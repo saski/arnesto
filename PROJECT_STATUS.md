@@ -1,7 +1,7 @@
-# Augmentedcode Configuration - Project Status
+# Arnesto - Project Status
 
-**Last Updated**: 2026-08-14
-**Overall Status**: 🟢 **Ready** - Agent instructions use progressive loading across clients, deterministic hygiene contracts protect the loading graph, and Codex/Orca retain separate runtime state with one versioned source for shared defaults.
+**Last Updated**: 2026-08-17
+**Overall Status**: 🟢 **Ready** - Arnesto is an independent multi-tool agent harness with portable setup, progressive instruction loading, deterministic hygiene contracts, and isolated client runtime state.
 
 ---
 
@@ -20,7 +20,7 @@
 | Marmalade team rules | ⚠️ Pending | Still loading via Eventbrite team config; awaiting admin removal |
 | Hermes Telegram and OmniRoute operations | ✅ Locally verified | Frontier reset, explicit free model switch, secret-scope patch, dashboard, and recovery runbook documented; mutable local configuration remains out of repo |
 
-**Current Readiness**: Configuration is stable for daily use across Cursor, Codex, Claude Code, Gemini, Antigravity, and Langflow. Local saski repositories now live under `~/Code`; the old `~/saski` root has been retired to `~/saski.legacy-2026-06-17`.
+**Current Readiness**: Arnesto is stable for daily use across Cursor, Codex, Claude Code, Gemini, Antigravity, Hermes, OpenCode, OmniRoute, and Langflow. The public canonical repository is `saski/arnesto`; the checkout intentionally remains at its legacy local path until a separate physical-path decision.
 
 ### 2026-07-30: Hermes Telegram and OmniRoute operational slice ✅
 
@@ -36,6 +36,21 @@
 ---
 
 ## Recent Changes
+
+### 2026-08-17: Arnesto standalone transition ✅
+
+- Graduated the harness to the independent public `saski/arnesto` repository
+  while preserving complete Git history and Eduardo Ferro provenance.
+- Kept the original fork as the `legacy` remote for rollback and preserved its
+  stars, child fork, and historical identity.
+- Made `setup-symlinks.sh` derive its checkout from the script location and
+  added a behavior-level portability contract for arbitrary directory names.
+- Kept the current physical checkout path and live symlinks unchanged so the
+  public identity migration does not force a client reconfiguration.
+
+**Validation**: Arnesto reports `fork: false`; local, `origin/main`, and
+`legacy/main` matched at the cutover revision; GitHub Actions and canonical
+`make check` passed.
 
 ### 2026-08-14: Agent configuration hygiene and runtime boundary ✅
 

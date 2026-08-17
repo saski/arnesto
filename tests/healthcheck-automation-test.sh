@@ -93,12 +93,29 @@ test_repository_rule_scope_contract() {
     local rules="$REPO_DIR/.agents/rules/repository.md"
 
     assert_file_exists "$rules"
-    assert_contains "$rules" "A portable operating layer for AI-assisted development"
+    assert_contains "$rules" "A portable, multi-tool agent harness for AI-assisted work."
     assert_contains "$rules" 'Read and follow `.agents/rules/base.md`'
     assert_contains "$rules" '`make check`'
     assert_contains "$rules" '`make ci-check`'
     assert_not_contains "$rules" "## Contextual Rules"
     assert_not_contains "$rules" "Route task-specific work through"
+}
+
+test_arnesto_identity_contract() {
+    local readme="$REPO_DIR/README.md"
+    local repository_rules="$REPO_DIR/.agents/rules/repository.md"
+    local cursor_rules="$REPO_DIR/.cursor/rules/cursor-config-management.mdc"
+    local review_command="$REPO_DIR/.agents/commands/review-pr.md"
+    local repo_inventory="$REPO_DIR/saski-github-repos.tsv"
+
+    assert_contains "$readme" '<h1 align="center">Arnesto</h1>'
+    assert_contains "$readme" 'git@github.com-saski:saski/arnesto.git'
+    assert_contains "$readme" "Eduardo Ferro's augmented-code configuration"
+    assert_contains "$repository_rules" "# Arnesto"
+    assert_contains "$cursor_rules" "github.com/saski/arnesto"
+    assert_not_contains "$cursor_rules" "github.com/saski/augmentedcode-configuration"
+    assert_contains "$review_command" "repo: arnesto"
+    assert_contains "$repo_inventory" $'augmentedcode-configuration\torigin\tmain\tmain\t-'
 }
 
 test_progressive_rule_loading_contract() {
@@ -256,6 +273,7 @@ test_managed_tool_path_contract() {
 
 test_healthcheck_automation_contract
 test_repository_rule_scope_contract
+test_arnesto_identity_contract
 test_progressive_rule_loading_contract
 test_global_and_repository_rule_wiring_contract
 test_documented_make_targets_exist

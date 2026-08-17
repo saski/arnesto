@@ -1,6 +1,6 @@
 ---
 name: personal-knowledge-routing
-description: Route durable personal context and reusable knowledge between augmentedcode-configuration and the personal knowledge vault. Use when the user asks to remember, persist, capture, retrieve, or organize personal knowledge; when deciding whether information belongs in rules, skills, portfolio, notes, maps, or inbox; or when using personal-knowledge-vault as a low-context reference layer.
+description: Route durable personal context and reusable knowledge between Arnesto and the personal knowledge vault. Use when the user asks to remember, persist, capture, retrieve, or organize personal knowledge; when deciding whether information belongs in rules, skills, portfolio, notes, maps, or inbox; or when using personal-knowledge-vault as a low-context reference layer.
 ---
 
 # Personal Knowledge Routing
@@ -9,7 +9,7 @@ Use this skill to keep agent instructions small while preserving durable knowled
 
 ## Repositories
 
-- Agent configuration: `/Users/saski/Code/augmentedcode-configuration`
+- Arnesto checkout (current path): `/Users/saski/Code/augmentedcode-configuration`
 - Personal vault: `/Users/saski/Code/personal-knowledge-vault`
 - Vault content root: `/Users/saski/Code/personal-knowledge-vault/vault`
 
@@ -30,9 +30,9 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 | Information type | Destination |
 |---|---|
-| Agent behavior that must apply across tools | `augmentedcode-configuration/.agents/rules/` |
-| Repeatable agent workflow or protocol | `augmentedcode-configuration/.agents/skills/` |
-| Tool setup, symlink policy, validation scripts | `augmentedcode-configuration/` |
+| Agent behavior that must apply across tools | Arnesto `.agents/rules/` |
+| Repeatable agent workflow or protocol | Arnesto `.agents/skills/` |
+| Tool setup, symlink policy, validation scripts | Arnesto |
 | Stable personal facts, preferences, goals, responsibilities, working agreements | `personal-knowledge-vault/vault/portfolio/` |
 | Durable decisions and decision-making patterns | `personal-knowledge-vault/vault/portfolio/decision-log.md` or `vault/notes/` |
 | Distilled reusable knowledge, source summaries, lessons, patterns | `personal-knowledge-vault/vault/notes/` |
@@ -70,4 +70,4 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 - For "remember this about me": propose a concise `portfolio/` update, then apply it only if the source is stable.
 - For "save this idea": create or update a `notes/` page and link it from a relevant `maps/` page.
 - For "capture this conversation": put raw or summary material under `inbox/` or `notes/`, then propose any portfolio promotion separately.
-- For "make agents aware": add the smallest possible rule or skill pointer in `augmentedcode-configuration`, with details stored in the vault.
+- For "make agents aware": add the smallest possible rule or skill pointer in Arnesto, with details stored in the vault.

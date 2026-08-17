@@ -3,6 +3,8 @@
 - Recorded: 2026-08-17
 - Accepted source revision:
   `e21a933cb2cd87298939b5a4c475edf48d7b0c78`
+- Arnesto cutover revision:
+  `5bc1c9c6839c9eb042e31b4a1277b530f41e43eb`
 - Local `main` and `origin/main` match at the accepted revision.
 - Legacy remote:
   `git@github.com-saski:saski/augmentedcode-configuration.git`
@@ -57,3 +59,25 @@
   path and passed after `REPO_DIR` defaulted to the script directory.
 - The focused portability contract, `openspec validate graduate-to-arnesto`,
   and the complete `make check` suite passed with the portable setup included.
+
+## Standalone Remote Evidence
+
+- Created `https://github.com/saski/arnesto` as a public repository without a
+  fork action; GitHub reports `fork: false` and no parent.
+- Mirrored the only source branch, `main`, at the cutover revision. The source
+  contained no tags.
+- GitHub Actions run `32039934964` completed successfully at the cutover
+  revision.
+- Arnesto uses the description `Arnesto — the agent harness that got out of
+  hand` and the minimal topics `ai-agents`, `agent-harness`, and
+  `coding-agents`.
+- Actions are enabled with `allowed_actions: all` and no SHA-pinning
+  requirement, matching the legacy repository.
+- Both repositories report `main` as unprotected. The legacy repository has no
+  rulesets, Actions secrets, Actions variables, environments, or webhooks to
+  migrate.
+- Local `origin` is `git@github.com-saski:saski/arnesto.git`; the former
+  `origin` is retained as `legacy` at
+  `git@github.com-saski:saski/augmentedcode-configuration.git`.
+- Local `HEAD`, `origin/main`, and `legacy/main` matched at the cutover
+  revision before rebranding began.

@@ -28,8 +28,8 @@ Use text-first tools for diagrams, decks, sketches, and source ingest so the age
 ## Routing
 
 - Durable personal context, source summaries, and reusable knowledge belong in the personal knowledge vault.
-- Repeatable behavior, setup, validation scripts, and Makefile glue belong in `augmentedcode-configuration` or the active project's developer tooling.
-- If a workflow is useful beyond one repository, capture it as a shared skill or rule in `augmentedcode-configuration`.
+- Repeatable behavior, setup, validation scripts, and Makefile glue belong in Arnesto or the active project's developer tooling.
+- If a workflow is useful beyond one repository, capture it as a shared skill or rule in Arnesto.
 
 ## Before You Start
 

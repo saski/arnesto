@@ -8,8 +8,8 @@ alwaysApply: true
 
 ## Canonical Source
 
-- **Repository**: the current clone of `augmentedcode-configuration`
-- **GitHub**: `github.com/saski/augmentedcode-configuration`
+- **Repository**: the current Arnesto checkout
+- **GitHub**: `github.com/saski/arnesto`
 - **Global Config**: `~/.cursor/commands/` (symlink to repo). Cursor rules in `.cursor/rules/` apply only when this repo is open; the universal rulebook reaches every Cursor workspace via `~/AGENTS.md` → `.agents/rules/base.md`.
 - **Managed Cursor Config**: `~/.cursor/mcp.json` and `~/.cursor/cli-config.json` (symlinked to repo)
 - **Managed Codex Config**: `~/.codex/rules/default.rules`, `~/.codex/AGENTS.md`, and `~/.codex/hooks/rtk-rewrite.sh` are symlinked to repo; `~/.codex/config.toml` and `~/.codex/hooks.json` are copied from `templates/codex/`
@@ -30,7 +30,7 @@ The repository uses symlinks for configuration. Use `setup-symlinks.sh` for:
 ### Setup on New Machine
 
 ```bash
-cd /path/to/augmentedcode-configuration
+cd /path/to/arnesto
 ./setup-symlinks.sh setup
 ```
 

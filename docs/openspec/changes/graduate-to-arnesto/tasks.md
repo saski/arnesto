@@ -19,18 +19,18 @@
 
 ## 4. Graduate to a Standalone Remote
 
-- [ ] 4.1 Create the empty public `saski/arnesto` repository without using GitHub's fork action.
-- [ ] 4.2 Mirror the accepted legacy revision and all source refs into Arnesto.
-- [ ] 4.3 Verify `fork: false`, matching `main` revisions, clone access through `github.com-saski`, and passing CI.
-- [ ] 4.4 Recreate only the required GitHub description, topics, Actions permissions, and branch rules.
-- [ ] 4.5 Change local `origin` to Arnesto and retain the current fork as a temporary `legacy` remote.
+- [x] 4.1 Create the empty public `saski/arnesto` repository without using GitHub's fork action.
+- [x] 4.2 Mirror the accepted legacy revision and all source refs into Arnesto.
+- [x] 4.3 Verify `fork: false`, matching `main` revisions, clone access through `github.com-saski`, and passing CI.
+- [x] 4.4 Recreate only the required GitHub description, topics, Actions permissions, and branch rules.
+- [x] 4.5 Change local `origin` to Arnesto and retain the current fork as a temporary `legacy` remote.
 
 ## 5. Apply the Arnesto Identity
 
-- [ ] 5.1 Rebrand the README as Arnesto with the public tagline, standalone clone URL, and Eduardo Ferro provenance.
-- [ ] 5.2 Update active repository, setup, routing, status, inventory, and skill references without rewriting historical `thoughts/` artifacts.
-- [ ] 5.3 Add or update deterministic contracts that reject operational dependence on the legacy repository name.
-- [ ] 5.4 Run OpenSpec validation and `make check`, then publish the rebranding to Arnesto.
+- [x] 5.1 Rebrand the README as Arnesto with the public tagline, standalone clone URL, and Eduardo Ferro provenance.
+- [x] 5.2 Update active repository, setup, routing, status, inventory, and skill references without rewriting historical `thoughts/` artifacts.
+- [x] 5.3 Add or update deterministic contracts that reject operational dependence on the legacy repository name.
+- [x] 5.4 Run OpenSpec validation and `make check`, then publish the rebranding to Arnesto.
 
 ## 6. Retire the Legacy Fork Safely
 

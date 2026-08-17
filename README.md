@@ -1,11 +1,11 @@
-<h1 align="center">Augmented Code Configuration</h1>
+<h1 align="center">Arnesto</h1>
 
 <p align="center">
-  A portable operating layer for AI-assisted development: shared rules, skills, commands, workflows, MCP config, hooks, and local setup conventions for Cursor, Codex, Claude, Gemini, Antigravity, and related tools.
+  The agent harness that got out of hand: a portable, multi-tool operating layer for AI-assisted work.
 </p>
 
 <p align="center">
-  <a href="https://github.com/saski/augmentedcode-configuration/blob/main/LICENSE">
+  <a href="https://github.com/saski/arnesto/blob/main/LICENSE">
     <img alt="License: Unlicense" src="https://img.shields.io/badge/license-Unlicense-lightgrey">
   </a>
   <img alt="Status: ready" src="https://img.shields.io/badge/status-ready-brightgreen">
@@ -19,7 +19,9 @@
 
 AI coding tools are useful, but each one tends to grow its own private pile of rules, commands, memories, hooks, and local configuration. That becomes hard to audit and even harder to move between tools.
 
-This repository keeps the reusable parts in one place.
+Arnesto keeps the reusable parts in one place: rules, skills, planning,
+OpenSpec changes, tool adapters, and the wiring that connects them across
+Codex, Cursor, Claude, Gemini, Hermes, OpenCode, and OmniRoute.
 
 The goal is not to create a giant prompt library. The goal is to keep a small, explicit, versioned configuration system that helps agents:
 
@@ -28,6 +30,11 @@ The goal is not to create a giant prompt library. The goal is to keep a small, e
 - use the right skill or workflow for the task;
 - save durable research and plans outside transient chat context;
 - verify work before claiming it is done.
+
+Arnesto grew from
+[Eduardo Ferro's augmented-code configuration](https://github.com/eferro/augmentedcode-configuration).
+Its complete Git history is preserved here, while the original fork remains as
+a public provenance record.
 
 ## What you get
 
@@ -45,7 +52,7 @@ The goal is not to create a giant prompt library. The goal is to keep a small, e
 
 ```mermaid
 flowchart LR
-    repo["augmentedcode-configuration"]
+    repo["Arnesto"]
     agents[".agents<br/>rules / skills / commands<br/>workflows / MCP / hooks"]
     thoughts["thoughts/<br/>research / plans / PR notes"]
     templates["templates/<br/>safe local defaults"]
@@ -160,11 +167,11 @@ For an explicit OpenCode entry contract, see [OpenCode Free-Agent Entry](docs/op
 
 ## Quick start
 
-Clone this repository to the default location expected by the setup script:
+Clone the repository wherever you keep source checkouts:
 
 ```bash
-git clone git@github.com-saski:saski/augmentedcode-configuration.git ~/Code/augmentedcode-configuration
-cd ~/Code/augmentedcode-configuration
+git clone git@github.com-saski:saski/arnesto.git ~/Code/arnesto
+cd ~/Code/arnesto
 ```
 
 Set up local tool links and checks:
@@ -175,10 +182,11 @@ make install-hooks
 make check
 ```
 
-If you keep the repo somewhere else, run the script with an explicit path:
+The script discovers the checkout from its own location. Automation may still
+provide an explicit root when needed:
 
 ```bash
-REPO_DIR=/path/to/augmentedcode-configuration ./setup-symlinks.sh setup
+REPO_DIR=/path/to/arnesto ./setup-symlinks.sh setup
 ```
 
 ## Daily use

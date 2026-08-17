@@ -2,11 +2,11 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-08-14 -->
-<!-- version: 1.1 -->
-# Augmented Code Configuration
+<!-- last_updated: 2026-08-17 -->
+<!-- version: 1.2 -->
+# Arnesto
 
-A portable operating layer for AI-assisted development across supported coding tools.
+A portable, multi-tool agent harness for AI-assisted work.
 
 Read and follow `.agents/rules/base.md`; this repository rulebook extends it with narrower instructions.
 

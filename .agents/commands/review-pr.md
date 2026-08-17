@@ -1,7 +1,7 @@
 <!--
 installed-from: review-pr
 command-name: review-pr
-repo: augmentedcode-configuration
+repo: arnesto
 -->
 
 # Review PR

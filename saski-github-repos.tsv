@@ -13,7 +13,8 @@
 
 ai-adoption-map	origin	main	main	-
 augmented-lean-delivery	origin	main	main	-
-augmentedcode-configuration	upstream	main	main	origin
+# Arnesto currently remains at its legacy local checkout path.
+augmentedcode-configuration	origin	main	main	-
 augmentedcode-skills	origin	main	main	-
 bugmagnet-ai-assistant	origin	master	master	-
 chatgpt-knowledge-export	origin	main	main	-
