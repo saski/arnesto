@@ -34,19 +34,19 @@
 
 ## 6. Retire the Legacy Fork Safely
 
-- [ ] 6.1 Add a concise Arnesto migration pointer to `saski/augmentedcode-configuration` without merging it into Arnesto.
-- [ ] 6.2 Verify Arnesto clone, CI, remote, documentation, and harness setup before archival.
-- [ ] 6.3 Archive the legacy fork while retaining its stars, child fork, and public provenance.
+- [x] 6.1 Add a concise Arnesto migration pointer to `saski/augmentedcode-configuration` without merging it into Arnesto.
+- [x] 6.2 Verify Arnesto clone, CI, remote, documentation, and harness setup before archival.
+- [x] 6.3 Archive the legacy fork while retaining its stars, child fork, and public provenance.
 
 ## 7. Decide the Optional Physical Rename
 
-- [ ] 7.1 Re-inventory absolute local links and active external path consumers after the remote transition.
-- [ ] 7.2 Record whether the physical checkout rename provides enough benefit to proceed.
-- [ ] 7.3 If approved, move the checkout behind a temporary legacy-path compatibility link and regenerate all managed links from the Arnesto path.
-- [ ] 7.4 Update active external consumers, run client smoke checks, and remove the compatibility link only after no dependency remains.
+- [x] 7.1 Re-inventory absolute local links and active external path consumers after the remote transition.
+- [x] 7.2 Record whether the physical checkout rename provides enough benefit to proceed.
+- [x] 7.3 If approved, move the checkout behind a temporary legacy-path compatibility link and regenerate all managed links from the Arnesto path. Not applicable because the rename was deferred.
+- [x] 7.4 Update active external consumers, run client smoke checks, and remove the compatibility link only after no dependency remains. Not applicable because no physical move occurred.
 
 ## 8. Verify and Close the Transition
 
-- [ ] 8.1 Verify every requirement and scenario against repository, GitHub, and local wiring evidence.
-- [ ] 8.2 Run `openspec validate --all`, `setup-symlinks.sh validate`, and `make check` from the canonical checkout.
-- [ ] 8.3 Sync and archive the OpenSpec change after the remote transition and physical-path decision are complete.
+- [x] 8.1 Verify every requirement and scenario against repository, GitHub, and local wiring evidence.
+- [x] 8.2 Run `openspec validate --all`, `setup-symlinks.sh validate`, and `make check` from the canonical checkout.
+- [x] 8.3 Sync and archive the OpenSpec change after the remote transition and physical-path decision are complete.

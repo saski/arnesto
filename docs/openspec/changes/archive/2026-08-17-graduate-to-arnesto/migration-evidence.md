@@ -81,3 +81,29 @@
   `git@github.com-saski:saski/augmentedcode-configuration.git`.
 - Local `HEAD`, `origin/main`, and `legacy/main` matched at the cutover
   revision before rebranding began.
+
+## Rebranding and Legacy Retirement Evidence
+
+- Arnesto rebranding was published at
+  `2751cb383a80ab416b46a6257a5b67c63caf718e`.
+- GitHub Actions run `32040211365` passed for that revision.
+- A fresh SSH clone through `github.com-saski` matched the rebranding revision
+  and passed `make ci-check`.
+- The legacy-only commit
+  `d57067bf1e396647d09d4c2da3f348096ef38102` added the Arnesto migration
+  pointer without merging legacy-only content into Arnesto.
+- GitHub reports the legacy fork archived and still public, with fourteen
+  stars and one child fork.
+
+## Physical Path Decision
+
+- The checkout remains at
+  `/Users/saski/Code/augmentedcode-configuration`; this is now only a local
+  physical path, not the repository identity or remote destination.
+- The live managed symlinks and active external consumers still resolve that
+  path, while `~/.agents` remains the stable shared entry point.
+- A physical rename is deferred because it provides no current operational
+  benefit and would create avoidable churn in symlinks, trust state, and
+  external repository guidance.
+- If that trade-off changes, the compatibility-link procedure in `design.md`
+  remains the required migration path.
