@@ -20,9 +20,10 @@ const worker = config.agent?.['free-worker']
 assert(provider?.npm === '@ai-sdk/openai-compatible', 'OmniRoute provider package')
 assert(provider?.options?.baseURL === 'http://127.0.0.1:20128/v1', 'OmniRoute base URL')
 assert(JSON.stringify(Object.keys(provider?.models ?? {}).sort()) === JSON.stringify([
+  'combo/free-coding',
   'oc/big-pickle',
   'oc/deepseek-v4-flash-free',
-]), 'exact verified free model set')
+]), 'exact managed free model set')
 assert(worker?.mode === 'primary', 'free-worker mode')
 assert(worker?.maxSteps === 3, 'free-worker step cap')
 for (const tool of ['read', 'edit']) assert(worker?.tools?.[tool] === true, `${tool} enabled`)

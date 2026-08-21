@@ -41,6 +41,7 @@ the attachment and a second tool call would duplicate frontier consumption.
 | Lane | Use for | Provider and model | Selection |
 |---|---|---|---|
 | Default text | Ordinary chat and bounded, non-sensitive work | `omniroute` / `oc/deepseek-v4-flash-free` | Automatic after `/new` |
+| Managed free coding | Non-sensitive coding with free-only fallback | `omniroute` / `combo/free-coding` | Explicit session override |
 | Automatic image analysis | Inspecting an attached image before free reasoning | `openai-codex` / `gpt-5.6-sol`, low effort | Automatic only when an image is present |
 | Full frontier | Planning, SDD, orchestration, sensitive or ambiguous work | `openai-codex` / `gpt-5.6-sol` | Explicit model switch or dedicated profile |
 
@@ -51,12 +52,11 @@ is a preprocessing call, not the session model.
 The obsolete `free-stack` and `free-deterministic` combos were inactive and
 deleted from the local OmniRoute store on 2026-08-21. Do not recreate them.
 `free-coding` is the only tracked ordered combo: Laguna, MiMo, HY3, then Big
-Pickle. It was installed and passed direct text, tool-call, and read-only Codex
-entry probes on 2026-08-21. It remains the explicit `codex-free` policy;
-promoting it to the Hermes default still requires a Hermes-specific end-to-end
-probe and an explicit policy decision. A catalog entry or HTTP 200 response is
-insufficient; the route must return usable content, a terminal finish reason,
-and non-zero usage.
+Pickle. It was installed and passed direct text, tool-call, Codex, and Hermes
+entry probes on 2026-08-21. Hermes exposes it as an explicit session override;
+the direct DeepSeek pin remains the default. A catalog entry or HTTP 200
+response is insufficient; the route must return usable content, a terminal
+finish reason, and non-zero usage.
 
 ## Managed routing overlay
 
@@ -120,6 +120,16 @@ Return to the free main model with:
 ```text
 /model oc/deepseek-v4-flash-free --provider custom
 ```
+
+For the managed free-only coding route, use:
+
+```text
+/model combo/free-coding --provider custom
+```
+
+The equivalent one-shot CLI form is `hermes -m combo/free-coding --provider
+omniroute -z '...'`. Model selection remains session-local unless `--global` is
+explicitly requested.
 
 ## Multiplex secret scope
 

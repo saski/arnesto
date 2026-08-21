@@ -69,7 +69,9 @@
 - The ordered `free-coding` desired state is versioned separately from mutable
   OmniRoute runtime state, with fixed diagnostic pins and drift-safe setup.
 - The local combo is installed and passed exact-text, structured tool-call, and
-  read-only `codex-free` end-to-end probes with non-zero usage.
+  read-only Codex, Hermes, and OpenCode entry probes with non-zero usage.
+- Hermes and OpenCode expose the shared combo by identifier, while Codex and
+  Orca terminals reuse `codex-free`; no client duplicates the preference order.
 - The inactive `free-stack` and `free-deterministic` runtime combos were
   removed after a recoverable local backup.
 - A portable company-environment bug-fixing skill is tracked for future use
@@ -101,8 +103,8 @@ No Hermes-to-Orca bridge, automatic task mirroring, or merged Codex runtime is a
 
 1. Complete the Orca trial with evidence from real development tasks.
 2. Evaluate Grok Agent as another possible surface without assuming integration or credential sharing.
-3. Decide whether `free-coding` should remain an explicit Codex lane or be
-   evaluated separately as a Hermes default.
+3. Evaluate whether `free-coding` should ever replace a client default; it is
+   currently an explicit shared lane.
 4. Close or split the remaining `codex-led-agent-routing` tasks once the entry-surface experiments settle.
 
 ---

@@ -164,6 +164,9 @@ with `make configure-omniroute-free-coding`. The configurator is idempotent and
 stops on drift instead of replacing a locally edited combo.
 The former `free-stack` and `free-deterministic` runtime combos were retired on
 2026-08-21 and are intentionally absent from portable configuration.
+Hermes and OpenCode expose only the `free-coding` combo identifier; Codex and
+Orca terminals use `codex-free`. The ordered model policy is not copied into
+client configuration.
 
 ## Thoughts and Workflow Assets
 

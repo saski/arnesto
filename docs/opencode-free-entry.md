@@ -1,7 +1,14 @@
 # OpenCode Free-Agent Entry
 
-OpenCode supports two explicit execution modes. It does not decide between
-them, and neither mode uses automatic model fallback.
+OpenCode supports an explicit interactive free route and a constrained worker
+mode. It does not switch to either one automatically.
+
+## Interactive free route
+
+Select `omniroute/combo/free-coding` for ordinary, non-sensitive coding work.
+OpenCode only declares that single model identifier; OmniRoute owns the ordered
+free-only selection and fallback policy. The normal OpenCode model remains
+unchanged.
 
 ## Frontier work
 
@@ -15,7 +22,8 @@ integration.
 Use the free route only for an explicitly authorized, non-sensitive bounded
 task. Copy the provider and worker policy from
 [`templates/opencode/free-worker.jsonc`](../templates/opencode/free-worker.jsonc).
-The only admitted models are:
+The constrained worker adapter retains direct pins rather than inheriting combo
+fallback. Its only admitted models are:
 
 - `omniroute/oc/deepseek-v4-flash-free`
 - `omniroute/oc/big-pickle`
@@ -30,11 +38,12 @@ Install only the managed OpenCode fields with:
 ```
 
 The installer updates `~/.config/opencode/opencode.jsonc` atomically. It adds
-the two verified model identifiers and the constrained `free-worker` agent if
-they are missing. It preserves unrelated top-level configuration, providers,
-models, agent definitions, and the existing local OmniRoute endpoint when it
-uses either supported loopback form (`localhost` or `127.0.0.1`). It never
-reads or writes OpenCode credential storage.
+the shared `combo/free-coding` route, the two direct worker pins, and the
+constrained `free-worker` agent if they are missing. It preserves unrelated
+top-level configuration, providers, models, agent definitions, and the existing
+local OmniRoute endpoint when it uses either supported loopback form
+(`localhost` or `127.0.0.1`). It never reads or writes OpenCode credential
+storage.
 
 The local configuration must be strict JSON. A comment-bearing or malformed
 JSONC file, a different OmniRoute endpoint, or an incompatible managed agent

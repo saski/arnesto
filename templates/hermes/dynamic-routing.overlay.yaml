@@ -17,6 +17,8 @@ providers:
     default_model: oc/deepseek-v4-flash-free
     discover_models: true
     models:
+      combo/free-coding:
+        supports_vision: false
       oc/deepseek-v4-flash-free:
         supports_vision: false
 

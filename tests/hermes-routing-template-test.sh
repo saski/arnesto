@@ -25,6 +25,9 @@ assert(config.dig("providers", "omniroute-local", "key_env") == "OMNIROUTE_API_K
 assert(config.dig("providers", "omniroute-local", "models",
                   "oc/deepseek-v4-flash-free", "supports_vision") == false,
        "the free model is explicitly text-only")
+assert(config.dig("providers", "omniroute-local", "models",
+                  "combo/free-coding", "supports_vision") == false,
+       "the managed free-coding route is selectable and text-only")
 assert(config.dig("auxiliary", "vision", "provider") == "openai-codex",
        "images route to OpenAI Codex")
 assert(config.dig("auxiliary", "vision", "model") == "gpt-5.6-sol",
@@ -53,6 +56,8 @@ assert(!text.match?(/\bsk-[A-Za-z0-9_-]{16,}\b/),
        "the template contains no API key")
 assert(!text.match?(/\+34[\s-]*\d/),
        "the template contains no phone number")
+assert(!text.include?("free-stack") && !text.include?("free-deterministic"),
+       "retired combo names are absent")
 
 puts "PASS: Hermes dynamic routing template"
 RUBY

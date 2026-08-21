@@ -64,7 +64,7 @@ used as an implicit source of truth for OmniRoute's free-route policy.
 Orca is an optional workspace/terminal surface. Its isolated Codex runtime is
 not evidence of a Hermes-to-Orca bridge or of automatic OmniRoute routing.
 
-## Explicit free Codex lane
+## Explicit free Codex and Orca lane
 
 Use `codex-free` when a task is suitable for a free external model. It launches
 Codex through OmniRoute for that process only and leaves the normal Codex and
@@ -77,6 +77,11 @@ codex-free --mimo          # fixed strong alternate
 codex-free --hy3           # fixed availability alternate
 codex-free --big-pickle    # fixed compatibility fallback
 ```
+
+The same command is available from an Orca terminal. Orca's shell keeps its
+isolated `CODEX_HOME`; OmniRoute injects only the provider and model arguments
+for the child process. No Orca-specific model catalog or duplicated routing
+policy is required.
 
 The ordered desired state lives in
 `templates/omniroute/free-coding-combo.json`; OmniRoute owns runtime selection,
