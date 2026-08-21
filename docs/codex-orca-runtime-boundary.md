@@ -89,6 +89,11 @@ token with `manage` scope.
 Until that combo exists, the wrapper degrades safely to the fixed Laguna pin
 and reports the bootstrap fallback on stderr.
 
+The current machine installed the tracked combo on 2026-08-21. Direct Responses
+API probes returned exact text and a structured function call through Laguna,
+both with `status: completed` and non-zero usage. A read-only end-to-end
+`codex-free exec` probe returned `CODEX_FREE_OK` with exit status 0.
+
 The wrapper starts the local OmniRoute daemon when needed and rejects a second
 Codex model override. The manual pins bypass the combo for diagnosis. Do not use
 this lane for private company code, credentials, personal data, or any other
@@ -97,6 +102,10 @@ content that has not been approved for the selected external provider.
 OmniRoute 3.8.49 has an open upstream report that priority routing can be
 affected by cache affinity. Keep the pins available and require a semantic probe
 after OmniRoute upgrades; catalog presence or an HTTP 200 is not sufficient.
+Codex also warns that the combo alias has no native model metadata and therefore
+uses fallback metadata. OmniRoute does not currently publish enough context
+metadata for this alias to define an accurate Codex catalog entry, so do not
+invent those values.
 
 `setup-symlinks.sh setup` also exposes the wrapper through
 `~/.local/bin/codex-free`, which is the normal interactive-shell entry point.

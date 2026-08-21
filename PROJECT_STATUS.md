@@ -68,6 +68,8 @@
   Terra/Medium Codex and Orca defaults.
 - The ordered `free-coding` desired state is versioned separately from mutable
   OmniRoute runtime state, with fixed diagnostic pins and drift-safe setup.
+- The local combo is installed and passed exact-text, structured tool-call, and
+  read-only `codex-free` end-to-end probes with non-zero usage.
 - The inactive `free-stack` and `free-deterministic` runtime combos were
   removed after a recoverable local backup.
 - A portable company-environment bug-fixing skill is tracked for future use
@@ -97,10 +99,10 @@ No Hermes-to-Orca bridge, automatic task mirroring, or merged Codex runtime is a
 
 ## 📋 Next Steps
 
-1. Authenticate the local OmniRoute management context, apply `free-coding`,
-   and complete its semantic code and tool-call probes.
-2. Complete the Orca trial with evidence from real development tasks.
-3. Evaluate Grok Agent as another possible surface without assuming integration or credential sharing.
+1. Complete the Orca trial with evidence from real development tasks.
+2. Evaluate Grok Agent as another possible surface without assuming integration or credential sharing.
+3. Decide whether `free-coding` should remain an explicit Codex lane or be
+   evaluated separately as a Hermes default.
 4. Close or split the remaining `codex-led-agent-routing` tasks once the entry-surface experiments settle.
 
 ---
@@ -108,8 +110,9 @@ No Hermes-to-Orca bridge, automatic task mirroring, or merged Codex runtime is a
 ## 🐛 Known Issues
 
 - External model catalogs and free routes are inherently volatile; every promoted route needs a semantic smoke test.
-- Local OmniRoute inference is healthy, but management API mutations currently
-  require an authenticated context before `free-coding` can be installed.
+- Codex lacks native model metadata for the `combo/free-coding` alias and uses
+  fallback metadata. OmniRoute does not currently expose enough context data to
+  define accurate values without guessing.
 - The active routing OpenSpec contains unfinished Cursor and acceptance work.
 - The repository is intentionally opinionated and includes local-environment conventions that adopters should review before running setup.
 

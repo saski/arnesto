@@ -51,9 +51,10 @@ is a preprocessing call, not the session model.
 The obsolete `free-stack` and `free-deterministic` combos were inactive and
 deleted from the local OmniRoute store on 2026-08-21. Do not recreate them.
 `free-coding` is the only tracked ordered combo: Laguna, MiMo, HY3, then Big
-Pickle. It is currently the explicit `codex-free` policy; promoting it to the
-Hermes default still requires management-authenticated installation and a fresh
-semantic conformance test. A catalog entry or HTTP 200 response is
+Pickle. It was installed and passed direct text, tool-call, and read-only Codex
+entry probes on 2026-08-21. It remains the explicit `codex-free` policy;
+promoting it to the Hermes default still requires a Hermes-specific end-to-end
+probe and an explicit policy decision. A catalog entry or HTTP 200 response is
 insufficient; the route must return usable content, a terminal finish reason,
 and non-zero usage.
 
