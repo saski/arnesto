@@ -97,6 +97,7 @@ Use when the answer depends on understanding current behavior before proposing o
 Skills:
 
 - `diagnose` - Use for disciplined debugging of failures, broken behavior, or regressions.
+- `source-command-bug-fixing-agent` - Use for company-environment bug investigations that combine tickets, internal documentation, private repositories, ownership, and production evidence.
 - `fic-research` - Use to investigate the existing codebase and capture findings without proposing changes.
 - `find-docs` - Use for current library, framework, SDK, API, CLI tool, or cloud service documentation via the Context7 CLI.
 - `documentation-lookup` - Canonical current-docs route; prefer Context7 MCP tools and fall back to the CLI when MCP is unavailable.

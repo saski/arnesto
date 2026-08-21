@@ -22,6 +22,9 @@
 .agents/gemini/
 .agents/bin/
 
+# Mutable Codex runtime state is seeded from templates and remains local.
+/.codex/
+
 .claude/notifications/
 .claude/backups/
 .claude/cache/

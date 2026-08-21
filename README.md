@@ -185,6 +185,13 @@ The setup recreates local shims such as `~/.agents/bin/openspec`; mutable
 runtime state remains outside the repository. Forking and removing the pieces
 that do not match your tools is an expected way to use Arnesto.
 
+For an explicit free-model Codex session, `codex-free` uses the tracked
+OmniRoute `free-coding` priority route without changing the normal Codex
+default. Fixed Laguna, MiMo, HY3, and Big Pickle pins remain available for
+diagnosis. See the [runtime-boundary guide](docs/codex-orca-runtime-boundary.md)
+for configuration and the data-safety boundary. The older `free-stack` and
+`free-deterministic` combos are retired and must not be recreated.
+
 ## Where to go next
 
 - [Architecture snapshot](docs/local-agentic-development-architecture.md) —

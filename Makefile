@@ -1,4 +1,4 @@
-.PHONY: check test lint-shell validate-skills validate-cursor-skills validate-openspec validate-symlinks check-tracked-ignored install-hooks install-hermes-gateway-config-watch hermes-update-check hermes-update-stage hermes-update-activate sync-saski-repos sync-saski-repos-apply discover-saski-repos ci-check
+.PHONY: check test lint-shell validate-skills validate-cursor-skills validate-openspec validate-symlinks check-tracked-ignored install-hooks install-hermes-gateway-config-watch configure-omniroute-free-coding hermes-update-check hermes-update-stage hermes-update-activate sync-saski-repos sync-saski-repos-apply discover-saski-repos ci-check
 
 export PATH := $(HOME)/.agents/bin:$(HOME)/.bun/bin:/opt/homebrew/bin:/usr/local/bin:$(PATH)
 
@@ -11,6 +11,8 @@ SHELL_SCRIPTS := \
 	hermes-gateway-config-watch.sh \
 	install-hermes-gateway-config-watch.sh \
 	hermes-update-safe.sh \
+	bin/configure-omniroute-free-coding \
+	bin/codex-free \
 	validate-skill-library.sh \
 	validate-cursor-skills.sh \
 	lib/validate-skill-frontmatter.sh \
@@ -32,6 +34,9 @@ SHELL_SCRIPTS := \
 	tests/sync-saski-repos-test.sh \
 	tests/sync-skill-factory-test.sh \
 	tests/codex-free-entry-test.sh \
+	tests/codex-free-switch-test.sh \
+	tests/omniroute-free-coding-config-test.sh \
+	tests/source-command-bug-fixing-agent-test.sh \
 	tests/hermes-routing-template-test.sh \
 	tests/hermes-gateway-config-watch-test.sh \
 	tests/hermes-update-safe-test.sh \
@@ -54,6 +59,9 @@ test:
 	./tests/sync-saski-repos-test.sh
 	./tests/sync-skill-factory-test.sh
 	./tests/codex-free-entry-test.sh
+	./tests/codex-free-switch-test.sh
+	./tests/omniroute-free-coding-config-test.sh
+	./tests/source-command-bug-fixing-agent-test.sh
 	./tests/hermes-routing-template-test.sh
 	./tests/hermes-gateway-config-watch-test.sh
 	./tests/hermes-update-safe-test.sh
@@ -91,6 +99,9 @@ install-hooks:
 install-hermes-gateway-config-watch:
 	./install-hermes-gateway-config-watch.sh
 
+configure-omniroute-free-coding:
+	./bin/configure-omniroute-free-coding
+
 hermes-update-check:
 	./hermes-update-safe.sh check
 
@@ -127,6 +138,9 @@ ci-check: lint-shell validate-cursor-skills
 	./tests/cursor-skills-validation-test.sh
 	./tests/sync-saski-repos-test.sh
 	./tests/sync-skill-factory-test.sh
+	./tests/codex-free-switch-test.sh
+	./tests/omniroute-free-coding-config-test.sh
+	./tests/source-command-bug-fixing-agent-test.sh
 	./tests/hermes-routing-template-test.sh
 	./tests/hermes-gateway-config-watch-test.sh
 	./tests/hermes-update-safe-test.sh

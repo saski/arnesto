@@ -153,8 +153,17 @@ SKILL_FACTORY=/path/to/skill-factory ./sync-skill-factory.sh --dry-run
 - `~/.agents` -> repo `.agents`
 - `~/.agents/bin/rtk` -> `/opt/homebrew/bin/rtk` when Homebrew RTK is present
 - `~/.agents/bin/openspec` -> `/opt/homebrew/bin/openspec` or `~/.bun/bin/openspec` when OpenSpec is present
+- `~/.agents/bin/codex-free` -> repo `bin/codex-free`
+- `~/.local/bin/codex-free` -> repo `bin/codex-free` for interactive shells
 
 Mutable local config such as `~/.codex/config.toml`, `~/.codex/hooks.json`, and `~/.claude/settings.json` is seeded from `templates/` and intentionally not symlinked back into the repo.
+
+OmniRoute combo state is also mutable local state. Its portable desired state
+is tracked in `templates/omniroute/free-coding-combo.json`; apply it explicitly
+with `make configure-omniroute-free-coding`. The configurator is idempotent and
+stops on drift instead of replacing a locally edited combo.
+The former `free-stack` and `free-deterministic` runtime combos were retired on
+2026-08-21 and are intentionally absent from portable configuration.
 
 ## Thoughts and Workflow Assets
 

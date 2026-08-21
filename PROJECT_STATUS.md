@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-08-19
+**Last Updated**: 2026-08-21
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 ---
@@ -62,6 +62,17 @@
 - The former `augmentedcode-configuration` fork is archived with a migration pointer.
 - Setup no longer depends on the physical checkout name.
 
+### Free-model routing hygiene
+
+- `codex-free` provides an isolated free-model entry without changing the
+  Terra/Medium Codex and Orca defaults.
+- The ordered `free-coding` desired state is versioned separately from mutable
+  OmniRoute runtime state, with fixed diagnostic pins and drift-safe setup.
+- The inactive `free-stack` and `free-deterministic` runtime combos were
+  removed after a recoverable local backup.
+- A portable company-environment bug-fixing skill is tracked for future use
+  without embedding company-specific identifiers or credentials.
+
 ---
 
 ## 🚧 In Progress
@@ -86,16 +97,19 @@ No Hermes-to-Orca bridge, automatic task mirroring, or merged Codex runtime is a
 
 ## 📋 Next Steps
 
-1. Complete the Orca trial with evidence from real development tasks.
-2. Evaluate Grok Agent as another possible surface without assuming integration or credential sharing.
-3. Close or split the remaining `codex-led-agent-routing` tasks once the entry-surface experiments settle.
-4. Revalidate external model routes only when provider health or actual failure rates justify it.
+1. Authenticate the local OmniRoute management context, apply `free-coding`,
+   and complete its semantic code and tool-call probes.
+2. Complete the Orca trial with evidence from real development tasks.
+3. Evaluate Grok Agent as another possible surface without assuming integration or credential sharing.
+4. Close or split the remaining `codex-led-agent-routing` tasks once the entry-surface experiments settle.
 
 ---
 
 ## 🐛 Known Issues
 
 - External model catalogs and free routes are inherently volatile; every promoted route needs a semantic smoke test.
+- Local OmniRoute inference is healthy, but management API mutations currently
+  require an authenticated context before `free-coding` can be installed.
 - The active routing OpenSpec contains unfinished Cursor and acceptance work.
 - The repository is intentionally opinionated and includes local-environment conventions that adopters should review before running setup.
 

@@ -1,6 +1,6 @@
 # Hermes, OmniRoute, and Telegram Operations
 
-**Verified locally:** 2026-08-11
+**Routing inventory verified locally:** 2026-08-21
 
 This runbook records the intended secret-free routing policy. The reusable
 overlay is versioned at
@@ -48,10 +48,14 @@ the attachment and a second tool call would duplicate frontier consumption.
 continues to report the free main model after an image turn; auxiliary vision
 is a preprocessing call, not the session model.
 
-Do not promote broad `auto/*`, `free-stack`, or `free-deterministic` aliases as
-the operational default without a fresh semantic conformance test. A catalog
-entry or HTTP 200 response is insufficient; the route must return usable
-content for the requested task.
+The obsolete `free-stack` and `free-deterministic` combos were inactive and
+deleted from the local OmniRoute store on 2026-08-21. Do not recreate them.
+`free-coding` is the only tracked ordered combo: Laguna, MiMo, HY3, then Big
+Pickle. It is currently the explicit `codex-free` policy; promoting it to the
+Hermes default still requires management-authenticated installation and a fresh
+semantic conformance test. A catalog entry or HTTP 200 response is
+insufficient; the route must return usable content, a terminal finish reason,
+and non-zero usage.
 
 ## Managed routing overlay
 

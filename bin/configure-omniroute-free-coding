@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+manifest="$repo_dir/templates/omniroute/free-coding-combo.json"
+combo_name="free-coding"
+
+combo_list_json() {
+    omniroute --output json combo list | sed -n '/^[[:space:]]*{/,$p'
+}
+
+for dependency in jq omniroute; do
+    if ! command -v "$dependency" >/dev/null 2>&1; then
+        echo "configure-omniroute-free-coding: $dependency is required" >&2
+        exit 1
+    fi
+done
+
+jq -e '
+    .name == "free-coding" and
+    .strategy == "priority" and
+    (.models | length > 0) and
+    ([.models[].model] | length == (unique | length))
+' "$manifest" >/dev/null || {
+    echo "configure-omniroute-free-coding: tracked manifest is invalid" >&2
+    exit 1
+}
+
+if ! omniroute health >/dev/null 2>&1; then
+    echo "configure-omniroute-free-coding: OmniRoute must be healthy before applying runtime state" >&2
+    exit 1
+fi
+
+current_json=$(combo_list_json)
+existing=$(printf '%s\n' "$current_json" | jq -c --arg name "$combo_name" \
+    '.combos[]? | select(.name == $name)')
+
+projection='{
+    name,
+    strategy,
+    models: [.models[] | {model, providerId, weight}],
+    allowedProviders: (.allowedProviders // []),
+    config: {trackMetrics: (.config.trackMetrics // false)}
+}'
+desired_projection=$(jq -c "$projection" "$manifest")
+
+if [ -n "$existing" ]; then
+    existing_projection=$(printf '%s\n' "$existing" | jq -c "$projection")
+    if [ "$existing_projection" = "$desired_projection" ]; then
+        echo "OmniRoute combo '$combo_name' already matches the tracked manifest."
+        exit 0
+    fi
+
+    echo "configure-omniroute-free-coding: runtime combo '$combo_name' differs from the tracked manifest" >&2
+    echo "Inspect the runtime combo before replacing it; this command does not overwrite drift." >&2
+    exit 1
+fi
+
+create_output=$(omniroute api combos post-api-combos --body "@$manifest")
+if printf '%s\n' "$create_output" | grep -Fq 'Authentication required'; then
+    echo "configure-omniroute-free-coding: OmniRoute management authentication is required" >&2
+    echo "Use an active authenticated context or OMNIROUTE_API_KEY with manage scope, then retry." >&2
+    exit 1
+fi
+
+current_json=$(combo_list_json)
+created=$(printf '%s\n' "$current_json" | jq -c --arg name "$combo_name" \
+    '.combos[]? | select(.name == $name)')
+created_projection=$(printf '%s\n' "$created" | jq -c "$projection")
+
+if [ -z "$created" ] || [ "$created_projection" != "$desired_projection" ]; then
+    echo "configure-omniroute-free-coding: OmniRoute did not persist the tracked combo contract" >&2
+    exit 1
+fi
+
+echo "Configured OmniRoute combo '$combo_name' from $manifest."

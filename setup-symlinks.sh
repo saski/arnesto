@@ -11,6 +11,8 @@ CLAUDE_SETTINGS_TEMPLATE="$TEMPLATES_DIR/claude/settings.json"
 OPENCODE_FREE_WORKER_TEMPLATE="$TEMPLATES_DIR/opencode/free-worker.jsonc"
 OPENCODE_CONFIG_PATH="$HOME/.config/opencode/opencode.jsonc"
 OPENCODE_CONFIG_INSTALLER="$REPO_DIR/lib/install-opencode-free-worker-config.mjs"
+CODEX_FREE_WRAPPER="$REPO_DIR/bin/codex-free"
+CODEX_FREE_SHELL_LINK="$HOME/.local/bin/codex-free"
 
 # Dev/AI tools under ~ that get a direct "$HOME/$tool/skills" symlink.
 # Cursor and Codex are handled separately due tool-specific directory layouts.
@@ -104,6 +106,11 @@ check_environment() {
         echo "❌ lib/install-opencode-free-worker-config.mjs not found in repo"
         exit 1
     fi
+
+    if [ ! -x "$CODEX_FREE_WRAPPER" ]; then
+        echo "❌ bin/codex-free is missing or not executable"
+        exit 1
+    fi
 }
 
 check_opencode_environment() {
@@ -154,6 +161,18 @@ link_managed_path() {
 
     mkdir -p "$(dirname "$destination_path")"
     ln -sfn "$source_path" "$destination_path"
+}
+
+link_codex_free_shell_entry() {
+    mkdir -p "$(dirname "$CODEX_FREE_SHELL_LINK")"
+
+    if [ -e "$CODEX_FREE_SHELL_LINK" ] && [ ! -L "$CODEX_FREE_SHELL_LINK" ]; then
+        echo "❌ $CODEX_FREE_SHELL_LINK exists and is not a symlink; refusing to replace it"
+        return 1
+    fi
+
+    ln -sfn "$CODEX_FREE_WRAPPER" "$CODEX_FREE_SHELL_LINK"
+    echo "✓ $CODEX_FREE_SHELL_LINK → $CODEX_FREE_WRAPPER"
 }
 
 link_managed_binary() {
@@ -303,6 +322,8 @@ setup_symlinks() {
         "$HOME/.bun/bin/openspec" \
         "/usr/local/bin/openspec" \
         "$(resolve_path_binary openspec)" || true
+    link_managed_binary "codex-free" "$CODEX_FREE_WRAPPER"
+    link_codex_free_shell_entry
 
     setup_claude_config
     setup_opencode_free_worker_config
@@ -634,6 +655,17 @@ validate_symlinks() {
         "$HOME/.bun/bin/openspec" \
         "/usr/local/bin/openspec" \
         "$(resolve_path_binary openspec)" || errors=$((errors + 1))
+    validate_managed_binary "codex-free" "$CODEX_FREE_WRAPPER" || errors=$((errors + 1))
+
+    if [ ! -L "$CODEX_FREE_SHELL_LINK" ]; then
+        echo "❌ $CODEX_FREE_SHELL_LINK is not a symlink (run ./setup-symlinks.sh setup to expose codex-free on PATH)"
+        errors=$((errors + 1))
+    elif [ "$(readlink "$CODEX_FREE_SHELL_LINK")" != "$CODEX_FREE_WRAPPER" ]; then
+        echo "❌ $CODEX_FREE_SHELL_LINK points to $(readlink "$CODEX_FREE_SHELL_LINK"), expected $CODEX_FREE_WRAPPER"
+        errors=$((errors + 1))
+    else
+        echo "✓ $CODEX_FREE_SHELL_LINK → $CODEX_FREE_WRAPPER"
+    fi
 
     # Check root configs
     for config in CLAUDE.md AGENTS.md GEMINI.md; do

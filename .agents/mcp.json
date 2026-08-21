@@ -20,11 +20,6 @@
       "command": "snyk mcp -t stdio --experimental",
       "env": {}
     },
-    "glean_default": {
-      "type": "http",
-      "url": "https://eventbrite-be.glean.com/mcp/default",
-      "headers": {}
-    },
     "context7": {
       "command": "/opt/homebrew/bin/npx",
       "args": [

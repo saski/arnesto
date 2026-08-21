@@ -63,3 +63,40 @@ used as an implicit source of truth for OmniRoute's free-route policy.
 
 Orca is an optional workspace/terminal surface. Its isolated Codex runtime is
 not evidence of a Hermes-to-Orca bridge or of automatic OmniRoute routing.
+
+## Explicit free Codex lane
+
+Use `codex-free` when a task is suitable for a free external model. It launches
+Codex through OmniRoute for that process only and leaves the normal Codex and
+Orca configuration files unchanged:
+
+```bash
+codex-free                 # combo/free-coding: Laguna -> MiMo -> HY3 -> Big Pickle
+codex-free --laguna        # fixed primary pin for diagnosis
+codex-free --mimo          # fixed strong alternate
+codex-free --hy3           # fixed availability alternate
+codex-free --big-pickle    # fixed compatibility fallback
+```
+
+The ordered desired state lives in
+`templates/omniroute/free-coding-combo.json`; OmniRoute owns runtime selection,
+error fallback, cooldowns, and metrics. Apply the tracked state with
+`make configure-omniroute-free-coding`. The command is idempotent and refuses to
+overwrite a drifted runtime combo. The local OmniRoute context must be
+authenticated for management operations, or `OMNIROUTE_API_KEY` must contain a
+token with `manage` scope.
+
+Until that combo exists, the wrapper degrades safely to the fixed Laguna pin
+and reports the bootstrap fallback on stderr.
+
+The wrapper starts the local OmniRoute daemon when needed and rejects a second
+Codex model override. The manual pins bypass the combo for diagnosis. Do not use
+this lane for private company code, credentials, personal data, or any other
+content that has not been approved for the selected external provider.
+
+OmniRoute 3.8.49 has an open upstream report that priority routing can be
+affected by cache affinity. Keep the pins available and require a semantic probe
+after OmniRoute upgrades; catalog presence or an HTTP 200 is not sufficient.
+
+`setup-symlinks.sh setup` also exposes the wrapper through
+`~/.local/bin/codex-free`, which is the normal interactive-shell entry point.

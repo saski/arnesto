@@ -9,7 +9,7 @@ Use this skill to keep agent instructions small while preserving durable knowled
 
 ## Repositories
 
-- Arnesto checkout (current path): `/Users/saski/Code/augmentedcode-configuration`
+- Arnesto checkout (current path): `/Users/saski/Code/arnesto`
 - Personal vault: `/Users/saski/Code/personal-knowledge-vault`
 - Vault content root: `/Users/saski/Code/personal-knowledge-vault/vault`
 

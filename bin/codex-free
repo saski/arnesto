@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+model="combo/free-coding"
+
+usage() {
+    cat <<'EOF'
+Usage: codex-free [--laguna|--mimo|--hy3|--big-pickle] [CODEX_ARGS...]
+
+Launch Codex through an explicit free OmniRoute model for this process only.
+
+  (no switch)  Use combo/free-coding with managed priority and fallback
+  --laguna     Pin opencode-zen/laguna-s-2.1-free
+  --mimo       Pin oc/mimo-v2.5-free
+  --hy3        Pin oc/hy3-free
+  --big-pickle Pin oc/big-pickle
+  --help-free   Show this help
+
+Normal `codex` sessions keep the configured Terra/Medium default.
+EOF
+}
+
+case "${1:-}" in
+    --laguna)
+        model="opencode-zen/laguna-s-2.1-free"
+        shift
+        ;;
+    --mimo)
+        model="oc/mimo-v2.5-free"
+        shift
+        ;;
+    --hy3)
+        model="oc/hy3-free"
+        shift
+        ;;
+    --big-pickle)
+        model="oc/big-pickle"
+        shift
+        ;;
+    --help-free)
+        usage
+        exit 0
+        ;;
+esac
+
+for argument in "$@"; do
+    case "$argument" in
+        -m|--model|--model=*)
+            echo "codex-free: model overrides are not allowed; use a documented free-route switch" >&2
+            exit 2
+            ;;
+    esac
+done
+
+if ! command -v codex >/dev/null 2>&1; then
+    echo "codex-free: codex is not installed or not on PATH" >&2
+    exit 1
+fi
+
+if ! command -v omniroute >/dev/null 2>&1; then
+    echo "codex-free: omniroute is not installed or not on PATH" >&2
+    exit 1
+fi
+
+if ! omniroute health >/dev/null 2>&1; then
+    omniroute serve --daemon --no-open >/dev/null
+
+    gateway_ready=0
+    for _attempt in {1..20}; do
+        if omniroute health >/dev/null 2>&1; then
+            gateway_ready=1
+            break
+        fi
+        sleep 0.25
+    done
+
+    if [ "$gateway_ready" -ne 1 ]; then
+        echo "codex-free: OmniRoute did not become healthy within 5 seconds" >&2
+        exit 1
+    fi
+fi
+
+if [ "$model" = "combo/free-coding" ]; then
+    combo_list=$(omniroute --output json combo list | sed -n '/^[[:space:]]*{/,$p')
+    if ! command -v jq >/dev/null 2>&1 ||
+        ! printf '%s\n' "$combo_list" | jq -e \
+            '.combos[]? | select(.name == "free-coding" and (.models | length > 0))' \
+            >/dev/null 2>&1; then
+        echo "codex-free: managed combo is not installed; using the Laguna pin" >&2
+        model="opencode-zen/laguna-s-2.1-free"
+    fi
+fi
+
+exec omniroute launch-codex -- --model "$model" "$@"

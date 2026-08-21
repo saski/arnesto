@@ -14,6 +14,7 @@ mkdir -p \
     "$fixture_repo/.agents/rules" \
     "$fixture_repo/.agents/hooks" \
     "$fixture_repo/.claude/hooks" \
+    "$fixture_repo/bin" \
     "$fixture_repo/templates/codex" \
     "$fixture_repo/templates/claude" \
     "$fixture_repo/templates/opencode" \
@@ -31,6 +32,8 @@ touch \
     "$fixture_repo/templates/claude/settings.json" \
     "$fixture_repo/templates/opencode/free-worker.jsonc" \
     "$fixture_repo/lib/install-opencode-free-worker-config.mjs"
+cp "$repo_dir/bin/codex-free" "$fixture_repo/bin/codex-free"
+chmod +x "$fixture_repo/bin/codex-free"
 git -C "$fixture_repo" init -q
 
 output=$(HOME="$home_dir" "$fixture_repo/setup-symlinks.sh" status)

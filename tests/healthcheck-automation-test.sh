@@ -109,13 +109,24 @@ test_arnesto_identity_contract() {
     local repo_inventory="$REPO_DIR/saski-github-repos.tsv"
 
     assert_contains "$readme" '<h1 align="center">Arnesto</h1>'
-    assert_contains "$readme" 'git@github.com-saski:saski/arnesto.git'
+    assert_contains "$readme" 'git clone https://github.com/saski/arnesto.git'
     assert_contains "$readme" "Eduardo Ferro's augmented-code configuration"
     assert_contains "$repository_rules" "# Arnesto"
     assert_contains "$cursor_rules" "github.com/saski/arnesto"
     assert_not_contains "$cursor_rules" "github.com/saski/augmentedcode-configuration"
     assert_contains "$review_command" "repo: arnesto"
     assert_contains "$repo_inventory" $'augmentedcode-configuration\torigin\tmain\tmain\t-'
+}
+
+test_portable_public_defaults_contract() {
+    local mcp_config="$REPO_DIR/.agents/mcp.json"
+    local codex_rules="$REPO_DIR/.agents/rules/codex-default.rules"
+
+    assert_not_contains "$mcp_config" "eventbrite-be.glean.com"
+    assert_not_contains "$codex_rules" "/Users/saski/Documents/"
+    assert_not_contains "$codex_rules" "invoke-release"
+    assert_not_contains "$codex_rules" "luciastuy.com"
+    assert_file_absent "$REPO_DIR/.codex/config.toml"
 }
 
 test_progressive_rule_loading_contract() {
@@ -274,6 +285,7 @@ test_managed_tool_path_contract() {
 test_healthcheck_automation_contract
 test_repository_rule_scope_contract
 test_arnesto_identity_contract
+test_portable_public_defaults_contract
 test_progressive_rule_loading_contract
 test_global_and_repository_rule_wiring_contract
 test_documented_make_targets_exist

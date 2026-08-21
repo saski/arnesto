@@ -1,0 +1,33 @@
+{
+  "name": "free-coding",
+  "strategy": "priority",
+  "models": [
+    {
+      "model": "opencode-zen/laguna-s-2.1-free",
+      "providerId": "opencode-zen",
+      "weight": 0
+    },
+    {
+      "model": "opencode/mimo-v2.5-free",
+      "providerId": "opencode",
+      "weight": 0
+    },
+    {
+      "model": "opencode/hy3-free",
+      "providerId": "opencode",
+      "weight": 0
+    },
+    {
+      "model": "opencode/big-pickle",
+      "providerId": "opencode",
+      "weight": 0
+    }
+  ],
+  "allowedProviders": [
+    "opencode-zen",
+    "opencode"
+  ],
+  "config": {
+    "trackMetrics": true
+  }
+}

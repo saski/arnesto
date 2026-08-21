@@ -81,10 +81,12 @@ and rejects a no-op when `require_changes` is true. Usage is visible only after
 a provider call emits its `step_finish` event, so the first oversized request
 may cross the threshold; the guard prevents repeated oversized iterations.
 
-The OmniRoute catalog listed `free-deterministic` as active on 2026-08-06, but
-a minimal semantic probe failed with `payment_required` at pipeline step 3
-(`longcat/LongCat-2.0`). Keep the direct verified pins until the combo passes
-the same semantic and bounded-edit conformance.
+The historical `free-deterministic` combo failed a minimal semantic probe with
+`payment_required` at pipeline step 3 (`longcat/LongCat-2.0`). It and
+`free-stack` were inactive and removed from the local OmniRoute store on
+2026-08-21. They are retired, not fallback candidates. Keep the direct verified
+worker pins until a replacement passes the same semantic and bounded-edit
+conformance.
 
 ## Hard prohibitions
 

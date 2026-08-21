@@ -1318,6 +1318,23 @@ skills:
       - xp-predict-problems
     notes: "Disciplined reproduce-minimise-hypothesise-instrument-fix loop for bugs and performance regressions."
 
+  - name: source-command-bug-fixing-agent
+    category: workflow-automation
+    pattern: pipeline
+    owner: engineering
+    status: active
+    review_cycle_days: 90
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - diagnose
+      - tdd
+      - triage
+    notes: "Company-context overlay for diagnosis across tickets, internal documentation, private repositories, ownership, and production evidence. Delegates the core debugging loop to diagnose."
+
   - name: improve-codebase-architecture
     category: data-analysis
     pattern: reviewer

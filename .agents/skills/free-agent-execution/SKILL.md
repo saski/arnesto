@@ -95,10 +95,11 @@ Version one (2026-07-26) verified two `omniroute/oc/*` identifiers for `bounded_
 
 Six `omniroute/opencode-zen/*` identifiers were reconciled with the live OmniRoute catalog and tested on 2026-07-30. All returned an OpenCode status-1 failure with no usable completion, so they are quarantined and absent from the manifest. Use only the two original `oc/*` models unless a future conformance run promotes another model.
 
-OmniRoute advertised the active `free-deterministic` combo on 2026-08-06, but
-its minimal semantic probe failed with `payment_required` at pipeline step 3,
-`longcat/LongCat-2.0`. Active catalog presence is not semantic conformance, so
-the combo remains a candidate and is not admitted to the manifest.
+OmniRoute advertised `free-deterministic` on 2026-08-06, but its minimal
+semantic probe failed with `payment_required` at pipeline step 3,
+`longcat/LongCat-2.0`. The inactive combo and the obsolete `free-stack` combo
+were removed from the local store on 2026-08-21. They are retired and are not
+admitted to the manifest.
 
 Do not substitute aliases or newly advertised free models without updating the routing manifest and re-running `validate-routing-manifest`. The adapter still validates that the requested model is both globally verified and admitted for the requested task class.
 

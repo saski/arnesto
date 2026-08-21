@@ -143,6 +143,7 @@ Imported and local sources land in the same tree:
 | fic-research | workflow | Research and document the current codebase state without proposing changes. Use when the user asks to investigate existing behavior, architecture, or implementation details and capture findings. |
 | fic-validate-plan | workflow | Validate that an implementation plan was executed correctly. Use when the user asks to verify completion, compare code changes to a plan, or produce a validation report. |
 | project-status-maintenance | documentation | Create or update PROJECT_STATUS.md at the repo root using the canonical structure (Executive Summary, Completed Components, In Progress, Next Steps, Known Issues, Notes). |
+| source-command-bug-fixing-agent | engineering | Investigate and fix company-environment bugs using available tickets, internal documentation, private repositories, ownership data, and production evidence while preserving corporate access and mutation boundaries. |
 | find-docs | developer-tools | Retrieves up-to-date documentation, API references, and code examples for developer technologies using the Context7 CLI. Use for library, framework, SDK, API, CLI tool, or cloud service questions. |
 | documentation-lookup | developer-tools | Use current library and framework docs through Context7, preferring MCP tools with the CLI as a fallback. Activates for setup questions, API references, code examples, or named frameworks such as React, Next.js, or Prisma. |
 | verification-loop | workflow | A comprehensive verification system for Claude Code sessions. |
