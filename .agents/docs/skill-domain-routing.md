@@ -224,6 +224,7 @@ Use when the work is about explaining, translating, challenging, facilitating, o
 Skills:
 
 - `traductor-bilingue` - Use for English-Spanish technical translation.
+- `ste` - Use only when the user explicitly requests ASD-STE100 Simplified Technical English or invokes `/ste`; do not use it for ordinary clarity or documentation requests.
 - `radical-candor` - Use for direct feedback while preserving care.
 - `stakeholder-update-generator` - Use for progress updates and release notes.
 - `grill-me` - Use to stress-test a plan or design through questioning.

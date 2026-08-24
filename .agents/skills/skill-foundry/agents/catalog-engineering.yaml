@@ -1538,6 +1538,22 @@ skills:
     overlap_with: []
     notes: "Local completion notifications for AI tools."
 
+  - name: ste
+    category: artifact-creation
+    pattern: generator
+    owner: engineering
+    status: active
+    review_cycle_days: 90
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - traductor-bilingue
+      - refinement-loop
+    notes: "Explicit-only ASD-STE100 technical prose rewriting; not for general writing."
+
   - name: github-host-alias
     category: tool-reference
     pattern: tool-wrapper
