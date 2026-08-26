@@ -47,7 +47,7 @@ Use these checks to keep the draft complete before opening the editor. Do not sh
 | Scope | Before opening editor unless deferred |
 |-------|---------------------------------------|
 | **PCD:slack-trigger** | Slack channel ids are resolved, or user chose to pick channels in the Automations UI. Empty channels are valid only for explicit UI deferral. |
-| **PCD:slack-actions** | `slack.channel` / readSlack scope is resolved, or user chose **Select channels** in the editor. IDs must be `C…` / `G…` / `D…`, never `U…`. |
+| **PCD:slack-actions** | `slack.channel` / readSlack scope is resolved, or user chose **Select channels** in the editor. IDs must be `C…` / `G…`, never `U…`. A `D…` id is valid only in the `slack` action and always resolves to a DM with the automation owner. |
 | **PCD:git-scope** | PR triggers have repos/orgs; push triggers have repo + branch; CI triggers have repo scope. Use scoped repo discovery only after the user identifies the target. |
 
 ### PCD notes
@@ -249,7 +249,7 @@ Guardrails: do not run broad private repo inventory or unscoped account/org swee
 
 Slack MCP discovery before channel question, every time `slackTrigger` / `slack` / `readSlack` is involved. **Specify now** means the agent runs discovery first — not "ask the user for IDs". 1 channel → inline confirm; 2 → inline either/or; 3+ → `AskQuestion` over returned channels (+ **Pick in Automations UI**). **Do not prefill with empty channels after Specify now without discovery or continue-without.** If discovery is blocked → **Retry after setup** / **Continue without MCP** / **Pick in Automations UI** inline.
 
-Slack `channel` accepts `C…` / `G…` / `D…` IDs only — never `U…` member IDs. For Slack replies, offer **respond in the triggering thread** separately from **send to a specific channel or DM**. Empty `{}` actions are valid when the user picks **Select channels** in the editor; record the deferral in the draft table.
+Slack `channel` accepts `C…` / `G…` channel IDs — never `U…` member IDs. In the `slack` **action**, a `D…` id is also accepted and always resolves to a DM with the automation owner (DMing other users is not supported); `D…` ids are rejected in triggers. For Slack replies, offer **respond in the triggering thread** separately from **send to a specific channel or DM**. Empty `{}` actions are valid when the user picks **Select channels** in the editor; record the deferral in the draft table.
 
 #### PagerDuty / Linear / Sentry
 
@@ -257,7 +257,7 @@ PagerDuty MCP list services before `serviceIds` scope: 1/2 inline; 3+ → `AskQu
 
 ### YAML output shape (agent-internal)
 
-Wire format matches the reviewed Automations draft passed to `open_automation` as `prefillWorkflowData` — canonical proto JSON with full enum names (e.g. `GIT_PULL_REQUEST_ACTION_OPENED`). PR scope lives on `git.pullRequest` (`repos` / `orgs`); `workflow.gitConfig` holds `repo` + `branch` for non-`git` triggers that need a checkout. Use `ignoreDraftPrs`, not `ignoreDraftPr`. Slack channel / DM IDs: `C…` / `G…` / `D…`.
+Wire format matches the reviewed Automations draft passed to `open_automation` as `prefillWorkflowData` — canonical proto JSON with full enum names (e.g. `GIT_PULL_REQUEST_ACTION_OPENED`). PR scope lives on `git.pullRequest` (`repos` / `orgs`); `workflow.gitConfig` holds `repo` + `branch` for non-`git` triggers that need a checkout. Use `ignoreDraftPrs`, not `ignoreDraftPr`. Slack channel IDs: `C…` / `G…`; a `D…` id (`slack` action only) resolves to the automation owner's DM.
 
 Skeleton:
 

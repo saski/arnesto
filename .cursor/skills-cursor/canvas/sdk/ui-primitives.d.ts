@@ -507,15 +507,17 @@ export type StatProps = {
 };
 /**
  * Single metric display — a large value with a compact label beneath it.
- * Use inside `<Grid>` for dashboard summary strips.
+ * Best as compact supporting context beside a primary artifact (e.g. one or
+ * two Stats in a `<Row>`); reserve a `<Grid>` of equal Stats for when the
+ * data truly calls for a summary strip.
  *
  * @example
  * ```tsx
- * <Grid columns={3} gap={16}>
- *   <Stat value="4" label="Healthy" tone="success" />
- *   <Stat value="1" label="Degraded" tone="warning" />
- *   <Stat value="99.2%" label="Avg Uptime" />
- * </Grid>
+ * // Supporting context next to a primary artifact — not a hero KPI strip.
+ * <Row gap={16}>
+ *   <Stat value="12" label="Failing checks" tone="danger" />
+ *   <Stat value="3" label="Services" />
+ * </Row>
  * ```
  */
 export declare function Stat({ value, label, tone, style }: StatProps): JSX.Element;

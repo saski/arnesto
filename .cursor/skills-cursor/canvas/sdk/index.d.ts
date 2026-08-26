@@ -11,6 +11,9 @@
  * - Don't wrap every section in Card — mix open sections with cards.
  * - Run that skill's Pre-delivery self-check before returning code.
  */
+/** React authoring utilities re-exported so canvases need one public import. */
+export type { CSSProperties, RefObject } from "react";
+export { useEffect, useMemo, useRef, useState } from "react";
 /** Shared category color palette used by `Swatch`, `UsageBar`, etc. */
 export type { CategoryPalette, Color } from "./canvas-tokens.js";
 export { categoryPaletteDark, categoryPaletteLight, colorPalette, usageColorSequence, } from "./canvas-tokens.js";

@@ -18,13 +18,17 @@ For shared skills, use [skill-factory-skills.md](skill-factory-skills.md) and [s
 | automate | ide | Create Cursor Automations through the Automations editor handoff, with trigger, tool, prompt, and integration completeness checks. |
 | autopilot | ide | Keep a PR merge-ready by triaging comments, resolving clear conflicts, and fixing CI in a loop. |
 | canvas | ide | Live React Canvas beside the chat for analytical artifacts, charts, tables, and MCP-heavy deliverables; also required when editing `.canvas.tsx` files. |
-| loop | ide | Run a prompt or skill on a recurring local interval using monitored background shell output (`/loop`, polling, local cron-like loops). |
+| goal | ide | Set a durable objective that Cursor pursues across turns until an evidence-based completion audit passes. |
+| loop | ide | Run a prompt or skill repeatedly through cloud subscription timers or monitored local shell output. |
+| new-repo | ide | Create and push a Cursor-hosted repository for a project that has no existing remote. |
 | onboard | ide | Focused Cursor onboarding flow that learns basic preferences, picks a first goal, and routes the user to the right next action (`/onboard`). |
+| origin | ide | Install, authenticate, update, and repair the CLI for Cursor-hosted repositories. |
 | rename-chat | ide | Rename the current Cursor chat to a concise topic title when the user explicitly invokes `/rename-chat`. |
 | review | ide | Route a code review request to either Bugbot or Security Review. |
 | review-bugbot | ide | Review code changes with the Bugbot subagent. |
 | review-security | ide | Review code changes with the Security Review subagent. |
 | sdk | ide | Build on the Cursor SDK (`@cursor/sdk`, `cursor-sdk`) from scripts, CI, or backends; agents, streaming, MCP, and errors. |
+| share | ide | Save or share a project through a private Cursor-hosted repository, with novice-friendly framing. |
 | shell | ide | Run the rest of a `/shell` request as a literal shell command when the user explicitly invokes it. |
 | split-to-prs | ide | Split current work into small reviewable PRs from a chat, branch, or PR. |
 | statusline | ide | Configure a custom CLI status line (`statusline`, `statusLine`, prompt footer). |

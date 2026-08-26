@@ -15,6 +15,10 @@ description: >-
 metadata:
   surfaces:
     - ide
+    - cloud
+environments:
+  - local
+  - cloud
 ---
 A canvas is a single `.canvas.tsx` file the IDE compiles so the user can open it beside the chat. Follow the workflow below in order.
 

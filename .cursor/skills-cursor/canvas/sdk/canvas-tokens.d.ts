@@ -1,67 +1,28 @@
 /**
  * Design tokens for `cursor/canvas` (standalone; no UI framework dependency).
  *
- * Color values are aligned with the Cursor app dark theme (`packages/ui` `cursor-dark` sources).
+ * Color values are pinned copies of the `packages/ui` cursor-core themes
+ * (`src/tokens/themes/cursor-core/{dark,light}.ts`) resolved through
+ * `CURSOR_SEMANTIC_RULES` (`src/tokens/semantic-schema.ts`). Alpha-hex entries
+ * are `base` at the rule's `mixTransparent` percent so they composite
+ * correctly over any surface. When the ui tokens change, re-derive these —
+ * they do not update automatically.
+ *
+ * Mapping (dark base #F0F0F0, light base #141414):
+ * - foreground*        → text-primary/secondary/tertiary/quaternary (100/74/60/36%)
+ * - editor/chrome/sidebar/elevated → the core surface hexes (elevated = editor)
+ * - fill*              → bg-primary/secondary/tertiary/quaternary (20/14/8/6%)
+ * - stroke*            → stroke-primary/secondary/tertiary (20/12/8%)
+ * - strokeFocused      → core `focus` at full opacity (NOT `--cursor-stroke-focused`,
+ *   which is 15% and layered with other cues in the app; in a canvas this is
+ *   the sole focus affordance)
+ * - accent/button*     → bg-accent / action-label / bg-accent-hover (mixTwo base 10%)
+ * - link               → text-link (= core blue)
+ * - diff*Line          → the core diff line backgrounds; diffStrip* keep the
+ *   canvas-specific alphas on the core green/red hues
  */
-export declare const canvasPaletteDark: {
-    readonly foreground: "#E4E4E4EB";
-    readonly foregroundSecondary: "#E4E4E48D";
-    readonly foregroundTertiary: "#E4E4E45E";
-    readonly foregroundQuaternary: "#E4E4E442";
-    readonly editor: "#181818";
-    readonly chrome: "#141414";
-    readonly sidebar: "#141414";
-    readonly elevated: "#181818";
-    readonly fillPrimary: "#E4E4E430";
-    readonly fillSecondary: "#E4E4E41E";
-    readonly fillTertiary: "#E4E4E411";
-    readonly fillQuaternary: "#E4E4E40A";
-    readonly strokePrimary: "#E4E4E433";
-    readonly strokeSecondary: "#E4E4E41F";
-    readonly strokeTertiary: "#E4E4E414";
-    readonly strokeFocused: "#E4E4E4";
-    readonly accent: "#599CE7";
-    readonly buttonBackground: "#599CE7";
-    readonly buttonForeground: "#191c22";
-    readonly buttonHoverBackground: "#6AABE9";
-    readonly link: "#87c3ff";
-    readonly diffInsertedLine: "#3FA26633";
-    readonly diffRemovedLine: "#B8004933";
-    readonly diffStripAdded: "#3FA2668F";
-    readonly diffStripRemoved: "#FC6B838F";
-};
-/**
- * Light-mode palette derived from `packages/ui/src/tokens/themes/cursor-core/light.ts`.
- * Base color: #141414.  Same percentages as dark (regular light has no overrides
- * in CURSOR_SEMANTIC_OVERRIDES — only high-contrast does).
- */
-export declare const canvasPaletteLight: {
-    readonly foreground: "#141414F0";
-    readonly foregroundSecondary: "#141414BD";
-    readonly foregroundTertiary: "#1414148A";
-    readonly foregroundQuaternary: "#1414145C";
-    readonly editor: "#FCFCFC";
-    readonly chrome: "#F8F8F8";
-    readonly sidebar: "#F3F3F3";
-    readonly elevated: "#FCFCFC";
-    readonly fillPrimary: "#14141433";
-    readonly fillSecondary: "#14141424";
-    readonly fillTertiary: "#14141414";
-    readonly fillQuaternary: "#1414140F";
-    readonly strokePrimary: "#14141433";
-    readonly strokeSecondary: "#1414141F";
-    readonly strokeTertiary: "#14141414";
-    readonly strokeFocused: "#3685BF";
-    readonly accent: "#3685BF";
-    readonly buttonBackground: "#3685BF";
-    readonly buttonForeground: "#FCFCFC";
-    readonly buttonHoverBackground: "#2E76AB";
-    readonly link: "#3685BF";
-    readonly diffInsertedLine: "#1F8A651F";
-    readonly diffRemovedLine: "#CF2D5614";
-    readonly diffStripAdded: "#1F8A65CC";
-    readonly diffStripRemoved: "#CF2D56CC";
-};
+export declare const canvasPaletteDark: CanvasPalette;
+export declare const canvasPaletteLight: CanvasPalette;
 /**
  * Overlay a host-provided primary/accent color (e.g. the active VS Code
  * theme's accent) onto a base palette. Only the accent-adjacent entries
@@ -143,40 +104,21 @@ export declare const chartPalette: {
  * Shared category palette for canvas primitives that show categorical tints
  * (`Swatch`, `UsageBar` segments, etc.). Hexes mirror the cursor core hues
  * from `packages/ui/src/tokens/themes/cursor-core/{dark,light}.ts` (via the
- * `text-{hue}-primary` semantic tokens); `gray` mirrors `text-tertiary`
- * (`mixTransparent base 54%`). `orange` is mixed 70/30 with red to keep
+ * `text-{hue}-primary` semantic tokens); `gray` reuses the palette's
+ * `foregroundTertiary` (= `text-tertiary`, `mixTransparent base 60%`).
+ * `orange` is mixed 70/30 with red to keep
  * Conversation distinct from Skills' yellow in light mode while staying warm.
  *
  * The insertion order here is the canonical category order — primitives
  * that auto-assign colors (e.g. `UsageBar` segments without an explicit
  * `color`) cycle through these keys in order.
  */
-export declare const categoryPaletteDark: {
-    readonly gray: "#E4E4E48A";
-    readonly purple: "#9386F2";
-    readonly green: "#3FA266";
-    readonly yellow: "#F1B467";
-    readonly cyan: "#81A1C1";
-    readonly pink: "#B48EAD";
-    readonly blue: "#7BAFE9";
-    readonly orange: "#DD7F76";
-    readonly red: "#FC6B83";
-};
-export declare const categoryPaletteLight: {
-    readonly gray: "#1414148A";
-    readonly purple: "#7754D9";
-    readonly green: "#1F8A65";
-    readonly yellow: "#C08532";
-    readonly cyan: "#4C7F8C";
-    readonly pink: "#B8448B";
-    readonly blue: "#3685BF";
-    readonly orange: "#D75C4E";
-    readonly red: "#CF2D56";
-};
-/** Legacy `colorPalette` name kept for back-compat; per-theme tables are `categoryPalette{Dark,Light}`. React consumers should read `useHostTheme().category` so the color flips with the host theme. */
-export declare const colorPalette: typeof categoryPaletteDark;
-export type Color = keyof typeof colorPalette;
+export type Color = "gray" | "purple" | "green" | "yellow" | "cyan" | "pink" | "blue" | "orange" | "red";
 export type CategoryPalette = Readonly<Record<Color, string>>;
+export declare const categoryPaletteDark: CategoryPalette;
+export declare const categoryPaletteLight: CategoryPalette;
+/** Legacy `colorPalette` name kept for back-compat; per-theme tables are `categoryPalette{Dark,Light}`. React consumers should read `useHostTheme().category` so the color flips with the host theme. */
+export declare const colorPalette: CategoryPalette;
 /**
  * Auto-color rotation for `UsageBar` segments without an explicit `color`.
  * Decoupled from `colorPalette`'s declaration order so the palette can grow
