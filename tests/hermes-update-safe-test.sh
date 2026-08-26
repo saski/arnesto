@@ -6,7 +6,8 @@ SCRIPT="$REPO_DIR/hermes-update-safe.sh"
 TEST_DIR="$(mktemp -d)"
 trap 'rm -rf "$TEST_DIR"' EXIT
 
-mkdir -p "$TEST_DIR/bin" "$TEST_DIR/home/hermes-agent/.git"
+mkdir -p "$TEST_DIR/bin" "$TEST_DIR/home/hermes-agent"
+printf 'gitdir: /tmp/fake-common-dir/worktrees/hermes-agent\n' >"$TEST_DIR/home/hermes-agent/.git"
 
 cat >"$TEST_DIR/bin/git" <<'EOF'
 #!/usr/bin/env bash
@@ -21,6 +22,10 @@ case "$1" in
     exit 1
     ;;
   rev-parse)
+    if [[ "${2:-}" == "--git-dir" ]]; then
+      printf '.git\n'
+      exit 0
+    fi
     if [[ "${FAKE_GIT_STATE:-behind}" != "current" && "$2" == "origin/main" ]]; then
       printf 'upstream-revision\n'
     else

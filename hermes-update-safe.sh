@@ -13,7 +13,7 @@ usage() {
 }
 
 require_agent_checkout() {
-  if [[ ! -d "$HERMES_AGENT_DIR/.git" ]]; then
+  if ! git -C "$HERMES_AGENT_DIR" rev-parse --git-dir >/dev/null 2>&1; then
     printf 'Hermes checkout not found: %s\n' "$HERMES_AGENT_DIR" >&2
     exit 2
   fi

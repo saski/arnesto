@@ -96,6 +96,33 @@ The TypeScript CLI under `src/thoughts/` is not part of mandatory `make check` u
 
 The Makefile prepends `~/.agents/bin`, `~/.bun/bin`, `/opt/homebrew/bin`, and `/usr/local/bin` to `PATH` so checks can find managed tools from non-login shells.
 
+## Verified Local Toolchain Baseline
+
+The 2026-08-26 maintenance pass verified this direct development toolchain:
+
+| Tool | Verified version |
+|------|------------------|
+| Codex CLI | 0.149.1 (`gpt-5.6-terra`, medium reasoning) |
+| Orca Desktop/CLI | 1.4.188 |
+| OpenCode Desktop/CLI | 1.18.23 |
+| Hermes Agent | 0.20.5 plus the carried multiplexed-profile patch |
+| OmniRoute | 3.8.49 |
+| Node.js / npm | 24.16.0 LTS / 12.0.2 |
+| Pi / OpenSpec | 0.84.3 / 1.10.0 |
+| GitHub CLI / RTK / uv | 2.98.0 / 0.45.0 / 0.12.6 |
+
+Use the fully qualified `stablyai/orca/orca` Homebrew cask for Orca. The
+unqualified cask name can resolve to an unrelated deprecated Plotly package.
+Hermes source updates must preserve the local multiplexing patch: validate a
+parallel worktree, switch the canonical install path only after its focused
+tests pass, and retain the previous checkout until the new gateway is healthy.
+
+The pass considered a healthy OmniRoute route to require non-empty content, a
+terminal finish reason, and non-zero usage. The `combo/free-coding` smoke
+resolved to `mimo-v2.5-free`, returned `READY`, stopped normally, and reported
+266 total tokens. Package-manager success alone is not semantic verification.
+Unrelated outdated Homebrew libraries are intentionally outside this baseline.
+
 ## Pre-Commit Hook
 
 The tracked pre-commit template lives at `hooks/pre-commit` and delegates to `make check`.

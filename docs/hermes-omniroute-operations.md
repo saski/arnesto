@@ -252,6 +252,10 @@ gateway, and confirm that no WhatsApp adapter is listed.
 
 ## Verification record
 
+- On 2026-08-26 Hermes 0.20.5 was activated from a parallel worktree with the
+  multiplexed custom-provider patch reapplied. The focused gateway suite passed
+  25 tests, Ruff passed, and launchd served the `default` and `coding` profiles
+  with Telegram and webhook connected.
 - The Telegram route selects the `default` profile.
 - A text-only turn uses `oc/deepseek-v4-flash-free` through OmniRoute.
 - A one-image smoke produced one auxiliary `gpt-5.6-sol` analysis followed by
