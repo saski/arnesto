@@ -1036,6 +1036,24 @@ skills:
       - lean-ai-adoption-coach
     notes: "Reference collection of AI coding patterns. lean-ai-adoption-coach covers adoption decisions."
 
+  - name: ai-coding-interview
+    category: workflow-automation
+    pattern: pipeline
+    owner: engineering
+    status: active
+    review_cycle_days: 90
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - tdd
+      - grill-me
+      - align
+      - verification-loop
+    notes: "Guided and timed AI coding interview pipeline with a visible plan, bounded RED-GREEN slices, AI-judgment checks, clock control, and evidence-based scoring. Composes narrower testing and facilitation skills without replacing them."
+
   - name: align
     category: artifact-creation
     pattern: pipeline

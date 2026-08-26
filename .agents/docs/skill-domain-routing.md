@@ -170,6 +170,7 @@ Skills:
 - `write-a-skill` - Use to create portable agent skills with proper structure.
 - `find-skills` - Use to discover installable external skills.
 - `ai-patterns` - Use for augmented coding patterns, anti-patterns, and steering techniques.
+- `ai-coding-interview` - Use for guided or timed AI-assisted backend coding interview practice with a visible numbered plan, bounded vertical slices, and rubric-based scoring.
 - `launching-agent-teams` - Use to create agent teams, spawn teammates, or coordinate parallel agents (Claude Code).
 - `lean-ai-adoption-coach` - Use for pragmatic AI adoption decisions and guardrails.
 
