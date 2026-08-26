@@ -24,6 +24,7 @@ SHELL_SCRIPTS := \
 	tests/opencode-free-template-test.sh \
 	tests/opencode-managed-config-test.sh \
 	tests/setup-symlinks-portability-test.sh \
+	tests/codex-config-invariants-test.sh \
 	tests/check-omniroute-catalog-test.sh \
 	tests/openspec-install-test.sh \
 	tests/validate-skill-library-test.sh \
@@ -49,6 +50,7 @@ test:
 	./tests/opencode-free-template-test.sh
 	./tests/opencode-managed-config-test.sh
 	./tests/setup-symlinks-portability-test.sh
+	./tests/codex-config-invariants-test.sh
 	./tests/check-omniroute-catalog-test.sh
 	./tests/openspec-install-test.sh
 	./tests/validate-skill-library-test.sh
@@ -130,6 +132,7 @@ ci-check: lint-shell validate-cursor-skills
 	./tests/opencode-free-template-test.sh
 	./tests/opencode-managed-config-test.sh
 	./tests/setup-symlinks-portability-test.sh
+	./tests/codex-config-invariants-test.sh
 	./tests/check-omniroute-catalog-test.sh
 	./tests/openspec-install-test.sh
 	./tests/validate-skill-library-test.sh

@@ -143,7 +143,7 @@ SKILL_FACTORY=/path/to/skill-factory ./sync-skill-factory.sh --dry-run
 - `~/.codex/rules/default.rules` -> repo `.agents/rules/codex-default.rules`
 - `~/.codex/AGENTS.md` -> repo `.agents/rules/base.md`
 - `~/.codex/hooks/rtk-rewrite.sh` -> repo `.agents/hooks/rtk-rewrite.sh`
-- `~/.codex/hooks.json` is seeded from `templates/codex/hooks.json`
+- `~/.codex/config.toml` and `~/.codex/hooks.json` are seeded from `templates/codex/`
 - `~/.claude/commands` -> repo `.agents/commands`
 - `~/.claude/skills` -> repo `.agents/skills`
 - `~/.claude/hooks` -> repo `.claude/hooks`
@@ -156,7 +156,7 @@ SKILL_FACTORY=/path/to/skill-factory ./sync-skill-factory.sh --dry-run
 - `~/.agents/bin/codex-free` -> repo `bin/codex-free`
 - `~/.local/bin/codex-free` -> repo `bin/codex-free` for interactive shells
 
-Mutable local config such as `~/.codex/config.toml`, `~/.codex/hooks.json`, and `~/.claude/settings.json` is seeded from `templates/` and intentionally not symlinked back into the repo.
+Mutable local config such as `~/.codex/config.toml`, `~/.codex/hooks.json`, and `~/.claude/settings.json` is seeded from `templates/` and intentionally not symlinked back into the repo. For Codex, the required portable invariants are Terra, Medium reasoning, pragmatic personality, and `multi_agent = true`; `setup-symlinks.sh validate` checks them without replacing local MCP, plugin, marketplace, desktop, or hook state. `.agents/mcp.json` is shared with Cursor and Gemini, not installed into Codex.
 
 OmniRoute combo state is also mutable local state. Its portable desired state
 is tracked in `templates/omniroute/free-coding-combo.json`; apply it explicitly

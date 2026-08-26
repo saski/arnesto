@@ -268,6 +268,39 @@ validate_opencode_free_worker_config() {
     node "$OPENCODE_CONFIG_INSTALLER" validate "$OPENCODE_FREE_WORKER_TEMPLATE" "$OPENCODE_CONFIG_PATH"
 }
 
+validate_codex_config_invariants() {
+    local config_path="$HOME/.codex/config.toml"
+    local expected_line
+    local errors=0
+
+    for expected_line in \
+        'model = "gpt-5.6-terra"' \
+        'model_reasoning_effort = "medium"' \
+        'personality = "pragmatic"'; do
+        if ! grep -Fqx -- "$expected_line" "$config_path"; then
+            echo "❌ $config_path must contain: $expected_line"
+            errors=$((errors + 1))
+        fi
+    done
+
+    if ! awk '
+        /^\[features\]$/ { in_features = 1; next }
+        /^\[/ { in_features = 0 }
+        in_features && $0 == "multi_agent = true" { found = 1 }
+        END { exit !found }
+    ' "$config_path"; then
+        echo "❌ $config_path must enable multi_agent in [features]"
+        errors=$((errors + 1))
+    fi
+
+    if [ "$errors" -eq 0 ]; then
+        echo "✓ $config_path matches required Codex invariants"
+        return 0
+    fi
+
+    return 1
+}
+
 setup_symlinks() {
     echo "🔗 Setting up symlinks..."
 
@@ -436,6 +469,7 @@ validate_symlinks() {
         errors=$((errors + 1))
     else
         echo "✓ $codex_config_path is a local managed file"
+        validate_codex_config_invariants || errors=$((errors + 1))
     fi
 
     local codex_hooks_json_path="$HOME/.codex/hooks.json"
