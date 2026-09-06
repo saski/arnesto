@@ -26,22 +26,23 @@ A canvas is a single `.canvas.tsx` file the IDE compiles so the user can open it
 
 ### 1. Decide whether to use a canvas
 
-The trigger is **user intent**, not response shape. Ask: would the user benefit from viewing this output as its **own standalone artifact**, separate from the chat? If the output is a means to an end (a drafted message, a code fix, a dashboard in another tool), skip the canvas.
+The trigger is **user intent**, not response shape. Ask: would the user benefit from viewing this output as its **own durable standalone artifact outside the transcript**, separate from the chat? If the output is a means to an end (a drafted message, a code fix, a dashboard in another tool), skip the canvas.
 
 **Use a canvas when the agent produces new standalone analytical output:**
 - Quantitative analyses and metrics breakdowns (e.g. "send 500 requests and tell me how many fail")
 - Billing or account investigations that surface structured findings from database queries
 - Security audits or architecture reviews with categorized findings
 - Cross-system data analyses and overlap reports
-- Structured data from MCP tools (Databricks, Datadog, etc.) where the data IS the deliverable
+- Structured data from MCP tools (Databricks, Datadog, etc.) where a durable standalone artifact is the deliverable
 - Financial analyses, margin decompositions, usage trend reports
-- Tables with more than a handful of rows that the user asked to see
+- Large tables the user wants to revisit or refine
 
 **Do NOT use a canvas when:**
 - The user asks for work in a **specific tool** — "create a Datadog dashboard" means give them a Datadog dashboard, not a canvas
 - The user has a **specific deliverable** — "draft a support response", "fix this code", "make this PR"
 - The user is **working within an existing artifact** — improving an HTML dashboard, editing an existing file
 - The user is doing **targeted debugging** or active development, even if structured findings emerge along the way
+- An immutable visual output belongs inside the transcript rather than in a durable standalone artifact
 - Short factual answers, one-off file edits, or quick clarifying questions
 - MCP tools are queried as an **intermediate step** for a different deliverable (e.g. querying Stripe to draft a support reply)
 

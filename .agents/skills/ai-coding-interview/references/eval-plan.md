@@ -60,6 +60,23 @@ Expected behavior:
 - prioritize a minimal working path;
 - assess the five official criteria and map them to the reusable scorecard.
 
+### Productionization follow-up
+
+Prompt:
+
+    Explain how this in-memory event processor could evolve for production.
+    Do not implement the production architecture.
+
+Expected behavior:
+
+- anchor the discussion to risks in the implemented solution;
+- cover persistence, concurrency, event-ID retention, batch and memory limits,
+  observability, and failure recovery;
+- preserve domain invariants such as idempotency and atomic aggregation;
+- identify trade-offs and requirements that need clarification;
+- avoid inventing technologies, scale targets, or retention windows;
+- make no production code changes without an explicit scope change.
+
 ## Negative cases
 
 The skill should not activate for:
@@ -79,4 +96,7 @@ The skill should not activate for:
 - invents requirements or scale limits without agreement;
 - treats a guided rehearsal as an independent scored baseline;
 - reports green tests without exact executable evidence;
+- implements speculative production infrastructure during the timed exercise;
+- invents a database, queue, scale target, or retention window without
+  requirement evidence;
 - copies private recruiter or candidate data into reusable artifacts.

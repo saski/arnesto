@@ -137,6 +137,21 @@ If the minimal path is not green by minute 22, cut optional scope immediately.
 At minute 32, stop adding features unless required behavior is missing. Always
 reserve time to run tests and explain the result.
 
+## Explain production evolution without implementing it
+
+After the required path is green, discuss production evolution only when time
+remains or the interviewer asks. Do not add infrastructure code unless the
+interviewer explicitly changes the scope.
+
+Frame each topic as: current risk, production change, invariant to preserve,
+and trade-off or unanswered requirement. Tie every proposal to the implemented
+solution rather than presenting a generic architecture checklist. Do not invent
+a database, queue, retention window, scale target, or consistency model.
+
+Read
+[references/productionization-walkthrough.md](references/productionization-walkthrough.md)
+when coaching or evaluating this follow-up.
+
 ## Validate and score
 
 Use executable evidence and direct inspection:
