@@ -274,7 +274,6 @@ validate_codex_config_invariants() {
     local errors=0
 
     for expected_line in \
-        'model = "gpt-5.6-terra"' \
         'model_reasoning_effort = "medium"' \
         'personality = "pragmatic"'; do
         if ! grep -Fqx -- "$expected_line" "$config_path"; then

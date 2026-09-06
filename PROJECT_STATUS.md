@@ -32,6 +32,8 @@
 - Shared `codex-model-routing` policy for explicit Codex model, effort, Fast,
   and spending decisions, with local evidence and an initial evaluation plan;
   empirical outcome benchmarking remains pending.
+- Conditional Codex/Astra instructions cover follow-through, skill conflicts,
+  communication, delegation, and verification while retaining Terra Medium.
 - Versioned templates and adapters for supported clients.
 - Stable `~/.agents` entry point with deterministic symlink validation.
 - Separate runtime ownership for credentials, sessions, databases, trust state, and mutable preferences.

@@ -24,6 +24,19 @@ governance. Root `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` shims point to it.
 The universal rulebook owns contextual-rule triggers so repository shims do not
 repeat them.
 
+The `Codex with Astra` section of `base.md` applies only to that client/model
+combination. It adapts the [official Astra prompting guidance](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra#gpt-6-astra-prompting-best-practices),
+reviewed on 2026-09-06. Codex already loads this file through its existing
+`~/.codex/AGENTS.md` link; no new setup step is required. The Codex template
+retains Terra Medium. Model selection remains in `codex-model-routing`.
+This instruction adaptation does not migrate API requests or alter runtime
+configuration. Behavior with Astra still requires evaluation on real tasks.
+
+The Codex invariant test enforces Terra Medium in the repository template.
+Local validation allows a different model selection and setup preserves it.
+Medium reasoning, pragmatic personality, and multi-agent enablement remain
+required local invariants.
+
 Repo-type details belong in contextual rule files such as `.agents/rules/python-project.md` and `.agents/rules/makefile-project.md`. Task-specific workflows belong in skills. Do not add generic best-practice prose to `base.md` unless it routes concrete behavior that agents cannot reliably infer from the codebase or user request.
 
 Cursor consumes the home-level and repository `AGENTS.md` hierarchy directly.
