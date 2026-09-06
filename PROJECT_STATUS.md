@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-08-21
+**Last Updated**: 2026-09-06
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 ---
@@ -29,6 +29,9 @@
 
 - One compact universal rulebook with narrower repository and contextual rules.
 - Shared skills and commands routed on demand instead of loaded globally.
+- Shared `codex-model-routing` policy for explicit Codex model, effort, Fast,
+  and spending decisions, with local evidence and an initial evaluation plan;
+  empirical outcome benchmarking remains pending.
 - Versioned templates and adapters for supported clients.
 - Stable `~/.agents` entry point with deterministic symlink validation.
 - Separate runtime ownership for credentials, sessions, databases, trust state, and mutable preferences.

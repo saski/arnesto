@@ -138,6 +138,7 @@ Imported and local sources land in the same tree:
 |-------|----------|---------|
 | ste | writing | Writes or rewrites prose in ASD-STE100 Simplified Technical English. Use only when the user explicitly invokes `/ste`, the STE skill, or ASD-STE100; it does not apply to generic requests for clearer documentation. |
 | agent-config-hygiene | practices | Audit and simplify AGENTS.md hierarchies, always-loaded rules, client wrappers, skill routing, and runtime boundaries without adding more permanent context. |
+| codex-model-routing | developer-tools | Choose Codex/OpenAI models (Astra, Sol, Terra, Luna), reasoning effort (Light/Low through Ultra), and Fast mode for explicit routing, consumption optimization, or spending questions; not ordinary programming or other-provider routing. |
 | ai-coding-interview | workflow | Guide AI-assisted backend coding interview rehearsals, timed mocks, visible vertical-slice plans, and evidence-based scoring while preserving candidate ownership. |
 | free-agent-execution | developer-tools | Run an explicitly requested, bounded, non-sensitive coding task through the local free-worker adapter using a verified free OpenCode model. Use only when the user asks to execute a free worker or free agent and accepts the external-model safety boundary. |
 | fic-create-plan | workflow | Build a detailed, phase-based implementation plan from research or a task description. Use when the user asks for implementation planning, phased rollout, or a concrete execution plan. |

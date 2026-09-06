@@ -156,6 +156,10 @@ The full skill inventory deliberately stays out of this README. Discovery
 belongs to the active client and the domain routing catalog, not to a giant
 prompt loaded on every task.
 
+For explicit Codex model, reasoning effort, Fast mode, or spending decisions,
+use [codex-model-routing](.agents/skills/codex-model-routing/SKILL.md). It provides
+cost-conscious recommendations with acceptance checks and escalation criteria.
+
 ## Explore or adapt it
 
 Start by reading the repository before installing anything. The setup script

@@ -4,6 +4,25 @@
 # Routing text stays in each SKILL.md frontmatter (name + description); this file adds taxonomy and overlaps only.
 
 skills:
+  - name: codex-model-routing
+    category: tool-reference
+    pattern: tool-wrapper
+    owner: engineering
+    status: active
+    review_cycle_days: 60
+    last_reviewed: "2026-09-06"
+    next_benchmark: "2026-11-05"
+    benchmark_after_model_update: true
+    platforms:
+      - codex
+      - claude
+      - cursor
+    overlap_with:
+      - agent-config-hygiene
+      - lean-ai-adoption-coach
+      - free-agent-execution
+    notes: "Native advisory policy for Codex/OpenAI model, effort, Fast, and cost decisions. Other clients can advise about Codex; their own routing is unchanged. No configuration mutations or free-worker execution. Initial eval plan authored; empirical benchmark pending."
+
   # --- Testing skills ---
 
   - name: tdd
