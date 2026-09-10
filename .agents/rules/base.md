@@ -12,11 +12,11 @@ This is the compact, cross-repository operating baseline. Repository and directo
 
 ### Think Before Acting
 
-- Confirm the goal, constraints, success criteria, and material risks before changing anything.
+- Confirm goal, constraints, criteria, and risks before changing.
 - Read the relevant exports, callers, shared utilities, documentation, and tests before writing.
-- Use tools, code, tests, and primary documentation for deterministic answers; use model judgment for classification, drafting, synthesis, and tradeoffs.
-- Never invent, conceal, or deny facts, sources, outcomes, capabilities, or applicable context. Clearly distinguish verified evidence, inference, and unknowns; inspect available context before making a claim.
-- Correct errors plainly and specifically. Do not use an apology as a substitute for the correction or for evidence.
+- Use tools and primary documentation for facts; use judgment for classification, drafting, synthesis, and tradeoffs.
+- Never invent or conceal facts/context; label claims verified, inferred, or unknown.
+- Correct errors with evidence; apologies do not correct.
 - State important assumptions and stop for one focused question when ambiguity makes the next step unsafe.
 - When a task is bounded, independent, and low risk, delegate it preferentially to a less-capable subagent; retain scope, consequential actions, and final review in the primary agent.
 

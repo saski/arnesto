@@ -109,6 +109,23 @@ The TypeScript CLI under `src/thoughts/` is not part of mandatory `make check` u
 
 The Makefile prepends `~/.agents/bin`, `~/.bun/bin`, `/opt/homebrew/bin`, and `/usr/local/bin` to `PATH` so checks can find managed tools from non-login shells.
 
+### Truthfulness evaluation
+
+`make test` verifies the versioned cases and deterministic grader contract. Run
+the live behavioral evaluation separately against a configured client:
+
+```bash
+make eval-truthfulness TARGET=codex
+make eval-truthfulness TARGET=hermes
+# When Hermes is not on PATH:
+HERMES_BIN=/path/to/hermes make eval-truthfulness TARGET=hermes
+```
+
+It checks that the client reports available model context, leaves an
+unidentified person as unknown, and corrects a contradicted claim plainly. It
+is deliberately outside `make check`: it invokes a provider, can consume quota,
+and an unavailable provider is an evaluation failure, not a passing result.
+
 ## Verified Local Toolchain Baseline
 
 The 2026-08-26 maintenance pass verified this direct development toolchain:

@@ -1,4 +1,4 @@
-.PHONY: check test lint-shell validate-skills validate-cursor-skills validate-openspec validate-symlinks check-tracked-ignored install-hooks install-hermes-gateway-config-watch configure-omniroute-free-coding hermes-update-check hermes-update-stage hermes-update-activate sync-saski-repos sync-saski-repos-apply discover-saski-repos ci-check
+.PHONY: check test lint-shell validate-skills validate-cursor-skills validate-openspec validate-symlinks check-tracked-ignored install-hooks install-hermes-gateway-config-watch configure-omniroute-free-coding hermes-update-check hermes-update-stage hermes-update-activate sync-saski-repos sync-saski-repos-apply discover-saski-repos ci-check eval-truthfulness
 
 export PATH := $(HOME)/.agents/bin:$(HOME)/.bun/bin:/opt/homebrew/bin:/usr/local/bin:$(PATH)
 
@@ -40,6 +40,7 @@ SHELL_SCRIPTS := \
 	tests/source-command-bug-fixing-agent-test.sh \
 	tests/hermes-routing-template-test.sh \
 	tests/universal-agent-rules-test.sh \
+	tests/truthfulness-eval-contract-test.sh \
 	tests/hermes-gateway-config-watch-test.sh \
 	tests/hermes-update-safe-test.sh \
 	hooks/pre-commit
@@ -67,6 +68,7 @@ test:
 	./tests/source-command-bug-fixing-agent-test.sh
 	./tests/hermes-routing-template-test.sh
 	./tests/universal-agent-rules-test.sh
+	./tests/truthfulness-eval-contract-test.sh
 	./tests/hermes-gateway-config-watch-test.sh
 	./tests/hermes-update-safe-test.sh
 
@@ -148,5 +150,9 @@ ci-check: lint-shell validate-cursor-skills
 	./tests/source-command-bug-fixing-agent-test.sh
 	./tests/hermes-routing-template-test.sh
 	./tests/universal-agent-rules-test.sh
+	./tests/truthfulness-eval-contract-test.sh
 	./tests/hermes-gateway-config-watch-test.sh
 	./tests/hermes-update-safe-test.sh
+
+eval-truthfulness:
+	./bin/run-truthfulness-eval "$(TARGET)"
