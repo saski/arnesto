@@ -39,6 +39,7 @@ SHELL_SCRIPTS := \
 	tests/omniroute-free-coding-config-test.sh \
 	tests/source-command-bug-fixing-agent-test.sh \
 	tests/hermes-routing-template-test.sh \
+	tests/universal-agent-rules-test.sh \
 	tests/hermes-gateway-config-watch-test.sh \
 	tests/hermes-update-safe-test.sh \
 	hooks/pre-commit
@@ -65,6 +66,7 @@ test:
 	./tests/omniroute-free-coding-config-test.sh
 	./tests/source-command-bug-fixing-agent-test.sh
 	./tests/hermes-routing-template-test.sh
+	./tests/universal-agent-rules-test.sh
 	./tests/hermes-gateway-config-watch-test.sh
 	./tests/hermes-update-safe-test.sh
 
@@ -145,5 +147,6 @@ ci-check: lint-shell validate-cursor-skills
 	./tests/omniroute-free-coding-config-test.sh
 	./tests/source-command-bug-fixing-agent-test.sh
 	./tests/hermes-routing-template-test.sh
+	./tests/universal-agent-rules-test.sh
 	./tests/hermes-gateway-config-watch-test.sh
 	./tests/hermes-update-safe-test.sh

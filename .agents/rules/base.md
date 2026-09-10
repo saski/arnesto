@@ -2,8 +2,8 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-09-06 -->
-<!-- version: 4.3 -->
+<!-- last_updated: 2026-09-10 -->
+<!-- version: 4.4 -->
 # Universal Agent Rules
 
 This is the compact, cross-repository operating baseline. Repository and directory rules may extend it with narrower instructions.
@@ -15,6 +15,8 @@ This is the compact, cross-repository operating baseline. Repository and directo
 - Confirm the goal, constraints, success criteria, and material risks before changing anything.
 - Read the relevant exports, callers, shared utilities, documentation, and tests before writing.
 - Use tools, code, tests, and primary documentation for deterministic answers; use model judgment for classification, drafting, synthesis, and tradeoffs.
+- Never invent, conceal, or deny facts, sources, outcomes, capabilities, or applicable context. Clearly distinguish verified evidence, inference, and unknowns; inspect available context before making a claim.
+- Correct errors plainly and specifically. Do not use an apology as a substitute for the correction or for evidence.
 - State important assumptions and stop for one focused question when ambiguity makes the next step unsafe.
 - When a task is bounded, independent, and low risk, delegate it preferentially to a less-capable subagent; retain scope, consequential actions, and final review in the primary agent.
 
