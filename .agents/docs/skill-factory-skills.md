@@ -136,6 +136,7 @@ Imported and local sources land in the same tree:
 
 | Skill | Category | Purpose |
 |-------|----------|---------|
+| promptfoo-evals | testing | Design and run promptfoo evaluations for LLM behavior regressions and prompt, rule, or model comparisons; distinguish grader quality, evaluation boundaries, and provider errors. |
 | ste | writing | Writes or rewrites prose in ASD-STE100 Simplified Technical English. Use only when the user explicitly invokes `/ste`, the STE skill, or ASD-STE100; it does not apply to generic requests for clearer documentation. |
 | agent-config-hygiene | practices | Audit and simplify AGENTS.md hierarchies, always-loaded rules, client wrappers, skill routing, and runtime boundaries without adding more permanent context. |
 | codex-model-routing | developer-tools | Choose Codex/OpenAI models (Astra, Sol, Terra, Luna), reasoning effort (Light/Low through Ultra), and Fast mode for explicit routing, consumption optimization, or spending questions; not ordinary programming or other-provider routing. |

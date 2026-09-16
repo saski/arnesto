@@ -204,6 +204,10 @@ combos are retired and must not be recreated.
   stable core, operational integrations, and evaluation boundaries.
 - [Development guide](docs/development-guide.md) — repository structure,
   skill governance, setup, and validation.
+- [Promptfoo evaluation](docs/development-guide.md#promptfoo-behavioral-evaluation)
+  — check that Arnesto reports unexecuted validation honestly.
+- [Promptfoo skill](.agents/skills/promptfoo-evals/SKILL.md) — choose and design
+  behavioral evaluations for prompts, agent rules, and models.
 - [Hermes, OmniRoute, and Telegram operations](docs/hermes-omniroute-operations.md)
   — the current remote-entry runbook.
 - [Runtime boundaries](docs/codex-orca-runtime-boundary.md) — why Codex, Orca,

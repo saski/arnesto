@@ -25,6 +25,24 @@ skills:
 
   # --- Testing skills ---
 
+  - name: promptfoo-evals
+    category: verification-testing
+    pattern: tool-wrapper
+    owner: engineering
+    status: active
+    review_cycle_days: 90
+    last_reviewed: "2026-09-16"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - tdd
+      - verification-loop
+      - codex-model-routing
+    notes: "Native LLM behavioral evaluation guidance. Covers evaluation boundaries, grader controls, and provider-error reporting. Ordinary tests stay with tdd; model-selection policy stays with codex-model-routing."
+
   - name: tdd
     category: verification-testing
     pattern: pipeline

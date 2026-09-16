@@ -13,6 +13,7 @@ Use when the work involves test design, test review, coverage gaps, safe impleme
 Skills:
 
 - `tdd` - Start here for test-first feature work or bug fixes.
+- `promptfoo-evals` - Use for repeatable LLM behavioral evaluations or comparisons across prompts, agent rules, and models. Ordinary unit tests and static configuration checks stay in the project's test suite.
 - `test-doubles-first` - Use before choosing mocks; favors fakes, stubs, and spies.
 - `nullables` - Use for tests around external I/O without heavy mocking.
 - `approval-tests` - Use for complex output, fixtures, golden masters, and characterization tests.

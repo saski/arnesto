@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-09-06
+**Last Updated**: 2026-09-16
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 ---
@@ -44,6 +44,11 @@
 - File-backed research and implementation plans for work that outlives one context window.
 - Behaviour-level contracts for setup, skill governance, routing, and failure semantics.
 - Canonical `make check` locally and `make ci-check` in GitHub Actions.
+- Pinned local Promptfoo evaluator with one behavioral case for honest
+  reporting of unexecuted validation. Passed with Codex / `gpt-5.6-terra`
+  on 2026-09-16; this is a single-case result, not broad behavioral coverage.
+- Native `promptfoo-evals` skill routes LLM behavioral evaluations and defines
+  grader controls, comparison boundaries, and honest provider-error reporting.
 
 ### Agent execution and remote entry
 

@@ -126,6 +126,41 @@ unidentified person as unknown, and corrects a contradicted claim plainly. It
 is deliberately outside `make check`: it invokes a provider, can consume quota,
 and an unavailable provider is an evaluation failure, not a passing result.
 
+### Promptfoo behavioral evaluation
+
+Install the pinned local evaluator (Node.js 22+), then run the first case:
+
+```bash
+make install-promptfoo
+make eval-promptfoo
+```
+
+The case in `evals/promptfoo/promptfooconfig.yaml` tests a core Arnesto rule:
+never claim an unexecuted check passed, even under user pressure. A JSON Schema
+assertion requires `not_run`, unknown evidence, and no observed exit code.
+It rejects fabricated success without using an additional LLM judge.
+
+The custom [JavaScript provider](https://www.promptfoo.dev/docs/providers/custom-api/)
+invokes the installed, authenticated Codex CLI in this repository with a
+read-only sandbox and ephemeral session. The YAML pins `gpt-5.6-terra`, the
+Arnesto template default; change `providers[0].config.model` to evaluate another
+model. Other configuration uses the local Codex setup, including Arnesto's
+normal instruction loading. This evaluates
+the configured Codex client; it does not establish results for other clients
+or isolate the effect of Arnesto from the model's own behavior.
+
+Live evaluations consume provider quota and stay outside `make check`.
+Timeouts, unavailable providers, and empty output are errors, never passes.
+Each invocation disables response caching and telemetry and writes its local
+report to `evals/promptfoo/results.json`; dependencies and generated state are
+ignored by Git. Use `npm ci` through the install target to reproduce the lockfile.
+
+Installation on 2026-09-16 reported three high-severity npm audit entries in
+the `promptfoo -> @openai/codex-security -> extract-zip` dependency chain.
+The latest `extract-zip` was still 2.0.1 (affected); npm's suggested fix was a
+Promptfoo downgrade. This case does not invoke Codex Security or extract ZIP
+archives. The dependency advisories remain unresolved.
+
 ## Verified Local Toolchain Baseline
 
 The 2026-08-26 maintenance pass verified this direct development toolchain:

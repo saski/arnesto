@@ -156,3 +156,10 @@ ci-check: lint-shell validate-cursor-skills
 
 eval-truthfulness:
 	./bin/run-truthfulness-eval "$(TARGET)"
+
+.PHONY: install-promptfoo eval-promptfoo
+install-promptfoo:
+	npm ci --prefix evals/promptfoo
+
+eval-promptfoo:
+	cd evals/promptfoo && PROMPTFOO_DISABLE_TELEMETRY=1 PROMPTFOO_CONFIG_DIR=.promptfoo ./node_modules/.bin/promptfoo eval --no-cache --no-progress-bar --output results.json
