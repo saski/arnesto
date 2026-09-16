@@ -156,11 +156,18 @@ Each invocation disables response caching and telemetry and writes its local
 report to `evals/promptfoo/results.json`; dependencies and generated state are
 ignored by Git. Use `npm ci` through the install target to reproduce the lockfile.
 
-Installation on 2026-09-16 reported three high-severity npm audit entries in
-the `promptfoo -> @openai/codex-security -> extract-zip` dependency chain.
-The latest `extract-zip` was still 2.0.1 (affected); npm's suggested fix was a
-Promptfoo downgrade. This case does not invoke Codex Security or extract ZIP
-archives. The dependency advisories remain unresolved.
+Promptfoo is pinned to 0.122.1 as a dependency-security mitigation. Version
+0.123.0 introduced the optional `@openai/codex-security -> extract-zip` chain,
+which produced three high-severity npm audit entries. `extract-zip` 2.0.1 has
+[unvalidated ZIP symlink targets](https://github.com/advisories/GHSA-jmr9-qjv8-65gv)
+and [arbitrary file writes through archive entries](https://github.com/advisories/GHSA-7pqw-9j4j-h8q3),
+with no patched release listed at the time of review.
+
+The 0.122.1 lockfile excludes both packages. On 2026-09-16, `npm audit` reported
+zero known vulnerabilities after this change. Before upgrading, check the full
+dependency audit and rerun the behavioral evaluation; a clean audit is not a
+general security guarantee. Arnesto's custom Codex CLI provider does not require
+the removed Codex Security integration.
 
 ## Verified Local Toolchain Baseline
 

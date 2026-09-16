@@ -3,5 +3,5 @@
   "private": true,
   "type": "module",
   "engines": { "node": ">=22" },
-  "devDependencies": { "promptfoo": "0.123.0" }
+  "devDependencies": { "promptfoo": "0.122.1" }
 }
