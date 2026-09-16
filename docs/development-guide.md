@@ -33,9 +33,10 @@ This instruction adaptation does not migrate API requests or alter runtime
 configuration. Behavior with Astra still requires evaluation on real tasks.
 
 The Codex invariant test enforces Terra Medium in the repository template.
-Local validation allows a different model selection and setup preserves it.
-Medium reasoning, pragmatic personality, and multi-agent enablement remain
-required local invariants.
+Local validation allows different model and reasoning-effort selections, and
+setup preserves them, including Astra with low effort. Model/effort compatibility
+belongs to the installed Codex client, not a fixed Arnesto allowlist.
+Pragmatic personality and multi-agent enablement remain required local invariants.
 
 Repo-type details belong in contextual rule files such as `.agents/rules/python-project.md` and `.agents/rules/makefile-project.md`. Task-specific workflows belong in skills. Do not add generic best-practice prose to `base.md` unless it routes concrete behavior that agents cannot reliably infer from the codebase or user request.
 
@@ -248,7 +249,7 @@ SKILL_FACTORY=/path/to/skill-factory ./sync-skill-factory.sh --dry-run
 - `~/.agents/bin/codex-free` -> repo `bin/codex-free`
 - `~/.local/bin/codex-free` -> repo `bin/codex-free` for interactive shells
 
-Mutable local config such as `~/.codex/config.toml`, `~/.codex/hooks.json`, and `~/.claude/settings.json` is seeded from `templates/` and intentionally not symlinked back into the repo. For Codex, the required portable invariants are Terra, Medium reasoning, pragmatic personality, and `multi_agent = true`; `setup-symlinks.sh validate` checks them without replacing local MCP, plugin, marketplace, desktop, or hook state. `.agents/mcp.json` is shared with Cursor and Gemini, not installed into Codex.
+Mutable local config such as `~/.codex/config.toml`, `~/.codex/hooks.json`, and `~/.claude/settings.json` is seeded from `templates/` and intentionally not symlinked back into the repo. For Codex, Terra/Medium are template defaults; local model and reasoning-effort choices are preserved. The required portable invariants are pragmatic personality and `multi_agent = true`; `setup-symlinks.sh validate` checks them without replacing local MCP, plugin, marketplace, desktop, or hook state. `.agents/mcp.json` is shared with Cursor and Gemini, not installed into Codex.
 
 OmniRoute combo state is also mutable local state. Its portable desired state
 is tracked in `templates/omniroute/free-coding-combo.json`; apply it explicitly

@@ -33,15 +33,20 @@ if ! grep -Fq 'matches required Codex invariants' <<<"$validation_output"; then
 fi
 
 ruby -e 'path = ARGV.fetch(0); File.write(path, File.read(path).sub(/^model = "gpt-5.6-terra"$/, "model = \"gpt-6-astra\""))' "$fixture_home/.codex/config.toml"
+ruby -e 'path = ARGV.fetch(0); File.write(path, File.read(path).sub(/^model_reasoning_effort = "medium"$/, "model_reasoning_effort = \"low\""))' "$fixture_home/.codex/config.toml"
 
 if ! HOME="$fixture_home" "$fixture_repo/setup-symlinks.sh" validate >/dev/null; then
-    echo "FAIL: setup validation rejected the local Astra model selection" >&2
+    echo "FAIL: setup validation rejected the local Astra/low selection" >&2
     exit 1
 fi
 
 HOME="$fixture_home" "$fixture_repo/setup-symlinks.sh" setup >/dev/null
 if ! grep -Fqx 'model = "gpt-6-astra"' "$fixture_home/.codex/config.toml"; then
     echo "FAIL: setup overwrote the local model selection" >&2
+    exit 1
+fi
+if ! grep -Fqx 'model_reasoning_effort = "low"' "$fixture_home/.codex/config.toml"; then
+    echo "FAIL: setup overwrote the local reasoning effort" >&2
     exit 1
 fi
 
