@@ -14,10 +14,14 @@ def assert(condition, message)
   abort("FAIL: #{message}") unless condition
 end
 
-assert(config.dig("model", "default") == "oc/deepseek-v4-flash-free",
-       "free model is the Hermes default")
-assert(config.dig("model", "provider") == "omniroute",
+assert(config.dig("model", "default") == "combo/free-coding-v2",
+       "free-coding-v2 is the Hermes default")
+assert(config.dig("model", "provider") == "omniroute-local",
        "OmniRoute is the default provider")
+assert(config.dig("providers", "omniroute-local", "model") == "combo/free-coding-v2",
+       "the local provider selects free-coding-v2")
+assert(config.dig("providers", "omniroute-local", "default_model") == "combo/free-coding-v2",
+       "the local provider defaults to free-coding-v2")
 assert(config.dig("model", "openai_runtime") == "codex_app_server",
        "Codex OAuth uses the app-server runtime")
 assert(config.dig("providers", "omniroute-local", "key_env") == "OMNIROUTE_API_KEY",
@@ -26,8 +30,8 @@ assert(config.dig("providers", "omniroute-local", "models",
                   "oc/deepseek-v4-flash-free", "supports_vision") == false,
        "the free model is explicitly text-only")
 assert(config.dig("providers", "omniroute-local", "models",
-                  "combo/free-coding", "supports_vision") == false,
-       "the managed free-coding route is selectable and text-only")
+                  "combo/free-coding-v2", "supports_vision") == false,
+       "the current free-coding route is selectable and text-only")
 assert(config.dig("auxiliary", "vision", "provider") == "openai-codex",
        "images route to OpenAI Codex")
 assert(config.dig("auxiliary", "vision", "model") == "gpt-5.6-sol",

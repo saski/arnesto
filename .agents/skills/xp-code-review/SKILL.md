@@ -39,3 +39,13 @@ Provide:
 - A **structured review** detailing strengths and weaknesses.
 - **Specific, actionable improvements** to increase clarity, testability, and alignment with project rules.
 - A brief final summary: *Is this change ready to commit? If not, what is the smallest next improvement?*
+
+### Optional interactive review
+
+When the user wants to inspect or annotate the pending patch themselves and
+`tuicr` is installed, offer `tuicr -w` from the repository root. The user can
+copy their review with `y` or ask the agent to read the saved session with
+`tuicr review list --repo .` followed by
+`tuicr review comments --session <slug> --repo .`. Keep the user's comments
+distinct from the agent's findings. Analyze the actual diff and relevant code
+for the agent review; the TUI and its saved comments do not replace that work.

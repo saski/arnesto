@@ -1,6 +1,6 @@
 # Hermes, OmniRoute, and Telegram Operations
 
-**Routing inventory verified locally:** 2026-08-21
+**Routing configuration inspected locally:** 2026-09-25
 
 This runbook records the intended secret-free routing policy. The reusable
 overlay is versioned at
@@ -21,7 +21,7 @@ flowchart LR
     gateway --> profile["Default profile"]
     profile --> input{"Image attached?"}
 
-    input -->|No| free["Main agent\noc/deepseek-v4-flash-free"]
+    input -->|No| free["Main agent\ncombo/free-coding-v2"]
     input -->|Yes| vision["Auxiliary vision\ngpt-5.6-sol, low effort"]
     vision --> summary["Text image analysis"]
     summary --> free
@@ -30,9 +30,9 @@ flowchart LR
     vision --> codex["Codex app-server\nChatGPT OAuth"]
 ```
 
-The normal Telegram path is free. An image triggers exactly one frontier
-preprocessing call; Hermes converts its visual analysis to text and sends that
-text to the free main model. The Telegram toolset intentionally omits the
+The normal Telegram path uses `combo/free-coding-v2`. An image triggers one
+frontier preprocessing call; Hermes converts its visual analysis to text and
+sends that text to the main route. The Telegram toolset intentionally omits the
 explicit `vision` tool because automatic image preprocessing already handles
 the attachment and a second tool call would duplicate frontier consumption.
 
@@ -40,23 +40,25 @@ the attachment and a second tool call would duplicate frontier consumption.
 
 | Lane | Use for | Provider and model | Selection |
 |---|---|---|---|
-| Default text | Ordinary chat and bounded, non-sensitive work | `omniroute` / `oc/deepseek-v4-flash-free` | Automatic after `/new` |
-| Managed free coding | Non-sensitive coding with free-only fallback | `omniroute` / `combo/free-coding` | Explicit session override |
-| Automatic image analysis | Inspecting an attached image before free reasoning | `openai-codex` / `gpt-5.6-sol`, low effort | Automatic only when an image is present |
+| Default text | Ordinary chat and bounded, non-sensitive work | `omniroute-local` / `combo/free-coding-v2` | Automatic after `/new` |
+| Direct free pin | Diagnostic or temporary model override | `omniroute-local` / `oc/deepseek-v4-flash-free` | Explicit session override |
+| Automatic image analysis | Inspecting an attached image before main-route reasoning | `openai-codex` / `gpt-5.6-sol`, low effort | Automatic only when an image is present |
 | Full frontier | Planning, SDD, orchestration, sensitive or ambiguous work | `openai-codex` / `gpt-5.6-sol` | Explicit model switch or dedicated profile |
 
-`/new` clears session overrides and starts the default free model. `/status`
-continues to report the free main model after an image turn; auxiliary vision
+`/new` clears session overrides and starts the default v2 route. `/status`
+continues to report the main route after an image turn; auxiliary vision
 is a preprocessing call, not the session model.
 
 The obsolete `free-stack` and `free-deterministic` combos were inactive and
 deleted from the local OmniRoute store on 2026-08-21. Do not recreate them.
-`free-coding` is the only tracked ordered combo: Laguna, MiMo, HY3, then Big
-Pickle. It was installed and passed direct text, tool-call, Codex, and Hermes
-entry probes on 2026-08-21. Hermes exposes it as an explicit session override;
-the direct DeepSeek pin remains the default. A catalog entry or HTTP 200
-response is insufficient; the route must return usable content, a terminal
-finish reason, and non-zero usage.
+`free-coding` remains the tracked ordered combo for Codex/Orca: Laguna, MiMo,
+HY3, then Big Pickle. It passed direct text, tool-call, Codex, and Hermes
+entry probes on 2026-08-21. Hermes now defaults to `free-coding-v2`, whose
+selection policy lives in local OmniRoute state. On 2026-09-25 that local combo
+contained one `kiro/claude-haiku-4.5` route and no fallback; verify it again
+before relying on its composition. A catalog entry or HTTP 200 response is
+insufficient; the route must return usable content, a terminal finish reason,
+and non-zero usage.
 
 ## Managed routing overlay
 
@@ -92,13 +94,13 @@ Send every command as a separate Telegram message and wait for its reply. Do
 not paste `/new` and `/model` into one message: Hermes treats text following
 `/new` as a session title.
 
-### Default free session
+### Default OmniRoute session
 
 ```text
 /new
 ```
 
-Expected result: `oc/deepseek-v4-flash-free` through the OmniRoute provider.
+Expected selection: `combo/free-coding-v2` through the local OmniRoute provider.
 A minimal smoke prompt is:
 
 ```text
@@ -113,23 +115,21 @@ Reply with exactly: RUTA_FREE_OK
 
 Use this for work that requires frontier planning or orchestration. The model
 override is session-only unless `--global` is supplied; avoid `--global` when
-the desired default remains free.
+the desired default remains `combo/free-coding-v2`.
 
-Return to the free main model with:
+Select the direct DeepSeek pin for diagnosis with:
 
 ```text
 /model oc/deepseek-v4-flash-free --provider custom
 ```
 
-For the managed free-only coding route, use:
+Return to the current default route with:
 
 ```text
-/model combo/free-coding --provider custom
+/model combo/free-coding-v2 --provider custom
 ```
 
-The equivalent one-shot CLI form is `hermes -m combo/free-coding --provider
-omniroute -z '...'`. Model selection remains session-local unless `--global` is
-explicitly requested.
+Model selection remains session-local unless `--global` is explicitly requested.
 
 ## Multiplex secret scope
 
@@ -252,6 +252,9 @@ gateway, and confirm that no WhatsApp adapter is listed.
 
 ## Verification record
 
+The following observations are from 2026-08-26 and do not verify today's v2
+route:
+
 - On 2026-08-26 Hermes 0.20.5 was activated from a parallel worktree with the
   multiplexed custom-provider patch reapplied. The focused gateway suite passed
   25 tests, Ruff passed, and launchd served the `default` and `coding` profiles
@@ -262,7 +265,7 @@ gateway, and confirm that no WhatsApp adapter is listed.
   one free DeepSeek completion; the free main call used 2,477 input and 44
   output tokens.
 - The launchd gateway was running and Telegram reconnected in polling mode.
-- The committed regression test checks the free default, automatic low-effort
+- The regression test at that time checked the free default, automatic low-effort
   frontier vision, default profile route, absence of the duplicate `vision`
   tool, and absence of common credential or personal-identifier patterns.
 - OpenCode free workers remain a separate, bounded adapter path; this Hermes

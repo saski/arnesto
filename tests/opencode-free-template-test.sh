@@ -20,7 +20,7 @@ const worker = config.agent?.['free-worker']
 assert(provider?.npm === '@ai-sdk/openai-compatible', 'OmniRoute provider package')
 assert(provider?.options?.baseURL === 'http://127.0.0.1:20128/v1', 'OmniRoute base URL')
 assert(JSON.stringify(Object.keys(provider?.models ?? {}).sort()) === JSON.stringify([
-  'combo/free-coding',
+  'combo/free-coding-v2',
   'oc/big-pickle',
   'oc/deepseek-v4-flash-free',
 ]), 'exact managed free model set')

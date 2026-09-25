@@ -63,9 +63,19 @@ How would you like to proceed?
 3. **Jump to specific file** - Go directly to a file of interest
 4. **Ask questions first** - Discuss the changes before diving in
 5. **Post a general comment** - Add a PR-level comment
+6. **Review in tuicr** - Inspect and annotate the PR in a local terminal, if installed
 
-Choose option (1/2/3/4/5):
+Choose option (1/2/3/4/5/6):
 ```
+
+For option 6, give the reviewer `tuicr pr <PR-URL>` to run from the repository
+root. An explicit URL also works when the Git remote uses a custom SSH host
+alias. When they finish, accept the review text copied with `y`, or find the
+saved session with `tuicr review list --repo .` and read its comments with
+`tuicr review comments --session <slug> --repo .`. Attribute those comments to
+the reviewer and summarize them before using the existing comment-posting
+steps. Opening or reading a tuicr session does not publish a GitHub review;
+post only when the reviewer asks to submit the prepared feedback.
 
 ### Phase 3: File-by-File Walkthrough
 

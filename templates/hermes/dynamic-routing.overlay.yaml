@@ -3,8 +3,8 @@
 # Replace the Telegram chat placeholder locally before restarting the gateway.
 
 model:
-  default: oc/deepseek-v4-flash-free
-  provider: omniroute
+  default: combo/free-coding-v2
+  provider: omniroute-local
   openai_runtime: codex_app_server
   base_url: http://localhost:20128/v1
 
@@ -13,11 +13,11 @@ providers:
     name: OmniRoute local
     base_url: http://localhost:20128/v1
     key_env: OMNIROUTE_API_KEY
-    model: oc/deepseek-v4-flash-free
-    default_model: oc/deepseek-v4-flash-free
+    model: combo/free-coding-v2
+    default_model: combo/free-coding-v2
     discover_models: true
     models:
-      combo/free-coding:
+      combo/free-coding-v2:
         supports_vision: false
       oc/deepseek-v4-flash-free:
         supports_vision: false

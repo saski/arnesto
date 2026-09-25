@@ -110,6 +110,21 @@ The TypeScript CLI under `src/thoughts/` is not part of mandatory `make check` u
 
 The Makefile prepends `~/.agents/bin`, `~/.bun/bin`, `/opt/homebrew/bin`, and `/usr/local/bin` to `PATH` so checks can find managed tools from non-login shells.
 
+### Optional local diff review
+
+[`tuicr`](https://github.com/agavra/tuicr) is an optional terminal interface
+for a human to inspect and annotate local changes, commit ranges, or PRs. From
+the repository root, use `tuicr -w` for uncommitted changes or
+`tuicr pr https://github.com/saski/arnesto/pull/<number>` for a GitHub PR.
+The explicit URL works with this checkout's custom SSH host alias. Press `y`
+in the TUI to copy review comments for an agent, or use
+`tuicr review list --repo .` and
+`tuicr review comments --session <slug> --repo .` to read a saved session.
+Use the `xp-code-review` skill for an agent review of pending changes and
+`/review-pr` for an assisted PR review. `tuicr` is a local convenience, not a
+setup requirement or a substitute for `make check`; publishing a PR review
+requires a separate submission step.
+
 ### Truthfulness evaluation
 
 `make test` verifies the versioned cases and deterministic grader contract. Run

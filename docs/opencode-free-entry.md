@@ -5,10 +5,10 @@ mode. It does not switch to either one automatically.
 
 ## Interactive free route
 
-Select `omniroute/combo/free-coding` for ordinary, non-sensitive coding work.
-OpenCode only declares that single model identifier; OmniRoute owns the ordered
-free-only selection and fallback policy. The normal OpenCode model remains
-unchanged.
+Select `omniroute/combo/free-coding-v2` for ordinary, non-sensitive coding work.
+OpenCode declares the model identifier; OmniRoute owns its current selection
+policy. Check the local combo before assuming any particular provider or
+fallback. The normal OpenCode model remains unchanged.
 
 ## Frontier work
 
@@ -38,7 +38,7 @@ Install only the managed OpenCode fields with:
 ```
 
 The installer updates `~/.config/opencode/opencode.jsonc` atomically. It adds
-the shared `combo/free-coding` route, the two direct worker pins, and the
+the current `combo/free-coding-v2` route, the two direct worker pins, and the
 constrained `free-worker` agent if they are missing. It preserves unrelated
 top-level configuration, providers, models, agent definitions, and the existing
 local OmniRoute endpoint when it uses either supported loopback form

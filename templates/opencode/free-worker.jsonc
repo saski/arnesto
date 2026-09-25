@@ -6,7 +6,7 @@
         "baseURL": "http://127.0.0.1:20128/v1"
       },
       "models": {
-        "combo/free-coding": {},
+        "combo/free-coding-v2": {},
         "oc/deepseek-v4-flash-free": {},
         "oc/big-pickle": {}
       }

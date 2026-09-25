@@ -19,7 +19,7 @@ Turn one pile of work into a few small PRs.
 
 Compare the current work to the repo's default branch, including committed and uncommitted changes. Summarize the real slices you see, and use the chat history to recover intent.
 
-Before proposing slices, find ownership signals for the touched paths (`CODEOWNERS`, nested ownership files, `tools/ownership/PRODUCTOWNERS`, or repo equivalents) and use them to identify natural reviewer boundaries.
+Before proposing slices, find ownership signals for the touched paths (`CODEOWNERS`, nested ownership files, or repo equivalents) and use them to identify natural reviewer boundaries.
 
 ## 2. Propose the split
 

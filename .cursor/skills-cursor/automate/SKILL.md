@@ -276,7 +276,7 @@ workflow:
 
 Prompts use `|` block scalar (`>-` folding breaks bullets). Empty `{}` actions are valid when the field is UI-only. `mcp.server.name` is required when `mcp` is enabled, and the name must be the `serverName` field from the matched entry's `SERVER_METADATA.json` — not the folder / `serverIdentifier`. See the MCP existence gate for the eligibility filter and the no-prefix-invention rule.
 
-**Trigger oneof keys are exhaustive.** Every entry in `workflow.triggers` must use exactly one of these top-level proto keys: `cron`, `git`, `slackTrigger`, `slackReactionAdded`, `slackChannelCreated`, `microsoftTeamsTrigger`, `microsoftTeamsChannelCreated`, `linear`, `webhook`, `pagerduty`, `sentry`. Never invent or paraphrase (`slackReaction`, `slack_reaction`, `slack`, `reactionAdded`, etc.) — the editor decodes triggers with `ignoreUnknownFields: true`, silently drops unknown keys, and renders the result as an unconfigurable "Configure trigger" card that blocks save. Empty `{}` trigger entries hit the same failure mode; never prefill a trigger you cannot fully name.
+**Trigger oneof keys are exhaustive.** Every entry in `workflow.triggers` must use exactly one of these top-level proto keys: `cron`, `git`, `slackTrigger`, `slackReactionAdded`, `slackChannelCreated`, `emailReceived`, `microsoftTeamsTrigger`, `microsoftTeamsChannelCreated`, `linear`, `webhook`, `pagerduty`, `sentry`. Never invent or paraphrase (`slackReaction`, `slack_reaction`, `slack`, `reactionAdded`, etc.) — the editor decodes triggers with `ignoreUnknownFields: true`, silently drops unknown keys, and renders the result as an unconfigurable "Configure trigger" card that blocks save. Empty `{}` trigger entries hit the same failure mode; never prefill a trigger you cannot fully name.
 
 ### Validation check (agent-internal)
 
@@ -335,6 +335,8 @@ These labels are agent-only — never show ids to users. If a future structured 
 | Channel created | `slack_channel_created` | `slackChannelCreated` |
 
 **`slackReactionAdded` payload** — `{ channels: ["C…"], emojiName: "<name>" }`. `emojiName` is the Slack short name **without** surrounding colons (e.g. `thumbsup`, not `:thumbsup:`); the server normalizes Unicode emoji to the matching alias on save. Completion reactions are not supported on `slackReactionAdded` triggers (would recurse) and are silently dropped.
+
+**`emailReceived` payload** (Grok Bot only) — `{ inboxEmail: "<one of the user's Grok Bot inbox addresses>", fromAddresses?: ["a@b.com"], requireAuthPass: true }`. Fires when mail arrives at that inbox; `fromAddresses` is an exact lowercased sender allowlist (empty = any sender) and `requireAuthPass` (default true) skips mail that failed SPF/DKIM/DMARC. Messages that fail these filters do not trigger a run. The run gets the envelope only (sender, subject, ids) and reads the body with `read_email_thread`.
 
 **Completion reaction on a Slack message trigger.** "React with `:foo:` when the agent finishes" is a completion-reaction option on `slackTrigger`, not a separate trigger. Put `slackCompletionReactionMode: SLACK_COMPLETION_REACTION_MODE_CUSTOM` and `slackCompletionReactionCustomEmoji: ":foo:"` (with surrounding colons) on the same `slackTrigger` entry. Do not create a `slackReactionAdded` trigger to express completion behavior.
 
