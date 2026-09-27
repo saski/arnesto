@@ -13,6 +13,7 @@ Imported and local sources land in the same tree:
 - **Product management pack** — `pmprompt/claude-plugin-product-management` (integrity: repo-root `skills-lock.json`; taxonomy and overlaps: [.agents/skills/skill-foundry/agents/catalog-product-management.yaml](../skills/skill-foundry/agents/catalog-product-management.yaml))
 - **Matt Pocock skills** — `mattpocock/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
 - **Google Data Cloud skills** — installed with `.agents/skills/.datacloud_skills_manifest`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml)
+- **TypeSafe AI skill** — copied from `typesafe-ai/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
 - **Native and local skills** — authored, maintained, or locally installed into this repository
 
 ## Local sibling skill references
@@ -131,6 +132,12 @@ Imported and local sources land in the same tree:
 | triage | engineering | Triage issues through a role-driven state machine. Use for incoming bugs, feature requests, issue workflow, and AFK-agent readiness. |
 | write-a-skill | productivity | Create new agent skills with proper structure, progressive disclosure, and bundled resources. |
 | zoom-out | engineering | Ask the agent to zoom out and provide broader module/caller context using project domain language. |
+
+## TypeSafe AI (external copy)
+
+| Skill | Category | Purpose |
+|-------|----------|---------|
+| typesafe-ai | developer-tools | Build AI-powered software with TypeSafe's typed judgments and probabilities; use for semantic routing, ranking, extraction, verification, or replacing an LLM prompt-and-parse step with a structured decision. Read current TypeSafe docs before implementation. |
 
 ## Native skills (local to this repo)
 

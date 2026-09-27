@@ -54,6 +54,7 @@ The skill library is self-contained:
 - Imported skill-factory skills are copied into `.agents/skills/` and tracked in git.
 - Matt Pocock skills are installed into `.agents/skills/` and tracked in git with provenance in `skills-lock.json`.
 - Product-management skills are tracked in `.agents/skills/` with provenance in `skills-lock.json`.
+- The TypeSafe AI skill is copied intact into `.agents/skills/` with its license and provenance in `skills-lock.json`; update it by replacing the entire upstream skill directory and refreshing its hash and source commit.
 - Skill-factory provenance is tracked in `.agents/upstreams/skill-factory/components.lock.json`.
 - ECC upstream components are tracked in `.agents/upstreams/ecc/components.lock.json`.
 

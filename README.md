@@ -208,6 +208,8 @@ combos are retired and must not be recreated.
   — check that Arnesto reports unexecuted validation honestly.
 - [Promptfoo skill](.agents/skills/promptfoo-evals/SKILL.md) — choose and design
   behavioral evaluations for prompts, agent rules, and models.
+- [TypeSafe AI skill](.agents/skills/typesafe-ai/SKILL.md) — design and build
+  applications with TypeSafe's typed AI judgments using current vendor docs.
 - [Hermes, OmniRoute, and Telegram operations](docs/hermes-omniroute-operations.md)
   — the current remote-entry runbook.
 - [Runtime boundaries](docs/codex-orca-runtime-boundary.md) — why Codex, Orca,

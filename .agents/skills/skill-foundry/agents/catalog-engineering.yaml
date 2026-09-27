@@ -1,9 +1,24 @@
 # Skill-foundry governance for engineering skills in .agents/skills/<name>/.
 # Taxonomy keys: see taxonomy.md in this directory.
-# Sources: skill-factory (synced via pull-and-sync-skills.sh), mattpocock/skills, and native/local skills.
+# Sources: skill-factory (synced via pull-and-sync-skills.sh), mattpocock/skills, typesafe-ai/skills, and native/local skills.
 # Routing text stays in each SKILL.md frontmatter (name + description); this file adds taxonomy and overlaps only.
 
 skills:
+  - name: typesafe-ai
+    category: tool-reference
+    pattern: tool-wrapper
+    owner: engineering
+    status: active
+    review_cycle_days: 90
+    last_reviewed: "2026-09-27"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with: []
+    notes: "External TypeSafe AI skill copied intact from typesafe-ai/skills; provenance and content hash are in skills-lock.json. Use for TypeSafe application design and integration, with live vendor docs as the API source of truth."
+
   - name: codex-model-routing
     category: tool-reference
     pattern: tool-wrapper

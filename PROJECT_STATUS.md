@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-09-16
+**Last Updated**: 2026-09-27
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 ---
@@ -49,6 +49,8 @@
   on 2026-09-16; this is a single-case result, not broad behavioral coverage.
 - Native `promptfoo-evals` skill routes LLM behavioral evaluations and defines
   grader controls, comparison boundaries, and honest provider-error reporting.
+- External `typesafe-ai` skill is installed in the shared library with its
+  upstream license, pinned source commit, content hash, and routing entries.
 
 ### Agent execution and remote entry
 

@@ -72,7 +72,7 @@ Skills:
 
 ## Architecture, System Design, and Risk
 
-Tags: `architecture`, `domain-modeling`, `complexity`, `risk`, `security`, `performance`
+Tags: `architecture`, `domain-modeling`, `complexity`, `risk`, `security`, `performance`, `typesafe-ai`, `semantic-judgments`
 
 Use when the user is choosing a design, challenging a technical proposal, modeling a domain, or checking risk before implementation.
 
@@ -86,6 +86,7 @@ Skills:
 - `xp-security-analysis` - Use for OWASP, threat modeling, and pragmatic security review.
 - `dockerfile-review` - Use for container build performance, image size, and security.
 - `cwv-improvement-planner` - Use for Core Web Vitals, Lighthouse, and web performance work.
+- `typesafe-ai` - Use when building with TypeSafe or exploring typed AI judgments for semantic routing, ranking, extraction, and verification; read the live TypeSafe docs before implementing.
 - `modern-cli-design` - Use for scalable command-line interface design.
 - `accidental-data-loss-prevention` - Use before irreversible SQL, Cloud Storage, or GCP resource deletion commands.
 
