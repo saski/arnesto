@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-09-27
+**Last Updated**: 2026-10-05
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 ---
@@ -58,6 +58,9 @@
 - Bounded, non-sensitive work can use the governed OpenCode free-worker adapter.
 - Hermes provides a persistent Telegram entry surface with explicit provider boundaries.
 - OmniRoute routes only explicitly admitted free-worker models; semantic failure is not accepted as success.
+- Coordination artifact guidance and a normalized provisional launcher snapshot
+  are documented in [the reference guide](docs/free-worker-coordination/README.md)
+  (2026-10-05). Active model admission and the supported launcher are unchanged.
 
 ### Specialised build workbenches
 

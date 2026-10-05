@@ -118,6 +118,8 @@ Use when the task is about command-line tooling, runtime setup, repo workflow, l
 Skills:
 
 - `free-agent-execution` - Use only when the user explicitly requests a bounded, non-sensitive free OpenCode worker run.
+  Its [artifact guidance](../../docs/free-worker-coordination/README.md) separates
+  project recipes/evidence, ignored runtime records and Arnesto-owned mechanisms.
 - `writing-bash-scripts` - Use when creating or editing shell scripts.
 - `using-uv` - Use for Python projects, scripts, and dependency management with uv.
 - `bun-toolkit` - Use for Bun-aware JS, TS, and JSX work.

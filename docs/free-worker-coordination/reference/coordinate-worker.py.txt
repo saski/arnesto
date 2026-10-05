@@ -1,0 +1,56 @@
+"""Launch and bound external free implementers; never writes project source."""
+from pathlib import Path
+from dotenv import dotenv_values
+import os, json, subprocess, sys, time, signal, hashlib
+
+base = Path(__file__).parent
+contract = json.loads(Path(sys.argv[1]).read_text())
+workspace = Path(contract['working_directory'])
+model = contract['model']
+assert model in {'omniroute/kiro/claude-haiku-4.5', 'omniroute/kiro/claude-sonnet-4.5'}
+allowed = set(contract['allowed_files'])
+
+def files():
+    paths = subprocess.check_output(['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], cwd=workspace).decode().split('\0')
+    return {s: hashlib.sha256((workspace/s).read_bytes()).hexdigest() for s in paths if s and (workspace/s).is_file()}
+
+before = files()
+env = os.environ.copy()
+env['OMNIROUTE_API_KEY'] = dotenv_values('<HERMES_HOME>/.env').get('OMNIROUTE_API_KEY', '')
+env['OPENCODE_CONFIG'] = str(base/'opencode-client.json')
+edit_scope = {'*': 'deny'}
+for f in allowed:
+    edit_scope[f] = 'allow'
+    edit_scope[str(workspace/f)] = 'allow'
+env['OPENCODE_CONFIG_CONTENT'] = json.dumps({'agent': {'free-worker': {
+    'mode': 'primary', 'prompt': 'You implement one precise task. Read only when necessary, then edit the allowed files. Do not explore, delegate, run shell or change routing. Finish with a concise result.', 'maxSteps': min(contract.get('max_steps', 3), 5),
+    'tools': {'read': True, 'edit': True, 'write': True, 'bash': False, 'glob': False, 'grep': False, 'question': False, 'skill': False, 'task': False, 'todowrite': False, 'webfetch': False},
+    'permission': {'edit': edit_scope, 'task': 'deny', 'bash': 'deny', 'webfetch': 'deny', 'external_directory': 'deny', 'doom_loop': 'deny'}
+}}})
+result_path = base/(contract['task_id']+'-events.jsonl')
+start = time.monotonic()
+reason = 'completed'
+usage = 0
+with result_path.open('w') as out:
+    proc = subprocess.Popen(['opencode','run','--pure','--format','json','--model',model,'--agent','free-worker','--dir',str(workspace),contract['requirement']],env=env,stdout=out,stderr=out,start_new_session=True)
+    while proc.poll() is None:
+        usage = 0
+        for line in result_path.read_text().splitlines():
+            try: event = json.loads(line)
+            except ValueError: continue
+            if event.get('type') == 'step_finish': usage += event.get('part',{}).get('tokens',{}).get('input',0)
+        if usage > 50000 or time.monotonic()-start > 180:
+            reason = 'input_limit' if usage > 50000 else 'timeout'
+            os.killpg(proc.pid, signal.SIGTERM)
+            try: proc.wait(timeout=5)
+            except subprocess.TimeoutExpired: os.killpg(proc.pid, signal.SIGKILL); proc.wait()
+            break
+        time.sleep(0.5)
+    code = proc.wait()
+usage = sum(json.loads(line).get('part', {}).get('tokens', {}).get('input', 0) for line in result_path.read_text().splitlines() if line.startswith('{') and json.loads(line).get('type') == 'step_finish')
+if usage > 50000: reason = 'input_limit'
+after = files()
+changed = sorted(k for k in set(before)|set(after) if before.get(k)!=after.get(k))
+result = {'task_id':contract['task_id'],'model':model,'exit_code':code,'termination_reason':reason,'input_tokens':usage,'changed_files':changed,'scope_valid':set(changed)<=allowed,'status':'returned_for_review' if code==0 and reason=='completed' and changed and set(changed)<=allowed else 'failed'}
+(base/(contract['task_id']+'-result.json')).write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps(result))

@@ -1,0 +1,15 @@
+{
+  "capture_date": "2026-10-05",
+  "status": "Archived reference, not an admitted or installed launcher",
+  "source_launcher_sha256": "6fef4d98f266ad4f6348b39f07d16f059c9a29a63ffa3fcf71e6b540ad3958f5",
+  "published_launcher_sha256": "9db1c20ed8842b96788c129385aeaac09bd31423e853731c679a6a3960a5def8",
+  "normalization": "Host-specific paths replaced with placeholders; code otherwise preserved as text",
+  "routing_candidate_status": "Not admitted by the existing canonical validator: its allowed provider prefixes are oc and opencode-zen",
+  "limits_observed_in_launcher": {
+    "default_steps": 3,
+    "maximum_steps": 5,
+    "input_tokens": 50000,
+    "timeout_seconds": 180
+  },
+  "admission_change": "none"
+}

@@ -14,6 +14,12 @@ This document covers repository-internal structure, sync workflows, and validati
 - `.cursor/skills-cursor/` contains Cursor-only skills (Canvas, SDK, meta-skills). Inventory: `.agents/docs/cursor-skills.md`. Not part of skill-factory sync or `validate-skill-library.sh`.
 - `~/.cursor/skills` points at `.agents/skills/`; it is not a separate tracked tree under `.cursor/skills/`.
 
+Project-specific coordination recipes and evidence belong to their project;
+expanded contracts and raw streams stay in its ignored `.lab/coordination/`.
+Arnesto owns reusable execution mechanisms. See
+[coordination artifact guidance](free-worker-coordination/README.md) for a
+reference launcher, recorded limitations and the boundary with active policy.
+
 ## Rule Model
 
 `.agents/rules/base.md` is the compact home-level rulebook shared across repositories. Its universal behavior is organized around four operating principles: Think Before Acting, Simplest Surgical Change, Goal-Driven Verification, and Checkpoint and Escalate.

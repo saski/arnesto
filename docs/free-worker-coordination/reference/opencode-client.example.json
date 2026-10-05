@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "omniroute": {
+      "models": {
+        "kiro/claude-haiku-4.5": {
+          "name": "Kiro Free Haiku 4.5"
+        },
+        "kiro/claude-sonnet-4.5": {
+          "name": "Kiro Free Sonnet4.5"
+        }
+      }
+    }
+  },
+  "small_model": "omniroute/kiro/claude-sonnet-4.5"
+}

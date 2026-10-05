@@ -200,6 +200,8 @@ combos are retired and must not be recreated.
 
 ## Where to go next
 
+- [Coordination artifacts](docs/free-worker-coordination/README.md) — project-owned
+  recipes and evidence, local execution logs, and a provisional launcher reference.
 - [Architecture snapshot](docs/local-agentic-development-architecture.md) —
   stable core, operational integrations, and evaluation boundaries.
 - [Development guide](docs/development-guide.md) — repository structure,

@@ -19,6 +19,16 @@ Pass one JSON contract file:
 
 The adapter writes one JSON result to standard output. A missing or unreadable contract is a usage error with exit status `2`. Contract, model, worker, scope, and validation failures are returned as JSON with `status: "failed"`.
 
+## Artifact ownership
+
+Version reusable task contracts, prompts and selected evidence in the project
+that owns the task. Store expanded host-specific contracts, complete streams
+and temporary client configuration in that project's ignored
+`.lab/coordination/<run-id>/`. Arnesto owns shared launchers and routing policy;
+the coordinating client does not own the project's execution artifacts.
+See [coordination artifact guidance](../../../docs/free-worker-coordination/README.md)
+for the ownership boundary and an archived provisional launcher reference.
+
 ## Input contract
 
 Use this shape:

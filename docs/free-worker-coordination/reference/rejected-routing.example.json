@@ -1,0 +1,30 @@
+{
+  "manifest_version": "1",
+  "frontier_role": "codex_principal",
+  "verified_free_models": [
+    "omniroute/kiro/claude-haiku-4.5"
+  ],
+  "free_worker": {
+    "default_model": "omniroute/kiro/claude-haiku-4.5",
+    "task_classes": {
+      "bounded_code": {
+        "sensitivity": "non_sensitive",
+        "max_steps": 3,
+        "max_input_tokens": 50000,
+        "max_timeout_seconds": 180,
+        "models": [
+          "omniroute/kiro/claude-haiku-4.5"
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "frontier_only_categories": [
+      "credentials",
+      "personal_data",
+      "private_customer_data",
+      "proprietary_secrets",
+      "security_sensitive"
+    ]
+  }
+}
