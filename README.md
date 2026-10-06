@@ -19,6 +19,10 @@ It is not a universal agent framework or a polished distribution. It is a
 working system shaped around my environment, published so other people can
 inspect it, borrow from it, and adapt the useful pieces to their own stack.
 
+Read [how I organise my agent environment](https://www.saski.com/notes/arnesto/)
+for concrete examples of rules, skills, context and runtime boundaries.
+More writing lives in [Notes on saski.com](https://www.saski.com/notes/).
+
 ## Why “Arnesto”?
 
 **Arnesto** is a small collision between the Spanish word *arnés* —harness—
