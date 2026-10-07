@@ -29,6 +29,11 @@
 
 - One compact universal rulebook with narrower repository and contextual rules.
 - Shared skills and commands routed on demand instead of loaded globally.
+- Shared `madrid-avisos` workflow covers drafting, authorized browser submission,
+  status checks, and native browser-session reuse with manual sign-in. The public
+  form was inspected without sending a report; authenticated persistence,
+  end-to-end verification, and model comparison remain pending. Hermes/OpenCode
+  still need a verified persistent browser integration for municipal access.
 - Shared `codex-model-routing` policy for explicit Codex model, effort, Fast,
   and spending decisions, with local evidence and an initial evaluation plan;
   empirical outcome benchmarking remains pending.

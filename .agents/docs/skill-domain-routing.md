@@ -241,6 +241,16 @@ Skills:
 - `refinement-loop` - Use when the output needs multiple distillation passes.
 - `strategic-compact` - Use to preserve session context at logical phase boundaries.
 
+## Municipal Reports and Citizen Services
+
+Tags: `madrid`, `municipal-reports`, `avisos`, `street-maintenance`
+
+Use for reporting incidents or requesting new street elements in Madrid city.
+
+Skills:
+
+- `madrid-avisos` - Prepare and submit authorized reports through avisos.madrid.es, or check an existing report. Requires browser interaction for submission; otherwise prepare a draft and handoff. Excludes emergencies, other municipalities, and formal administrative appeals.
+
 ## Knowledge Vault, Wiki, and Personal Knowledge
 
 Tags: `wiki`, `obsidian`, `knowledge-management`, `ingest`, `links`, `research`, `personal-context`

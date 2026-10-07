@@ -1,0 +1,4 @@
+interface:
+  display_name: "Madrid Avisos"
+  short_description: "Prepare and manage Madrid municipal reports"
+  default_prompt: "Use $madrid-avisos to prepare a municipal incident report from the details I provide."

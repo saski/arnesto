@@ -143,6 +143,7 @@ Imported and local sources land in the same tree:
 
 | Skill | Category | Purpose |
 |-------|----------|---------|
+| madrid-avisos | workflow-automation | Prepare, submit with user authorization, and check municipal reports at avisos.madrid.es. Use for street defects and requests for new street elements in Madrid city; browser execution depends on the current agent's tools. |
 | promptfoo-evals | testing | Design and run promptfoo evaluations for LLM behavior regressions and prompt, rule, or model comparisons; distinguish grader quality, evaluation boundaries, and provider errors. |
 | ste | writing | Writes or rewrites prose in ASD-STE100 Simplified Technical English. Use only when the user explicitly invokes `/ste`, the STE skill, or ASD-STE100; it does not apply to generic requests for clearer documentation. |
 | agent-config-hygiene | practices | Audit and simplify AGENTS.md hierarchies, always-loaded rules, client wrappers, skill routing, and runtime boundaries without adding more permanent context. |

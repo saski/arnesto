@@ -164,6 +164,11 @@ For explicit Codex model, reasoning effort, Fast mode, or spending decisions,
 use [codex-model-routing](.agents/skills/codex-model-routing/SKILL.md). It provides
 cost-conscious recommendations with acceptance checks and escalation criteria.
 
+For Madrid municipal incidents, use
+[madrid-avisos](.agents/skills/madrid-avisos/SKILL.md) to prepare a report, submit
+it with authorization through an available browser, or check its status. See
+[setup and validation notes](docs/madrid-avisos.md) for client availability.
+
 ## Explore or adapt it
 
 Start by reading the repository before installing anything. The setup script

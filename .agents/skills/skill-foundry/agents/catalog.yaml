@@ -23,6 +23,26 @@ lifecycle_statuses:
   - retired
 
 skills:
+  - name: madrid-avisos
+    category: workflow-automation
+    pattern: pipeline
+    owner: personal-operations
+    status: monitor
+    review_cycle_days: 60
+    last_reviewed: "2026-10-02"
+    next_benchmark: "2026-12-01"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+      - gemini
+      - hermes
+      - opencode
+      - chatgpt
+    overlap_with: []
+    notes: "Portable municipal-report workflow. Browser capability and authentication are runtime-specific; ChatGPT needs a supported skill/plugin installation. Public form inspected without submission; authenticated end-to-end operation and comparative benchmarking remain pending."
+
   - name: skill-foundry
     category: skill-governance
     pattern: reviewer
