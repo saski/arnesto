@@ -221,6 +221,9 @@ combos are retired and must not be recreated.
   behavioral evaluations for prompts, agent rules, and models.
 - [TypeSafe AI skill](.agents/skills/typesafe-ai/SKILL.md) — design and build
   applications with TypeSafe's typed AI judgments using current vendor docs.
+- [Token-efficiency tools](docs/token-efficiency-tools.md) — existing RTK and
+  Caveman coverage, scoped Ponytail guidance, and optional CodeGraph/Headroom
+  integrations with bounded local verification.
 - [Hermes, OmniRoute, and Telegram operations](docs/hermes-omniroute-operations.md)
   — the current remote-entry runbook.
 - [Runtime boundaries](docs/codex-orca-runtime-boundary.md) — why Codex, Orca,

@@ -91,6 +91,21 @@
       "sourceType": "github",
       "computedHash": "fce0643f1ea7d9e807bf6c65f9d76d25c728a15aa573d3bcb05871e82d68c9c4"
     },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "sourceType": "github",
+      "sourceCommit": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "skillPath": "skills/ponytail/SKILL.md",
+      "adapted": true,
+      "upstreamSkillHash": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "computedHash": "c0b68c2137aedaf21462c4c878deeb8dc0eba1190c0b40d7d55abf370d04ef16",
+      "localFileHashes": {
+        "LICENSE": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
+        "SKILL.md": "8c8d7018316af481a02e1dea0b0b77466bbb44246ccb595220b5cbbae23d7e4d",
+        "references/eval-plan.md": "602507bb42e823a099b0bd79107e19c128fea13afff5c2b720c699234fac1e63",
+        "references/provenance.md": "700adbef6cca81da64c8ecf060fc688daed9d5643c4009bb466560298eafce7d"
+      }
+    },
     "positioning-canvas": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",

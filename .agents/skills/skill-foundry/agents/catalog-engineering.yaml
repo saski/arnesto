@@ -1,9 +1,64 @@
 # Skill-foundry governance for engineering skills in .agents/skills/<name>/.
 # Taxonomy keys: see taxonomy.md in this directory.
-# Sources: skill-factory (synced via pull-and-sync-skills.sh), mattpocock/skills, typesafe-ai/skills, and native/local skills.
+# Sources: skill-factory (synced via pull-and-sync-skills.sh), mattpocock/skills, typesafe-ai/skills, DietrichGebert/ponytail (adapted), and native/local skills.
 # Routing text stays in each SKILL.md frontmatter (name + description); this file adds taxonomy and overlaps only.
 
 skills:
+  - name: ponytail
+    category: workflow-automation
+    pattern: pipeline
+    owner: engineering
+    status: active
+    review_cycle_days: 60
+    last_reviewed: "2026-09-27"
+    next_benchmark: "2026-11-26"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - code-simplifier
+      - xp-simple-design-refactor
+      - complexity-review
+    notes: "Arnesto-maintained MIT adaptation of DietrichGebert/ponytail, routed on demand before implementation. No universal activation, requirement cuts, or test-policy replacement. Source and file hashes are pinned in skills-lock.json; behavioral comparison pending."
+
+  - name: codegraph
+    category: tool-reference
+    pattern: tool-wrapper
+    owner: engineering
+    status: experimental
+    review_cycle_days: 60
+    last_reviewed: "2026-09-27"
+    next_benchmark: "2026-11-26"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - fic-research
+      - zoom-out
+    notes: "Native optional CLI/MCP runbook for CodeGraph 1.6.0. A synthetic CLI symbol/caller smoke passed; real-repository benefits and MCP lifecycle remain unmeasured. No automatic client installation, telemetry, or Git-hook setup."
+
+  - name: headroom
+    category: tool-reference
+    pattern: tool-wrapper
+    owner: engineering
+    status: experimental
+    review_cycle_days: 60
+    last_reviewed: "2026-09-27"
+    next_benchmark: "2026-11-26"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - ai-patterns
+      - promptfoo-evals
+    notes: "Native optional Headroom 0.39.1 library runbook. Synthetic compression preserved an outlier, system instructions, and recent context; no downstream provider, proxy, or MCP acceptance test. Local trial disables telemetry, persistent storage, and ML compression."
+
   - name: typesafe-ai
     category: tool-reference
     pattern: tool-wrapper

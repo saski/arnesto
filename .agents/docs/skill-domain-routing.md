@@ -65,6 +65,7 @@ Skills:
 - `xp-simple-design-refactor` - Use when the goal is simple design and ROI-ranked maintainability.
 - `xp-mikado-method` - Use for large refactors that need dependency graphs and safe sequencing.
 - `code-simplifier` - Use for local clarity and complexity reduction without behavior change.
+- `ponytail` - Use for explicit Ponytail or simplest-implementation requests; reuse existing, standard-library, or native features while preserving complete scope and project tests.
 - `xp-technical-debt` - Use to catalog, rank, and choose debt payoff work.
 - `thin-wrappers` - Use to isolate external SDKs and infrastructure behind small interfaces.
 - `improve-codebase-architecture` - Use to find deeper architecture improvements from existing code and docs.
@@ -101,6 +102,7 @@ Skills:
 - `diagnose` - Use for disciplined debugging of failures, broken behavior, or regressions.
 - `source-command-bug-fixing-agent` - Use for company-environment bug investigations that combine tickets, internal documentation, private repositories, ownership, and production evidence.
 - `fic-research` - Use to investigate the existing codebase and capture findings without proposing changes.
+- `codegraph` - Use an optional local index for repeated symbol, caller, and impact exploration. Prefer ordinary search for simple lookups and validate returned locations against source.
 - `find-docs` - Use for current library, framework, SDK, API, CLI tool, or cloud service documentation via the Context7 CLI.
 - `documentation-lookup` - Canonical current-docs route; prefer Context7 MCP tools and fall back to the CLI when MCP is unavailable.
 - `corporate-aws-cli` - Use for AWS CLI work in federated corporate accounts and account-region validation.
@@ -120,6 +122,7 @@ Skills:
 - `free-agent-execution` - Use only when the user explicitly requests a bounded, non-sensitive free OpenCode worker run.
   Its [artifact guidance](../../docs/free-worker-coordination/README.md) separates
   project recipes/evidence, ignored runtime records and Arnesto-owned mechanisms.
+- `headroom` - Use for explicit Headroom work or measured compression of large tool payloads in a controlled application; start locally and keep proxy/provider setup separate.
 - `writing-bash-scripts` - Use when creating or editing shell scripts.
 - `using-uv` - Use for Python projects, scripts, and dependency management with uv.
 - `bun-toolkit` - Use for Bun-aware JS, TS, and JSX work.

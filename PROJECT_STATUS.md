@@ -56,6 +56,8 @@
   grader controls, comparison boundaries, and honest provider-error reporting.
 - External `typesafe-ai` skill is installed in the shared library with its
   upstream license, pinned source commit, content hash, and routing entries.
+- Scoped `ponytail` skill adapts the upstream reuse ladder with its MIT notice,
+  pinned provenance, and evaluation cases; model-comparison evidence is pending.
 
 ### Agent execution and remote entry
 
@@ -100,6 +102,15 @@
 ---
 
 ## 🚧 In Progress
+
+### Evaluate optional token-efficiency tools
+
+Shared `codegraph` and `headroom` skills now provide version-pinned, on-demand
+runbooks. CodeGraph passed a synthetic symbol/caller CLI check; Headroom passed
+a local compression fixture with evidence-preservation assertions. Real-task
+savings, MCP lifecycle, and proxy/provider compatibility remain unmeasured.
+Client configuration and provider routes are unchanged. See the
+[evaluation and integration decisions](docs/token-efficiency-tools.md).
 
 ### Complete the multi-entry routing contract
 

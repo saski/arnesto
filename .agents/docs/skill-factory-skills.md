@@ -14,6 +14,7 @@ Imported and local sources land in the same tree:
 - **Matt Pocock skills** — `mattpocock/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
 - **Google Data Cloud skills** — installed with `.agents/skills/.datacloud_skills_manifest`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml)
 - **TypeSafe AI skill** — copied from `typesafe-ai/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
+- **Ponytail adaptation** — scoped reuse-first workflow adapted from `DietrichGebert/ponytail`, with MIT notice, pinned source, and local file hashes in `skills-lock.json`
 - **Native and local skills** — authored, maintained, or locally installed into this repository
 
 ## Local sibling skill references
@@ -115,6 +116,17 @@ Imported and local sources land in the same tree:
 | ml-best-practices | data-analysis | Guide machine learning and data analysis workflows, including clustering, classification, regression, forecasting, and statistical testing. |
 | notebook-guidance | data-analysis | Structure, execute, and validate Jupyter notebooks for data analysis, visualization, and BigQuery SQL. |
 | skill-repair | skill-governance | Repair failed skill installations and update installer manifests after fixes. |
+
+## Optional efficiency tools
+
+See [the evaluation and integration decisions](../../docs/token-efficiency-tools.md).
+RTK is already part of shell routing; Caveman remains in the Matt Pocock pack.
+
+| Skill | Category | Purpose |
+|-------|----------|---------|
+| ponytail | practices | Apply the reuse-first ladder for explicit Ponytail or minimal-implementation requests while completing all requirements and repository checks. |
+| codegraph | developer-tools | Use a local symbol and caller index for repeated structural exploration; initialize only a selected repository and keep client registration separate. |
+| headroom | developer-tools | Evaluate compression of large repetitive tool payloads through a local library trial before considering a proxy or provider integration. |
 
 ## Matt Pocock skills (external sync)
 
