@@ -287,9 +287,15 @@ with `make configure-omniroute-free-coding`. The configurator is idempotent and
 stops on drift instead of replacing a locally edited combo.
 The former `free-stack` and `free-deterministic` runtime combos were retired on
 2026-08-21 and are intentionally absent from portable configuration.
-Hermes and OpenCode expose only the `free-coding` combo identifier; Codex and
-Orca terminals use `codex-free`. The ordered model policy is not copied into
-client configuration.
+The Hermes overlay selects `combo/free-coding-v2`; OpenCode exposes
+`omniroute/combo/free-coding-v2` as an explicit interactive route alongside the
+direct worker pins. The v2 combo's membership and selection policy live in
+local OmniRoute state and are not managed by the tracked v1 configurator.
+Codex and Orca terminals retain `codex-free` with `combo/free-coding`.
+The bounded adapter admits only models in `.agents/free-agent-routing.json`;
+neither entry alias grants worker admission. The ordered model policy is not
+copied into client configuration. See [OpenCode entry](opencode-free-entry.md)
+and [Hermes operations](hermes-omniroute-operations.md) for the distinct lanes.
 
 ## Thoughts and Workflow Assets
 

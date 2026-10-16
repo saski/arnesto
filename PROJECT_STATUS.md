@@ -1,7 +1,11 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-10-05
+**Last Updated**: 2026-10-16
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
+
+This update reviews repository artifacts and documented evidence. Runtime
+observations retain their original dates; it does not certify today's provider
+availability or complete unfinished acceptance tasks.
 
 ---
 
@@ -15,7 +19,9 @@
 | OpenSpec and durable planning | ✅ Complete | 100% | - |
 | Hermes, OpenCode, and OmniRoute integration | 🟢 Ready | Operational | Provider health can change |
 | AI Studio Android workbench | 🟢 Validated edge | Health tracking build/install loop | Hosted capabilities can change |
-| Multi-entry routing contract | 🟡 In Progress | 27/38 tasks | Cursor entry and final acceptance remain |
+| Multi-entry routing contract | 🟡 In Progress | Adapter and partial entry paths implemented | Cursor entry, portable Hermes profile, attribution, and final acceptance remain |
+| Behavioural evaluation | 🟡 In Progress | Truthfulness cases and one recorded Promptfoo case | Broader model/client and outcome comparisons remain |
+| Artifact classification | ✅ Complete | README inventory reviewed on 2026-10-16 | Proposed capability gaps remain separate from implemented mechanisms |
 | Orca evaluation | 🟡 In Progress | Level-1 trial | Needs evidence from real tasks |
 | Grok Agent evaluation | ⚠️ Pending | 0% | Starts after the Orca trial |
 
@@ -87,13 +93,17 @@
 ### Free-model routing hygiene
 
 - `codex-free` provides an isolated free-model entry without changing the
-  Terra/Medium Codex and Orca defaults.
+  normal Codex and Orca model choices. Terra/Medium remains the repository
+  template default; setup preserves local model/effort selections.
 - The ordered `free-coding` desired state is versioned separately from mutable
   OmniRoute runtime state, with fixed diagnostic pins and drift-safe setup.
-- The local combo is installed and passed exact-text, structured tool-call, and
-  read-only Codex, Hermes, and OpenCode entry probes with non-zero usage.
-- Hermes and OpenCode expose the shared combo by identifier, while Codex and
-  Orca terminals reuse `codex-free`; no client duplicates the preference order.
+- Historical `free-coding` installation and semantic probes are recorded in the
+  runtime guides. They do not verify current provider health or v2 behaviour.
+- Hermes and OpenCode templates now expose `combo/free-coding-v2`, whose
+  membership and selection policy remain local OmniRoute state. Codex/Orca
+  terminals retain `codex-free` and the tracked `free-coding` desired state.
+- The bounded worker adapter retains the separate direct-model allowlist in
+  `.agents/free-agent-routing.json`; entry combo aliases do not expand admission.
 - The inactive `free-stack` and `free-deterministic` runtime combos were
   removed after a recoverable local backup.
 - A portable company-environment bug-fixing skill is tracked for future use
@@ -105,10 +115,11 @@
 
 ### Evaluate optional token-efficiency tools
 
-Shared `codegraph` and `headroom` skills now provide version-pinned, on-demand
-runbooks. CodeGraph passed a synthetic symbol/caller CLI check; Headroom passed
-a local compression fixture with evidence-preservation assertions. Real-task
-savings, MCP lifecycle, and proxy/provider compatibility remain unmeasured.
+Shared `codegraph` and `headroom` skills provide version-pinned, on-demand
+runbooks. CodeGraph has bounded navigation evidence; Headroom passed a local
+compression fixture with evidence-preservation assertions. These checks do not
+establish total-session savings, production MCP lifecycle, or proxy/provider
+compatibility.
 Client configuration and provider routes are unchanged. See the
 [evaluation and integration decisions](docs/token-efficiency-tools.md).
 
@@ -128,15 +139,32 @@ Orca is an optional workspace and terminal surface. It remains isolated from the
 
 No Hermes-to-Orca bridge, automatic task mirroring, or merged Codex runtime is approved.
 
+### Classify the remaining capability gaps
+
+The [README artifact taxonomy](README.md#artifact-categories) now distinguishes
+instructions and context, execution and integrations, and control and evidence.
+It identifies candidate work on agent/handoff definitions, authorization and
+tool trust, execution isolation and recovery, behavioural evaluation,
+observability/evidence retention, and distribution compatibility.
+
+These are review directions, not implemented services or approved build plans.
+There is no general agent registry, central schema registry, Arnesto-owned
+gateway, or unified audit service. Existing client runtimes retain ownership
+of credentials, sessions, trust state, and personal memory.
+
 ---
 
 ## 📋 Next Steps
 
 1. Complete the Orca trial with evidence from real development tasks.
 2. Evaluate Grok Agent as another possible surface without assuming integration or credential sharing.
-3. Evaluate whether `free-coding` should ever replace a client default; it is
-   currently an explicit shared lane.
+3. Evaluate route changes against the client-specific baseline: Hermes/OpenCode
+   templates select v2, Codex/Orca retain their explicit `codex-free` lane, and
+   bounded worker admission remains separate.
 4. Close or split the remaining `codex-led-agent-routing` tasks once the entry-surface experiments settle.
+5. Select the next artifact/control gap only when a recurring task supplies
+   concrete acceptance criteria; use the existing adapter before adding another
+   registry, router, or coordinator.
 
 ---
 
@@ -147,6 +175,13 @@ No Hermes-to-Orca bridge, automatic task mirroring, or merged Codex runtime is a
   fallback metadata. OmniRoute does not currently expose enough context data to
   define accurate values without guessing.
 - The active routing OpenSpec contains unfinished Cursor and acceptance work.
+- Worker file-scope checking happens after execution and excludes paths already
+  dirty before the run. It is not filesystem isolation or automatic rollback.
+- Input-token limits depend on completed-call usage reports and cannot prevent
+  an oversized first request. Declared task sensitivity is not automatic data
+  classification.
+- Live behavioural evaluations are separate from `make check`; passing local
+  contracts does not establish a model's quality or a provider's availability.
 - The repository is intentionally opinionated and includes local-environment conventions that adopters should review before running setup.
 
 ---

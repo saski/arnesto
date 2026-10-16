@@ -1,6 +1,7 @@
 # Codex, Orca, Hermes, and OmniRoute runtime boundaries
 
-**Verified locally:** 2026-08-14
+**Runtime isolation verified locally:** 2026-08-14
+**Configuration contract reviewed:** 2026-10-16
 
 ## Decision
 
@@ -10,10 +11,11 @@ symlinking or merging the directories.
 
 The top-level `model` and `model_reasoning_effort` values in the
 [versioned Codex template](../templates/codex/config.toml) are the canonical
-shared defaults. Synchronize those preferences deliberately across both local
-configuration files, but do not treat the rest of either file as
-interchangeable. This document intentionally does not duplicate their current
-values.
+template defaults. Setup preserves local model and reasoning-effort choices;
+it does not continuously synchronize either runtime to the template. If a
+preference change is intended for both runtimes, apply it deliberately to each
+local configuration file. Do not treat the rest of either file as
+interchangeable. This document intentionally does not duplicate default values.
 
 ## Local paths
 
@@ -45,8 +47,9 @@ When changing a Codex default:
 
 1. Inspect both `config.toml` files and confirm whether `ORCA_CODEX_HOME` is
    active for the relevant process.
-2. Read the intended defaults from `templates/codex/config.toml` and
-   synchronize only `model` and `model_reasoning_effort`.
+2. Confirm the intended `model` and `model_reasoning_effort` for each affected
+   runtime. Use `templates/codex/config.toml` when resetting to shared defaults;
+   preserve a deliberate local choice otherwise.
 3. Preserve Orca-specific hooks, trust metadata, permissions, databases, and
    environment settings.
 4. Do not symlink, delete, or merge the Orca runtime without an explicit,
@@ -91,8 +94,14 @@ overwrite a drifted runtime combo. The local OmniRoute context must be
 authenticated for management operations, or `OMNIROUTE_API_KEY` must contain a
 token with `manage` scope.
 
-Until that combo exists, the wrapper degrades safely to the fixed Laguna pin
-and reports the bootstrap fallback on stderr.
+Hermes and OpenCode now reference `combo/free-coding-v2` in their templates.
+That combo is local OmniRoute state, separate from the tracked `free-coding`
+desired state and from the bounded worker adapter's direct-model allowlist.
+See [Hermes operations](hermes-omniroute-operations.md) and
+[OpenCode entry](opencode-free-entry.md); do not migrate Codex/Orca implicitly.
+
+Until the tracked `free-coding` combo exists, the wrapper degrades safely to the
+fixed Laguna pin and reports the bootstrap fallback on stderr.
 
 The current machine installed the tracked combo on 2026-08-21. Direct Responses
 API probes returned exact text and a structured function call through Laguna,
