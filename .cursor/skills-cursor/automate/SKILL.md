@@ -336,7 +336,9 @@ These labels are agent-only — never show ids to users. If a future structured 
 
 **`slackReactionAdded` payload** — `{ channels: ["C…"], emojiName: "<name>" }`. `emojiName` is the Slack short name **without** surrounding colons (e.g. `thumbsup`, not `:thumbsup:`); the server normalizes Unicode emoji to the matching alias on save. Completion reactions are not supported on `slackReactionAdded` triggers (would recurse) and are silently dropped.
 
-**`emailReceived` payload** (Grok Bot only) — `{ inboxEmail: "<one of the user's Grok Bot inbox addresses>", fromAddresses?: ["a@b.com"], requireAuthPass: true }`. Fires when mail arrives at that inbox; `fromAddresses` is an exact lowercased sender allowlist (empty = any sender) and `requireAuthPass` (default true) skips mail that failed SPF/DKIM/DMARC. Messages that fail these filters do not trigger a run. The run gets the envelope only (sender, subject, ids) and reads the body with `read_email_thread`.
+**Incoming email** (Grok Bot only) — A routine can watch mail from anyone, specific sender addresses, or a domain such as `*@example.com`. Sender authentication checks are enabled by default. Mail that matches no routine does not start a run. See [Cursor's email guide](https://cursor.com/help/grok-bot/agent-email).
+
+Before prefilling an `emailReceived` trigger, confirm its exact field names and filter semantics against the current client schema. If that schema is unavailable, defer email-trigger configuration to the Automations editor instead of guessing a payload. Check the run's actual tool catalog before promising to read message bodies; do not assume a particular email-thread tool name or that chat tools are available in routine runs.
 
 **Completion reaction on a Slack message trigger.** "React with `:foo:` when the agent finishes" is a completion-reaction option on `slackTrigger`, not a separate trigger. Put `slackCompletionReactionMode: SLACK_COMPLETION_REACTION_MODE_CUSTOM` and `slackCompletionReactionCustomEmoji: ":foo:"` (with surrounding colons) on the same `slackTrigger` entry. Do not create a `slackReactionAdded` trigger to express completion behavior.
 
