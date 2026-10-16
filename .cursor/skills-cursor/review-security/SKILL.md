@@ -12,7 +12,7 @@ Launch exactly one `security-review` subagent with:
 - `description: "Security Review"`
 - `subagent_type: "security-review"`
 
-The review subagent computes the local diff from the repository path, so do not compute the diff yourself before launching it. The repository path should be the active workspace or repository root for the code the user wants reviewed.
+The review subagent computes the local diff from the repository path, so do not compute the diff yourself before launching it. Set Full Repository Path to the absolute path of the git repository that contains the changes the user wants reviewed. That repository may be a subfolder of the current workspace. Do not change the agent's workspace root or call move_agent_to_root to review a repository that is already reachable.
 
 By default, the review subagent infers the repository's actual base branch, such as `main`, when computing `branch changes`. In most cases, do not provide `Base Branch`. Only provide it if you know the current branch or PR should be compared against a specific branch other than the repository's default base branch, such as when you created the current branch from another branch.
 
