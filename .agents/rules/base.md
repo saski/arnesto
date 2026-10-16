@@ -2,11 +2,11 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-09-10 -->
-<!-- version: 4.4 -->
+<!-- last_updated: 2026-10-07 -->
+<!-- version: 4.5 -->
 # Universal Agent Rules
 
-This is the compact, cross-repository operating baseline. Repository and directory rules may extend it with narrower instructions.
+Cross-repository baseline; local rules may extend it.
 
 ## 1. Operating Principles
 
@@ -51,6 +51,7 @@ This is the compact, cross-repository operating baseline. Repository and directo
 
 ## 3. Communication and Documentation
 
+- PDFs: show full text in chat; await explicit approval before generation.
 - Lead with the outcome, followed by concise supporting detail.
 - Team communication may be in Spanish or English; technical artifacts must be in English.
 - Use a diagram when it materially clarifies structure, state, or flow.
