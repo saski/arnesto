@@ -48,9 +48,9 @@ is reference material.
 
 ## Why “Arnesto”?
 
-**Arnesto** is a small collision between the Spanish word *arnés* —harness—
-and Ernesto. The name fits what the repository became: no longer a collection
-of configuration files, but the harness connecting an increasingly unruly set
+**Arnesto** takes its cue from the Spanish word *arnés* —harness—.
+The name fits what the repository became: no longer a collection of
+configuration files, but the harness connecting an increasingly unruly set
 of tools.
 
 ## How it got here
