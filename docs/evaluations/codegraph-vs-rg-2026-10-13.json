@@ -1,0 +1,250 @@
+{
+  "date": "2026-10-13",
+  "repository": "/Users/saski/Code/agent-systems-lab",
+  "commit": "4078a2216864f0f94c692489149c69f3b9af445b",
+  "corpus": {
+    "copied_files": 25,
+    "python_files": 24,
+    "lines_including_pyproject": 4778,
+    "codegraph_nodes": 463,
+    "codegraph_edges": 1168,
+    "initial_index_reported_ms": 729,
+    "index_db_bytes": 1654784
+  },
+  "versions": {
+    "codegraph": "1.6.0",
+    "ripgrep": "15.2.0",
+    "worker_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "tokenizer": "tiktoken 0.12.0 o200k_base"
+  },
+  "metrics_scope": "Retrieved repository evidence only. Not billed model tokens, cached input, reasoning output, completion cost, or end-to-end agent latency.",
+  "agent_pilot": {
+    "rg": {
+      "per_task": {
+        "q1": {
+          "calls": 5,
+          "retrieved_tokens": 8374,
+          "bytes": 31449,
+          "capped": 0
+        },
+        "q2": {
+          "calls": 8,
+          "retrieved_tokens": 8525,
+          "bytes": 33718,
+          "capped": 0
+        },
+        "q3": {
+          "calls": 5,
+          "retrieved_tokens": 12209,
+          "bytes": 49170,
+          "capped": 0
+        },
+        "q4": {
+          "calls": 4,
+          "retrieved_tokens": 3871,
+          "bytes": 15376,
+          "capped": 0
+        }
+      },
+      "total_calls": 22,
+      "retrieved_tokens": 32979,
+      "bytes": 129713
+    },
+    "codegraph": {
+      "per_task": {
+        "q1": {
+          "calls": 4,
+          "retrieved_tokens": 5362,
+          "bytes": 18483,
+          "capped": 0
+        },
+        "q2": {
+          "calls": 11,
+          "retrieved_tokens": 11887,
+          "bytes": 43565,
+          "capped": 0
+        },
+        "q3": {
+          "calls": 7,
+          "retrieved_tokens": 8548,
+          "bytes": 33795,
+          "capped": 0
+        },
+        "q4": {
+          "calls": 9,
+          "retrieved_tokens": 5666,
+          "bytes": 21235,
+          "capped": 0
+        }
+      },
+      "total_calls": 31,
+      "retrieved_tokens": 31463,
+      "bytes": 117078
+    }
+  },
+  "protocol_deviation": "Both arms were instructed to use at most 22 evidence calls. RG used 22. CodeGraph used 31, including one malformed CLI query, and had two earlier unlogged wrapper argument rejections. Therefore the agent comparison is exploratory and cannot establish a controlled treatment effect. Agents shared their own prior-question context; only one session per arm.",
+  "query_repeats": {
+    "note": "CLI query-only latency. rg returns textual occurrences including definition; CodeGraph returns distinct caller symbols plus file-level records. These outputs are not identical answers. No LLM completion time or cost measured.",
+    "warmups": 2,
+    "repeats": 10,
+    "tokenizer": "o200k_base",
+    "results": [
+      {
+        "symbol": "workflow",
+        "arms": {
+          "rg": {
+            "median_ms": 9.426854000000095,
+            "min_ms": 8.572542000000016,
+            "max_ms": 11.797124999999964,
+            "runs_ms": [
+              9.762665999999975,
+              9.094125000000064,
+              9.59041599999999,
+              9.361707999999913,
+              11.797124999999964,
+              8.572542000000016,
+              8.576042000000061,
+              9.343792000000128,
+              9.545500000000207,
+              9.492000000000278
+            ],
+            "output_tokens": 156,
+            "bytes": 645,
+            "command": [
+              "rg",
+              "-n",
+              "\\bworkflow\\s*\\(",
+              "src",
+              "tests"
+            ]
+          },
+          "codegraph": {
+            "median_ms": 166.44566699999996,
+            "min_ms": 163.01116700000006,
+            "max_ms": 179.707375,
+            "runs_ms": [
+              174.46675,
+              166.401625,
+              163.01116700000006,
+              166.79633299999998,
+              164.24983299999997,
+              165.30587499999982,
+              166.48970899999992,
+              179.707375,
+              167.62283300000024,
+              164.0859579999998
+            ],
+            "output_tokens": 238,
+            "bytes": 819,
+            "command": [
+              "/private/tmp/codegraph-rg-20261013-f0kjno8y/tool/node_modules/.bin/codegraph",
+              "--no-color",
+              "callers",
+              "workflow",
+              "--json",
+              "--path",
+              "/private/tmp/codegraph-rg-20261013-f0kjno8y/snapshot"
+            ]
+          }
+        }
+      },
+      {
+        "symbol": "export_attempt",
+        "arms": {
+          "rg": {
+            "median_ms": 10.345541499999777,
+            "min_ms": 8.81266699999994,
+            "max_ms": 12.246167000000252,
+            "runs_ms": [
+              11.086582999999983,
+              9.8791669999998,
+              12.246167000000252,
+              9.949166999999814,
+              9.275917000000078,
+              9.436832999999645,
+              10.74191599999974,
+              11.04020799999983,
+              8.81266699999994,
+              11.045167000000689
+            ],
+            "output_tokens": 637,
+            "bytes": 2693,
+            "command": [
+              "rg",
+              "-n",
+              "\\bexport_attempt\\s*\\(",
+              "src",
+              "tests"
+            ]
+          },
+          "codegraph": {
+            "median_ms": 165.52247900000003,
+            "min_ms": 158.58462500000005,
+            "max_ms": 170.66800000000003,
+            "runs_ms": [
+              164.53879199999966,
+              165.85187499999998,
+              158.58462500000005,
+              165.07604199999992,
+              169.09225000000026,
+              168.7977079999996,
+              164.49283300000062,
+              170.66800000000003,
+              165.19308300000012,
+              168.44599999999943
+            ],
+            "output_tokens": 921,
+            "bytes": 3472,
+            "command": [
+              "/private/tmp/codegraph-rg-20261013-f0kjno8y/tool/node_modules/.bin/codegraph",
+              "--no-color",
+              "callers",
+              "export_attempt",
+              "--json",
+              "--path",
+              "/private/tmp/codegraph-rg-20261013-f0kjno8y/snapshot"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "staleness_probe": {
+    "file": "tests/test_workflow.py",
+    "temporary_symbol": "benchmark_workflow_caller",
+    "rg_sees_new_caller_immediately": true,
+    "graph_callers_sees_new_caller_before_sync": false,
+    "graph_callers_sees_new_caller_after_sync": true,
+    "reported_sync_ms": 71,
+    "temporary_edit_restored": true
+  },
+  "quality_findings": {
+    "q1": {
+      "rg": "All five workflow invocation sites identified.",
+      "codegraph": "Agent omitted cli.py:139 and incorrectly claimed one production call. Graph correctly returned the enclosing execute caller, not individual callsite lines."
+    },
+    "q2": {
+      "rg": "Core subprocess/runtime/HTTP/authorization chain and revoke status explained.",
+      "codegraph": "Core checks explained; worker.main and Store.revoke implementation were not explicitly traced."
+    },
+    "q3": {
+      "rg": "JSON export, integrity and completion marker identified; CLI regression test included.",
+      "codegraph": "JSON export, integrity and completion marker identified; CLI regression test not included."
+    },
+    "q4": {
+      "rg": "Checkpoint/resume identified; Store decision internals explicitly uninspected; final no-callback-registration sentence contradicts add_node source.",
+      "codegraph": "More complete Store.decide and separate gateway history explanation."
+    }
+  },
+  "verification": {
+    "original_source_unchanged": true,
+    "snapshot_restored": true,
+    "protected_configs_and_hooks_unchanged": true,
+    "original_git_status_unchanged": true,
+    "original_commit_unchanged": true,
+    "index_files": 2
+  },
+  "raw_evidence_directory": "/private/tmp/codegraph-rg-20261013-f0kjno8y",
+  "recommendation": "Keep rg as the default in this small repository. Use CodeGraph on demand for repeated structural caller/impact questions, verifying source and synchronizing the index. No evidence here for global activation or total cost savings."
+}

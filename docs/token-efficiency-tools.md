@@ -52,6 +52,13 @@ their own benchmarks and do not establish savings for Arnesto. Measure total
 tokens, cached-token behavior, time, quality, and setup overhead on the same
 tasks before promoting either experimental runtime integration.
 
+The [2026-10-13 CodeGraph versus rg comparison](evaluations/codegraph-vs-rg-2026-10-13.md)
+used a temporary copy of Agent Systems Lab's Python source and tests. It
+supports keeping `rg` as the default in that small repository and CodeGraph
+available for occasional structural questions. The exploratory agent run had
+an unenforced query-budget deviation and does not establish total-cost savings.
+No global integration or original-repository changes were made.
+
 ## Ownership and maintenance
 
 - [Ponytail skill](../.agents/skills/ponytail/SKILL.md): Arnesto-maintained
