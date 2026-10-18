@@ -47,7 +47,6 @@ Use JTBD when you need to:
 **Books:**
 - *Demand-Side Sales* by Bob Moesta
 - *Competing Against Luck* by Clayton Christensen
-- *When Coffee and Kale Compete* by Alan Klement
 
 
 ## Further Reading

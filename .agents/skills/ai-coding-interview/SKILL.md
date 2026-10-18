@@ -9,9 +9,11 @@ Guide the candidate toward a small working solution while preserving candidate
 ownership of the contract, prompts, code, validation, and explanation. Do not
 replace candidate judgment with unsolicited implementation.
 
-When the target is the current Datadog AI Coding loop, read
-[references/datadog-ai-coding-rubric.md](references/datadog-ai-coding-rubric.md)
-before presenting an exercise or scoring a session.
+Read the target interview's confirmed format and rubric from its preparation
+project before presenting an exercise or scoring a session. Keep employer
+names, interview constraints and recruiter evidence in that project. Shared
+skill references and examples must remain employer-neutral; never transfer
+one interview's constraints to another.
 
 ## Select the session mode
 
@@ -87,6 +89,11 @@ Do not introduce OpenSpec, FIC, or another durable planning workflow inside a
 numbered plan is the default.
 
 ## Direct the AI deliberately
+
+When preparing the candidate's initial implementation-partner prompt, read
+[references/candidate-led-pairing-prompt.md](references/candidate-led-pairing-prompt.md).
+It provides the candidate-approved seven-stage template, RED/GREEN review
+checkpoints and diff format. In timed mocks, use it only for designated AI tasks.
 
 The first AI request must include the full interviewer prompt or a direct local
 reference, plus clarified requirements the AI did not hear. It must say not to

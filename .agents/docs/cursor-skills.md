@@ -18,7 +18,6 @@ For shared skills, use [skill-factory-skills.md](skill-factory-skills.md) and [s
 | automate | ide | Create Cursor Automations through the Automations editor handoff, with trigger, tool, prompt, and integration completeness checks. |
 | autopilot | ide | Keep a PR merge-ready by triaging comments, resolving clear conflicts, and fixing CI in a loop. |
 | canvas | ide | Live React Canvas beside the chat for analytical artifacts, charts, tables, and MCP-heavy deliverables; also required when editing `.canvas.tsx` files. |
-| deploy-with-vercel | ide | Link a Cursor Origin repository to Vercel and deploy it through the Vercel MCP. |
 | goal | ide | Set a durable objective that Cursor pursues across turns until an evidence-based completion audit passes. |
 | loop | ide | Run a prompt or skill repeatedly through cloud subscription timers or monitored local shell output. |
 | new-repo | ide | Create and push a Cursor-hosted repository for a project that has no existing remote. |

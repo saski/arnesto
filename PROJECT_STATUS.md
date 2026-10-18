@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-10-16
+**Last Updated**: 2026-10-18
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 This update reviews repository artifacts and documented evidence. Runtime
@@ -14,6 +14,7 @@ availability or complete unfinished acceptance tasks.
 | Component | Status | Progress | Blocking |
 |---|---|---:|---|
 | Shared rules, skills, and commands | ✅ Complete | 100% | - |
+| Candidate-led coding practice | ✅ Complete | Seven-stage template and explicit RED/GREEN review checkpoints | Independent readiness requires a completed mock |
 | Progressive instruction loading | ✅ Complete | 100% | - |
 | Setup and canonical validation | ✅ Complete | 100% | - |
 | OpenSpec and durable planning | ✅ Complete | 100% | - |
@@ -48,6 +49,21 @@ availability or complete unfinished acceptance tasks.
 - Versioned templates and adapters for supported clients.
 - Stable `~/.agents` entry point with deterministic symlink validation.
 - Separate runtime ownership for credentials, sessions, databases, trust state, and mutable preferences.
+
+### Reusable coding interview practice
+
+- The shared [starting prompt](.agents/skills/ai-coding-interview/references/candidate-led-pairing-prompt.md)
+  preserves candidate ownership through understanding, contract, approved plan,
+  one RED test and review, minimum GREEN implementation and review, next slice,
+  and evidence-based close.
+- Each RED/GREEN review shows actual project code diffs, executed commands and
+  results. Revisions require rerunning relevant checks. Timers start only on
+  explicit instruction; mock assistance remains limited to designated AI tasks.
+- Shared skill assets use employer-neutral examples. Interview-specific rubrics,
+  constraints and recruiter evidence belong to each preparation project.
+- Cursor's skill inventory no longer advertises the removed deployment skill.
+  Local Cursor validation and the complete `make check` passed on 2026-10-18.
+  These checks validate repository contracts, not candidate readiness.
 
 ### Durable delivery workflow
 

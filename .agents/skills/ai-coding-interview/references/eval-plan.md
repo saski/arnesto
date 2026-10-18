@@ -47,18 +47,20 @@ Expected behavior:
 - avoid a narrative transcript;
 - request a bounded plan before editing.
 
-### Datadog target
+### Target-specific rubric
 
 Prompt:
 
-    Use this skill for my Datadog AI Coding interview practice.
+    Use this skill for my upcoming AI coding interview. The confirmed format
+    and evaluation rubric are in my preparation project's interview brief.
 
 Expected behavior:
 
-- read the Datadog rubric reference;
-- preserve the single-file and local-environment constraints;
+- read the project-local interview brief and rubric;
+- preserve its confirmed environment, timing and delivery constraints;
 - prioritize a minimal working path;
-- assess the five official criteria and map them to the reusable scorecard.
+- map the supplied criteria to the reusable scorecard without inventing rules;
+- keep employer identities and interview evidence out of shared skill assets.
 
 ### Productionization follow-up
 

@@ -26,7 +26,7 @@ More writing lives in [Notes on saski.com](https://www.saski.com/notes/).
 
 ## Current state
 
-Repository review: **2026-10-16**. This describes checked-in mechanisms and
+Repository review: **2026-10-18**. This describes checked-in mechanisms and
 documented experiments; provider health and installed runtime state require
 their own live checks.
 
@@ -35,6 +35,7 @@ their own live checks.
 | Portable core | Progressive rules, shared skills, commands, OpenSpec, setup contracts, and local/CI validation | Keep client wiring and imported material aligned as tools change |
 | Agent execution | A frontier-owned handoff to a constrained OpenCode worker, with model admission, execution limits, structured results, and local validation | Complete the shared multi-entry contract, including Cursor, a portable Hermes profile, and final acceptance evidence |
 | Runtime integration | Separate Codex/Orca runtimes, Hermes remote entry, OmniRoute configuration, and explicit free-model lanes | Recheck volatile routes; configuration and past probes do not establish current availability |
+| Coding interview practice | Candidate-led seven-stage pairing template, vertical TDD slices, code diffs, and explicit RED/GREEN review checkpoints | Keep guided practice separate from independent assessment; load interview-specific evidence from its project |
 | Behavioural evaluation | Truthfulness cases and a pinned Promptfoo evaluator; one recorded Promptfoo case passed | Broader model/client comparisons and representative quality, cost, and correction measurements |
 | Optional tools | Ponytail reuse guidance, CodeGraph navigation, and a Headroom compression fixture | Real-task benefit and integration quality remain unproven; these do not change global routing |
 | Experimental surfaces | A documented AI Studio Android build/install workflow and an Orca trial | Orca acceptance evidence; Grok Agent remains a planned evaluation |
@@ -236,6 +237,20 @@ For Madrid municipal incidents, use
 [madrid-avisos](.agents/skills/madrid-avisos/SKILL.md) to prepare a report, submit
 it with authorization through an available browser, or check its status. See
 [setup and validation notes](docs/madrid-avisos.md) for client availability.
+
+For coding interview preparation, use
+[ai-coding-interview](.agents/skills/ai-coding-interview/SKILL.md) and its
+[reusable starting prompt](.agents/skills/ai-coding-interview/references/candidate-led-pairing-prompt.md).
+The candidate owns the contract, plan and accepted changes across seven stages:
+understand, define the contract, plan, RED, GREEN, select the next slice, and
+close with execution evidence. Reviews include the actual code diff and check
+results; revisions are followed by relevant checks. The candidate approves each
+transition and explicitly starts any timer.
+
+Keep employer identities, recruiter evidence and interview-specific constraints
+in the preparation project. Shared templates remain employer-neutral. During
+a mock, implementation assistance applies only to designated AI tasks; guided
+practice does not establish independent readiness.
 
 ## Explore or adapt it
 

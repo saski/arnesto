@@ -7,7 +7,7 @@ description: >-
   reviews, data-heavy content, timelines, charts, tables, interactive
   explorations, repeatable tools, or any response that benefits from visual
   layout. Especially prefer a canvas when presenting results from MCP tools
-  (Datadog, Databricks, Linear, Sentry, Slack, etc.) where the data is the
+  (observability, analytics, issue-tracking and messaging tools) where the data is the
   deliverable — render it in a rich canvas rather than dumping it into a
   markdown table or code block. If you catch yourself about to write a markdown
   table, stop and use a canvas instead. You MUST also read this skill whenever
@@ -33,12 +33,12 @@ The trigger is **user intent**, not response shape. Ask: would the user benefit 
 - Billing or account investigations that surface structured findings from database queries
 - Security audits or architecture reviews with categorized findings
 - Cross-system data analyses and overlap reports
-- Structured data from MCP tools (Databricks, Datadog, etc.) where a durable standalone artifact is the deliverable
+- Structured data from MCP tools (analytics and observability platforms) where a durable standalone artifact is the deliverable
 - Financial analyses, margin decompositions, usage trend reports
 - Large tables the user wants to revisit or refine
 
 **Do NOT use a canvas when:**
-- The user asks for work in a **specific tool** — "create a Datadog dashboard" means give them a Datadog dashboard, not a canvas
+- The user asks for work in a **specific tool** — "create a dashboard in the monitoring platform" means create it in that platform, not a canvas
 - The user has a **specific deliverable** — "draft a support response", "fix this code", "make this PR"
 - The user is **working within an existing artifact** — improving an HTML dashboard, editing an existing file
 - The user is doing **targeted debugging** or active development, even if structured findings emerge along the way
@@ -62,7 +62,7 @@ The trigger is **user intent**, not response shape. Ask: would the user benefit 
 - A title naming the **specific metric** (not "Metrics" — "API error rate by service").
 - **Axis labels with units** on both axes (e.g. "Date", "Latency (ms)").
 - A **legend** when more than one series is shown, with the exact series names from the source data.
-- The **source and time range** in a small caption (e.g. "Source: Datadog · last 7 days"). If a value is a transformation (mean, p95, normalized, smoothed), say so in the label.
+- The **source and time range** in a small caption (e.g. "Source: monitoring platform · last 7 days"). If a value is a transformation (mean, p95, normalized, smoothed), say so in the label.
 
 **Component discovery:** prefer built-in `cursor/canvas` components over hand-rolled markup. The full public surface (components, hooks, prop types, tokens) is declared in `~/.cursor/skills-cursor/canvas/sdk/index.d.ts` and its sibling `.d.ts` files — read them when you need exact exports, prop shapes, or hook signatures rather than guessing. Referencing an export that does not exist is the most common runtime error.
 
