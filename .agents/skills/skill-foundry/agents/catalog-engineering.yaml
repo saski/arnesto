@@ -1619,6 +1619,46 @@ skills:
     overlap_with: []
     notes: "Persistent ultra-compressed communication mode for lower-token replies while preserving technical accuracy."
 
+  # --- On-demand writing skills ---
+
+  - name: avoid-ai-writing
+    category: artifact-creation
+    pattern: reviewer
+    owner: engineering
+    status: active
+    review_cycle_days: 60
+    last_reviewed: "2026-10-20"
+    next_benchmark: "2026-12-19"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - humanizer
+      - refinement-loop
+      - ste
+    notes: "On-demand local MIT wrapper with unchanged pinned upstream resources and an ES/EN communication profile. Recommendations do not activate rewriting; Spanish rules are editorial, not detector-validated. Synthetic cases do not establish comparative quality. Source and file hashes are pinned in skills-lock.json."
+
+  - name: humanizer
+    category: artifact-creation
+    pattern: reviewer
+    owner: engineering
+    status: active
+    review_cycle_days: 60
+    last_reviewed: "2026-10-20"
+    next_benchmark: "2026-12-19"
+    benchmark_after_model_update: true
+    platforms:
+      - claude
+      - codex
+      - cursor
+    overlap_with:
+      - avoid-ai-writing
+      - refinement-loop
+      - ste
+    notes: "On-demand local MIT wrapper with unchanged pinned upstream resources and an ES/EN communication profile. Recommendations do not activate rewriting; Spanish rules are editorial, not detector-validated. Synthetic cases do not establish comparative quality. Source and file hashes are pinned in skills-lock.json."
+
   # --- Utility skills ---
 
   - name: traductor-bilingue

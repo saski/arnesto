@@ -1,0 +1,2 @@
+# Preserve the pinned upstream detector's whitespace verbatim.
+.agents/skills/avoid-ai-writing/upstream/detector/patterns.js whitespace=-blank-at-eol

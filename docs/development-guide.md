@@ -61,6 +61,7 @@ The skill library is self-contained:
 - Matt Pocock skills are installed into `.agents/skills/` and tracked in git with provenance in `skills-lock.json`.
 - Product-management skills are tracked in `.agents/skills/` with provenance in `skills-lock.json`.
 - The TypeSafe AI skill is copied intact into `.agents/skills/` with its license and provenance in `skills-lock.json`; update it by replacing the entire upstream skill directory and refreshing its hash and source commit.
+- `avoid-ai-writing` and `humanizer` are local wrappers around unchanged upstream skills. Preserve each `upstream/` copy and the root MIT license; update source pins and content hashes in `skills-lock.json` when refreshing upstream. Keep the identical `references/communication-profile.md` copies synchronized. The English-only detector has not been validated for Spanish. See [writing skill guidance](writing-skills.md) for routing and usage.
 - Ponytail is a scoped local adaptation with its upstream MIT notice and source/file hashes in `skills-lock.json`; review and merge upstream changes manually instead of overwriting it. CodeGraph and Headroom are native optional runbooks; their external runtimes are not installed by setup. See [token-efficiency tools](token-efficiency-tools.md) for decisions, pinned versions, and bounded smoke evidence.
 - Skill-factory provenance is tracked in `.agents/upstreams/skill-factory/components.lock.json`.
 - ECC upstream components are tracked in `.agents/upstreams/ecc/components.lock.json`.

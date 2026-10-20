@@ -2,8 +2,8 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-10-07 -->
-<!-- version: 4.5 -->
+<!-- last_updated: 2026-10-20 -->
+<!-- version: 4.6 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -61,7 +61,8 @@ Cross-repository baseline; local rules may extend it.
 
 ## 4. Skills and Explicit Routing
 
-- Prefer the skill catalog exposed by the active client, then read and follow only the matching `SKILL.md`. If no catalog is available, search the relevant section of `~/.agents/docs/skill-domain-routing.md`; reserve the full skill inventory for library maintenance.
+- Prefer the client catalog or relevant sections of `~/.agents/docs/skill-domain-routing.md`. Follow matching skills; reserve full inventories for maintenance.
+- Suggest `humanizer` once for public or professional drafts with concrete voice problems; activate only when requested or accepted.
 - Load a named workflow or command from `~/.agents/workflows/` or `~/.agents/commands/` when the user explicitly invokes it or the task matches its documented trigger.
 - When the user explicitly asks to create or coordinate an agent team, load and follow the `launching-agent-teams` skill.
 - When the user explicitly requests a bounded, non-sensitive free worker, the agent loads and follows the free-agent-execution skill; the frontier agent retains scope preparation and final review.

@@ -232,6 +232,8 @@ Use when the work is about explaining, translating, challenging, facilitating, o
 
 Skills:
 
+- `avoid-ai-writing` - Use on demand for an explicitly requested AI-ism audit or conservative prose cleanup; preserve meaning and structure with the ES/EN communication profile.
+- `humanizer` - Use on demand for an explicitly requested or accepted author-voice rewrite. For a public or professional draft that needs this treatment, suggest it briefly; a suggestion does not authorize rewriting. Ask one focused question only when an unresolved scope or voice choice materially changes the edit. Continue already-authorized work, suggest at most once per draft, and skip ordinary chat, literal translation, factual fixes and code-only tasks. Do not automatically chain both writing skills. See [writing skills](../../docs/writing-skills.md) for examples and English-detector limits in Spanish.
 - `traductor-bilingue` - Use for English-Spanish technical translation.
 - `ste` - Use only when the user explicitly requests ASD-STE100 Simplified Technical English or invokes `/ste`; do not use it for ordinary clarity or documentation requests.
 - `radical-candor` - Use for direct feedback while preserving care.

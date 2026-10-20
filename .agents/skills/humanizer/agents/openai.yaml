@@ -1,0 +1,6 @@
+interface:
+  display_name: "Humanizer"
+  short_description: "Author-voice rewrites in Spanish or English"
+  default_prompt: "Use $humanizer to rewrite this draft in my voice with the Spanish/English profile, preserving its claims, commitments and uncertainty."
+policy:
+  allow_implicit_invocation: false

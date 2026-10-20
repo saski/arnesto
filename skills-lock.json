@@ -219,6 +219,63 @@
       "sourceType": "github",
       "skillPath": "skills/engineering/zoom-out/SKILL.md",
       "computedHash": "8357aeaece3b709c442eab67e64b86844e05e2f1ea95b109565eba50b6def36e"
+    },
+    "avoid-ai-writing": {
+      "source": "conorbronsdon/avoid-ai-writing",
+      "sourceType": "github",
+      "sourceCommit": "209815cdeb4af942616daec89a5e0a706c804e3a",
+      "skillPath": "skills/avoid-ai-writing/SKILL.md",
+      "upstreamVersion": "3.38.0",
+      "adapted": true,
+      "upstreamSkillHash": "af4be7fb7898d00a9fca25b54ffe6d0f123117989aa60732d1be7dc69fac0491",
+      "upstreamFileHashes": {
+        "agents/openai.yaml": "cc9c3a3cf200e64753cd182c9ed85fa1fa378ce6f02d9d4318ab9e918847d2fe",
+        "detector/CATEGORIES.md": "fb303990be9e9da197ab83ac5b9ff3539de63b827641f3760493a13bc1763256",
+        "detector/patterns.js": "37d6b022821f592b062e421c639789861b692e22388f65e8db0692154f7a59fd",
+        "detector/validate.js": "00c36a802373e263120325c4180e34d7bf2f64196f850b76226e90a09c7f22c9",
+        "examples/README.md": "d1e0ca4d2c100b2f276253a9964506b3a92a161068ca327f9c4f06e77e04bc39",
+        "examples/prose.json": "720a208037e469e3e4234aa41a05d13f9600dc6d562e40e033c41f0fa7fead3f",
+        "examples/technical.json": "f44c732fa3d222b997fa1310f2b74e1c2d6d619c3e47249833a66816b08cc969",
+        "references/patterns.md": "d5452a813006840b47273b0c1ddd4ca655733cbab4db9fbe19e803c03e77c499",
+        "scripts/check-style.js": "a7265f5b5dd3312c4cafa5d395300cdf6156876ef60b499cde06f63eea8a374f",
+        "scripts/markdown-prose.js": "bd3cc9a98081728f9b663c4943b38e3bf2ceea389721b45bb5abccba0b916903",
+        "scripts/normalize-quotes.js": "9d3ee6f66d8e70041a66d60a41d60fc53ea6308c20728e48cbb71dc2493bfb65",
+        "instructions.md": "af4be7fb7898d00a9fca25b54ffe6d0f123117989aa60732d1be7dc69fac0491"
+      },
+      "computedHash": "520078d958579bdee5b5f7a87f54bc59144c0c0fe398066821c10d0d56305630",
+      "localFileHashes": {
+        "LICENSE": "4da9b9f0bb899269b6e79fb383b4c3f24ebcadf7352f970871bae3e215401589",
+        "SKILL.md": "8c2d1645c813b12bcd43eaff42b906dabed93c0c0f850eab358873c9545a0a58",
+        "agents/openai.yaml": "6d12a209ea73b9d80807c757ad5e69c5b7ee097970812e5c3f0fd7e62249d608",
+        "references/communication-profile.md": "5c94217bae8d37906fbefd2ad9fd0f08f08f34fe6e551efc5c4eda8328a032e2",
+        "references/provenance.md": "df0bebbfed9935916c5420de14ff23524c1b81e28a7df8e065e76dacff4fb52e"
+      },
+      "upstreamPathMap": {
+        "instructions.md": "SKILL.md"
+      }
+    },
+    "humanizer": {
+      "source": "blader/humanizer",
+      "sourceType": "github",
+      "sourceCommit": "8c307f367c91bd974002f10f2be2965d642c13df",
+      "skillPath": "SKILL.md",
+      "upstreamVersion": "3.1.0",
+      "adapted": true,
+      "upstreamSkillHash": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad",
+      "upstreamFileHashes": {
+        "instructions.md": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad"
+      },
+      "computedHash": "d301e814f90bed6147d357ed0e822213eda852f23106d5299b33260a142b2366",
+      "localFileHashes": {
+        "LICENSE": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96",
+        "SKILL.md": "f282edfe129b609057905ae716740074bb4d8af4deb34dbd3d665ce01302fc38",
+        "agents/openai.yaml": "ed5f4507802d9e11fb67c457cf56ccb51f86a7344b9cfecd531f751ebed23ff1",
+        "references/communication-profile.md": "5c94217bae8d37906fbefd2ad9fd0f08f08f34fe6e551efc5c4eda8328a032e2",
+        "references/provenance.md": "30e8573a4e8f217190a65f015bf31bd2f551a5a8ee060a20af566a4709f994c9"
+      },
+      "upstreamPathMap": {
+        "instructions.md": "SKILL.md"
+      }
     }
   }
 }

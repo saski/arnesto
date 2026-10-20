@@ -15,6 +15,7 @@ Imported and local sources land in the same tree:
 - **Google Data Cloud skills** — installed with `.agents/skills/.datacloud_skills_manifest`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml)
 - **TypeSafe AI skill** — copied from `typesafe-ai/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
 - **Ponytail adaptation** — scoped reuse-first workflow adapted from `DietrichGebert/ponytail`, with MIT notice, pinned source, and local file hashes in `skills-lock.json`
+- **Writing skills** — on-demand wrappers for `conorbronsdon/avoid-ai-writing` and `blader/humanizer`, with unchanged pinned upstream resources, MIT notices, a portable ES/EN profile, and source/file hashes in `skills-lock.json`
 - **Native and local skills** — authored, maintained, or locally installed into this repository
 
 ## Local sibling skill references
@@ -150,6 +151,15 @@ RTK is already part of shell routing; Caveman remains in the Matt Pocock pack.
 | Skill | Category | Purpose |
 |-------|----------|---------|
 | typesafe-ai | developer-tools | Build AI-powered software with TypeSafe's typed judgments and probabilities; use for semantic routing, ranking, extraction, verification, or replacing an LLM prompt-and-parse step with a structured decision. Read current TypeSafe docs before implementation. |
+
+## Writing skills (external sources, local wrappers)
+
+| Skill | Category | Purpose |
+|-------|----------|---------|
+| avoid-ai-writing | writing | On-demand AI-ism audit or conservative cleanup preserving structure, facts and uncertainty; includes the ES/EN communication profile. |
+| humanizer | writing | On-demand author-voice rewrite for a public or professional draft; recommend when useful and ask before an unrequested broader edit. |
+
+Usage, selection criteria and language limits: [writing skills](../../docs/writing-skills.md).
 
 ## Native skills (local to this repo)
 

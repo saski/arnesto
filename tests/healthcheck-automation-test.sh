@@ -194,7 +194,7 @@ test_global_rule_budget_contract() {
     assert_not_contains "$base_rules" "catalog-engineering.yaml"
     assert_not_contains "$base_rules" "./validate-skill-library.sh"
     assert_not_contains "$base_rules" "#### Resolution Order"
-    assert_contains "$base_rules" "Prefer the skill catalog exposed by the active client"
+    assert_contains "$base_rules" '~/.agents/docs/skill-domain-routing.md'
     assert_not_contains "$base_rules" 'Use `~/.agents/docs/skill-factory-skills.md` to route task-specific work'
 
     word_count="$(wc -w < "$base_rules" | tr -d ' ')"

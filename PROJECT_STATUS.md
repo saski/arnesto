@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-10-18
+**Last Updated**: 2026-10-20
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 This update reviews repository artifacts and documented evidence. Runtime
@@ -36,6 +36,7 @@ availability or complete unfinished acceptance tasks.
 
 - One compact universal rulebook with narrower repository and contextual rules.
 - Shared skills and commands routed on demand instead of loaded globally.
+- On-demand `avoid-ai-writing` and `humanizer` wrappers share an ES/EN communication profile. Synthetic Spanish and English cases passed; no comparative quality gain is evidenced. See [writing skill guidance](docs/writing-skills.md).
 - Shared `madrid-avisos` workflow covers drafting, authorized browser submission,
   status checks, and native browser-session reuse with manual sign-in. The public
   form was inspected without sending a report; authenticated persistence,

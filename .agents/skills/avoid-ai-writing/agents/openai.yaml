@@ -1,0 +1,6 @@
+interface:
+  display_name: "Avoid AI Writing"
+  short_description: "Conservative AI-ism cleanup in Spanish or English"
+  default_prompt: "Use $avoid-ai-writing to clean up this draft with the Spanish/English profile while preserving its structure, facts and uncertainty."
+policy:
+  allow_implicit_invocation: false
