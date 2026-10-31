@@ -327,6 +327,19 @@ combos are retired and must not be recreated.
 5. Keep credentials and mutable runtime state with the tool that owns them.
 6. Promote experiments only after they earn a place in the stable core.
 
+All agent configuration instructions belong in shared `.agents` rules or
+skills, not in one client's memory or configuration. Client adapters implement
+that common policy while credentials and mutable runtime state remain local.
+Each authorized Arnesto update includes validation, a scoped commit, a push to
+the Arnesto remote, and verification of the published commit. Failed checks
+block publication; unrelated changes are preserved. The shared communication
+default is concise, natural prose, with lists for scripts, meeting support, and
+study material. Personal facts and reusable knowledge remain in the personal
+knowledge vault.
+
+Client-specific instructions such as [Codex with Astra](.agents/rules/codex-astra.md)
+remain owned by Arnesto and load only for the matching client/model.
+
 ## Provenance
 
 Arnesto grew from

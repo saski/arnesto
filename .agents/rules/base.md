@@ -2,8 +2,8 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-10-20 -->
-<!-- version: 4.6 -->
+<!-- last_updated: 2026-10-31 -->
+<!-- version: 4.9 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -47,12 +47,15 @@ Cross-repository baseline; local rules may extend it.
 - When the task changes Python source or packaging, read `~/.agents/rules/python-project.md`.
 - When the task changes a `Makefile` or relies on its targets, read `~/.agents/rules/makefile-project.md`.
 - When the task changes React or TSX source, read `~/.agents/rules/react-best-practices.md`.
+- Only when Codex runs GPT-6 Astra, read `~/.agents/rules/codex-astra.md`; other clients retain their routing policies.
 - Contextual rules extend this baseline. Missing contextual files are optional unless a repository says otherwise.
 
 ## 3. Communication and Documentation
 
 - PDFs: show full text in chat; await explicit approval before generation.
 - Lead with the outcome, followed by concise supporting detail.
+- Keep conversational responses concise but natural, using complete sentences and short paragraphs rather than telegraphic fragments or mechanical status labels. Do not use Caveman-style compression by default.
+- For scripts, meeting-support documents, and study material, prefer lists and clear structure for easy reference.
 - Team communication may be in Spanish or English; technical artifacts must be in English.
 - Use a diagram when it materially clarifies structure, state, or flow.
 - Keep `README.md` user-focused and put developer, CI, and infrastructure details in a development guide.
@@ -89,13 +92,8 @@ Cross-repository baseline; local rules may extend it.
 - Use `rtk` as the default wrapper for compatible shell commands when it is available.
 - If RTK is unavailable or incompatible, fail open and continue with the underlying command.
 
-## 6. Codex with Astra
+## 6. Shared Configuration
 
-Apply this section only when Codex runs GPT-6 Astra. Terra Medium remains the default; other providers retain their routing policies.
-
-- Treat requests for action as work to complete. Resolve routine gaps from context, retain the goal through follow-ups, and continue authorized work. Ask only when missing information materially affects correctness or safety.
-- Before requesting necessary approval, finish authorized preparation so the user can review a concrete result. Preserve actual permission boundaries.
-- User instructions override skill guidelines within higher-priority constraints. If a skill blocks progress, identify and link its SKILL.md, quote the blocking instruction, and explain its applicability; distinguish requirements from interpretation.
-- Lead with the outcome in concise, plain prose. Use lists for parallel items or steps; avoid repetitive summaries and stock phrases.
-- Follow the existing bounded delegation rule; give independent workers clear deliverables and readable messages. Do not increase delegation merely because Astra supports it.
-- Complete required checks. Avoid implementation-mirroring tests for trivial reversible edits; expand or repeat verification only for changed code, failures, or unresolved risks.
+- All agent configuration instructions are cross-tool and owned by Arnesto `.agents`, never client-only memory. Client adapters/templates implement shared policy; credentials and mutable runtime state stay local.
+- For each authorized Arnesto update, validate, commit only task-owned changes, push to its remote, and verify the remote commit. This is standing publication authorization, not permission for unrelated edits, secrets, force-pushes, or bypassing failed checks.
+- Load `~/.agents/skills/agent-config-hygiene/SKILL.md` for configuration work and publication.

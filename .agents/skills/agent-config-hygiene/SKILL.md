@@ -1,6 +1,6 @@
 ---
 name: agent-config-hygiene
-description: Audit and simplify agent configuration, AGENTS.md hierarchies, always-loaded rules, skill routing, client wrappers, and local runtime boundaries. Use when the user asks to review, slim, deduplicate, or clean up agentic configuration or reduce instruction/context bloat.
+description: Audit, update, and publish cross-tool agent configuration through Arnesto. Use for agent configuration instructions, AGENTS.md hierarchies, always-loaded rules, skill routing, client wrappers, local runtime boundaries, or instruction/context cleanup.
 ---
 
 # Agent Configuration Hygiene
@@ -45,6 +45,32 @@ from mutable local runtime state.
   runtime state.
 - A safety boundary belongs in documentation plus a targeted workflow unless it
   must affect most tasks.
+
+## Shared Ownership and Publication
+
+- All agent configuration instructions have their authoritative source in
+  Arnesto `.agents`, including communication preferences. Do not keep an
+  independent policy in client-specific memory or configuration.
+- Client-specific syntax and capabilities may require adapters or versioned
+  templates in Arnesto. They implement shared policy rather than creating a
+  separate source of instructions. Keep credentials and mutable runtime state
+  local; do not merge client runtime homes or publish private data.
+- Every authorized Arnesto update includes validation, a scoped commit, and a
+  push to the configured Arnesto remote. The user granted this standing
+  publication authorization on 2026-10-31; a later explicit local-only request
+  takes precedence. It does not authorize unrelated changes or changes in
+  other repositories.
+- Read the worktree and index before staging. Preserve unrelated changes,
+  including hunks in shared files. Review the exact staged diff for scope and
+  sensitive data, update existing version metadata where applicable, and run
+  the canonical checks. Do not bypass failed checks or hooks.
+- Verify the remote and branch before pushing, using the `github-host-alias`
+  skill. Never force-push or rewrite unrelated history. If remote changes,
+  authentication, permissions, or checks block publication, report the exact
+  blocker and keep local/published status distinct.
+- After pushing, verify that the remote branch contains the committed update
+  and report the commit. Check available CI without treating push success as
+  evidence that CI passed. Do not create release tags unless requested.
 
 ## Report
 

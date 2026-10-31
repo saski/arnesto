@@ -30,10 +30,10 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 | Information type | Destination |
 |---|---|
-| Agent behavior that must apply across tools | Arnesto `.agents/rules/` |
+| Agent configuration instructions and behavior, including cross-thread communication style | Arnesto `.agents/rules/`; cross-tool source, not client-specific configuration or memory |
 | Repeatable agent workflow or protocol | Arnesto `.agents/skills/` |
 | Tool setup, symlink policy, validation scripts | Arnesto |
-| Stable personal facts, preferences, goals, responsibilities, working agreements | `personal-knowledge-vault/vault/portfolio/` |
+| Stable personal facts, goals, responsibilities and preferences other than agent behavior | `personal-knowledge-vault/vault/portfolio/` |
 | Durable decisions and decision-making patterns | `personal-knowledge-vault/vault/portfolio/decision-log.md` or `vault/notes/` |
 | Distilled reusable knowledge, source summaries, lessons, patterns | `personal-knowledge-vault/vault/notes/` |
 | Navigation and topic indexes | `personal-knowledge-vault/vault/maps/` |
@@ -43,6 +43,8 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 ## Persistence Rules
 
+- Distinguish instructions about how agents should work from personal knowledge. All agent configuration instructions belong in shared Arnesto `.agents` rules or skills, not client-specific memory/configuration. Client adapters implement shared policy; credentials and mutable runtime state remain local.
+- For authorized Arnesto updates, follow `agent-config-hygiene` through validation, scoped commit, push, and remote verification. Publication is part of the update, not a separate optional step.
 - Prefer references over copying: if the vault already contains the knowledge, link or cite the file path instead of pasting it into rules.
 - Update `portfolio/` only when information is stable, reusable, and source-backed.
 - Apply the vault promotion policy before moving content from `inbox/` to `notes/` or from `notes/` to `portfolio/`.

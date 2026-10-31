@@ -170,7 +170,7 @@ Use when the work is about creating, improving, selecting, evaluating, or govern
 
 Skills:
 
-- `agent-config-hygiene` - Use to audit or slim AGENTS.md hierarchies, always-loaded rules, client wrappers, skill routing, and agent runtime boundaries.
+- `agent-config-hygiene` - Use to audit, update, and publish cross-tool configuration through Arnesto, including AGENTS.md hierarchies, client adapters, skill routing, and runtime boundaries.
 - `codex-model-routing` - Use for Codex/OpenAI model selection (Astra, Sol, Terra, Luna), effort (Light/Low, Medium, High, Extra High/xhigh, Max, Ultra), consumption/spending reviews, or Fast decisions. Do not route ordinary coding without such a request or other-provider model selection here; preserve their existing criteria.
 - `skill-foundry` - Use to organize, evaluate, benchmark, and improve a skill library.
 - `skill-creator` - Use to create, edit, benchmark, and tune Agent Skills and evals.
