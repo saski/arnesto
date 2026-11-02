@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-10-31
+**Last Updated**: 2026-11-02
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 This update reviews repository artifacts and documented evidence. Runtime
@@ -35,7 +35,8 @@ availability or complete unfinished acceptance tasks.
 ### Portable operating core
 
 - One compact universal rulebook with narrower repository and contextual rules.
-- All agent configuration instructions use shared `.agents` rules/skills rather than client-specific memory/configuration. Each authorized Arnesto update includes validation, a scoped commit, push, and remote verification. Communication defaults to concise, natural prose; scripts, meeting support and study material use lists. Rules version 4.9, updated on 2026-10-31.
+- All agent configuration instructions use shared `.agents` rules/skills rather than client-specific memory/configuration. Each authorized Arnesto update includes validation, a scoped commit, push, and remote verification. Communication defaults to concise, natural prose; scripts, meeting support and study material use lists. Rules version 4.10, updated on 2026-11-02.
+- Shared [software installation storage rules](.agents/rules/software-installation.md) require installations, dependencies, caches, and build artifacts to stay outside cloud-synced folders across clients and operating systems, with destination checks before and after installation.
 - Shared skills and commands routed on demand instead of loaded globally.
 - On-demand `avoid-ai-writing` and `humanizer` wrappers share an ES/EN communication profile. Synthetic Spanish and English cases passed; no comparative quality gain is evidenced. See [writing skill guidance](docs/writing-skills.md).
 - Shared `madrid-avisos` workflow covers drafting, authorized browser submission,

@@ -2,8 +2,8 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-10-31 -->
-<!-- version: 4.9 -->
+<!-- last_updated: 2026-11-02 -->
+<!-- version: 4.10 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -44,6 +44,7 @@ Cross-repository baseline; local rules may extend it.
 
 ## 2. Contextual Rule Loading
 
+- Before installing/updating software, downloading dependencies, or building, follow `~/.agents/rules/software-installation.md` (required); keep installation artifacts outside cloud-synced folders.
 - When the task changes Python source or packaging, read `~/.agents/rules/python-project.md`.
 - When the task changes a `Makefile` or relies on its targets, read `~/.agents/rules/makefile-project.md`.
 - When the task changes React or TSX source, read `~/.agents/rules/react-best-practices.md`.
@@ -89,8 +90,7 @@ Cross-repository baseline; local rules may extend it.
 
 ### RTK
 
-- Use `rtk` as the default wrapper for compatible shell commands when it is available.
-- If RTK is unavailable or incompatible, fail open and continue with the underlying command.
+- Default to available `rtk` for compatible commands; otherwise use the underlying command.
 
 ## 6. Shared Configuration
 
