@@ -1,3 +1,5 @@
+# Arnesto-owned permission policy in Codex execpolicy syntax.
+# Other clients need their own reviewed adapter; ownership stays in Arnesto.
 prefix_rule(pattern=["curl", "-I", "-L"], decision="allow")
 prefix_rule(pattern=["curl", "-I", "https://mcp.atlassian.com/v1/mcp"], decision="allow")
 prefix_rule(pattern=["/Applications/Codex.app/Contents/Resources/codex", "mcp", "remove", "atlassian"], decision="allow")
@@ -23,3 +25,5 @@ prefix_rule(pattern=["omniroute", "providers", "test"], decision="allow")
 prefix_rule(pattern=["curl", "-sS", "--max-time", "30", "-X", "POST", "http://localhost:20128/v1/chat/completions"], decision="allow")
 prefix_rule(pattern=["curl", "-sS", "--max-time", "30", "-X", "POST", "http://localhost:20128/v1/responses"], decision="allow")
 prefix_rule(pattern=["npm", "view", "omniroute"], decision="allow")
+prefix_rule(pattern=["curl", "-L", "--max-time", "20", "--fail", "-o", "/private/tmp/edreams-glassdoor-ip2.html", "-w", "%{http_code}\\n", "https://www.glassdoor.es/Entrevista/eDreams-ODIGEO-Software-Engineer-Preguntas-de-entrevista-EI_IE12822.0,14_KO15,32_IP2.htm"], decision="allow")
+prefix_rule(pattern=["npx", "--yes", "ctx7@latest", "docs", "/vitest-dev/vitest", "Use @vitest-environment jsdom per test file and vi.spyOn Math.random mockReturnValueOnce with vi.restoreAllMocks"], decision="allow")

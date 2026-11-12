@@ -280,6 +280,12 @@ SKILL_FACTORY=/path/to/skill-factory ./sync-skill-factory.sh --dry-run
 - `~/.agents/bin/codex-free` -> repo `bin/codex-free`
 - `~/.local/bin/codex-free` -> repo `bin/codex-free` for interactive shells
 
+Permission policy remains owned by Arnesto. The versioned
+`.agents/rules/codex-default.rules` file expresses it in
+[Codex execpolicy syntax](https://learn.chatgpt.com/docs/agent-configuration/rules).
+Other clients need their own reviewed enforcement adapters; storing a rule in
+Arnesto does not establish that every client already enforces it.
+
 Mutable local config such as `~/.codex/config.toml`, `~/.codex/hooks.json`, and `~/.claude/settings.json` is seeded from `templates/` and intentionally not symlinked back into the repo. For Codex, Terra/Medium are template defaults; local model and reasoning-effort choices are preserved. The required portable invariants are pragmatic personality and `multi_agent = true`; `setup-symlinks.sh validate` checks them without replacing local MCP, plugin, marketplace, desktop, or hook state. `.agents/mcp.json` is shared with Cursor and Gemini, not installed into Codex.
 
 OmniRoute combo state is also mutable local state. Its portable desired state
