@@ -62,6 +62,14 @@ The Spanish profile supplies contextual editorial guidance; English scores and
 thresholds do not establish Spanish writing quality or human authorship.
 Neither skill promises to pass an AI detector.
 
+Humanizer also checks how the author develops an explanation. A personal note
+about a concrete experiment can lose its voice when rewritten as a generic
+"Take an..." tutorial, even if its facts are correct and a detector finds no
+issues. Author-written samples and explicit feedback guide that judgment.
+Earlier assistant drafts are content sources, not approved voice samples.
+Keep useful explanations for beginners and hypothetical examples when they fit
+the requested text; removing every teaching device is not the goal.
+
 Avoid AI Writing includes its upstream Node.js tools under `upstream/`:
 quote normalization, house-style checking, pattern analysis and mechanical
 preservation checking. Run commands from that directory with absolute input
@@ -92,6 +100,9 @@ unmodified upstream behavior:
 | Public draft with a concrete voice problem and no requested rewrite | Recommend once when useful; do not activate the skill without acceptance |
 | Explicitly accepted Humanizer rewrite | Proceed within scope without asking for the same permission again |
 | Ordinary chat, code-only task or literal translation | Continue the original task without offering a writing workflow |
+| Personal experiment note rejected for its generic "Take an..." framing | Explain the existing experiment in the author's register, preserve the mechanism, and check the neighboring paragraphs; changing the opening verb or adding first person is insufficient |
+| Tutorial explicitly requesting a hypothetical example | Keep the requested example and beginner explanations; do not apply a blanket ban on teaching devices |
+| Author rejects a rewrite despite a clean pattern check | Treat the rejection as voice feedback; keep a proposed replacement distinct from an author-approved sample |
 
 These cases check scope and fidelity. They do not establish comparative quality
 or a benefit on real personal writing. Broader claims require representative

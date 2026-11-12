@@ -265,10 +265,10 @@
       "upstreamFileHashes": {
         "instructions.md": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad"
       },
-      "computedHash": "d301e814f90bed6147d357ed0e822213eda852f23106d5299b33260a142b2366",
+      "computedHash": "623412aa9a90ae5cac68b92a660ff16dd559711ff79be867ceb45f4f1621e93a",
       "localFileHashes": {
         "LICENSE": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96",
-        "SKILL.md": "f282edfe129b609057905ae716740074bb4d8af4deb34dbd3d665ce01302fc38",
+        "SKILL.md": "21923e58a5cbda80b9481d7dfca4c243f661ff5b35114197f69d92068825076c",
         "agents/openai.yaml": "ed5f4507802d9e11fb67c457cf56ccb51f86a7344b9cfecd531f751ebed23ff1",
         "references/communication-profile.md": "5c94217bae8d37906fbefd2ad9fd0f08f08f34fe6e551efc5c4eda8328a032e2",
         "references/provenance.md": "30e8573a4e8f217190a65f015bf31bd2f551a5a8ee060a20af566a4709f994c9"

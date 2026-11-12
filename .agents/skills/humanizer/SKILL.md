@@ -28,6 +28,32 @@ The upstream entry is stored as `upstream/instructions.md` so recursive skill
 scanners discover only this local wrapper. References to `SKILL.md` within the
 upstream material mean that file; its content is unchanged.
 
+## Match the author's way of explaining
+
+Use author-written samples and explicit feedback as voice evidence. Earlier
+assistant drafts supply content, but are not voice samples unless the author
+endorses them. When samples are available, identify two or three observable
+choices before rewriting: how an idea begins, how the reasoning develops, and
+how sentences connect. Use explicit feedback to refine those observations.
+Match those choices without copying catchphrases or adding personal experience.
+
+In a personal technical note about an existing experiment, keep the explanation
+grounded in that experiment and the author's stated reasoning. A generic setup
+such as "Take an...", "Imagine..." or "Think of..." can turn their account into
+a stock tutorial. Keep that scaffolding when the author uses it or the reader
+needs a hypothetical example; otherwise explain the concrete situation directly.
+Beginner-friendly writing still needs intermediate reasoning and clear terms.
+
+Check the paragraph's purpose and cadence, not only its vocabulary. Replacing
+"Take" with "Consider", adding "I" or "we", or attaching a punchy closing sentence
+does not by itself recover the author's voice. Read the rewrite with its neighboring
+paragraphs so the explanation continues without restarting or repeating the point.
+
+Treat a passage the author rejects as evidence that voice matching failed, even
+when a pattern detector reports no issues. Preserve its factual content while
+changing the framing that failed. A proposed replacement remains a candidate
+until the author accepts it; do not reuse it as an approved voice sample.
+
 ## Scope and output
 
 - An explicit request for a natural author-voice rewrite activates this skill for
