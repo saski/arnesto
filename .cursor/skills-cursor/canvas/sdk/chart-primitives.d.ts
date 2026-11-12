@@ -4,12 +4,12 @@
  *
  * Distilled from the portal-website Highcharts analytics charting layer.
  */
-import type { CSSProperties, JSX } from "react";
+import { type CSSProperties, type JSX } from "react";
 /**
  * Semantic tone for a chart series or slice. Mirrors the tone vocabulary
- * used by `Stat`, `Pill`, `Table`, and other SDK primitives so colors
- * match across a canvas — e.g. a `Stat tone="success"` and a
- * `ChartSeries tone="success"` render in the same green.
+ * used by `Stat`, `Callout`, and `Table` `rowTone` so colors match across
+ * a canvas — e.g. a `Stat tone="success"` and a `ChartSeries tone="success"`
+ * render in the same green. `Pill` does not share this vocabulary.
  *
  * Omit `tone` to let the chart auto-assign a distinct color from the
  * chart palette; supply `tone` only when the value carries semantic
@@ -29,6 +29,7 @@ export type ChartDataPoint = {
  */
 export type ChartSeries = {
     name: string;
+    /** Values aligned with `categories`. Must be numbers, not numeric strings. */
     data: number[];
     tone?: ChartTone;
 };
@@ -210,7 +211,7 @@ export declare function BarChart({ categories, series, height, stacked, horizont
  * />
  *
  * // Semantic tones — "errors" renders in the same red as a
- * // <Pill tone="danger"> elsewhere on the page.
+ * // <Stat tone="danger"> or <Callout tone="danger"> elsewhere on the page.
  * <LineChart
  *   categories={["00:00", "06:00", "12:00", "18:00"]}
  *   series={[

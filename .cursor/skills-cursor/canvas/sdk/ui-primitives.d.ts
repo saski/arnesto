@@ -110,6 +110,10 @@ export declare function Spacer(): JSX.Element;
 export type TableColumnAlign = "left" | "center" | "right";
 /** Semantic tone for a table row — marker dot in the first column. */
 export type TableRowTone = "success" | "danger" | "warning" | "info" | "neutral";
+/**
+ * Data table props. There is no `rowHeaderColumn` (or other invented
+ * column-role field) — pass `headers` plus `rows` of cells.
+ */
 export type TableProps = {
     /** Column titles, left to right. Column count is fixed by this array. */
     headers: ReactNode[];
@@ -140,7 +144,7 @@ export type TableProps = {
  * Data table with column headers and rows. Framed by default with its own
  * bordered container — **do not wrap in a Card** unless the card itself is
  * a named entity that happens to contain a table. Render directly under a
- * heading in the normal case.
+ * heading in the normal case. There is no `rowHeaderColumn` prop.
  *
  * @example
  * ```tsx
@@ -299,13 +303,18 @@ export type LinkProps = {
  */
 export declare function Link({ children, href, style }: LinkProps): JSX.Element;
 export type CardSize = "base" | "lg";
+/**
+ * Card chrome. Only `"default"` (bordered) and `"borderless"`.
+ * There is no accent, outlined, or primary variant — use `Callout` when
+ * the block needs semantic emphasis.
+ */
 export type CardVariant = "default" | "borderless";
 /**
  * Inline chevron SVG used by disclosure-style controls (collapsible cards,
  * expandable list items, etc.). Shared by `Card` and `todo-list.tsx` so
  * every disclosure in the canvas SDK uses the same glyph.
  */
-export declare function CanvasChevron({ expanded, }: {
+export declare function CanvasChevron({ expanded }: {
     expanded: boolean;
 }): JSX.Element;
 export type CardProps = {
@@ -411,7 +420,7 @@ export type CardHeaderProps = {
  * // Bad — multiple pills in header (use trailing for one, or move to CardBody)
  * ```
  */
-export declare function CardHeader({ children, trailing, style, }: CardHeaderProps): JSX.Element;
+export declare function CardHeader({ children, trailing, style }: CardHeaderProps): JSX.Element;
 export type CardBodyProps = {
     children?: ReactNode;
     style?: CSSProperties;
@@ -428,7 +437,7 @@ export type CardBodyProps = {
  * </Card>
  * ```
  */
-export declare function CardBody({ children, style, }: CardBodyProps): JSX.Element | null;
+export declare function CardBody({ children, style }: CardBodyProps): JSX.Element | null;
 export type ButtonProps = {
     children?: ReactNode;
     variant?: "primary" | "secondary" | "ghost";
@@ -451,14 +460,25 @@ export type ButtonProps = {
  * ```
  */
 export declare function Button({ children, variant, disabled, type, style, onClick, }: ButtonProps): JSX.Element;
-/** @deprecated Pills always render neutral now; tones are ignored. */
+/**
+ * Accepted on `Pill` for source compatibility only — the value is ignored
+ * and every pill renders neutral. This is not the Stat / Callout / Chart /
+ * Table `rowTone` vocabulary: `"danger"` is not a member. Use those
+ * components when you need semantic color.
+ *
+ * @deprecated Pills always render neutral now; tones are ignored.
+ */
 export type PillTone = "neutral" | "added" | "deleted" | "renamed" | "success" | "warning" | "info";
 export type PillSize = "sm" | "md";
 export type PillProps = {
     children?: ReactNode;
     /** Whether the pill is in its selected/active state (filled background). */
     active?: boolean;
-    /** @deprecated Ignored — pills always render with neutral styling. */
+    /**
+     * @deprecated Ignored — pills always render with neutral styling.
+     * `"danger"` is not a `PillTone`. Use `Stat`, `Callout`, `Chart`, or
+     * Table `rowTone` for semantic color.
+     */
     tone?: PillTone;
     /**
      * Visual size. `"md"` (default) is the standard pill. `"sm"` is a
@@ -478,6 +498,8 @@ export type PillProps = {
 /**
  * Pill-shaped label or toggle button. Use for tab bars, filter groups, or
  * action suggestions. Set `active` for the selected state (filled background).
+ * Pills are always neutral — `tone` is ignored and is not a shared semantic
+ * vocabulary with Stat / Callout / Chart.
  *
  * @example
  * ```tsx

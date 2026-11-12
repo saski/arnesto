@@ -1,4 +1,4 @@
-import type { CSSProperties, JSX } from "react";
+import { type CSSProperties, type JSX } from "react";
 export type TodoStatus = "pending" | "in_progress" | "completed" | "cancelled";
 export interface TodoItem {
     readonly id: string;

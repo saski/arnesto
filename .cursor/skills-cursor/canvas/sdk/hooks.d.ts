@@ -1,15 +1,24 @@
-import type { CanvasPalette, CanvasTokens } from "./canvas-tokens.js";
+import { type CanvasHostThemeBrand, type CanvasPalette, type CanvasTokens, type ChartPalette } from "./canvas-tokens.js";
 import { type CanvasAction } from "./internal/canvas-action-dispatch.js";
+import { type CanvasRadius, type CanvasTypography } from "./theme.js";
 /**
  * Host theme for the current canvas. Semantic color groups (`text`, `bg`,
  * `fill`, `stroke`, `accent`, `diff`) live at the top level for ergonomic
  * inline-style access; `tokens` is also present as a self-reference for
- * callers that prefer a namespaced form.
+ * callers that prefer a namespaced form. There is no `colors` bag —
+ * `theme.colors.bg.primary` is not a path.
  */
 export interface CanvasHostTheme extends CanvasTokens {
     readonly kind: string;
+    readonly brand: CanvasHostThemeBrand;
     readonly tokens: CanvasTokens;
     readonly palette: CanvasPalette;
+    readonly radius: CanvasRadius;
+    readonly typography: CanvasTypography;
+    readonly chart: {
+        readonly palette: ChartPalette;
+        readonly sequence: readonly string[];
+    };
 }
 /**
  * Raw theme payload read from the host `theme` channel. Every field is typed
@@ -21,6 +30,7 @@ export interface CanvasHostTheme extends CanvasTokens {
  */
 interface RawHostThemeState {
     readonly kind?: unknown;
+    readonly brand?: unknown;
     readonly primary?: unknown;
     readonly editorBackground?: unknown;
     readonly editorForeground?: unknown;
@@ -34,7 +44,9 @@ export declare function resolveTheme(raw: RawHostThemeState | undefined): Canvas
  *
  * Semantic color groups are available directly on the returned object —
  * `accent`, `text`, `bg`, `fill`, `stroke`, `diff` — as well as `kind`
- * (`"dark"` | `"light"` | …) and `palette` (the flat color palette).
+ * (`"dark"` | `"light"` | …), `brand` (`"cursor"` | `"grok"`, default
+ * `"cursor"` when the host omits it), and `palette` (the flat color
+ * palette). There is no `theme.colors` group.
  *
  * Call `useHostTheme()` inside each component that needs theme access —
  * the returned object is scoped to that component, not shared across

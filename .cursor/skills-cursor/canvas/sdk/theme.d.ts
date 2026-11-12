@@ -1,7 +1,9 @@
-export type { CanvasPalette, CanvasTokens } from "./canvas-tokens.js";
-export { canvasPaletteDark, canvasPaletteLight, canvasTokens, canvasTokensLight, } from "./canvas-tokens.js";
+import type { CanvasHostThemeBrand } from "./canvas-tokens.js";
+export type { CanvasHostThemeBrand, CanvasPalette, CanvasTokens, ChartPalette, } from "./canvas-tokens.js";
+export { canvasPaletteDark, canvasPaletteGrokDark, canvasPaletteGrokLight, canvasPaletteLight, canvasTokens, canvasTokensLight, chartThemeForBrand, parseCanvasHostThemeBrand, } from "./canvas-tokens.js";
 /** Typography presets used by the built-in `cursor/canvas` components. */
 export declare const canvasTypography: {
+    readonly fontFamily: "inherit";
     readonly h1: {
         readonly fontSize: "24px";
         readonly lineHeight: "30px";
@@ -28,6 +30,16 @@ export declare const canvasTypography: {
         readonly fontWeight: 400;
     };
 };
+/**
+ * Cursor canvases inherit the host frame's face (Geist in IDE / Inter on
+ * portal). Do not force Geist into the SDK — hosts already load it.
+ */
+export declare const canvasFontFamilyCursor: "inherit";
+/**
+ * Sand's current `--sand-font-sans` stack. Hosts apply this same stack on
+ * the frame document so `inherit` matches the token. System faces only.
+ */
+export declare const canvasFontFamilyGrok: string;
 /** Spacing scale (px). */
 export declare const canvasSpacing: {
     readonly "0.5": 2;
@@ -57,5 +69,40 @@ export declare const canvasRadius: {
     readonly xl: 12;
     readonly full: 9999;
 };
-export type CanvasRadius = typeof canvasRadius;
+export type CanvasRadius = {
+    readonly [K in keyof typeof canvasRadius]: number;
+};
+export type CanvasTypography = {
+    readonly fontFamily: string;
+    readonly h1: {
+        readonly fontSize: string;
+        readonly lineHeight: string;
+        readonly fontWeight: number;
+    };
+    readonly h2: {
+        readonly fontSize: string;
+        readonly lineHeight: string;
+        readonly fontWeight: number;
+    };
+    readonly h3: {
+        readonly fontSize: string;
+        readonly lineHeight: string;
+        readonly fontWeight: number;
+    };
+    readonly body: {
+        readonly fontSize: string;
+        readonly lineHeight: string;
+        readonly fontWeight: number;
+    };
+    readonly small: {
+        readonly fontSize: string;
+        readonly lineHeight: string;
+        readonly fontWeight: number;
+    };
+};
+/** Sand-grounded radii: 8 / 10 / 14 on the md / lg / xl steps. */
+export declare const canvasRadiusGrok: CanvasRadius;
+export declare const canvasTypographyGrok: CanvasTypography;
+export declare function canvasRadiusForBrand(brand: CanvasHostThemeBrand): CanvasRadius;
+export declare function canvasTypographyForBrand(brand: CanvasHostThemeBrand): CanvasTypography;
 //# sourceMappingURL=theme.d.ts.map

@@ -23,6 +23,38 @@
  */
 export declare const canvasPaletteDark: CanvasPalette;
 export declare const canvasPaletteLight: CanvasPalette;
+export declare const canvasPaletteGrokDark: CanvasPalette;
+export declare const canvasPaletteGrokLight: CanvasPalette;
+/**
+ * Parse a CSS hex color (`#rgb`, `#rgba`, `#rrggbb`, `#rrggbbaa`) into 0–255
+ * RGB components. Returns `undefined` for anything we can't confidently parse
+ * (named colors, `rgb()`, etc.) so callers can fall back to the base palette.
+ *
+ * Hand-rolled rather than reusing a shared color util because this package is
+ * deliberately dependency-light (it is bundled into every canvas), and the host
+ * only ever sends hex (VS Code's `Color.Format.CSS.formatHex`).
+ */
+export declare function parseHexColor(value: string): {
+    r: number;
+    g: number;
+    b: number;
+} | undefined;
+/** Visual brand for canvas token resolve. Unknown values become `"cursor"`. */
+export type CanvasHostThemeBrand = "cursor" | "grok";
+export interface CanvasHostThemeOverrides {
+    readonly brand?: CanvasHostThemeBrand;
+    readonly primary?: string;
+    readonly editorBackground?: string;
+    readonly editorForeground?: string;
+}
+/** Unknown / omitted brand keeps the Cursor tables. */
+export declare function parseCanvasHostThemeBrand(value: unknown): CanvasHostThemeBrand;
+/**
+ * Overlay workbench editor surface colors onto the base palette so the canvas
+ * body and primitives using `bg.editor` match the active VS Code theme
+ * instead of the fixed Cursor light/dark editor hex.
+ */
+export declare function applyWorkbenchSurfaces(palette: CanvasPalette, surfaces: Pick<CanvasHostThemeOverrides, "editorBackground" | "editorForeground">): CanvasPalette;
 /**
  * Overlay a host-provided primary/accent color (e.g. the active VS Code
  * theme's accent) onto a base palette. Only the accent-adjacent entries
@@ -34,17 +66,6 @@ export declare const canvasPaletteLight: CanvasPalette;
  * Returns the base palette unchanged when `primary` isn't a hex color we can
  * parse, keeping behaviour identical to hosts that only report a theme `kind`.
  */
-export interface CanvasHostThemeOverrides {
-    readonly primary?: string;
-    readonly editorBackground?: string;
-    readonly editorForeground?: string;
-}
-/**
- * Overlay workbench editor surface colors onto the base palette so the canvas
- * body and primitives using `bg.editor` match the active VS Code theme
- * instead of the fixed Cursor light/dark editor hex.
- */
-export declare function applyWorkbenchSurfaces(palette: CanvasPalette, surfaces: Pick<CanvasHostThemeOverrides, "editorBackground" | "editorForeground">): CanvasPalette;
 export declare function applyPrimaryColor(palette: CanvasPalette, primary: string): CanvasPalette;
 export interface CanvasPalette {
     readonly foreground: string;
@@ -117,6 +138,8 @@ export type Color = "gray" | "purple" | "green" | "yellow" | "cyan" | "pink" | "
 export type CategoryPalette = Readonly<Record<Color, string>>;
 export declare const categoryPaletteDark: CategoryPalette;
 export declare const categoryPaletteLight: CategoryPalette;
+export declare const categoryPaletteGrokDark: CategoryPalette;
+export declare const categoryPaletteGrokLight: CategoryPalette;
 /** Legacy `colorPalette` name kept for back-compat; per-theme tables are `categoryPalette{Dark,Light}`. React consumers should read `useHostTheme().category` so the color flips with the host theme. */
 export declare const colorPalette: CategoryPalette;
 /**
@@ -133,7 +156,43 @@ export declare const usageColorSequence: readonly Color[];
  * distinct hue families for maximum perceptual separation.
  */
 export declare const chartColorSequence: readonly string[];
-/** Semantic colors for components (spacing and radius live in `theme.ts`). */
+/**
+ * Sand data-categorical hues. Same key set as {@link chartPalette} so
+ * tone maps (`success` / `danger` / …) stay typed; the lead series colors
+ * are Sand blue / orange / purple.
+ */
+export declare const chartPaletteGrok: {
+    readonly green: "#00C972E8";
+    readonly darkGreen: "#009957E0";
+    readonly lightGreen: "#38D591E0";
+    readonly mintGreen: "#78E2B4E0";
+    readonly blue: "#1084FEE0";
+    readonly lightBlue: "#459FFEE0";
+    readonly indigo: "#0C64C1F0";
+    readonly lightIndigo: "#80BEFEE0";
+    readonly purple: "#9159FEF0";
+    readonly lightPurple: "#A97EFEE0";
+    readonly warmPink: "#FF309BE0";
+    readonly lightPink: "#FF5EB1E0";
+    readonly brightOrange: "#FF6700E0";
+    readonly deepOrange: "#C24E00E0";
+    readonly goldenYellow: "#FF9800E0";
+    readonly darkAmber: "#FF263CE0";
+    readonly warmPeach: "#FF8838E0";
+    readonly vibrantTeal: "#00BCA6E0";
+    readonly muted: "#777777E0";
+    readonly neutralLine: "#777777D0";
+};
+export declare const chartColorSequenceGrok: readonly string[];
+export type ChartPalette = {
+    readonly [K in keyof typeof chartPalette]: string;
+};
+/**
+ * Semantic colors for components (spacing and radius live in `theme.ts`).
+ * There is no `colors` bag — `theme.colors.bg.primary` is not a path.
+ * Use `theme.bg.editor`, `theme.fill.primary`, `theme.text.primary`,
+ * `theme.stroke.secondary`, `theme.accent.primary`.
+ */
 export interface CanvasTokens {
     bg: {
         editor: string;
@@ -182,9 +241,20 @@ export declare const canvasTokensLight: CanvasTokens;
  * Light kinds (`light`, `hc-light`) use the light palette/categories; every
  * other kind uses the dark ones. Centralizing the palette + category choice
  * here keeps `useHostTheme` a thin reader of host state.
+ *
+ * Grok skips the host `primary` overlay: Grok owns ink accents
+ * (`#FAFAFA` / `#070707`). Hosts like Sand and VS Code always send
+ * `primary` (workbench `button.background`) and would otherwise wipe
+ * those inks. Workbench surfaces (`editorBackground` /
+ * `editorForeground`) still apply.
  */
 export declare function buildHostTokens(kind: string, overrides?: CanvasHostThemeOverrides): {
     tokens: CanvasTokens;
     palette: CanvasPalette;
+    brand: CanvasHostThemeBrand;
+};
+export declare function chartThemeForBrand(brand: CanvasHostThemeBrand): {
+    palette: ChartPalette;
+    sequence: readonly string[];
 };
 //# sourceMappingURL=canvas-tokens.d.ts.map
