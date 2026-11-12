@@ -3,7 +3,7 @@ trigger: always_on
 ---
 
 <!-- last_updated: 2026-11-12 -->
-<!-- version: 4.12 -->
+<!-- version: 4.13 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -58,6 +58,7 @@ Cross-repository baseline; local rules may extend it.
 - Keep conversational responses concise but natural, using complete sentences and short paragraphs rather than telegraphic fragments or mechanical status labels. Do not use Caveman-style compression by default.
 - For scripts, meeting-support documents, and study material, prefer lists and clear structure for easy reference.
 - Team communication may be in Spanish or English; technical artifacts must be in English.
+- For documents in the user's local Documents folder, provide the verified Google Drive link for mobile access; in Codex Desktop, also provide a clickable absolute local path. If the Drive link cannot be found, say so rather than inventing it.
 - Use a diagram when it materially clarifies structure, state, or flow.
 - Keep `README.md` user-focused and put developer, CI, and infrastructure details in a development guide.
 - Update user-facing documentation when structure, setup, features, or usage changes.
