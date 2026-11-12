@@ -32,6 +32,10 @@ saving, checking, committing, and pushing to the corresponding repository.
 The shared [learning capture rule](.agents/rules/ai-feedback-learning-loop.md)
 defines this behavior for clients that load Arnesto.
 
+For complex, ambiguous tasks, shared [clarification guidance](.agents/rules/task-clarification.md)
+helps me specify Goal, Context, Output, and Boundaries. The AI uses the context
+already available and asks only about material gaps.
+
 ## Current state
 
 Repository review: **2026-10-18**. This describes checked-in mechanisms and

@@ -3,7 +3,7 @@ trigger: always_on
 ---
 
 <!-- last_updated: 2026-11-12 -->
-<!-- version: 4.13 -->
+<!-- version: 4.14 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -12,7 +12,7 @@ Cross-repository baseline; local rules may extend it.
 
 ### Think Before Acting
 
-- Confirm goal, constraints, criteria, and risks before changing.
+- Confirm goal, constraints, criteria, and risks; for complex, ambiguous tasks, follow `~/.agents/rules/task-clarification.md`.
 - Read the relevant exports, callers, shared utilities, documentation, and tests before writing.
 - Use tools and primary documentation for facts; use judgment for classification, drafting, synthesis, and tradeoffs.
 - Never invent or conceal facts/context; label claims verified, inferred, or unknown.
