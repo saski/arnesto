@@ -18,7 +18,7 @@ When you review in place:
 - Compute the diff the same way the review subagent would. Use `branch changes` unless the user asked for uncommitted changes only. If your prompt already has the Bugbot review shape, review that diff.
 - Do not call Task or Subagent.
 - If `bugbot` is unavailable and this run is not already the Bugbot reviewer, say "Bugbot is unavailable; I reviewed the diff in place." Attribute these findings to the in-place review, not to a Bugbot run.
-- Return the findings yourself. If there is no diff, say so in one sentence. If there are no issues, say "In-place review found no issues". If there are issues, print a compact markdown table with one row per finding, sorted by severity (highest first), using exactly these columns: Severity, Location (file:line), Finding. Put the file and line in the location column as `file:line`.
+- Return the findings yourself. If there is no diff, say so in one sentence. If there are no issues, say "Bugbot found no bugs" only when this run is already the Bugbot reviewer; otherwise say "In-place review found no issues". If there are issues, print a compact markdown table with one row per finding, sorted by severity (highest first), using exactly these columns: Severity, Location (file:line), Finding. Put the file and line in the location column as `file:line`.
 
 Launch a subagent only when `bugbot` is an available subagent type and this run is not already the Bugbot reviewer.
 
