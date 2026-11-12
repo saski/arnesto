@@ -64,6 +64,11 @@ distinguish repository state from mutable local runtime state.
   the specific content and destination before this authorization applies.
   It does not authorize unrelated changes or changes in other repositories;
   approved vault captures follow their own learning-capture publication scope.
+- Plan commit boundaries by purpose before staging. Each commit must be atomic,
+  narrowly scoped, independently reviewable, verifiable, and reversible. Separate
+  unrelated behavior changes, refactors, formatting, and documentation-only work.
+  Keep the tests and documentation required by a behavior change with that change;
+  do not split merely by file type or leave intermediate commits incomplete.
 - Read the worktree and index before staging. Preserve unrelated changes,
   including hunks in shared files. Review the exact staged diff for scope and
   sensitive data, update existing version metadata where applicable, and run

@@ -3,7 +3,7 @@ trigger: always_on
 ---
 
 <!-- last_updated: 2026-11-12 -->
-<!-- version: 4.11 -->
+<!-- version: 4.12 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -24,7 +24,7 @@ Cross-repository baseline; local rules may extend it.
 
 - Prefer the smallest working, reversible change that satisfies the request.
 - Do not add speculative features, abstractions, cleanup, comments, or formatting churn.
-- Preserve unrelated user changes and touch only files required for the goal.
+- Preserve unrelated changes. Keep commits atomic, scoped, independent, and separated by purpose.
 - Match local conventions; surface harmful conventions instead of silently creating a competing style.
 
 ### Goal-Driven Verification
