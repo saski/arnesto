@@ -24,6 +24,14 @@ Read [how I organise my agent environment](https://www.saski.com/notes/arnesto/)
 for concrete examples of rules, skills, context and runtime boundaries.
 More writing lives in [Notes on saski.com](https://www.saski.com/notes/).
 
+The active AI detects learning without a save request: how-to guidance and
+directives go to the fitting Arnesto rule, skill, workflow, command, or policy;
+explanations and opinions I identify with go to my personal knowledge vault.
+It presents the exact proposed content and destination for my validation before
+saving, checking, committing, and pushing to the corresponding repository.
+The shared [learning capture rule](.agents/rules/ai-feedback-learning-loop.md)
+defines this behavior for clients that load Arnesto.
+
 ## Current state
 
 Repository review: **2026-10-18**. This describes checked-in mechanisms and

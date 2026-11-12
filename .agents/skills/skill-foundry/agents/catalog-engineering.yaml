@@ -1233,7 +1233,7 @@ skills:
       - llm-wiki
       - wiki-capture
       - wiki-update
-    notes: "Routes personal context and durable knowledge between agent config and the personal vault."
+    notes: "Proactively routes procedures and directives to Arnesto, explanations and user-endorsed opinions to the personal vault; requires user validation before persistence and publication. Also supports retrieval."
 
   - name: vault-artifact-toolchain
     category: workflow-automation

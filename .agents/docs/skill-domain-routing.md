@@ -260,11 +260,11 @@ Skills:
 
 Tags: `wiki`, `obsidian`, `knowledge-management`, `ingest`, `links`, `research`, `personal-context`
 
-Use when information should be captured, routed, queried, synthesized, linked, or maintained as durable knowledge.
+Use when information should be captured, routed, queried, synthesized, linked, or maintained as durable knowledge. The active AI also detects learning without a save request: how-to guidance and directives go to Arnesto; explanations and user-endorsed opinions go to the vault. Both routes require user validation before persistence and publication.
 
 Skills:
 
-- `personal-knowledge-routing` - Use to decide what belongs in the personal vault versus agent configuration.
+- `personal-knowledge-routing` - Proactively route learning to Arnesto or the personal vault, prepare exact proposals for user validation, then persist and publish approved captures; also use for retrieval.
 - `llm-wiki` - Use for the foundational raw to wiki to schema knowledge architecture.
 - `obsidian-cli` - Use for Obsidian vault CLI operations, note management, and plugin or theme development.
 - `vault-artifact-toolchain` - Use for Mermaid, Marp, Excalidraw, notebooklm-py, yt-dlp, markitdown, and Makefile vault artifact workflows.

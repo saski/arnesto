@@ -2,8 +2,8 @@
 trigger: always_on
 ---
 
-<!-- last_updated: 2026-11-02 -->
-<!-- version: 4.10 -->
+<!-- last_updated: 2026-11-12 -->
+<!-- version: 4.11 -->
 # Universal Agent Rules
 
 Cross-repository baseline; local rules may extend it.
@@ -61,7 +61,6 @@ Cross-repository baseline; local rules may extend it.
 - Use a diagram when it materially clarifies structure, state, or flow.
 - Keep `README.md` user-focused and put developer, CI, and infrastructure details in a development guide.
 - Update user-facing documentation when structure, setup, features, or usage changes.
-- When a durable learning changes agent behavior, follow `~/.agents/rules/ai-feedback-learning-loop.md`.
 
 ## 4. Skills and Explicit Routing
 
@@ -71,11 +70,11 @@ Cross-repository baseline; local rules may extend it.
 - When the user explicitly asks to create or coordinate an agent team, load and follow the `launching-agent-teams` skill.
 - When the user explicitly requests a bounded, non-sensitive free worker, the agent loads and follows the free-agent-execution skill; the frontier agent retains scope preparation and final review.
 
-### Personal Knowledge
+### Learning and Personal Knowledge
 
-- Durable personal context, reusable knowledge, source summaries, and decisions belong in the personal knowledge vault, not always-loaded rules.
-- Use the `personal-knowledge-routing` skill when asked to remember, persist, retrieve, or route personal knowledge.
-- Load only the vault guide, maps, and exact target files needed for the task.
+- The active AI must detect learning proactively: how-to guidance and directives belong in Arnesto; explanations and user-endorsed opinions belong in the personal knowledge vault. No explicit save request is needed.
+- Follow `~/.agents/rules/ai-feedback-learning-loop.md`: show exact content and destination for user validation before persistence and remote publication.
+- Use `personal-knowledge-routing` for capture and retrieval; load only the vault guide, relevant maps, and target files.
 
 ### GitHub SSH
 
@@ -95,5 +94,5 @@ Cross-repository baseline; local rules may extend it.
 ## 6. Shared Configuration
 
 - All agent configuration instructions are cross-tool and owned by Arnesto `.agents`, never client-only memory. Client adapters/templates implement shared policy; credentials and mutable runtime state stay local.
-- For each authorized Arnesto update, validate, commit only task-owned changes, push to its remote, and verify the remote commit. This is standing publication authorization, not permission for unrelated edits, secrets, force-pushes, or bypassing failed checks.
+- Authorized Arnesto updates include validation, scoped commit, push, and remote verification. Proactive captures require user approval first. Preserve unrelated edits; never publish secrets, force-push, or bypass checks.
 - Load `~/.agents/skills/agent-config-hygiene/SKILL.md` for configuration work and publication.

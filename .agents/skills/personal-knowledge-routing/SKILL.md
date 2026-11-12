@@ -1,11 +1,19 @@
 ---
 name: personal-knowledge-routing
-description: Route durable personal context and reusable knowledge between Arnesto and the personal knowledge vault. Use when the user asks to remember, persist, capture, retrieve, or organize personal knowledge; when deciding whether information belongs in rules, skills, portfolio, notes, maps, or inbox; or when using personal-knowledge-vault as a low-context reference layer.
+description: Route learning between Arnesto and the personal knowledge vault. Trigger proactively when how-to guidance, directives, explanations, or user-endorsed opinions appear, without waiting for a save request; also use for explicit capture, retrieval, or organization of personal knowledge. Obtain user validation before persisting and publishing detected learning.
 ---
 
 # Personal Knowledge Routing
 
 Use this skill to keep agent instructions small while preserving durable knowledge in the personal knowledge vault.
+
+## Proactive Capture
+
+The active AI detects capture candidates without an explicit user request.
+Follow `~/.agents/rules/ai-feedback-learning-loop.md` to prepare exact content
+and destination, inform the user, obtain validation, then persist and publish
+to the owning repository. Detection alone is not approval. Explicit retrieval
+requests do not require capture approval when no content changes.
 
 ## Repositories
 
@@ -30,11 +38,13 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 | Information type | Destination |
 |---|---|
+| How-to guidance and directives for doing or solving something | Arnesto: the best fitting rule, skill, workflow, command, or existing policy; preserve the original scope |
 | Agent configuration instructions and behavior, including cross-thread communication style | Arnesto `.agents/rules/`; cross-tool source, not client-specific configuration or memory |
 | Repeatable agent workflow or protocol | Arnesto `.agents/skills/` |
 | Tool setup, symlink policy, validation scripts | Arnesto |
 | Stable personal facts, goals, responsibilities and preferences other than agent behavior | `personal-knowledge-vault/vault/portfolio/` |
 | Durable decisions and decision-making patterns | `personal-knowledge-vault/vault/portfolio/decision-log.md` or `vault/notes/` |
+| Explanations, concepts, interpretations, and opinions the user identifies with | `personal-knowledge-vault/vault/notes/`, with attribution and evidence; stable personal views may qualify for `portfolio/` promotion |
 | Distilled reusable knowledge, source summaries, lessons, patterns | `personal-knowledge-vault/vault/notes/` |
 | Navigation and topic indexes | `personal-knowledge-vault/vault/maps/` |
 | Raw imports, unprocessed conversations, temporary captures | `personal-knowledge-vault/vault/inbox/` |
@@ -43,8 +53,9 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 ## Persistence Rules
 
-- Distinguish instructions about how agents should work from personal knowledge. All agent configuration instructions belong in shared Arnesto `.agents` rules or skills, not client-specific memory/configuration. Client adapters implement shared policy; credentials and mutable runtime state remain local.
-- For authorized Arnesto updates, follow `agent-config-hygiene` through validation, scoped commit, push, and remote verification. Publication is part of the update, not a separate optional step.
+- Distinguish procedural learning and agent instructions from explanatory or personal knowledge. Keep the former in shared Arnesto artifacts and the latter in the vault, not client-specific memory/configuration. Client adapters implement shared policy; credentials and mutable runtime state remain local.
+- For proactive captures in either repository, present the exact content and destination for user validation before applying it. Once approved, run canonical checks, commit only approved changes, push to that repository's configured remote, and verify the remote commit. Approval includes publication unless the user requests local-only persistence; follow `agent-config-hygiene` for Arnesto. Do not treat standing publication authorization as approval of newly inferred content.
+- Keep source claims, facts, opinions, and inference distinct. Do not infer agreement from sharing material or from silence, and do not turn an AI-generated opinion into the user's belief. Ask about uncertain endorsement in the proposal.
 - Prefer references over copying: if the vault already contains the knowledge, link or cite the file path instead of pasting it into rules.
 - Update `portfolio/` only when information is stable, reusable, and source-backed.
 - Apply the vault promotion policy before moving content from `inbox/` to `notes/` or from `notes/` to `portfolio/`.
@@ -69,7 +80,9 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 ## Good Defaults
 
-- For "remember this about me": propose a concise `portfolio/` update, then apply it only if the source is stable.
-- For "save this idea": create or update a `notes/` page and link it from a relevant `maps/` page.
-- For "capture this conversation": put raw or summary material under `inbox/` or `notes/`, then propose any portfolio promotion separately.
-- For "make agents aware": add the smallest possible rule or skill pointer in Arnesto, with details stored in the vault.
+- When a how-to or operational directive appears: propose the smallest fitting Arnesto artifact, retaining its scope.
+- When an explanation or a user-endorsed opinion appears: propose an attributed `notes/` update without waiting for a save request.
+- For "remember this about me": propose a concise `portfolio/` update only if the source is stable.
+- For "save this idea": propose a `notes/` page and a link from a relevant `maps/` page.
+- For "capture this conversation": propose raw or summary material under `inbox/` or `notes/`, with portfolio promotion reviewed separately.
+- For "make agents aware": keep operational instructions in Arnesto and supporting explanatory knowledge in the vault.

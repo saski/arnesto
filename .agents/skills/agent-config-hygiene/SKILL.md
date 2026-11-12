@@ -5,9 +5,11 @@ description: Audit, update, and publish cross-tool agent configuration through A
 
 # Agent Configuration Hygiene
 
-Audit first. Do not modify configuration unless the user explicitly asks for
-changes. Preserve unrelated worktree changes and distinguish repository state
-from mutable local runtime state.
+Audit first. Modify configuration only when the user requests the change or
+validates a concrete learning proposal. Proactive detection follows
+`~/.agents/rules/ai-feedback-learning-loop.md`; it does not authorize applying
+or publishing inferred instructions. Preserve unrelated worktree changes and
+distinguish repository state from mutable local runtime state.
 
 ## Review workflow
 
@@ -58,8 +60,10 @@ from mutable local runtime state.
 - Every authorized Arnesto update includes validation, a scoped commit, and a
   push to the configured Arnesto remote. The user granted this standing
   publication authorization on 2026-10-31; a later explicit local-only request
-  takes precedence. It does not authorize unrelated changes or changes in
-  other repositories.
+  takes precedence. Automatically detected learning needs user validation of
+  the specific content and destination before this authorization applies.
+  It does not authorize unrelated changes or changes in other repositories;
+  approved vault captures follow their own learning-capture publication scope.
 - Read the worktree and index before staging. Preserve unrelated changes,
   including hunks in shared files. Review the exact staged diff for scope and
   sensitive data, update existing version metadata where applicable, and run
