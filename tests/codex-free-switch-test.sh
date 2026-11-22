@@ -34,7 +34,7 @@ case "${1:-}" in
         ;;
     --output)
         if [ "${OMNIROUTE_TEST_COMBO:-ready}" = ready ]; then
-            printf '%s\n' '{"combos":[{"name":"free-coding","models":[{"model":"opencode-zen/laguna-s-2.1-free"}]}],"active":null}'
+            printf '%s\n' '{"combos":[{"name":"free-coding-v2","models":[{"model":"moonshot/kimi-k3"}]}],"active":null}'
         else
             printf '%s\n' '{"combos":[],"active":null}'
         fi
@@ -56,7 +56,7 @@ run_switch() {
 rm -f "$state_path"
 run_switch exec --json "check default route"
 grep -Fxq 'serve --daemon --no-open' "$log_path"
-grep -Fxq 'launch-codex -- --model combo/free-coding exec --json check default route' "$log_path"
+grep -Fxq 'launch-codex -- --model combo/free-coding-v2 exec --json check default route' "$log_path"
 
 : > "$log_path"
 printf '%s\n' ready > "$state_path"
@@ -65,8 +65,8 @@ fallback_output=$(PATH="$fake_bin:/usr/bin:/bin" \
     OMNIROUTE_TEST_STATE="$state_path" \
     OMNIROUTE_TEST_COMBO=missing \
     "$repo_dir/bin/codex-free" exec "check bootstrap fallback" 2>&1)
-grep -Fxq 'launch-codex -- --model opencode-zen/laguna-s-2.1-free exec check bootstrap fallback' "$log_path"
-[[ "$fallback_output" = *"managed combo is not installed; using the Laguna pin"* ]]
+grep -Fxq 'launch-codex -- --model moonshot/kimi-k3 exec check bootstrap fallback' "$log_path"
+[[ "$fallback_output" = *"managed combo is not installed; using the Kimi pin"* ]]
 
 assert_switch() {
     local switch_name=$1
@@ -82,10 +82,8 @@ assert_switch() {
     fi
 }
 
-assert_switch --laguna opencode-zen/laguna-s-2.1-free
-assert_switch --mimo oc/mimo-v2.5-free
-assert_switch --hy3 oc/hy3-free
-assert_switch --big-pickle oc/big-pickle
+assert_switch --kimi moonshot/kimi-k3
+assert_switch --haiku kiro/claude-haiku-4.5
 
 if run_switch --model paid/model exec "unsafe override" >/dev/null 2>&1; then
     echo "FAIL: codex-free accepted a caller-supplied model override" >&2
@@ -93,9 +91,8 @@ if run_switch --model paid/model exec "unsafe override" >/dev/null 2>&1; then
 fi
 
 help_output=$(run_switch --help-free)
-if [[ "$help_output" != *"combo/free-coding"* ]] || [[ "$help_output" != *"--laguna"* ]] ||
-    [[ "$help_output" != *"--mimo"* ]] || [[ "$help_output" != *"--hy3"* ]] ||
-    [[ "$help_output" != *"--big-pickle"* ]]; then
+if [[ "$help_output" != *"combo/free-coding-v2"* ]] || [[ "$help_output" != *"--kimi"* ]] ||
+    [[ "$help_output" != *"--haiku"* ]]; then
     echo "FAIL: codex-free help does not document the managed route and manual pins" >&2
     exit 1
 fi

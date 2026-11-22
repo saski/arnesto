@@ -25,8 +25,8 @@ task. Copy the provider and worker policy from
 The constrained worker adapter retains direct pins rather than inheriting combo
 fallback. Its only admitted models are:
 
-- `omniroute/oc/deepseek-v4-flash-free`
-- `omniroute/oc/big-pickle`
+- `omniroute/combo/free-coding-v2`
+- `omniroute/moonshot/kimi-k3`
 
 ## Managed local installation
 
@@ -68,7 +68,7 @@ frontier principal for diff and validation review:
   "require_changes": true,
   "allowed_files": ["relative/path/to/file"],
   "validation": { "command": ["bash", "tests/example-test.sh"] },
-  "model": "omniroute/oc/deepseek-v4-flash-free",
+  "model": "omniroute/combo/free-coding-v2",
   "timeout_seconds": 180
 }
 ```

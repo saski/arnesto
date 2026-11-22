@@ -56,7 +56,7 @@ Use this shape:
       "test"
     ]
   },
-  "model": "omniroute/oc/deepseek-v4-flash-free",
+  "model": "omniroute/combo/free-coding-v2",
   "timeout_seconds": 30
 }
 ```
@@ -98,12 +98,7 @@ A context that is already acting as an OpenCode worker must not re-enter as entr
 
 The checked-in routing manifest at `.agents/free-agent-routing.json` is the source of truth. Treat the manifest, not this document, as authoritative for which model identifiers the adapter admits: both `verified_free_models` and `free_worker.task_classes.<class>.models`.
 
-Version one (2026-07-26) verified two `omniroute/oc/*` identifiers for `bounded_code`:
-
-- `omniroute/oc/deepseek-v4-flash-free`
-- `omniroute/oc/big-pickle`
-
-Six `omniroute/opencode-zen/*` identifiers were reconciled with the live OmniRoute catalog and tested on 2026-07-30. All returned an OpenCode status-1 failure with no usable completion, so they are quarantined and absent from the manifest. Use only the two original `oc/*` models unless a future conformance run promotes another model.
+The `omniroute/oc/*` aliases were retired by OmniRoute (live probe 2026-11-22: "No active credentials for provider: oc"). The manifest was re-verified the same day: `omniroute/combo/free-coding-v2` (moonshot/kimi-k3 main, kiro/claude-haiku-4.5 fallback) and the direct pin `omniroute/moonshot/kimi-k3`. Use only manifest models unless a future conformance run promotes another model.
 
 OmniRoute advertised `free-deterministic` on 2026-08-06, but its minimal
 semantic probe failed with `payment_required` at pipeline step 3,
@@ -130,7 +125,7 @@ A completed adapter run returns:
 ```json
 {
   "status": "succeeded",
-  "model": "omniroute/oc/deepseek-v4-flash-free",
+  "model": "omniroute/combo/free-coding-v2",
   "termination_reason": "completed",
   "summary": "Implemented the bounded task.",
   "changed_files": [

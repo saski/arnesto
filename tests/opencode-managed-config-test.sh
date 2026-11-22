@@ -40,8 +40,8 @@ cat >"$config_dir/opencode.jsonc" <<'JSON'
       "npm": "@ai-sdk/openai-compatible",
       "options": {"baseURL": "http://localhost:20128/v1"},
       "models": {
-        "oc/custom-free": {},
-        "oc/deepseek-v4-flash-free": {"name": "User model label"}
+        "custom/user-extra-model": {},
+        "custom/user-pinned-model": {"name": "User model label"}
       }
     }
   },
@@ -63,10 +63,10 @@ const fail = (message) => { console.error(`FAIL: ${message}`); process.exit(1) }
 if (config.$schema !== 'https://opencode.ai/config.json') fail('schema must be preserved')
 if (JSON.stringify(config.disabled_providers) !== JSON.stringify(['example'])) fail('unrelated top-level fields must be preserved')
 if (config.provider?.other?.npm !== 'example-provider') fail('unrelated provider must be preserved')
-if (!config.provider?.omniroute?.models?.['oc/custom-free']) fail('unrelated OmniRoute model must be preserved')
+if (!config.provider?.omniroute?.models?.['custom/user-extra-model']) fail('unrelated OmniRoute model must be preserved')
 if (config.provider?.omniroute?.options?.baseURL !== 'http://localhost:20128/v1') fail('existing local endpoint must be preserved')
-if (config.provider?.omniroute?.models?.['oc/deepseek-v4-flash-free']?.name !== 'User model label') fail('existing model metadata must be preserved')
-for (const model of ['combo/free-coding-v2', 'oc/deepseek-v4-flash-free', 'oc/big-pickle']) {
+if (config.provider?.omniroute?.models?.['custom/user-pinned-model']?.name !== 'User model label') fail('existing model metadata must be preserved')
+for (const model of ['combo/free-coding-v2', 'moonshot/kimi-k3', 'kiro/claude-haiku-4.5']) {
   if (!config.provider?.omniroute?.models?.[model]) fail(`managed model ${model} missing`)
 }
 if (config.agent?.existing?.mode !== 'primary') fail('unrelated agent must be preserved')
@@ -94,7 +94,7 @@ node - "$new_home_dir/.config/opencode/opencode.jsonc" <<'NODE'
 const fs = require('fs')
 const config = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))
 const provider = config.provider?.omniroute
-if (!provider?.models?.['combo/free-coding-v2'] || !provider?.models?.['oc/deepseek-v4-flash-free'] || !provider?.models?.['oc/big-pickle']) {
+if (!provider?.models?.['combo/free-coding-v2'] || !provider?.models?.['moonshot/kimi-k3'] || !provider?.models?.['kiro/claude-haiku-4.5']) {
   console.error('FAIL: new configuration missing managed model set')
   process.exit(1)
 }

@@ -7,8 +7,8 @@
       },
       "models": {
         "combo/free-coding-v2": {},
-        "oc/deepseek-v4-flash-free": {},
-        "oc/big-pickle": {}
+        "moonshot/kimi-k3": {},
+        "kiro/claude-haiku-4.5": {}
       }
     }
   },

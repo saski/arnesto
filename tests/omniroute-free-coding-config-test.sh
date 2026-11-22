@@ -10,10 +10,8 @@ fixture_dir=$(mktemp -d)
 trap 'status=$?; rm -rf "$fixture_dir"; exit "$status"' EXIT
 
 expected_models=$(jq -cn '[
-    "opencode-zen/laguna-s-2.1-free",
-    "opencode/mimo-v2.5-free",
-    "opencode/hy3-free",
-    "opencode/big-pickle"
+    "moonshot/kimi-k3",
+    "kiro/claude-haiku-4.5"
 ]')
 
 actual_models=$(jq -c '[.models[].model]' "$manifest")
@@ -23,10 +21,9 @@ actual_models=$(jq -c '[.models[].model]' "$manifest")
 }
 
 jq -e '
-    .name == "free-coding" and
+    .name == "free-coding-v2" and
     .strategy == "priority" and
-    .allowedProviders == ["opencode-zen", "opencode"] and
-    .config.trackMetrics == true and
+    ((.allowedProviders // []) | length == 0) and
     ([.models[].weight] | all(. == 0))
 ' "$manifest" >/dev/null || {
     echo "FAIL: free-coding manifest does not enforce the expected free-only priority contract" >&2
@@ -87,7 +84,7 @@ run_configurator() {
 : > "$log_path"
 run_configurator >/dev/null
 grep -Fq 'api combos post-api-combos --body @' "$log_path"
-jq -e '.combos[0].name == "free-coding"' "$state_path" >/dev/null
+jq -e '.combos[0].name == "free-coding-v2"' "$state_path" >/dev/null
 
 : > "$log_path"
 run_configurator >/dev/null

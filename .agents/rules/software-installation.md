@@ -7,6 +7,7 @@ Required for every agent/client before installing or updating software, download
 ## Storage rule
 
 - Always keep software installations, installers, downloaded packages, dependency binaries, virtual environments, package caches, and build artifacts outside folders synchronized with Google Drive or another cloud service.
+- **Agent working directories**: agents must never create project folders, workspaces, or scratch build dirs inside `~/Documents` (Google-Drive-synced on this Mac) or any other synced documents folder. Default work locations: `~/Code` for projects and repos, the OS/agent scratch dir for throwaway work. `~/Documents` is for documents only — no code, no `.venv`, no `node_modules`, no installation backups.
 - Check both the configured destination and its resolved path against the machine's actual sync roots, including backed-up folders. Do not assume that Documents, Desktop, a repository, a home directory, or an OS default is unsynchronized. Verify uncertain destinations before writing installation material.
 - Check where the command creates intermediate and final files, including project-local defaults such as `node_modules`, `.venv`, and build/cache directories. A Git ignore rule does not exclude files from Drive synchronization; a symlink inside a synced folder is not proof of exclusion either.
 

@@ -2,19 +2,17 @@
 
 set -euo pipefail
 
-model="combo/free-coding"
+model="combo/free-coding-v2"
 
 usage() {
     cat <<'EOF'
-Usage: codex-free [--laguna|--mimo|--hy3|--big-pickle] [CODEX_ARGS...]
+Usage: codex-free [--kimi|--haiku] [CODEX_ARGS...]
 
 Launch Codex through an explicit free OmniRoute model for this process only.
 
-  (no switch)  Use combo/free-coding with managed priority and fallback
-  --laguna     Pin opencode-zen/laguna-s-2.1-free
-  --mimo       Pin oc/mimo-v2.5-free
-  --hy3        Pin oc/hy3-free
-  --big-pickle Pin oc/big-pickle
+  (no switch)  Use combo/free-coding-v2 with managed priority and fallback
+  --kimi       Pin moonshot/kimi-k3
+  --haiku      Pin kiro/claude-haiku-4.5
   --help-free   Show this help
 
 Normal `codex` sessions keep the configured Terra/Medium default.
@@ -22,20 +20,12 @@ EOF
 }
 
 case "${1:-}" in
-    --laguna)
-        model="opencode-zen/laguna-s-2.1-free"
+    --kimi)
+        model="moonshot/kimi-k3"
         shift
         ;;
-    --mimo)
-        model="oc/mimo-v2.5-free"
-        shift
-        ;;
-    --hy3)
-        model="oc/hy3-free"
-        shift
-        ;;
-    --big-pickle)
-        model="oc/big-pickle"
+    --haiku)
+        model="kiro/claude-haiku-4.5"
         shift
         ;;
     --help-free)
@@ -81,14 +71,14 @@ if ! omniroute health >/dev/null 2>&1; then
     fi
 fi
 
-if [ "$model" = "combo/free-coding" ]; then
+if [ "$model" = "combo/free-coding-v2" ]; then
     combo_list=$(omniroute --output json combo list | sed -n '/^[[:space:]]*{/,$p')
     if ! command -v jq >/dev/null 2>&1 ||
         ! printf '%s\n' "$combo_list" | jq -e \
-            '.combos[]? | select(.name == "free-coding" and (.models | length > 0))' \
+            '.combos[]? | select(.name == "free-coding-v2" and (.models | length > 0))' \
             >/dev/null 2>&1; then
-        echo "codex-free: managed combo is not installed; using the Laguna pin" >&2
-        model="opencode-zen/laguna-s-2.1-free"
+        echo "codex-free: managed combo is not installed; using the Kimi pin" >&2
+        model="moonshot/kimi-k3"
     fi
 fi
 

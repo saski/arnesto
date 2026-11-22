@@ -19,7 +19,7 @@ providers:
     models:
       combo/free-coding-v2:
         supports_vision: false
-      oc/deepseek-v4-flash-free:
+      moonshot/kimi-k3:
         supports_vision: false
 
 auxiliary:

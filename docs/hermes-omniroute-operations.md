@@ -41,7 +41,7 @@ the attachment and a second tool call would duplicate frontier consumption.
 | Lane | Use for | Provider and model | Selection |
 |---|---|---|---|
 | Default text | Ordinary chat and bounded, non-sensitive work | `omniroute-local` / `combo/free-coding-v2` | Automatic after `/new` |
-| Direct free pin | Diagnostic or temporary model override | `omniroute-local` / `oc/deepseek-v4-flash-free` | Explicit session override |
+| Direct free pin | Diagnostic or temporary model override | `omniroute-local` / `moonshot/kimi-k3` | Explicit session override |
 | Automatic image analysis | Inspecting an attached image before main-route reasoning | `openai-codex` / `gpt-5.6-sol`, low effort | Automatic only when an image is present |
 | Full frontier | Planning, SDD, orchestration, sensitive or ambiguous work | `openai-codex` / `gpt-5.6-sol` | Explicit model switch or dedicated profile |
 
@@ -117,10 +117,10 @@ Use this for work that requires frontier planning or orchestration. The model
 override is session-only unless `--global` is supplied; avoid `--global` when
 the desired default remains `combo/free-coding-v2`.
 
-Select the direct DeepSeek pin for diagnosis with:
+Select the direct Kimi pin for diagnosis with:
 
 ```text
-/model oc/deepseek-v4-flash-free --provider custom
+/model moonshot/kimi-k3 --provider custom
 ```
 
 Return to the current default route with:
@@ -260,7 +260,7 @@ route:
   25 tests, Ruff passed, and launchd served the `default` and `coding` profiles
   with Telegram and webhook connected.
 - The Telegram route selects the `default` profile.
-- A text-only turn uses `oc/deepseek-v4-flash-free` through OmniRoute.
+- A text-only turn uses `combo/free-coding-v2` through OmniRoute.
 - A one-image smoke produced one auxiliary `gpt-5.6-sol` analysis followed by
   one free DeepSeek completion; the free main call used 2,477 input and 44
   output tokens.

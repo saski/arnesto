@@ -21,8 +21,8 @@ assert(provider?.npm === '@ai-sdk/openai-compatible', 'OmniRoute provider packag
 assert(provider?.options?.baseURL === 'http://127.0.0.1:20128/v1', 'OmniRoute base URL')
 assert(JSON.stringify(Object.keys(provider?.models ?? {}).sort()) === JSON.stringify([
   'combo/free-coding-v2',
-  'oc/big-pickle',
-  'oc/deepseek-v4-flash-free',
+  'kiro/claude-haiku-4.5',
+  'moonshot/kimi-k3',
 ]), 'exact managed free model set')
 assert(worker?.mode === 'primary', 'free-worker mode')
 assert(worker?.maxSteps === 3, 'free-worker step cap')

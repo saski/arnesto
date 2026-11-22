@@ -1,33 +1,17 @@
 {
-  "name": "free-coding",
+  "name": "free-coding-v2",
   "strategy": "priority",
   "models": [
     {
-      "model": "opencode-zen/laguna-s-2.1-free",
-      "providerId": "opencode-zen",
+      "model": "moonshot/kimi-k3",
+      "providerId": "moonshot",
       "weight": 0
     },
     {
-      "model": "opencode/mimo-v2.5-free",
-      "providerId": "opencode",
-      "weight": 0
-    },
-    {
-      "model": "opencode/hy3-free",
-      "providerId": "opencode",
-      "weight": 0
-    },
-    {
-      "model": "opencode/big-pickle",
-      "providerId": "opencode",
+      "model": "kiro/claude-haiku-4.5",
+      "providerId": "kiro",
       "weight": 0
     }
   ],
-  "allowedProviders": [
-    "opencode-zen",
-    "opencode"
-  ],
-  "config": {
-    "trackMetrics": true
-  }
+  "config": {}
 }

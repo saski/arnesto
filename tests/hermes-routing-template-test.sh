@@ -27,7 +27,7 @@ assert(config.dig("model", "openai_runtime") == "codex_app_server",
 assert(config.dig("providers", "omniroute-local", "key_env") == "OMNIROUTE_API_KEY",
        "OmniRoute uses an environment-secret reference")
 assert(config.dig("providers", "omniroute-local", "models",
-                  "oc/deepseek-v4-flash-free", "supports_vision") == false,
+                  "moonshot/kimi-k3", "supports_vision") == false,
        "the free model is explicitly text-only")
 assert(config.dig("providers", "omniroute-local", "models",
                   "combo/free-coding-v2", "supports_vision") == false,

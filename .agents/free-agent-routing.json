@@ -2,11 +2,11 @@
   "manifest_version": "1",
   "frontier_role": "codex_principal",
   "verified_free_models": [
-    "omniroute/oc/deepseek-v4-flash-free",
-    "omniroute/oc/big-pickle"
+    "omniroute/combo/free-coding-v2",
+    "omniroute/moonshot/kimi-k3"
   ],
   "free_worker": {
-    "default_model": "omniroute/oc/deepseek-v4-flash-free",
+    "default_model": "omniroute/combo/free-coding-v2",
     "task_classes": {
       "bounded_code": {
         "sensitivity": "non_sensitive",
@@ -14,8 +14,8 @@
         "max_input_tokens": 50000,
         "max_timeout_seconds": 180,
         "models": [
-          "omniroute/oc/deepseek-v4-flash-free",
-          "omniroute/oc/big-pickle"
+          "omniroute/combo/free-coding-v2",
+          "omniroute/moonshot/kimi-k3"
         ]
       }
     }
