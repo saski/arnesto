@@ -55,6 +55,7 @@ Do not read the whole vault unless the user explicitly asks for a full audit.
 
 - Distinguish procedural learning and agent instructions from explanatory or personal knowledge. Keep the former in shared Arnesto artifacts and the latter in the vault, not client-specific memory/configuration. Client adapters implement shared policy; credentials and mutable runtime state remain local.
 - For proactive captures in either repository, present the exact content and destination for user validation before applying it. Once approved, run canonical checks, commit only approved changes, push to that repository's configured remote, and verify the remote commit. Approval includes publication unless the user requests local-only persistence; follow `agent-config-hygiene` for Arnesto. Do not treat standing publication authorization as approval of newly inferred content.
+- An explicit request to add a vault entry includes publishing it. Run `make check`, commit the entry with its supporting changes, push to the vault's configured remote, and verify the remote commit. Honor explicit local-only requests.
 - Keep source claims, facts, opinions, and inference distinct. Do not infer agreement from sharing material or from silence, and do not turn an AI-generated opinion into the user's belief. Ask about uncertain endorsement in the proposal.
 - Prefer references over copying: if the vault already contains the knowledge, link or cite the file path instead of pasting it into rules.
 - Update `portfolio/` only when information is stable, reusable, and source-backed.
