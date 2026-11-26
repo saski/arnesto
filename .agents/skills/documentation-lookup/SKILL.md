@@ -2,6 +2,7 @@
 name: documentation-lookup
 description: Use current library and framework docs through Context7, preferring MCP tools with the CLI as a fallback. Activates for setup questions, API references, code examples, or named frameworks such as React, Next.js, or Prisma.
 origin: ECC
+license: MIT
 ---
 
 # Documentation Lookup (Context7)

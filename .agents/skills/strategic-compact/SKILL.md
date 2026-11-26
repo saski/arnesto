@@ -2,15 +2,16 @@
 name: strategic-compact
 description: Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction.
 origin: ECC
+license: MIT
 ---
 
 # Strategic Compact Skill
 
-Suggests manual `/compact` at strategic points in your workflow rather than relying on arbitrary auto-compaction.
+Choose a useful phase boundary for manual compaction. Use `/compact` in clients that support it.
 
 ## When to Activate
 
-- Running long sessions that approach context limits (200K+ tokens)
+- Running long sessions that approach the active model’s context limit
 - Working on multi-phase tasks (research → plan → implement → test)
 - Switching between unrelated tasks within the same session
 - After completing a major milestone and starting new work
@@ -30,32 +31,17 @@ Strategic compaction at logical boundaries:
 
 ## How It Works
 
-The `suggest-compact.js` script runs on PreToolUse (Edit/Write) and:
+When the client reports context usage, judge pressure relative to the active model’s context window. A tool-call count can prompt a review, but it does not measure remaining context.
+
+The optional [local helper](suggest-compact.js) counts calls when configured as a Claude Code PreToolUse hook for Edit and Write. It:
 
 1. **Tracks tool calls** — Counts tool invocations in session
 2. **Threshold detection** — Suggests at configurable threshold (default: 50 calls)
 3. **Periodic reminders** — Reminds every 25 calls after threshold
 
-## Hook Setup
+## Optional Claude Code Hook
 
-Add to your `~/.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Edit",
-        "hooks": [{ "type": "command", "command": "node ~/.claude/skills/strategic-compact/suggest-compact.js" }]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [{ "type": "command", "command": "node ~/.claude/skills/strategic-compact/suggest-compact.js" }]
-      }
-    ]
-  }
-}
-```
+Manual use requires no hook. Configure the helper through the user’s existing agent configuration workflow if they request an automatic reminder.
 
 ## Configuration
 
@@ -69,7 +55,7 @@ Use this table to decide when to compact:
 | Phase Transition | Compact? | Why |
 |-----------------|----------|-----|
 | Research → Planning | Yes | Research context is bulky; plan is the distilled output |
-| Planning → Implementation | Yes | Plan is in TodoWrite or a file; free up context for code |
+| Planning → Implementation | Yes | The implementation plan is saved in a task file |
 | Implementation → Testing | Maybe | Keep if tests reference recent code; compact if switching focus |
 | Debugging → Next feature | Yes | Debug traces pollute context for unrelated work |
 | Mid-implementation | No | Losing variable names, file paths, and partial state is costly |
@@ -77,27 +63,25 @@ Use this table to decide when to compact:
 
 ## What Survives Compaction
 
-Understanding what persists helps you compact with confidence:
+Persistence varies by client and session. Save a checkpoint to an authorized task file before compaction, with the goal, decisions, pending work, and verification evidence.
 
 | Persists | Lost |
 |----------|------|
-| CLAUDE.md instructions | Intermediate reasoning and analysis |
-| TodoWrite task list | File contents you previously read |
-| Memory files (`~/.claude/memory/`) | Multi-step conversation context |
+| Project instructions loaded from disk | Intermediate reasoning and analysis |
+| Task list, when the client exposes and preserves one | File contents you previously read |
+| Authorized notes written to disk | Multi-step conversation context |
 | Git state (commits, branches) | Tool call history and counts |
 | Files on disk | Nuanced user preferences stated verbally |
 
 ## Best Practices
 
-1. **Compact after planning** — Once plan is finalized in TodoWrite, compact to start fresh
+1. **Compact after planning** — Save the agreed plan before compacting
 2. **Compact after debugging** — Clear error-resolution context before continuing
 3. **Don't compact mid-implementation** — Preserve context for related changes
-4. **Read the suggestion** — The hook tells you *when*, you decide *if*
+4. **Read the suggestion** — Use reminders as input to a phase-boundary decision
 5. **Write before compacting** — Save important context to files or memory before compacting
 6. **Use `/compact` with a summary** — Add a custom message: `/compact Focus on implementing auth middleware next`
 
 ## Related
 
 - [The Longform Guide](https://x.com/affaanmustafa/status/2014040193557471352) — Token optimization section
-- Memory persistence hooks — For state that survives compaction
-- `continuous-learning` skill — Extracts patterns before session ends

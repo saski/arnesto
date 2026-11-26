@@ -3,8 +3,8 @@
   "name": "obsidian-cli",
   "owner": "kepano",
   "repo": "obsidian-skills",
-  "path": "skills/obsidian-cli",
+  "path": "plugins/obsidian/skills/obsidian-cli",
   "branch": "main",
-  "sha": "96254a554e480359de7b685571876f2e7f9ba57d",
+  "sha": "a53f5910cd68e7bad88ea52f2f4eb95b9aa40800",
   "source": "manual"
 }

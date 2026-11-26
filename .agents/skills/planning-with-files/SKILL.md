@@ -1,6 +1,6 @@
 ---
 name: planning-with-files
-description: Implements Manus-style file-based planning to organize and track progress on complex tasks. Creates task_plan.md, findings.md, and progress.md. Use when asked to plan out, break down, or organize a multi-step project, research task, or any work requiring >5 tool calls. Supports automatic session recovery after /clear.
+description: Implements Manus-style file-based planning to organize and track progress on complex tasks. Creates task_plan.md, findings.md, and progress.md. Use when asked to plan out, break down, or organize a multi-step project, research task, or any work requiring >5 tool calls. Resume from the planning files after a context reset.
 license: MIT
 ---
 
@@ -27,6 +27,12 @@ Before ANY complex task, create these three files:
 
 See references/ for starting templates.
 
+To resume an existing task after a reset, read its planning files first.
+Reconcile the current phase with the latest progress entry, then take the next
+action recorded in `task_plan.md`. If the plan has no next action yet, use the
+next unchecked item in the active phase and record it. Continue from the
+existing files.
+
 ## File Purposes
 
 | File | Purpose | When to Update |
@@ -50,6 +56,7 @@ Before major decisions, read the plan file. This keeps goals in your attention w
 
 ### 4. Update After Act
 After completing any phase:
+- Record the next action in `task_plan.md`
 - Mark phase status: `in_progress` → `complete`
 - Log any errors encountered
 - Note files created/modified

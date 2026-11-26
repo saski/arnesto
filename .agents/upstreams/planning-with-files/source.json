@@ -1,0 +1,49 @@
+{
+  "repository": "OthmanAdi/planning-with-files",
+  "license": "MIT",
+  "release": "v3.29.1",
+  "sourceCommit": "02cdda06fd378ef3287f8ef0d35fec4395040605",
+  "sourceArchiveSha256": "5d7f1a59132b4a62e269baff3b0e6aea57796b6f208f11e95d35067cd7e08a16",
+  "historicalComparison": {
+    "commit": "f54a290c3138c365088372b49725992e84fb2b47",
+    "sourceArchiveSha256": "63f17690e11066789f2bb65bbb097c958ca79ea209729da01b47ac48fd0425c0",
+    "finding": "All five local reference files matched this nearby official snapshot before the refresh. The local entry point is adapted and the exact original revision was not recorded."
+  },
+  "entryPoint": {
+    "status": "local-adaptation",
+    "installedFileSha256": "f259f93097ebab02c52fe39364dbe08bad67e1713fc91b4a9b4ff412a8fa02b5",
+    "decision": "Retain the existing portable task and trigger contract, updating only manual resume instructions. Upstream lifecycle hooks, transcript tools, autonomous modes, and extra templates are outside this import."
+  },
+  "references": {
+    "references/examples.md": {
+      "originalPath": ".agent/skills/planning-with-files/examples.md",
+      "sourcePath": "skills/planning-with-files/examples.md",
+      "sourceFileSha256": "450355fac69e0fac93453b6c7383c8fb9ba3470662f6c8291080028f73ce00dc",
+      "status": "unchanged"
+    },
+    "references/findings.md": {
+      "originalPath": ".agent/skills/planning-with-files/references/findings.md",
+      "sourcePath": "skills/planning-with-files/templates/findings.md",
+      "sourceFileSha256": "bb9237ccbf08148d7f7f23ad58fbc9bd7c879c6d0cbca1d533b5b5f21c26c529",
+      "status": "refreshed"
+    },
+    "references/progress.md": {
+      "originalPath": ".agent/skills/planning-with-files/references/progress.md",
+      "sourcePath": "skills/planning-with-files/templates/progress.md",
+      "sourceFileSha256": "28fc357000ed2b18910c4e436f0f2e02f4abf0acd29cce370a2670640974f31c",
+      "status": "refreshed"
+    },
+    "references/references.md": {
+      "originalPath": ".agent/skills/planning-with-files/references.md",
+      "sourcePath": "skills/planning-with-files/reference.md",
+      "sourceFileSha256": "8f7d9cfe1971c5a32f3e5edb63ddfad73a11cc7de19d5065a6ec75fd118c0fdb",
+      "status": "refreshed"
+    },
+    "references/task_plan.md": {
+      "originalPath": ".agent/skills/planning-with-files/references/task_plan.md",
+      "sourcePath": "skills/planning-with-files/templates/task_plan.md",
+      "sourceFileSha256": "3c4b61444270f689c3dab81b7113467fb87e9705175aea9c3a3b970bd4e777a3",
+      "status": "refreshed"
+    }
+  }
+}

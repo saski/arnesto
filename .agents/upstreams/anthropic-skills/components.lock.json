@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "anthropics/skills",
+    "sourceType": "github",
+    "sourceCommit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba"
+  },
+  "skills": {
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceCommit": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "sourcePath": "skills/skill-creator",
+      "sourceTree": "3cf9a8db32597ba3e24b584a3d696f4e11c7d7b6",
+      "computedHash": "b2bfe91d69ca99994c0566baede889e7d2b9bb8791c6b6106c5d387392f717f6",
+      "license": "Apache-2.0",
+      "historicalImport": {
+        "arnestoCommit": "5d7e08316fd358167c869aaac6cd4129400e9029",
+        "matchingSourceRepository": "Ar9av/obsidian-wiki",
+        "matchingSourceCommit": "c47c0efefd444e92de1a5a86dd201f39ea5d9120",
+        "matchingSourcePath": ".skills/skill-creator",
+        "matchingSourceTree": "98a510d1cfef9f82c3b1eec200229ca68725e613",
+        "matchingOfficialCommit": "b0cbd3df1533b396d281a6886d5132f623393a9c"
+      }
+    }
+  }
+}

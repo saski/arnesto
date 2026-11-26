@@ -1,0 +1,17 @@
+{
+  "repository": "kepano/obsidian-skills",
+  "license": "MIT",
+  "release": "1.2.3",
+  "sourceCommit": "a53f5910cd68e7bad88ea52f2f4eb95b9aa40800",
+  "sourcePath": "plugins/obsidian/skills/obsidian-cli",
+  "sourceArchiveSha256": "3e7c548299b0ee6ace49c05616011b47929fb630228a4c32a9064299fad80249",
+  "original": {
+    "commit": "96254a554e480359de7b685571876f2e7f9ba57d",
+    "sourcePath": "SKILL.md",
+    "sourceArchiveSha256": "d7ad0d4bdd4c72be2c84440657d6ca31a502cd0c48bdbb73db2e1a465cce5942",
+    "sourceFileSha256": "b54257cdc0e5d04488b35b0c797bfe427b24359f0848d3c73924dcacf8da6358"
+  },
+  "sourceFileSha256": "28f66289b1cf1d245807766d4dafb6f5f76eadc986fe4a7f224da51f50aa7524",
+  "installedFileSha256": "f656d5b20f5143bebebc2acb32a0790d491b8c992cf1bd690634c4f31c38ab70",
+  "adaptations": "Keep the Arnesto entry point and triggers. Require authorization for deletion and omit the unsolicited console capture and overwrite example."
+}
