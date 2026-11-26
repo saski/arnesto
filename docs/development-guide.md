@@ -193,6 +193,36 @@ dependency audit and rerun the behavioral evaluation; a clean audit is not a
 general security guarantee. Arnesto's custom Codex CLI provider does not require
 the removed Codex Security integration.
 
+### Madrid Avisos skill pilot
+
+On macOS, install the pinned evaluator with `make install-promptfoo` and sign in
+to the native `codex` and `agy` clients. The pilot also uses Python 3.11+ to
+read the names of configured Codex MCP servers. This target runs both clients.
+
+```bash
+make eval-madrid-avisos
+```
+
+To repeat one client, run `node evals/promptfoo/madrid-avisos/run.mjs codex`
+or substitute `agy`. Each client uses its own account quota for a positive
+control and 20 measured responses. The runner copies the canonical skill into
+one temporary workspace, checks both native catalogs, and audits the file-read
+traces alongside Promptfoo's routing assertions. It saves one row per response
+under `evals/promptfoo/.promptfoo/madrid-avisos/`. A provider error, an
+unverified control or an assertion failure produces a nonzero exit code.
+
+For a quality comparison, prepare a blinded packet from both result files.
+
+```bash
+node evals/promptfoo/madrid-avisos/blind-review.mjs /path/to/codex.ndjson /path/to/agy.ndjson
+```
+
+Give reviewers only `blinded.json` from the printed directory. Score the
+[three criteria for each case](../evals/promptfoo/madrid-avisos/cases.json)
+before applying `review-key.json` to identify the conditions. The
+[pilot report](evaluations/madrid-avisos-2026-11-26.md) links the graded
+responses and explains how to interpret activation and quality.
+
 ## Verified Local Toolchain Baseline
 
 The 2026-08-26 maintenance pass verified this direct development toolchain:

@@ -21,7 +21,7 @@ availability or complete unfinished acceptance tasks.
 | Hermes, OpenCode, and OmniRoute integration | 🟢 Ready | Operational | Provider health can change |
 | AI Studio Android workbench | 🟢 Validated edge | Health tracking build/install loop | Hosted capabilities can change |
 | Multi-entry routing contract | 🟡 In Progress | Adapter and partial entry paths implemented | Cursor entry, portable Hermes profile, attribution, and final acceptance remain |
-| Behavioural evaluation | 🟡 In Progress | Truthfulness cases and one recorded Promptfoo case | Broader model/client and outcome comparisons remain |
+| Behavioural evaluation | 🟡 In Progress | Truthfulness cases and a [Promptfoo skill pilot on two native clients](docs/evaluations/madrid-avisos-2026-11-26.md) | More skills, realistic tasks and repeat measurements |
 | Artifact classification | ✅ Complete | README inventory reviewed on 2026-10-16 | Proposed capability gaps remain separate from implemented mechanisms |
 | Orca evaluation | 🟡 In Progress | Level-1 trial | Needs evidence from real tasks |
 | Grok Agent evaluation | ⚠️ Pending | 0% | Starts after the Orca trial |
@@ -44,8 +44,10 @@ availability or complete unfinished acceptance tasks.
 - On-demand `avoid-ai-writing` and `humanizer` wrappers share an ES/EN communication profile. Synthetic Spanish and English cases passed; no comparative quality gain is evidenced. See [writing skill guidance](docs/writing-skills.md).
 - Shared `madrid-avisos` workflow covers drafting, authorized browser submission,
   status checks, and native browser-session reuse with manual sign-in. The public
-  form was inspected without sending a report; authenticated persistence,
-  end-to-end verification, and model comparison remain pending. Hermes/OpenCode
+  form was inspected without sending a report. A dated
+  [Codex and Agy pilot](docs/evaluations/madrid-avisos-2026-11-26.md) compares
+  activation and answer quality. Authenticated persistence and end-to-end
+  municipal verification remain open. Hermes/OpenCode
   still need a verified persistent browser integration for municipal access.
 - Shared `codex-model-routing` policy for explicit Codex model, effort, Fast,
   and spending decisions, with local evidence and an initial evaluation plan;
@@ -81,6 +83,8 @@ availability or complete unfinished acceptance tasks.
 - Pinned local Promptfoo evaluator with one behavioral case for honest
   reporting of unexecuted validation. Passed with Codex / `gpt-5.6-terra`
   on 2026-09-16; this is a single-case result, not broad behavioral coverage.
+- The Madrid Avisos pilot records native file reads and blinded answer scores
+  for five cases with and without the skill in Codex and Agy CLI.
 - Native `promptfoo-evals` skill routes LLM behavioral evaluations and defines
   grader controls, comparison boundaries, and honest provider-error reporting.
 - External `typesafe-ai` skill is installed in the shared library with its

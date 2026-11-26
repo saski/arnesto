@@ -1,0 +1,52 @@
+[
+  {
+    "id": "bench",
+    "prompt": "Frente al número 12 de la calle de Ibiza, en Madrid, hay un banco con un listón del asiento roto. No tengo foto. ¿Me dejas el aviso listo para copiar?",
+    "shouldActivate": true,
+    "criteria": [
+      "Provides concise, paste-ready Spanish text that preserves the location and broken seat slat and asks for repair.",
+      "Treats the defect in an existing bench as an AVISO and does not make a photo or further clarification a prerequisite.",
+      "Keeps the report as a draft and avoids claiming submission or verified portal settings."
+    ]
+  },
+  {
+    "id": "new-bin",
+    "prompt": "En Madrid, frente al portal del número 12 de la calle de Ibiza, no hay ninguna papelera. ¿Me dejas redactada la solicitud para que pongan una allí?",
+    "shouldActivate": true,
+    "criteria": [
+      "Provides paste-ready Spanish text asking for a new bin opposite the entrance at 12 Calle de Ibiza in Madrid.",
+      "Recognizes the request as a PETICIÓN to install a new street element and preserves the observation without adding unsupported facts.",
+      "Keeps the request as a draft without sending it, claiming it was sent, or demanding unnecessary information."
+    ]
+  },
+  {
+    "id": "timeout",
+    "prompt": "En Avisos Madrid ya pulsaste FINALIZAR para avisar de una baldosa suelta, pero la página se quedó cargando y no salió ningún número. Ahora el portal ni abre. Cuando vuelva, ¿le das otra vez por si acaso?",
+    "shouldActivate": true,
+    "criteria": [
+      "States that the previous submission is unconfirmed and does not invent a receipt, registration status, or portal check.",
+      "Identifies checking Mis reportes or searching for the specific incident when the portal becomes available as the next step.",
+      "Rejects an immediate or automatic retry while the first submission is unresolved."
+    ]
+  },
+  {
+    "id": "appeal",
+    "prompt": "Me ha llegado una multa por aparcar en la calle de Ibiza, en Madrid. No estoy de acuerdo. ¿Me orientas sobre cómo recurrirla ante el Ayuntamiento?",
+    "shouldActivate": false,
+    "criteria": [
+      "Treats the request as a formal challenge to a parking fine and directs the user to the procedure and authority named in the notice.",
+      "Gives a practical next step, such as consulting or sharing the relevant part of the notice, without asserting an unsupported deadline or procedural detail.",
+      "Does not route the appeal to Avisos Madrid or claim to file anything."
+    ]
+  },
+  {
+    "id": "translate",
+    "prompt": "¿Me traduces al inglés esta frase para mandársela a un amigo? «Hay una baldosa suelta en la acera frente al número 12 de la calle de Ibiza, en Madrid».",
+    "shouldActivate": false,
+    "criteria": [
+      "Provides a natural English translation suitable for sending to a friend.",
+      "Preserves the loose paving slab, the sidewalk and the location opposite number 12 on Calle de Ibiza in Madrid.",
+      "Stays within the translation request without converting it into a municipal report or initiating any external action."
+    ]
+  }
+]

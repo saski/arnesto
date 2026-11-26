@@ -38,8 +38,8 @@ already available and asks only about material gaps.
 
 ## Current state
 
-Repository review: **2026-10-18**. This describes checked-in mechanisms and
-documented experiments; provider health and installed runtime state require
+The repository-wide review took place on **2026-10-18**. Individual experiments
+link to their dated results. Provider health and installed runtime state require
 their own live checks.
 
 | Area | What exists today | What remains open |
@@ -48,7 +48,7 @@ their own live checks.
 | Agent execution | A frontier-owned handoff to a constrained OpenCode worker, with model admission, execution limits, structured results, and local validation | Complete the shared multi-entry contract, including Cursor, a portable Hermes profile, and final acceptance evidence |
 | Runtime integration | Separate Codex/Orca runtimes, Hermes remote entry, OmniRoute configuration, and explicit free-model lanes | Recheck volatile routes; configuration and past probes do not establish current availability |
 | Coding interview practice | Candidate-led seven-stage pairing template, vertical TDD slices, code diffs, and explicit RED/GREEN review checkpoints | Keep guided practice separate from independent assessment; load interview-specific evidence from its project |
-| Behavioural evaluation | Truthfulness cases and a pinned Promptfoo evaluator; one recorded Promptfoo case passed | Broader model/client comparisons and representative quality, cost, and correction measurements |
+| Behavioural evaluation | Truthfulness cases and a [Madrid Avisos skill pilot on Codex and Agy CLI](docs/evaluations/madrid-avisos-2026-11-26.md) using Promptfoo | More skills and representative quality, cost, and correction measurements |
 | Optional tools | Ponytail reuse guidance, CodeGraph navigation, and a Headroom compression fixture | Real-task benefit and integration quality remain unproven; these do not change global routing |
 | Experimental surfaces | A documented AI Studio Android build/install workflow and an Orca trial | Orca acceptance evidence; Grok Agent remains a planned evaluation |
 

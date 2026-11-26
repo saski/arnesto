@@ -48,6 +48,7 @@ SHELL_SCRIPTS := \
 check: test lint-shell validate-skills validate-cursor-skills validate-openspec validate-symlinks check-tracked-ignored
 
 test:
+	node --test evals/promptfoo/madrid-avisos/routing.test.mjs
 	./tests/free-agent-execution-test.sh
 	./tests/opencode-free-template-test.sh
 	./tests/opencode-managed-config-test.sh
@@ -132,6 +133,7 @@ discover-saski-repos:
 # external-skill-references test (sibling repos). Runs on a stock runner with
 # ruby, jq, python3, and git preinstalled.
 ci-check: lint-shell validate-cursor-skills
+	node --test evals/promptfoo/madrid-avisos/routing.test.mjs
 	./tests/free-agent-execution-test.sh
 	./tests/opencode-free-template-test.sh
 	./tests/opencode-managed-config-test.sh
@@ -157,9 +159,12 @@ ci-check: lint-shell validate-cursor-skills
 eval-truthfulness:
 	./bin/run-truthfulness-eval "$(TARGET)"
 
-.PHONY: install-promptfoo eval-promptfoo
+.PHONY: install-promptfoo eval-promptfoo eval-madrid-avisos
 install-promptfoo:
 	npm ci --prefix evals/promptfoo
 
 eval-promptfoo:
 	cd evals/promptfoo && PROMPTFOO_DISABLE_TELEMETRY=1 PROMPTFOO_CONFIG_DIR=.promptfoo ./node_modules/.bin/promptfoo eval --no-cache --no-progress-bar --output results.json
+
+eval-madrid-avisos:
+	node evals/promptfoo/madrid-avisos/run.mjs

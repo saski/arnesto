@@ -100,5 +100,10 @@ Six additional independent simulations passed with GPT-6 Luna Medium on
 runtime isolation, and broad-profile import. Live authenticated persistence
 across tasks or restarts remains unverified.
 
+On 2026-11-26, a Promptfoo pilot used the real Codex and Agy clients on five
+synthetic requests with and without the skill. The [results and supporting
+responses](evaluations/madrid-avisos-2026-11-26.md) cover observed manifest
+reads and answer quality. The simulated municipal portal stayed offline.
+
 The skill-creator structural validator, `git diff --check`, and the complete
 canonical `make check` suite passed.

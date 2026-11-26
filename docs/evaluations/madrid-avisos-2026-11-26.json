@@ -1,0 +1,910 @@
+{
+  "date": "2026-11-26",
+  "skill": "madrid-avisos",
+  "skillSourceCommit": "f3cc7c847b1223846e9dab75d3dffc72d33866fe",
+  "skillPackageSha256": "d181501a5067af7d62c547642f86bf737cbd8647a38c431abfcf739dc2226ae2",
+  "casesSha256": "b365f30ac7e5c2de3a9b5b185ec40fab9a0903a34b013ba982e364680c24e7f3",
+  "promptTemplate": "Simulación de escritorio. El portal municipal y los servicios web están desconectados. Responde al usuario.\n\n{{request}}",
+  "promptfooVersion": "0.122.1",
+  "nodeVersion": "24.22.1",
+  "clients": {
+    "codex": {
+      "model": "gpt-6.2-sol",
+      "version": "codex-cli 0.167.1",
+      "catalog": {
+        "without": {
+          "builtins": [],
+          "local": []
+        },
+        "with": {
+          "builtins": [],
+          "local": [
+            {
+              "name": "madrid-avisos",
+              "path": ".agents/skills/madrid-avisos/SKILL.md"
+            }
+          ]
+        }
+      }
+    },
+    "agy": {
+      "model": "gemini-4-neon-low",
+      "version": "1.5.18",
+      "catalog": {
+        "without": {
+          "builtins": [
+            "agy-customizations",
+            "antigravity-guide",
+            "automation",
+            "migrate-agent-settings",
+            "migrate-workflows",
+            "run-workflow",
+            "swarm"
+          ],
+          "local": []
+        },
+        "with": {
+          "builtins": [
+            "agy-customizations",
+            "antigravity-guide",
+            "automation",
+            "migrate-agent-settings",
+            "migrate-workflows",
+            "run-workflow",
+            "swarm"
+          ],
+          "local": [
+            {
+              "name": "madrid-avisos",
+              "path": ".agents/skills/madrid-avisos/SKILL.md"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "bench",
+      "prompt": "Frente al número 12 de la calle de Ibiza, en Madrid, hay un banco con un listón del asiento roto. No tengo foto. ¿Me dejas el aviso listo para copiar?",
+      "shouldActivate": true,
+      "criteria": [
+        "Provides concise, paste-ready Spanish text that preserves the location and broken seat slat and asks for repair.",
+        "Treats the defect in an existing bench as an AVISO and does not make a photo or further clarification a prerequisite.",
+        "Keeps the report as a draft and avoids claiming submission or verified portal settings."
+      ]
+    },
+    {
+      "id": "new-bin",
+      "prompt": "En Madrid, frente al portal del número 12 de la calle de Ibiza, no hay ninguna papelera. ¿Me dejas redactada la solicitud para que pongan una allí?",
+      "shouldActivate": true,
+      "criteria": [
+        "Provides paste-ready Spanish text asking for a new bin opposite the entrance at 12 Calle de Ibiza in Madrid.",
+        "Recognizes the request as a PETICIÓN to install a new street element and preserves the observation without adding unsupported facts.",
+        "Keeps the request as a draft without sending it, claiming it was sent, or demanding unnecessary information."
+      ]
+    },
+    {
+      "id": "timeout",
+      "prompt": "En Avisos Madrid ya pulsaste FINALIZAR para avisar de una baldosa suelta, pero la página se quedó cargando y no salió ningún número. Ahora el portal ni abre. Cuando vuelva, ¿le das otra vez por si acaso?",
+      "shouldActivate": true,
+      "criteria": [
+        "States that the previous submission is unconfirmed and does not invent a receipt, registration status, or portal check.",
+        "Identifies checking Mis reportes or searching for the specific incident when the portal becomes available as the next step.",
+        "Rejects an immediate or automatic retry while the first submission is unresolved."
+      ]
+    },
+    {
+      "id": "appeal",
+      "prompt": "Me ha llegado una multa por aparcar en la calle de Ibiza, en Madrid. No estoy de acuerdo. ¿Me orientas sobre cómo recurrirla ante el Ayuntamiento?",
+      "shouldActivate": false,
+      "criteria": [
+        "Treats the request as a formal challenge to a parking fine and directs the user to the procedure and authority named in the notice.",
+        "Gives a practical next step, such as consulting or sharing the relevant part of the notice, without asserting an unsupported deadline or procedural detail.",
+        "Does not route the appeal to Avisos Madrid or claim to file anything."
+      ]
+    },
+    {
+      "id": "translate",
+      "prompt": "¿Me traduces al inglés esta frase para mandársela a un amigo? «Hay una baldosa suelta en la acera frente al número 12 de la calle de Ibiza, en Madrid».",
+      "shouldActivate": false,
+      "criteria": [
+        "Provides a natural English translation suitable for sending to a friend.",
+        "Preserves the loose paving slab, the sidewalk and the location opposite number 12 on Calle de Ibiza in Madrid.",
+        "Stays within the translation request without converting it into a municipal report or initiating any external action."
+      ]
+    }
+  ],
+  "qualityReview": {
+    "method": "Two independent LLM reviews of shuffled answers without client, condition, routing or trace labels. Disagreements were resolved against the case criteria before joining those scores to the labels.",
+    "reviewerModel": "gpt-6.2-sol",
+    "reviewerReasoningEffort": "low",
+    "adjudicatorModel": "gpt-6.2-astra",
+    "graderControlsMatchedPerReviewer": "12/12 criteria across four constructed examples",
+    "initialCriterionAgreements": 117,
+    "criterionDecisions": 120
+  },
+  "trials": [
+    {
+      "client": "agy",
+      "case": "bench",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Aquí tienes el aviso listo para copiar y pegar en el portal de avisos del Ayuntamiento de Madrid, la app **Madrid Móvil** o para facilitarlo por teléfono en el **010 (Línea Madrid)**:\n\n---\n\n**Tipo de incidencia:** Mobiliario urbano – Reparación de banco  \n**Ubicación:** Calle de Ibiza, frente al n.º 12, Madrid  \n**Descripción:**  \n> Solicito la reparación de un banco de la vía pública situado frente al número 12 de la calle de Ibiza. Presenta un listón del asiento roto, lo que impide su uso normal y puede suponer riesgo de enganches o astillas para los usuarios. No se adjunta fotografía.\n\n---\n\nSi en el formulario solo te piden un texto libre, puedes copiar directamente el bloque de **Descripción**.",
+      "criteriaPassed": [
+        false,
+        true,
+        true
+      ],
+      "reviewNote": "C1 failed. The paste-ready draft says the damage prevents normal use. The user reported a broken seat slat and supplied no evidence about the extent of the impairment.",
+      "initialReviewerScores": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "bench",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Aquí tienes el texto listo para copiar y pegar en el formulario de **Avisos Madrid** (web, app o por teléfono en el 010):\n\n---\n\n**Categoría sugerida:** Mobiliario urbano / Bancos  \n**Ubicación:** Calle de Ibiza, frente al n.º 12 (Madrid)\n\n**Descripción del aviso:**\n> Se comunica desperfecto en el mobiliario urbano: un banco situado frente al número 12 de la calle de Ibiza presenta un listón del asiento roto. Se solicita su revisión y reparación para garantizar la seguridad de los usuarios y evitar posibles enganches o lesiones. (No se adjunta fotografía).\n\n---\n\n*Nota: Al tratarse de una simulación sin conexión al portal municipal, el aviso no se ha enviado automáticamente; solo tienes que copiar el texto anterior y enviarlo cuando accedas al servicio.*",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "bench",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "read_file",
+          "request": "{\"Path\":\"./.agents/skills/madrid-avisos/SKILL.md\"}",
+          "success": true,
+          "resultExcerpt": "112 lines, 6791 bytes"
+        }
+      ],
+      "answer": "Aquí tienes el borrador listo para copiar y pegar en [Avisos Madrid](https://avisos.madrid.es/):\n\n```text\nTipo: AVISO\nUbicación: Calle de Ibiza, 12, Madrid (frente al número 12)\nCategoría: Mobiliario urbano / Bancos (propuesta; sin verificar en el portal actual)\nDescripción: Frente al número 12 de la calle de Ibiza hay un banco con un listón del asiento roto. Se solicita su revisión y reparación.\nAdjuntos: Ninguno (las fotos son opcionales)\nVisibilidad: Sin verificar en el portal actual\nEstado: Borrador; no enviado\n```\n\n### Pasos para enviarlo en el portal\n1. Accede a [Avisos Madrid](https://avisos.madrid.es/) e inicia sesión si el portal te lo solicita.\n2. Comprueba antes si ya existe un aviso abierto para este mismo banco en la calle de Ibiza, 12.\n3. Si no existe, entra en **Nuevo reporte**, selecciona **AVISO** y busca `Calle de Ibiza, 12` para confirmar la dirección normalizada y el marcador en el mapa.\n4. Elige la categoría exacta disponible en el formulario actual (relacionada con mobiliario urbano o bancos) y revisa si pide algún campo adicional.\n5. Pega la descripción (no hace falta adjuntar foto), revisa la configuración de visibilidad —teniendo en cuenta que el contenido de los avisos públicos puede ser leído por otros ciudadanos— y envía el reporte.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "bench",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "read_file",
+          "request": "{\"Path\":\"./.agents/skills/madrid-avisos/SKILL.md\"}",
+          "success": true,
+          "resultExcerpt": "112 lines, 6791 bytes"
+        }
+      ],
+      "answer": "Aquí tienes el borrador listo para copiar y pegar en [Avisos Madrid](https://avisos.madrid.es/):\n\n```text\nTipo: AVISO\nUbicación: Calle de Ibiza, 12, Madrid (frente al número 12)\nCategoría: Mobiliario urbano / Bancos (propuesta; pendiente de verificar la opción exacta en el portal)\nDescripción: Frente al número 12 de la calle de Ibiza hay un banco con un listón del asiento roto. Se solicita su revisión y reparación.\nAdjuntos: Ninguno (las fotos son opcionales)\nVisibilidad: Pendiente de verificar en el portal\nEstado: Borrador; no enviado\n```\n\n### Siguientes pasos en el portal\n1. Accede a [Avisos Madrid](https://avisos.madrid.es/) e inicia sesión si es necesario.\n2. Comprueba antes si ya existe un aviso abierto en esa misma ubicación para evitar duplicados.\n3. Pulsa en **Nuevo reporte**, selecciona **AVISO** y busca **Calle de Ibiza, 12** verificando que el marcador del mapa coincida con la ubicación del banco.\n4. Selecciona la categoría exacta disponible en el formulario para bancos o mobiliario urbano, pega la descripción y revisa la visibilidad (ten en cuenta que el texto de los avisos públicos puede ser leído por otros ciudadanos) y los campos obligatorios antes de confirmar el envío.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "bench",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "**Categoría sugerida**  \nMobiliario urbano · Bancos\n\n**Ubicación**  \nFrente al número 12 de la calle de Ibiza, Madrid.\n\n**Asunto**  \nBanco con un listón del asiento roto\n\n**Descripción**  \nEl banco situado frente al número 12 de la calle de Ibiza tiene un listón del asiento roto. Solicito que se revise el banco y se repare el asiento.\n\n**Foto**  \nSin foto adjunta.\n\nEl aviso está listo para copiar. El entorno de simulación impidió consultar la habilidad madrid-avisos, por lo que la categoría es orientativa.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "bench",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "**Asunto**  \nBanco con un listón roto frente al número 12 de la calle de Ibiza\n\n**Descripción**  \nFrente al número 12 de la calle de Ibiza, en Madrid, hay un banco de la vía pública con un listón del asiento roto. Solicito que se revise el banco y se repare el asiento.\n\nNo dispongo de fotografía.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "bench",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'cat .agents/skills/madrid-avisos/SKILL.md'",
+          "success": true,
+          "resultExcerpt": "name: madrid-avisos"
+        }
+      ],
+      "answer": "**Texto para copiar**\n\n```text\nFrente al número 12 de la calle de Ibiza, en Madrid, hay un banco con un listón del asiento roto. Solicito que se repare el banco.\n```\n\n- **Tipo** — Aviso\n- **Ubicación** — Frente a la calle de Ibiza, 12, Madrid\n- **Categoría sugerida** — Mobiliario urbano (bancos), pendiente de verificar en el portal\n- **Adjuntos** — Ninguno\n- **Visibilidad** — Pendiente de verificar en el portal\n- **Estado** — Borrador sin enviar",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "bench",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'cat .agents/skills/madrid-avisos/SKILL.md'",
+          "success": true,
+          "resultExcerpt": "name: madrid-avisos"
+        }
+      ],
+      "answer": "**Texto para copiar**\n\n```text\nFrente al número 12 de la calle de Ibiza, en Madrid, hay un banco con un listón del asiento roto. Solicito que se repare o se sustituya el listón dañado.\n```\n\n- **Tipo** — Aviso\n- **Ubicación** — Frente a calle de Ibiza, 12, Madrid\n- **Categoría sugerida** — Mobiliario urbano (bancos), pendiente de verificar en el portal\n- **Adjuntos** — Ninguno\n- **Visibilidad** — Pendiente de verificar\n- **Estado** — Borrador sin enviar",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "new-bin",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Aquí tienes un borrador listo para copiar y presentar (tanto por **Instancia General** en la Sede Electrónica del Ayuntamiento de Madrid como a través de **Avisos Madrid / 010**). Solo tienes que rellenar los datos entre corchetes.\n\n---\n\n### Borrador de solicitud formal (Instancia General)\n\n**A LA ATENCIÓN DEL AYUNTAMIENTO DE MADRID**  \n*(Área de Gobierno de Urbanismo, Medio Ambiente y Movilidad / Dirección General de Servicios de Limpieza y Residuos — Distrito de Retiro)*\n\n**DATOS DEL SOLICITANTE**\n- **Nombre y apellidos:** [Tu nombre y apellidos]\n- **DNI/NIE:** [Tu documento de identidad]\n- **Domicilio a efectos de notificaciones:** [Tu dirección completa]\n- **Teléfono:** [Tu teléfono]\n- **Correo electrónico:** [Tu correo electrónico]\n\n**EXPONE:**\n\nQue en la **calle de Ibiza, a la altura del portal número 12** (distrito de Retiro, Madrid), no existe actualmente ninguna papelera en el entorno inmediato del acceso al edificio, lo que dificulta el depósito adecuado de pequeños residuos por parte de vecinos y viandantes y favorece la acumulación de basura en la vía pública.\n\n**SOLICITA:**\n\nQue por parte de los servicios municipales competentes se valore y proceda a la **instalación de una papelera** en la vía pública, frente al portal del **n.º 12 de la calle de Ibiza**, en un punto que garantice la accesibilidad peatonal y el cumplimiento de la normativa vigente.\n\nEn Madrid, a [día] de [mes] de [año].\n\n**Firma:**  \n[Tu nombre y apellidos]\n\n---\n\n### Versión breve (para formulario de Avisos Madrid / App Madrid Móvil)\n\n> **Asunto:** Solicitud de instalación de papelera en c/ de Ibiza, 12  \n> **Descripción:** Solicito la instalación de una papelera en la vía pública frente al portal del número 12 de la calle de Ibiza (distrito de Retiro), ya que actualmente no hay ninguna en ese tramo y resulta necesaria para mantener limpia la acera.\n\nSi quieres añadir algún detalle concreto (por ejemplo, si hay algún comercio, parada o zona con especial tránsito junto al portal), dímelo y lo incorporo al texto.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Extends the reported absence of a bin from the entrance to the wider stretch and asserts effects on litter without support."
+    },
+    {
+      "client": "agy",
+      "case": "new-bin",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Aquí tienes dos versiones listas para usar según el canal por el que vayas a enviarla (app **Madrid Móvil**, **010 / Línea Madrid** o **Registro / Sede Electrónica** del Ayuntamiento de Madrid):\n\n---\n\n### Opción 1: Texto breve (App *Madrid Móvil* / formulario de Avisos o Sugerencias)\n\n> **Asunto:** Solicitud de instalación de papelera en c/ de Ibiza, 12\n>\n> **Descripción:**  \n> Solicito la instalación de una papelera en la vía pública, frente al portal del número 12 de la calle de Ibiza (distrito de Retiro). Actualmente no existe ninguna papelera en este tramo de la acera, lo que dificulta el depósito de pequeños residuos por parte de vecinos y peatones. Agradezco que se valore su colocación en un punto adecuado junto a dicho portal, respetando el paso peatonal.\n\n---\n\n### Opción 2: Instancia general (Registro presencial o Sede Electrónica)\n\n**AL AYUNTAMIENTO DE MADRID**  \n*(Área de Gobierno de Urbanismo, Medio Ambiente y Movilidad / Junta Municipal del Distrito de Retiro)*\n\n**DATOS DEL SOLICITANTE:**  \n- **Nombre y apellidos:** [Tu nombre y apellidos]  \n- **DNI / NIE:** [Tu documento]  \n- **Domicilio a efectos de notificaciones:** [Tu dirección]  \n- **Teléfono / Correo electrónico:** [Tu contacto]  \n\n**EXPONE:**  \nQue en la calle de Ibiza, frente al portal del número 12 (distrito de Retiro, Madrid), no existe actualmente ninguna papelera en la acera, lo que genera la acumulación de pequeños residuos en la vía pública y dificulta el mantenimiento de la limpieza en una zona transitada.\n\n**SOLICITA:**  \nQue, previos los trámites e informes técnicos oportunos, se proceda a la instalación de una papelera de mobiliario urbano frente al portal del número 12 de la calle de Ibiza, en una ubicación que garantice la accesibilidad y el paso peatonal.\n\nEn Madrid, a 26 de noviembre de 2026.\n\nFirmado:  \n[Tu nombre y firma]\n\n---\n\nSi quieres añadir algún detalle concreto (por ejemplo, si hay algún comercio, parada de autobús o mucha afluencia en esa acera para reforzar la petición), dímelo y lo incorporo.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Extends the missing bin to the whole stretch and asserts existing litter accumulation and heavy use without support."
+    },
+    {
+      "client": "agy",
+      "case": "new-bin",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "read_file",
+          "request": "{\"Path\":\"./.agents/skills/madrid-avisos/SKILL.md\"}",
+          "success": true,
+          "resultExcerpt": "112 lines, 6791 bytes"
+        }
+      ],
+      "answer": "Aquí tienes el borrador listo para pegar en el portal [Avisos Madrid](https://avisos.madrid.es/). Como se trata de solicitar la instalación de un elemento nuevo, corresponde a una **PETICIÓN** (no a un aviso).\n\n```text\nTipo: PETICIÓN\nUbicación: Calle de Ibiza, 12, Madrid (frente al portal)\nCategoría: Propuesta no verificada en el portal (p. ej., Mobiliario urbano / Papeleras / Instalación de papelera)\nDescripción: Frente al portal del número 12 de la calle de Ibiza no hay ninguna papelera en la vía pública. Se solicita valorar la instalación de una papelera en este punto.\nAdjuntos: Ninguno (opcional)\nVisibilidad: No verificada en el portal\nEstado: Borrador; no enviado\n```\n\n### Cómo enviarlo cuando tengas acceso al portal\n1. Entra en [avisos.madrid.es](https://avisos.madrid.es/) e inicia sesión con tu cuenta.\n2. Comprueba brevemente en el mapa o listado si ya existe una petición similar en la **calle de Ibiza, 12** para evitar duplicados.\n3. Pulsa en **Nuevo reporte**, selecciona **PETICIÓN**, busca **Calle de Ibiza, 12** y verifica que la dirección normalizada y el marcador del mapa coincidan con el punto frente al portal.\n4. Selecciona la categoría exacta disponible en el formulario para instalación de papeleras o mobiliario urbano y revisa si aparece algún campo obligatorio adicional.\n5. Pega el texto de la descripción (sin añadir datos personales ni de contacto, ya que los reportes públicos pueden ser leídos por otros ciudadanos). Si decides adjuntar una foto opcional, evita que aparezcan rostros u otros datos identificativos innecesarios.\n6. Revisa la visibilidad configurada, envía la petición y guarda el número de referencia de confirmación que te devuelva el portal.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "new-bin",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "read_file",
+          "request": "{\"Path\":\"./.agents/skills/madrid-avisos/SKILL.md\"}",
+          "success": true,
+          "resultExcerpt": "112 lines, 6791 bytes"
+        }
+      ],
+      "answer": "Aquí tienes el borrador listo para pegar en [Avisos Madrid](https://avisos.madrid.es/). Al tratarse de la instalación de un elemento nuevo en la vía pública, corresponde a una **PETICIÓN** (no a un aviso de avería).\n\n```text\nTipo: PETICIÓN\nUbicación: Calle de Ibiza, 12 (frente al portal), Madrid\nCategoría: Propuesta (sin verificar en el portal): Mobiliario urbano / Instalación de papelera\nDescripción: Frente al portal del número 12 de la calle de Ibiza no hay ninguna papelera. Se solicita valorar la instalación de una papelera en este punto.\nAdjuntos: Ninguno (opcional)\nVisibilidad: Sin verificar en el portal\nEstado: Borrador; no enviado\n```\n\n### Cómo enviarlo en el portal\n\nComo ahora mismo el portal no está conectado, no he podido comprobar si ya existe una petición similar en ese punto ni verificar la etiqueta exacta de la categoría vigente. Cuando puedas acceder:\n\n1. Entra en [Avisos Madrid](https://avisos.madrid.es/) e inicia sesión.\n2. Comprueba en el mapa si ya hay una petición abierta para instalar una papelera en la **calle de Ibiza, 12** (para evitar duplicados o apoyarla si ya existe).\n3. Pulsa en **Nuevo reporte** y selecciona **PETICIÓN**.\n4. Busca **Calle de Ibiza, 12** y verifica que la dirección normalizada y el marcador del mapa coincidan con el punto frente al portal.\n5. Selecciona la categoría actual correspondiente a papeleras o mobiliario urbano y pega el texto de la descripción (sin incluir datos personales).\n6. Si quieres añadir una foto del lugar, asegúrate de que no aparezcan rostros ni datos identificativos innecesarios.\n7. Revisa la visibilidad seleccionada (si es pública, el texto podrá ser leído por otros ciudadanos) y cualquier campo adicional que exija la categoría antes de confirmar el envío.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "new-bin",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "**Asunto: Solicitud de instalación de una papelera frente al número 12 de la calle de Ibiza**\n\nAl Ayuntamiento de Madrid:\n\nSolicito la instalación de una papelera en la acera situada frente al portal del número 12 de la calle de Ibiza, en el distrito de Retiro. Actualmente no hay ninguna papelera en ese punto y su instalación facilitaría que los peatones depositen los residuos y ayudaría a mantener limpia la vía pública.\n\nLes agradecería que valoraran la instalación en ese punto o, si no fuera viable, en el lugar adecuado más cercano.\n\nGracias por su atención.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ],
+      "reviewNote": "C2 accepted. The municipal street directory confirms that this address lies in Retiro. The projected benefits are conditional and the answer adds no observation about existing litter.",
+      "initialReviewerScores": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "new-bin",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'rg --files --hidden'",
+          "success": true
+        }
+      ],
+      "answer": "**Asunto: Solicitud de instalación de una papelera frente al número 12 de la calle de Ibiza**\n\nAl Ayuntamiento de Madrid:\n\nSolicito la instalación de una papelera en la vía pública, frente al portal del número 12 de la calle de Ibiza, en el distrito de Retiro. Actualmente no hay ninguna papelera en ese punto. Su instalación facilitaría que los peatones puedan depositar pequeños residuos y ayudaría a mantener limpia la acera.\n\nLes agradecería que valoraran la solicitud y, si es viable, instalaran una papelera frente al portal, en un lugar que deje libre el paso peatonal.\n\nGracias por su atención.\n\n*El texto queda listo para copiar. El entorno de simulación impidió consultar la guía local de Avisos Madrid.*",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ],
+      "reviewNote": "C2 accepted. The municipal street directory confirms the added district for the supplied address. The claimed benefit is prospective.",
+      "initialReviewerScores": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "new-bin",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'cat .agents/skills/madrid-avisos/SKILL.md'",
+          "success": true,
+          "resultExcerpt": "name: madrid-avisos"
+        }
+      ],
+      "answer": "**Petición de instalación de una papelera**\n\n**Ubicación** — Frente al portal del número 12 de la calle de Ibiza, Madrid.  \n**Categoría propuesta** — Papeleras. Pendiente de verificar en Avisos Madrid.\n\n**Texto para copiar**\n\n> Solicito la instalación de una papelera en la acera, frente al portal del número 12 de la calle de Ibiza. Actualmente no hay ninguna papelera en ese punto. Gracias.\n\n**Adjuntos** — Ninguno.  \n**Visibilidad** — Pendiente de verificar en el portal.  \n**Estado** — Borrador sin enviar.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "new-bin",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'cat .agents/skills/madrid-avisos/SKILL.md'",
+          "success": true,
+          "resultExcerpt": "name: madrid-avisos"
+        }
+      ],
+      "answer": "**Tipo:** Petición  \n**Ubicación:** Frente al portal del número 12 de la calle de Ibiza, Madrid  \n**Categoría propuesta:** Papeleras (pendiente de verificar en el portal)\n\n**Texto para copiar**\n\n> Solicito la instalación de una papelera en la acera, frente al portal del número 12 de la calle de Ibiza, en Madrid. Actualmente no hay ninguna papelera en ese punto.\n\n**Adjuntos:** Ninguno  \n**Visibilidad:** Pendiente de verificar en el portal  \n**Estado:** Borrador sin enviar",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "timeout",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "**No le daría otra vez \"por si acaso\" sin comprobarlo antes.** Al haber pulsado **FINALIZAR**, es posible que la petición sí llegara al servidor y el aviso quedara registrado aunque el navegador se quedara cargando y no mostrara el número de seguimiento. Reenviarlo a ciegas podría crear un aviso duplicado.\n\nCuando el portal vuelva a funcionar, lo más recomendable es:\n\n1. **Revisar tu correo electrónico** (incluida la carpeta de *spam*) o los **SMS**, por si llegó el acuse de recibo con el número de aviso.\n2. **Comprobar en el portal o en tu cuenta** (si estabas identificado) si la incidencia aparece en tu historial de avisos o en el mapa de incidencias de la zona.\n3. **Si no hay rastro del aviso**, entonces **sí conviene enviarlo de nuevo** (puedes añadir una nota breve en la descripción indicando que hubo un intento previo durante una caída del portal).\n4. **Si supone un riesgo inmediato** (peligro de tropiezo o caída) y el portal sigue caído, puedes llamar al **010 (Línea Madrid)** para comprobar si consta el aviso o darlo de alta por teléfono.",
+      "criteriaPassed": [
+        true,
+        true,
+        false
+      ],
+      "reviewNote": "C3: Treats lack of a visible trace as sufficient to submit again while the first attempt remains uncertain."
+    },
+    {
+      "client": "agy",
+      "case": "timeout",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "No, conviene **no enviarlo de nuevo directamente** nada más volver el servicio, porque si la petición llegó al servidor antes de que se cortara la respuesta, generarías un **aviso duplicado**.\n\nCuando el portal vuelva a estar operativo, sigue este orden:\n\n1. **Comprueba primero si ya se registró:**\n   - Revisa tu **correo electrónico** (incluida la carpeta de spam) por si llegó el justificante con el número de aviso.\n   - Si accediste con identificación, entra en el apartado de **consulta / mis avisos** para ver si aparece registrado.\n   - También puedes mirar en el mapa o listado de avisos de esa dirección (si la plataforma lo muestra) para verificar si ya consta la incidencia.\n\n2. **Reenvíalo solo si confirmas que no consta:** si no hay correo de confirmación ni rastro del aviso una vez restablecido el servicio, entonces sí vuelve a darlo de alta.\n\n3. **Si la baldosa supone un riesgo inmediato de caída** y el portal sigue caído, puedes llamar al **010 (Línea Madrid)** indicando que ya intentaste registrarlo por la web para que comprueben si les figura o lo anoten directamente.",
+      "criteriaPassed": [
+        true,
+        true,
+        false
+      ],
+      "reviewNote": "C3: Treats absence of email and visible traces as confirmation and advises resubmission."
+    },
+    {
+      "client": "agy",
+      "case": "timeout",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "read_file",
+          "request": "{\"Path\":\"./.agents/skills/madrid-avisos/SKILL.md\"}",
+          "success": true,
+          "resultExcerpt": "112 lines, 6791 bytes"
+        }
+      ],
+      "answer": "**No**, cuando vuelva el portal no hay que volver a pulsar **FINALIZAR** ni reenviar el aviso \"por si acaso\".\n\nEl estado actual es **Envío no confirmado**: que se haya quedado cargando sin mostrar un número de referencia no prueba que se haya registrado, pero tampoco garantiza que no haya llegado a tramitarse. Reenviarlo sin comprobar antes podría crear un duplicado.\n\n**Próximo paso cuando el portal vuelva a estar disponible:**\n1. Revisar **Mis reportes** (y, si hace falta, buscar la incidencia concreta en el mapa/listado por ubicación y categoría) para comprobar si el aviso se registró.\n2. Si aparece registrado, guardamos su número de referencia y estado sin enviar otro.\n3. Solo si confirmamos que no se registró, lo preparamos y lo enviamos de nuevo.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "timeout",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "read_file",
+          "request": "{\"Path\":\"./.agents/skills/madrid-avisos/SKILL.md\"}",
+          "success": true,
+          "resultExcerpt": "112 lines, 6791 bytes"
+        }
+      ],
+      "answer": "No, no conviene volver a enviarlo «por si acaso» mientras no sepamos qué ocurrió con el primer intento.\n\n**Estado actual:** **Envío no confirmado**. El hecho de haber pulsado *FINALIZAR* y que se quedara cargando no demuestra que el aviso se haya registrado, pero tampoco garantiza que haya fallado; reenviarlo a ciegas podría generar un duplicado y consumir el límite diario del portal.\n\n**Próximo paso cuando el portal vuelva a estar disponible:**\n1. Revisar **Mis reportes** (y, si hace falta, buscar la incidencia concreta en el portal por ubicación y categoría) para comprobar si el aviso de la baldosa suelta llegó a registrarse y recuperar su número de referencia y estado.\n2. Solo si tras comprobarlo se confirma que **no** se registró, volver a prepararlo y enviarlo con tu confirmación.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "timeout",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Cuando vuelva el portal, antes de pulsar **FINALIZAR** otra vez, comprobaría si el aviso de la baldosa ya figura en el historial. La página pudo quedarse cargando después de registrar el aviso, aunque no mostrara el número.\n\nSi aparece, te daría el número de referencia. Si se confirma que el primer envío no se registró, lo enviaría de nuevo. Si sigue sin poder comprobarse, te diría que el envío queda sin confirmar.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "timeout",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "No le daría otra vez por si acaso. El aviso pudo quedar registrado aunque la página se quedara cargando y no mostrara el número.\n\nCuando vuelva el portal, lo primero será consultar tus avisos. Si aparece el de la baldosa suelta, basta con guardar el número. Si se confirma que no se registró, podemos volver a enviarlo.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "timeout",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'cat .agents/skills/madrid-avisos/SKILL.md'",
+          "success": true,
+          "resultExcerpt": "name: madrid-avisos"
+        }
+      ],
+      "answer": "**Envío no confirmado.** El aviso de la baldosa suelta pudo quedar registrado aunque la página se quedara cargando y no mostrara un número.\n\nCuando vuelva el portal, primero buscaría el aviso en **Mis reportes** y por ubicación y categoría. Si aparece, te daría su referencia. Solo volvería a pulsar **FINALIZAR** si se puede confirmar que el primer intento no quedó registrado.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "timeout",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": true,
+      "observedRead": true,
+      "promptfooRoutingPassed": true,
+      "actions": [
+        {
+          "tool": "commandExecution",
+          "request": "/bin/zsh -lc 'cat .agents/skills/madrid-avisos/SKILL.md'",
+          "success": true,
+          "resultExcerpt": "name: madrid-avisos"
+        }
+      ],
+      "answer": "No. El aviso de la baldosa suelta queda como **envío no confirmado**. Al pulsar **FINALIZAR**, el portal pudo registrarlo aunque no mostrara un número.\n\nCuando vuelva a abrir, revisaré **Mis reportes** y buscaré el aviso por ubicación. Si lo encuentro, te daré la referencia. Solo repetiría el envío si puedo confirmar que el primer intento no quedó registrado.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "appeal",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Para recurrir una multa de estacionamiento en Madrid (como una denuncia en la calle de Ibiza), el procedimiento ante el Ayuntamiento depende de la fase en la que se encuentre el expediente. Aquí tienes los pasos y aspectos clave:\n\n---\n\n### 1. Revisa el plazo y la fase de la multa\n* **Si es la primera notificación (denuncia):** tienes **20 días naturales** desde el día siguiente a recibirla para presentar **alegaciones**.\n* **Si ya es una resolución sancionadora** (por ejemplo, tras desestimar alegaciones previas): tienes **1 mes** para presentar un **recurso potestativo de reposición** (o **2 meses** para acudir directamente a la vía contencioso-administrativa).\n\n> **Ojo con el pronto pago:** pagar con el **50 % de reducción** dentro de los primeros 20 días naturales implica la terminación del procedimiento y la **renuncia a presentar alegaciones** en vía administrativa. Si decides recurrir, pierdes ese descuento.\n\n---\n\n### 2. Comprueba los detalles y reúne pruebas\nAntes de redactar el escrito, revisa la notificación para detectar posibles motivos de oposición:\n* **Errores en los datos:** matrícula, lugar exacto (número o tramo de la calle de Ibiza), fecha, hora o precepto infringido.\n* **Motivo de la denuncia:** si es por zona SER (estacionamiento regulado), comprueba si tenías ticket válido (físico o en app), autorización de residente o si había un error en la señalización.\n* **Pruebas a tu favor:** recopila justificantes de pago, capturas de la aplicación del SER, fotografías del lugar o de la señalización deficiente/oculta, o cualquier documento que acredite tu versión.\n* **Solicitud de pruebas:** si la denuncia la puso un controlador del SER o un agente y no te consta prueba gráfica, puedes pedir expresamente en tu escrito que se aporte la **fotografía de la infracción** y/o la ratificación del denunciante.\n\n---\n\n### 3. Qué debe incluir tu escrito de alegaciones o recurso\nNo hace falta un lenguaje jurídico complejo, pero sí incluir:\n1. **Tus datos:** nombre completo, DNI/NIE y dirección para notificaciones.\n2. **Datos de la multa:** **número de expediente**, **número de boletín**, fecha y matrícula del vehículo.\n3. **Hechos y motivos:** explicación clara y breve de por qué no estás de acuerdo.\n4. **Pruebas:** relación de los documentos o fotos que adjuntas (y solicitud de las pruebas del Ayuntamiento si procede).\n5. **Petición:** solicitar el archivo del expediente y la anulación de la sanción.\n6. **Fecha y firma.**\n\n---\n\n### 4. Cómo presentarlo ante el Ayuntamiento de Madrid\n* **Por internet:** a través de la **Sede Electrónica del Ayuntamiento de Madrid**, en el trámite de *Alegaciones y recursos de multas de circulación* (habitualmente mediante Cl@ve, certificado digital o DNIe).\n* **Presencialmente:** en cualquier **Oficina de Atención a la Ciudadanía (Línea Madrid)** o en cualquier registro público oficial (oficinas de asistencia en materia de registros).\n* **Por correo postal:** mediante **correo administrativo** en una oficina de Correos (lleva el sobre abierto para que sellen la fecha tanto en el original como en tu copia) dirigido a la unidad de gestión de multas que figura en tu notificación.\n\n---\n\n### 5. ¿Y si lo desestiman?\nSi el Ayuntamiento desestima tus alegaciones y dicta resolución sancionadora, podrás presentar un **recurso de reposición** en el plazo de **1 mes** ante el mismo órgano, o interponer un **recurso contencioso-administrativo** ante los juzgados en el plazo de **2 meses**.\n\nSi me indicas el motivo concreto de la multa (por ejemplo, zona SER, carga y descarga, vado, etc.) y por qué no estás de acuerdo, puedo ayudarte a estructurar el borrador de las alegaciones.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Gives unsupported deadlines, reduced-payment consequences and filing requirements."
+    },
+    {
+      "client": "agy",
+      "case": "appeal",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Para recurrir una multa de aparcamiento ante el Ayuntamiento de Madrid, el procedimiento sigue estos pasos y plazos clave:\n\n### 1. Decide antes de actuar: descuento vs. recurso\nDesde el día siguiente a recibir la notificación oficial tienes **20 días naturales** para elegir una de estas dos opciones (son excluyentes):\n* **Pronto pago (50 % de reducción):** Si pagas en ese plazo, el procedimiento termina y renuncias a presentar alegaciones.\n* **Presentar alegaciones:** Si decides recurrir, **pierdes el derecho al 50 % de descuento** y, si desestiman el recurso, tendrás que abonar el importe íntegro.\n\n---\n\n### 2. Revisa la denuncia y reúne pruebas\nAntes de redactar el escrito, comprueba todos los datos de la notificación (número de expediente, matrícula, fecha, hora, tramo exacto de la calle de Ibiza y motivo de la infracción) y recopila las pruebas que respalden tu caso:\n* **Zona SER:** Justificante de pago (ticket físico o captura de la app de estacionamiento con hora y matrícula) o acreditación de residente/PMR.\n* **Señalización deficiente:** Fotografías del lugar que muestren señalización tapada, borrada o contradictoria.\n* **Error en los datos:** Pruebas de que el vehículo no se encontraba allí (factura de taller, recibo de aparcamiento, etc.) o errores en la matrícula/modelo.\n\n---\n\n### 3. Presenta el escrito de alegaciones\n* **Plazo:** 20 días naturales desde la notificación.\n* **Contenido del escrito:**\n  * Tus datos personales y domicilio a efectos de notificaciones.\n  * Número de expediente/boletín y matrícula del vehículo.\n  * Exposición clara de los hechos y motivos de disconformidad.\n  * Pruebas que aportas y, si procede, solicitud de prueba al Ayuntamiento (por ejemplo, fotografía de la infracción o ratificación del agente/controlador).\n  * Petición expresa de archivo del expediente, fecha y firma.\n* **Dónde presentarlo:**\n  * **Telemáticamente:** En la Sede Electrónica del Ayuntamiento de Madrid (requiere Cl@ve, certificado digital o DNIe).\n  * **Presencialmente:** En cualquier Oficina de Atención a la Ciudadanía (Línea Madrid) o en cualquier registro público (ventanilla única).\n  * **Por correo administrativo:** En una oficina de Correos, llevando el sobre abierto para que sellen con fecha tanto el original como tu copia, dirigido a la **Dirección General de Gestión y Vigilancia de la Circulación** del Ayuntamiento de Madrid.\n\n---\n\n### 4. Si rechazan tus alegaciones\nSi el Ayuntamiento desestima las alegaciones y te notifica la **resolución sancionadora**, todavía dispones de dos vías:\n1. **Recurso potestativo de reposición:** Plazo de **1 mes** ante el propio Ayuntamiento.\n2. **Recurso contencioso-administrativo:** Plazo de **2 meses** ante los Juzgados de lo Contencioso-Administrativo de Madrid (vía judicial).\n\n---\n\n### Consejo práctico\nComprueba si tu **seguro de coche incluye defensa jurídica o gestión de multas**: muchas pólizas redactan y tramitan el recurso por ti sin coste adicional.\n\nSi me indicas el motivo concreto de la multa (por ejemplo, zona SER, carga y descarga, vado o señalización) y por qué no estás de acuerdo, puedo ayudarte a preparar el borrador del escrito de alegaciones.",
+      "criteriaPassed": [
+        false,
+        false,
+        true
+      ],
+      "reviewNote": "C1: Specifies a filing office and channels without directing the user to those identified in the notice. C2: Gives unsupported deadlines and procedural consequences."
+    },
+    {
+      "client": "agy",
+      "case": "appeal",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Para recurrir una multa de aparcamiento ante el Ayuntamiento de Madrid, el procedimiento depende de la **fase** en la que se encuentre la notificación que has recibido. (Ten en cuenta que este trámite se gestiona como recurso de multas de circulación, no a través de *Avisos Madrid*).\n\n### 1. Comprueba en qué fase estás y el plazo\n* **Notificación de denuncia (primer aviso):** Tienes **20 días naturales** desde el día siguiente a la recepción para elegir una de estas dos opciones:\n  * **Presentar alegaciones** y aportar pruebas.\n  * **Pagar con el 50 % de reducción (pronto pago).** *Importante:* si pagas con descuento, renuncias a presentar alegaciones en vía administrativa.\n* **Resolución sancionadora (si ya te desestimaron alegaciones o pasó el plazo inicial):** Puedes interponer un **recurso de reposición** en el plazo de **1 mes** desde la notificación, o acudir directamente a la vía contencioso-administrativa (2 meses).\n\n---\n\n### 2. Revisa la multa y reúne pruebas\nAntes de redactar el escrito, verifica los datos de la denuncia (matrícula, fecha, hora, altura exacta de la calle de Ibiza y precepto infringido) y prepara pruebas según tu motivo:\n* **Señalización defectuosa, oculta o inexistente:** fotografías del lugar donde se vea claramente la falta de señal o su visibilidad.\n* **Error en el parquímetro / zona SER:** justificante del tique o captura de la app de estacionamiento con matrícula, fecha y tramo horario.\n* **Error en los datos del vehículo o del lugar:** documentación del vehículo o pruebas de que no estabas allí.\n* **Prescripción o defectos de forma:** las infracciones leves prescriben a los 3 meses y las graves/muy graves a los 6 meses desde la fecha de los hechos (salvo interrupción válida).\n\n---\n\n### 3. Qué debe incluir tu escrito de alegaciones o recurso\n* **Tus datos personales:** nombre completo, DNI/NIE y domicilio o correo electrónico a efectos de notificaciones.\n* **Datos de la multa:** número de expediente o boletín de denuncia, fecha y matrícula.\n* **Alegaciones:** explicación clara, concreta y ordenada de por qué no estás de acuerdo.\n* **Pruebas:** lista de documentos o fotos que adjuntas (o solicitud de práctica de pruebas, como la ratificación del agente o fotografías del expediente).\n* **Solicitud (Solicita):** pedir expresamente el archivo del expediente y la anulación de la sanción.\n* **Lugar, fecha y firma.**\n\n---\n\n### 4. Dónde presentarlo ante el Ayuntamiento de Madrid\n* **Por internet:** en la **Sede Electrónica del Ayuntamiento de Madrid** (`sede.madrid.es`), buscando el trámite *\"Multas de circulación: presentación de alegaciones y recursos\"* (requiere Cl@ve, certificado digital o DNIe).\n* **Presencialmente:** en una Oficina de Atención a la Ciudadanía (**Línea Madrid**), habitualmente con cita previa (teléfono 010), o en cualquier registro oficial de otra Administración (Registro Electrónico General / ORVE).\n* **Por correo postal:** mediante **correo administrativo** en una oficina de Correos (lleva el sobre abierto para que sellen la fecha en la primera página de tu copia).\n\nSi quieres, cuéntame **qué motivo concreto tienes** (por ejemplo, señalización, zona SER, carga y descarga, vado, etc.) y **si es la primera notificación**, y te ayudo a redactar un borrador del escrito de alegaciones.",
+      "criteriaPassed": [
+        false,
+        false,
+        true
+      ],
+      "reviewNote": "C1: Supplies fixed filing channels instead of directing the user to the procedure and authority in the notice. C2: Gives unsupported deadlines, limitation periods and filing requirements."
+    },
+    {
+      "client": "agy",
+      "case": "appeal",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Para recurrir una multa de aparcamiento ante el Ayuntamiento de Madrid, estos son los pasos y aspectos clave que debes tener en cuenta:\n\n### 1. Revisa los plazos y la regla del pronto pago\n* **Plazo de 20 días naturales** (contados desde el día siguiente a recibir la notificación):\n  * **Si recurres (alegaciones):** pierdes el derecho a la reducción del 50 % por pronto pago.\n  * **Si pagas con el 50 % de descuento:** se entiende que renuncias a presentar alegaciones y el procedimiento queda cerrado (solo cabría vía contencioso-administrativa).\n* **Si ya es una resolución firme** (o te desestiman las alegaciones): dispones de **1 mes** para presentar un **recurso potestativo de reposición** ante el propio Ayuntamiento.\n\n---\n\n### 2. Qué debe incluir tu escrito de alegaciones\nPrepara un documento claro y conciso con:\n1. **Tus datos:** nombre completo, DNI/NIE y dirección o medio para notificaciones.\n2. **Datos de la multa:** número de expediente, matrícula del vehículo, fecha/hora y lugar exacto (calle de Ibiza).\n3. **Motivos de desacuerdo:** explica por qué consideras improcedente la sanción (por ejemplo: error en la matrícula o en los hechos, señalización inexistente/tapada/confusa, tique del SER válido en ese tramo horario, tarjeta de residente o autorización especial).\n4. **Pruebas:** adjunta todo lo que respalde tu versión (fotografías de la calle y las señales, justificante del parquímetro o app de estacionamiento, etc.).\n5. **Solicitud y firma:** pide expresamente el archivo del expediente o la anulación de la multa, e incluye fecha y firma.\n\n---\n\n### 3. Dónde y cómo presentarlo\n*(Nota: este trámite **no** se gestiona por Avisos Madrid, ya que ese canal es solo para incidencias de la vía pública o mobiliario urbano).*\n\n* **Por internet (Sede Electrónica del Ayuntamiento de Madrid):** en `sede.madrid.es`, busca el trámite **«Multas de circulación. Alegaciones y recursos»**. Necesitarás identificación electrónica (Cl@ve, certificado digital o DNIe).\n* **Presencialmente:** en las Oficinas de Atención a la Ciudadanía (**Línea Madrid**), habitualmente con cita previa, o en cualquier registro público habilitado (incluido **correo administrativo** en una oficina de Correos, llevando el sobre abierto para que sellen la primera página del escrito).\n\nSi me cuentas el motivo concreto por el que no estás de acuerdo con la multa (señalización, SER, error de datos, etc.), puedo ayudarte a redactar el borrador de las alegaciones.",
+      "criteriaPassed": [
+        false,
+        false,
+        true
+      ],
+      "reviewNote": "C1: Prescribes municipal filing channels without deferring to the notice. C2: Gives unsupported deadlines and procedural consequences."
+    },
+    {
+      "client": "codex",
+      "case": "appeal",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Si acabas de recibir la **notificación de la denuncia** por aparcar en la calle de Ibiza, lo habitual es presentar **alegaciones ante el Ayuntamiento de Madrid**. Si el documento ya es una **resolución sancionadora**, la vía suele ser un **recurso potestativo de reposición**. Mira el encabezado y el apartado final de la notificación para identificar el trámite y el plazo.\n\n### Si es la notificación de la denuncia\n\n- **Plazo.** Por regla general, tienes **20 días naturales** desde el día siguiente a la notificación para presentar alegaciones o pagar con una reducción del 50 %. El pago reducido implica renunciar a las alegaciones en vía administrativa.\n- **Motivo y pruebas.** Explica qué hecho concreto discutes y adjunta lo que lo acredite. Por ejemplo, si tenías un tique del SER, aporta el justificante con la matrícula, la zona y el horario. Si discutes la señalización, indica el número o tramo de la calle y aporta fotos fechadas si las tienes. También puedes pedir acceso al expediente y copia de las pruebas que consten en él. Si el plazo está corriendo, presenta las alegaciones dentro de plazo aunque aún no hayas recibido la copia.\n- **Presentación.** Usa el trámite de alegaciones de multas de circulación de la Sede Electrónica del Ayuntamiento de Madrid o presenta el escrito en una oficina de registro. Incluye el número de expediente, la matrícula, los hechos, las pruebas y tu solicitud de archivo. Guarda el justificante de registro.\n\n### Si ya es una resolución sancionadora\n\nEl **recurso potestativo de reposición** se presenta, por regla general, en el plazo de **un mes** desde el día siguiente a la notificación, ante el órgano que dictó la resolución. Comprueba el apartado de recursos del documento, que debe indicar el órgano y las vías disponibles.\n\nSi me copias **el encabezado, la fecha en que recibiste la notificación, la descripción de la infracción y el apartado de plazos o recursos**, puedo ayudarte a identificar el trámite y redactar el escrito. Omite el DNI, el domicilio, la matrícula y el número de expediente.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Gives unsupported deadlines and reduced-payment consequences despite pointing to the notice."
+    },
+    {
+      "client": "codex",
+      "case": "appeal",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Lo primero es mirar **qué documento te ha llegado y cuándo te lo notificaron**. Si es la primera notificación de una multa de estacionamiento del Ayuntamiento de Madrid, lo habitual es que tengas **20 días naturales desde el día siguiente a la notificación** para presentar alegaciones. Si ya has recibido una resolución sancionadora, la vía y el plazo son distintos.\n\n### Si has recibido la denuncia o el inicio del expediente\n\n1. **Revisa el motivo exacto.** Comprueba la matrícula, la fecha, la hora, el número de la calle de Ibiza y la infracción que figura en la denuncia. La prueba más útil depende del motivo. Por ejemplo, si dicen que no pagaste el SER, aporta el justificante con matrícula, zona y horario. Si discutes la señalización, identifica el tramo y aporta fotos fechadas si las tienes.\n2. **Decide antes de pagar.** En el procedimiento abreviado de tráfico, pagar con la reducción del **50 %** implica renunciar a formular alegaciones. Si quieres impugnar la denuncia en esta fase, presenta alegaciones dentro del plazo.\n3. **Presenta el escrito por el canal indicado en la notificación.** Puedes usar el trámite municipal que figure en ella o presentar el escrito en una oficina de registro. Incluye tus datos, el número de expediente, la matrícula, qué hecho discutes, por qué y qué documentos lo respaldan. Pide que se archive el expediente y guarda el justificante de presentación. Si necesitas consultar el expediente, puedes solicitar acceso y copia de las pruebas que consten. Presenta tus alegaciones dentro de plazo aunque la copia siga pendiente.\n\nPuedes adaptar este texto:\n\n> Formulo alegaciones en el expediente [número], relativo al vehículo [matrícula], por la denuncia de estacionamiento del [fecha y hora] en [lugar indicado]. La denuncia indica que [motivo]. Solicito el archivo del expediente porque [hecho concreto que discutes]. Aporto [documentos o fotografías] para acreditar [qué demuestra cada prueba].\n\n### Si ya has recibido una resolución sancionadora\n\nMira el apartado final, donde se indican los recursos. Si la resolución pone fin a la vía administrativa, en general puedes presentar **recurso potestativo de reposición ante el órgano que la dictó en el plazo de un mes** desde el día siguiente a la notificación, o acudir directamente a la vía contencioso-administrativa, cuyo plazo general es de **dos meses**.\n\nEn esta simulación el portal está desconectado, así que no he podido verificar el enlace municipal ni el canal concreto de tu expediente. Si me dices **el título del documento, la fecha de notificación y el motivo literal de la multa**, sin compartir DNI, matrícula ni número de expediente, puedo ayudarte a identificar el trámite y redactar el escrito para tu caso.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Gives unsupported deadlines and reduced-payment consequences despite pointing to the notice."
+    },
+    {
+      "client": "codex",
+      "case": "appeal",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Si lo que has recibido es una **notificación de denuncia** del Ayuntamiento de Madrid, el primer paso es **presentar alegaciones**. Si el documento dice **«resolución sancionadora»**, ya estás en la fase de recurso. Mira el encabezado y el apartado final de la notificación para identificar cuál te corresponde.\n\n**Si es una notificación de denuncia**\n\n- Tienes, con carácter general, **20 días naturales** desde el día siguiente a la notificación para presentar alegaciones y aportar pruebas.\n- Si pagas con la **reducción del 50 %**, renuncias a formular alegaciones en vía administrativa. Si presentas alegaciones y el Ayuntamiento las desestima, en general tendrás que pagar el importe íntegro.\n- Puedes presentarlas en la **Sede Electrónica del Ayuntamiento de Madrid**, buscando el trámite de alegaciones a multas de tráfico, o por los canales de registro que indique la notificación. Incluye el número de expediente y guarda el justificante de presentación.\n\n**Si ya es una resolución sancionadora**\n\nPor regla general, puedes interponer un **recurso potestativo de reposición** ante el órgano que dictó la resolución en el plazo de **un mes** desde el día siguiente a su notificación. También puedes acudir directamente a la vía contencioso-administrativa, cuyo plazo general es de **dos meses** frente a una resolución expresa. Comprueba el apartado de recursos de tu notificación.\n\nPara preparar el escrito, céntrate en **el motivo exacto de la multa y en qué prueba lo contradice**. Si te denuncian por falta de tique del SER y tenías uno válido, adjunta el justificante con matrícula, zona y hora. Si la denuncia se basa en una señal de prohibición o una reserva de carga y descarga, identifica el número y el lado de la calle de Ibiza y aporta, si las tienes, fotos que permitan comprobar la señal y su horario en la fecha de la denuncia. Puedes pedir acceso al expediente y a las fotos, si las hay. **Presenta el escrito dentro del plazo aunque todavía estés esperando esa documentación.**\n\nSi me dices **qué título tiene el documento, cuándo te lo notificaron y qué infracción pone literalmente**, puedo ayudarte a identificar el plazo y redactar el escrito. Omite la matrícula, el DNI y el número de expediente.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Gives unsupported deadlines and reduced-payment consequences."
+    },
+    {
+      "client": "codex",
+      "case": "appeal",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Si lo que has recibido es la **notificación de la denuncia**, el primer paso es presentar **alegaciones ante el Ayuntamiento de Madrid**. Si ya has recibido una **resolución sancionadora**, revisa el apartado de recursos al final del documento. El trámite y el plazo dependen de cuál de los dos tengas.\n\n### Si es la notificación de la denuncia\n\n- **Revisa el plazo.** Por regla general, tienes **20 días naturales**, contados desde el día siguiente a la notificación, para presentar alegaciones o pagar con la reducción del 50 %. El pago reducido implica renunciar a las alegaciones y cierra la vía administrativa. Si presentas alegaciones y las desestiman, normalmente tendrás que pagar el importe íntegro.\n- **Identifica el motivo concreto.** Comprueba la infracción indicada, la matrícula, la fecha, la hora y el número o tramo de la calle de Ibiza. Según el motivo, pueden servir el justificante del SER, el historial de la app de aparcamiento, una autorización vigente o fotos de la señalización del tramo. Puedes pedir acceso al expediente y a las pruebas disponibles. Presenta tus alegaciones dentro de plazo aunque sigas esperando esa documentación.\n- **Presenta el escrito y guarda el resguardo.** Usa el trámite de alegaciones de multas de circulación de la Sede Electrónica del Ayuntamiento de Madrid o el canal de registro que figure en la notificación. Incluye el número de expediente, los hechos que discutes, las pruebas que aportas y tu solicitud de que se archive el expediente.\n\n### Si ya es una resolución sancionadora\n\nSigue el **pie de recursos** de la resolución. Si indica que cabe **recurso potestativo de reposición**, el plazo habitual es de **un mes** desde el día siguiente a la notificación. La propia resolución debe indicar el órgano al que dirigirlo y las vías disponibles.\n\nComo el portal está desconectado en esta simulación, no he podido comprobar el trámite vigente. Si me dices **el título del documento, la fecha en que lo recibiste y el motivo exacto de la multa**, puedo ayudarte a identificar el paso que te corresponde y redactar un borrador. Omite el DNI, la matrícula y el número de expediente.",
+      "criteriaPassed": [
+        true,
+        false,
+        true
+      ],
+      "reviewNote": "C2: Gives unsupported deadlines and reduced-payment consequences despite pointing to the notice."
+    },
+    {
+      "client": "agy",
+      "case": "translate",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Aquí tienes una traducción natural para mandársela a un amigo:\n\n> **\"There's a loose paving stone on the sidewalk in front of 12 Calle de Ibiza, in Madrid.\"**\n\nSi tu amigo usa inglés británico, puedes cambiar *sidewalk* por *pavement*:\n\n> **\"There's a loose paving stone on the pavement in front of 12 Calle de Ibiza, in Madrid.\"**",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "translate",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Claro, aquí tienes la traducción al inglés:\n\n> *\"There's a loose paving stone on the sidewalk in front of 12 Calle de Ibiza, in Madrid.\"*\n\n*(Nota: si tu amigo usa inglés británico, puedes cambiar **sidewalk** por **pavement**.)*",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "translate",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Claro, aquí tienes una traducción natural:\n\n> \"There's a loose paving stone on the sidewalk in front of 12 Calle de Ibiza, in Madrid.\"\n\n*(Si tu amigo usa inglés británico, puedes cambiar **sidewalk** por **pavement**, o usar **loose tile** si prefieres algo más informal).*",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "agy",
+      "case": "translate",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "Aquí tienes la traducción al inglés:\n\n> **\"There is a loose tile on the sidewalk in front of 12 Calle de Ibiza, in Madrid.\"**\n\nSi tu amigo usa inglés británico, puedes cambiar *sidewalk* por *pavement*:\n\n> **\"There is a loose tile on the pavement in front of 12 Calle de Ibiza, in Madrid.\"**",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "translate",
+      "repetition": 1,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "“There’s a loose paving tile on the sidewalk outside number 12 on Calle de Ibiza in Madrid.”",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "translate",
+      "repetition": 2,
+      "skillAvailable": false,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "“There’s a loose paving slab on the pavement outside 12 Calle de Ibiza in Madrid.”",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "translate",
+      "repetition": 1,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "There’s a loose paving slab on the sidewalk in front of number 12 Calle de Ibiza in Madrid.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "client": "codex",
+      "case": "translate",
+      "repetition": 2,
+      "skillAvailable": true,
+      "expectedRead": false,
+      "observedRead": false,
+      "promptfooRoutingPassed": true,
+      "actions": [],
+      "answer": "There’s a loose paving slab on the sidewalk in front of 12 Calle de Ibiza in Madrid.",
+      "criteriaPassed": [
+        true,
+        true,
+        true
+      ]
+    }
+  ]
+}
