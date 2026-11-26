@@ -9,11 +9,13 @@ description: |-
     4. You need to query BigQuery from within a notebook. DO NOT use the Python BigQuery client library; instead, you MUST use the `%%bqsql` magics explained in this skill.
 license: Apache-2.0
 metadata:
-  version: v5
+  version: v9
   publisher: google
 ---
 
 # Notebook Guidance
+
+Keep generated notebooks usable on their own. When execution is unavailable, author the notebook locally and report that execution remains unverified. Inspect a cell before running it and execute writes or paid jobs only when the user authorized the target and operation.
 
 ## When to Use a Notebook
 
@@ -45,6 +47,14 @@ comparison is involved, favor a notebook and a visualization. A notebook is the
 
 ## Notebook Best Practices
 
+> [!CAUTION]
+>
+> **ALL DISCOVERY HAPPENS IN-CELL**: Schema inspection, data preview, package
+> availability, and model testing MUST be executed entirely inside notebook
+> cells. Do not run shell commands, external SQL tools (`execute_sql`,
+> `execute_sql_readonly`), or separate Python scripts/environments to test code
+> before creating cells.
+
 > [!IMPORTANT]
 >
 > **Agent execution rules**: Your behavior MUST depend on whether the
@@ -67,12 +77,14 @@ comparison is involved, favor a notebook and a visualization. A notebook is the
         *   Tell the user to run the notebook.
         *   Tell the user to let you know once the notebook run is completed so
             you can check the outputs to verify it's correct and fix any errors.
-2.  **IDENTIFY DATA EARLY**: Use `@skill:discovering-gcp-data-assets` or
-    BigQuery list tools to find the correct `project.dataset.table` before
-    writing ANY code. If the table ID is missing, ask the user.
-3.  **CLEAN FINAL STATE**: The final notebook MUST NOT have failed cells. If a
-    cell fails, you MUST fix it. If you tried several versions, delete the
-    failed attempts before you present the notebook to the user.
+2.  **IDENTIFY DATA EARLY**: Use `discovering-gcp-data-assets` or BigQuery list tools
+    to find the correct `project.dataset.table` before writing ANY code. If the
+    table ID is missing, ask the user.
+3.  **CLEAN FINAL STATE**: The final notebook MUST NOT have failed cells. It is
+    normal for cells to encounter errors during in-notebook prototyping—fix
+    failed cells in-place using `replace_cell` (or delete failed attempts)
+    before presenting the notebook to the user, rather than pre-testing code
+    outside the notebook.
 4.  **LOGICAL CHUNK FIDELITY**: Keep cells small. One logical transformation or
     visualization per cell. Group related cells into logical units (e.g., a
     BigQuery `%%bqsql` magic cell followed immediately by a Python visualization
@@ -101,15 +113,23 @@ kernel’s Python environment contains the necessary libraries (`bigframes`,
 ### No Active Kernel / Setup Check
 
 1.  **Infer or Ask about Kernel Preferences**:
+    -   **Infer from notebook purpose**:
+        -   Only "Spark" notebooks may use a **Remote Spark** kernel.
+            "BigFrames" and "BigQuery" notebooks MUST use **Local Python**.
+    -   **Infer from notebook cells**:
+        -   Presence of a Spark Connect session, for example
+            `ManagedSparkSession` or `DataprocSparkSession`, indicates **Local
+            Python**.
+    -   **Infer from notebook metadata**:
+        -   Read the `metadata.kernelspec` notebook field. A **Remote Spark**
+            kernel name starts with a connection hash.
     -   **Infer from Context**:
-        -   If the task mentions "Spark", "PySpark", or "distributed compute",
-            or if the active workspace is already a Spark cluster, lean towards
-            **Remote Spark**.
-        -   If the task is focused on "BigQuery", "BigFrames", or standard API
-            calls, lean towards **Local Python**.
+        -   For a "Spark" notebook, evidence of a local Python setup (such as a
+            Spark Connect session) means you should lean towards **Local
+            Python**. Without such evidence, lean towards **Remote Spark**.
     -   **Ask when Ambiguous**: If multiple options fit, ask if they prefer a
-        **Local Python** or a **Cloud/Remote Kernel** (e.g., Colab, Spark).
-2.  **For Local Setup**: Use `@skill:managing-python-dependencies` to verify if
+        **Local Python** or a **Remote Kernel**.
+2.  **For Local Setup**: Use `managing-python-dependencies` to verify if
     a virtual environment exists. If not, create one. Ensure `ipykernel` is
     installed in that environment. Install any other relevant libraries.
 3.  **For Remote Setup**: Advise the user to use the UI to select the
@@ -129,7 +149,7 @@ kernel’s Python environment contains the necessary libraries (`bigframes`,
 #### 1. Local Kernels
 
 Before installing any python libraries, you MUST use
-`@skill:managing-python-dependencies` to detect how python dependencies are
+`managing-python-dependencies` to detect how python dependencies are
 managed in the project.
 
 #### 2. Remote Kernels (Spark/Colab)
@@ -218,6 +238,125 @@ key is to keep them grouped logically and separated by Markdown headers.*
 3.  You SHOULD focus on columns directly related to accomplishing the task; not
     every column NEEDS to be cleaned.
 
+## Cell Execution
+
+When a notebook cell execution tool is available (exposed as
+`notebook_execute_cell` or `notebook__execute_cell`), you **MUST** use it to
+create and execute cells one at a time. You **MUST NOT** generate `.ipynb` files
+programmatically (for example with `nbformat`) or execute notebooks in batch
+from the shell (for example `jupyter nbconvert --execute` or `papermill`).
+
+For **Local Python** execution, you **MUST** use a virtual environment and the
+Python version inferred from the kernel definition.
+
+## Cell Execution Failure Handling
+
+> [!CAUTION]
+>
+> When a cell fails, the agent MUST follow the protocol below. The agent MUST
+> NEVER silently work around failures by fabricating data, substituting models,
+> or changing infrastructure. **Fake outputs that look correct are worse than a
+> visible error.**
+
+### 1. Retry Transient Failures
+
+Retry the cell once **only if** the error is plausibly transient (timeout,
+`DEADLINE_EXCEEDED`, `UNAVAILABLE`, kernel restart, rate limit). Re-invoke the
+cell execution tool with the exact same parameters: do NOT edit the code, change
+the kernel, or alter any tool argument first. If it fails again with the **same
+or substantially similar error**, the failure is confirmed. For deterministic
+errors (`SyntaxError`, `NameError`, `ModuleNotFoundError`, `PERMISSION_DENIED`,
+`NotFound`) skip the retry entirely. Proceed to step 2.
+
+> [!WARNING]
+>
+> Before retrying, you **MUST** consider whether the cell is safe to re-run. If
+> the cell has side effects (writes or appends to a table or bucket, `INSERT`,
+> DDL, an incrementing counter, a mutating API call) it may have partially
+> succeeded before failing. In that case you **MUST NOT** blindly retry: report
+> the situation to the user, or first verify or undo the partial effect.
+
+### 2. Classify the Failure
+
+Categorize the confirmed failure to determine whether the agent is allowed to
+fix it autonomously:
+
+#### Syntax / Logic Error
+
+-   Examples: `SyntaxError`, `NameError`, typos in column names, wrong API
+    usage.
+-   Agent May Fix: **YES** — fix the code.
+
+#### Missing Library
+
+-   Examples: `ModuleNotFoundError`, `ImportError`.
+-   Agent May Fix: **YES** — install it using
+    `managing-python-dependencies`.
+
+#### Infrastructure / Access Failure
+
+-   Examples: permission denied on GCS/S3, unreachable Spark cluster manager,
+    missing credentials, VPC/firewall errors.
+-   Agent May Fix: **NO** — STOP and ask the user.
+
+#### Missing Data or Model Artifact
+
+-   Examples: file/table/bucket not found, model path does not exist, empty
+    dataset.
+-   Agent May Fix: **NO** — STOP and ask the user.
+
+#### Kernel / Runtime Incompatibility
+
+-   Examples: Java version mismatch, unsupported Python version, class version
+    errors.
+-   Agent May Fix: **NO** — STOP and ask the user.
+
+### 3. Prohibited Workarounds (NEVER DO THESE)
+
+The following actions are **strictly forbidden** as remediation for a failing
+cell. Violating any of these produces misleading outputs that the user cannot
+trust.
+
+1.  **No Fabricating Data** — Never generate synthetic/sample data to replace a
+    dataset that failed to load. Never use `spark.createDataFrame(...)` or
+    `pd.DataFrame(...)` with made-up rows as a substitute for real data sources.
+2.  **No Substituting Models** — Never train a placeholder/dummy model to
+    replace a pre-trained model that failed to load. Never swap model types
+    (e.g., `RandomForestClassifier` for `XGBClassifier`) just to make the cell
+    pass.
+3.  **No Silently Changing Infrastructure** — Never switch
+    `master("spark://...")` → `master("local[*]")`. Never replace `gs://` /
+    `s3://` paths with local filesystem paths. Never swap a remote database
+    connection for a local file.
+4.  **No Downgrading the Execution Environment** — Never replace a
+    remote/managed Spark session with a local PySpark session.
+5.  **No Rewriting Cell Intent** — Never change what a cell fundamentally does
+    (e.g., turning "load from GCS" into "generate locally"). Minor syntax/API
+    fixes are allowed; replacing the data source is not.
+6.  **No Silently Reducing Data Scope** — Never add or lower `LIMIT` clauses,
+    filter predicates, or sampling to work around timeouts or resource errors
+    without explicit user approval.
+7.  **No Shipping Commented-Out Code** — Never leave failing lines commented out
+    or deleted in order to make the cell "succeed". Temporary bisection to
+    isolate a bug is a valid debugging step, but the delivered cell MUST execute
+    its intended logic or not at all.
+
+### 4. Required User Interaction on Unresolvable Failures
+
+When a failure falls into a "STOP" category above, the agent MUST:
+
+1.  **Diagnose**: determine the most likely root cause from the error message
+    and context (e.g., "The GCS bucket returned a 403 — this is a permissions
+    issue or the bucket may not exist in this project"). Base the diagnosis on
+    the symptoms you actually observe; do not invent details.
+2.  **Report**: show the user the exact error message, which cell failed, and
+    the diagnosis.
+3.  **Suggest**: propose concrete actions the user can take to resolve it (e.g.,
+    "Please verify the bucket exists with `gcloud storage ls gs://foo-bucket/`
+    and that your account has `storage.objectViewer` on it").
+4.  **Wait**: do NOT proceed to subsequent cells. Wait for the user to resolve
+    the issue and explicitly confirm before retrying.
+
 ## Specialized Notebook Guidance
 
 Refer to the following resources for guidance on specific notebook topics:
@@ -256,8 +395,7 @@ import bigframes.pandas as bpd
 
 > [!IMPORTANT]
 >
-> The `bigframes` library must be installed. Determine if bigframes needs to be
-> installed by following @skill:managing-python-dependencies.
+> The `bigframes` library must be installed.
 
 ```python
 %%bqsql df_sample
@@ -273,6 +411,9 @@ SELECT * FROM `project.dataset.table` LIMIT 10
 >     instead.
 > 2.  **NO Mixing Logic**: Do not put Python code in the same cell as `%%bqsql`
 >     magics.
+> 3.  **NO Unbundled Micro-Testing**: Do not issue individual shell commands per
+>     check or run out-of-band diagnostic scripts. Minimize how often you need
+>     to ask the user for permission.
 
 #### Working with SQL Results in Python
 
@@ -318,7 +459,7 @@ subsequent cells, you can use `<df_name>` directly.
 ### 2. Machine Learning in Notebooks
 
 Integration with machine learning workflows and best practices. - **Guide**: Use
-`@skill:ml-best-practices`. - **MUST READ WHEN**: The task involves machine
+`ml-best-practices`. - **MUST READ WHEN**: The task involves machine
 learning, training a model, clustering, classification, regression, or
 time-series forecasting.
 

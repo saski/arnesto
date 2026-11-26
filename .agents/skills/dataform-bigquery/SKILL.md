@@ -7,11 +7,13 @@ description: Expertise in generating clean, correct, and efficient Dataform pipe
   up a new Dataform project or configuring workflow_settings.yaml.
 license: Apache-2.0
 metadata:
-  version: v2
+  version: v9
   publisher: google
 ---
 
 # Dataform Expert Skill for BigQuery
+
+Work on local code and compile locally by default. A dry run can still contact BigQuery. Use a confirmed project and location for validation. Run changes against live tables only when the user authorized the target and operation.
 
 Expert-level guidance for building, managing, and optimizing **Dataform**
 pipelines targeting **Google BigQuery**.
@@ -35,17 +37,14 @@ Follow these steps when fulfilling Dataform-related requests:
 
 1.  Ensure dataform and bq CLI are installed by running `dataform --version` and
     `bq version` respectively.
-2.  If dataform CLI is not installed, ensure Node.js and npm are installed by
-    running `node -v` and `npm -v` respectively.
-3.  If Node.js or npm are not installed already, ask the user to install them.
-4.  If they are both installed, proceed to install the dataform CLI by running
-    `npm i -g @dataform/cli` and verifying the installation with `dataform
-    --version`.
-5.  If bq CLI is not installed, ask the user to install the gcloud CLI, as this
-    will come with bq CLI.
-6.  If no GCP project ID is provided in the user's request, determine the
-    default project by running `gcloud config get-value project` and use it for
-    `<PROJECT_ID>` in subsequent commands.
+2.  If the Dataform CLI is unavailable, use the project-managed Node.js
+    dependency setup and the repository software-installation rules.
+    Keep the CLI local to the project or its approved isolated environment.
+3.  If the bq CLI is unavailable, continue with local authoring and report
+    which metadata or validation checks are unavailable.
+4.  If no GCP project ID is provided in the user's request, determine the
+    default project by running `gcloud config get-value project`. Treat it as
+    a candidate until the intended target is established.
 
 ### 1. Understand the Current State
 
@@ -53,8 +52,8 @@ Follow these steps when fulfilling Dataform-related requests:
     `workflow_settings.yaml` file.
     *   **If `workflow_settings.yaml` is NOT found**:
         *   Assume the repository is uninitialized.
-        *   Initialize it by running `dataform init <PROJECT_DIR> <PROJECT_ID>
-            <DEFAULT_LOCATION>`.
+        *   Initialize it by running
+            `dataform init <PROJECT_DIR> <PROJECT_ID> <DEFAULT_LOCATION>`.
         *   Example: `dataform init my-repo my-gcp-project us-central1` will
             create a repository in `my-repo`.
     *   **If `workflow_settings.yaml` IS found**:
@@ -86,31 +85,35 @@ Follow these steps when fulfilling Dataform-related requests:
     GCS URIs.
     -   **List Datasets**: `bq ls --project_id=<PROJECT_ID>`
     -   **List Tables**: `bq ls <PROJECT_ID>:<DATASET_ID>`
+    -   **List Graphs**: ``bq query --use_legacy_sql=false "SELECT * FROM
+        `<PROJECT_ID>.<DATASET_ID>.INFORMATION_SCHEMA.PROPERTY_GRAPHS` LIMIT
+        100"``
     -   **Check Schema/Info**: `bq show --schema --format=prettyjson
-        <PROJECT_ID>:<DATASET_ID>.<TABLE_ID>` or `bq show --format=prettyjson
-        <PROJECT_ID>:<DATASET_ID>.<TABLE_ID>`
-    -   **Preview Data**: `bq head --format=prettyjson
-        <PROJECT_ID>:<DATASET_ID>.<TABLE_ID>`
+        <PROJECT_ID>:<DATASET_ID>.<TABLE_ID>` or
+        `bq show --format=prettyjson <PROJECT_ID>:<DATASET_ID>.<TABLE_ID>`
+    -   **Preview Data**:
+        `bq head --format=prettyjson <PROJECT_ID>:<DATASET_ID>.<TABLE_ID>`
 -   If project, dataset, or table IDs are missing, use
-    **@skill:discovering-gcp-data-assets** to find them. **Ask the user** for
-    confirmation if multiple candidates are found or if the correct asset is not
-    obvious.
+    **discovering-gcp-data-assets** to find them. **Ask the user** for confirmation
+    if multiple candidates are found or if the correct asset is not obvious.
 -   Review resolved SQLX actions from the DAG to understand data context and
     relationships.
 
 ### 3. Apply Automatic Data Cleaning and SQL Optimizations
 
-> [!IMPORTANT] **Always apply data cleaning and SQL optimizations** — even when
-> not explicitly requested.
+> [!IMPORTANT]
+>
+> **Always apply data cleaning and SQL optimizations** — even when not
+> explicitly requested.
 
 -   **Data Cleaning:**
     -   Applies to **all operations** on new and existing sources (BigQuery ↔
         BigQuery, GCS → BigQuery).
-    -   Follow the protocol in **@skill:data-autocleaning** strictly.
+    -   Follow the protocol in **data-autocleaning** strictly.
     -   If cleaning is not applied, provide **strong evidence** in the response.
     -   Include an **"Automatic Cleaning Summary"** section in every response.
 -   **SQL Optimizations:**
-    -   Follow the optimization protocol in **@skill:developing-with-bigquery**
+    -   Follow the [SQL Optimization Rules](#sql-optimization-rules) protocol
         strictly.
     -   Include an **"Optimization Summary"** section when applied.
 
@@ -177,30 +180,61 @@ is successfully created (as instructed in the Understand the Current State
 step). MUST NOT execute a real `dataform run` without explicit user request.
 
 If `.df-credentials.json` could not be initialized via `dataform init-creds` or
-manual creation, fall back on other methods of validation, such as `dataform
-compile`, manual SQL inspection, and `bq query --dry_run`.
+manual creation, fall back on other methods of validation, such as
+`dataform compile`, manual SQL inspection, and `bq query --dry_run`.
 
 ## Incremental / Append Operations
 
-> [!IMPORTANT] Use `type: "incremental"` for **all** append, move, or copy
-> operations targeting an **existing** BigQuery table. Never use `type:
-> "operations"` for these tasks.
+> [!IMPORTANT]
+>
+> Use `type: "incremental"` for **all** append, move, or copy operations
+> targeting an **existing** BigQuery table. Never use `type: "operations"` for
+> these tasks.
 
-| Rule                      | Detail                                           |
-| ------------------------- | ------------------------------------------------ |
-| **Config**                | Set `type: "incremental"` and `name` to the      |
-:                           : **existing target table name**. `partitionBy` is :
-:                           : optional (typically a date/timestamp column).    :
-| **Body**                  | Must contain **only** a `SELECT` statement —     |
-:                           : **no** `INSERT`. Dataform auto-generates the     :
-:                           : `INSERT`.                                        :
-| **References**            | Use `${ref("source_table_name")}` to reference   |
-:                           : sources.                                         :
-| **Schema alignment**      | Column names and types in `SELECT` must match    |
-:                           : the target table schema. Fetch the schema if     :
-:                           : unknown.                                         :
-| **No target declaration** | Do **not** create a `declaration` file for the   |
-:                           : target table when using `type\: "incremental"`.  :
+Rule                      | Detail
+------------------------- | ------
+**Config**                | Set `type: "incremental"` and `name` to the **existing target table name**. `partitionBy` is optional (typically a date/timestamp column).
+**Body**                  | Must contain **only** a `SELECT` statement — **no** `INSERT`. Dataform auto-generates the `INSERT`.
+**References**            | Use `${ref("source_table_name")}` to reference sources.
+**Schema alignment**      | Column names and types in `SELECT` must match the target table schema. Fetch the schema if unknown.
+**No target declaration** | Do **not** create a `declaration` file for the target table when using `type: "incremental"`.
+
+## SQL Optimization Rules
+
+> [!TIP]
+>
+> Always include an **"Optimization Summary"** section listing only the
+> optimizations applied.
+
+### Always Apply (Automatic)
+
+-   **Column Pruning**: Remove unnecessary columns from all query stages.
+-   **Common Subexpression Reuse**: Factor out identical expressions to avoid
+    redundant computation.
+-   **Predicate Pushdown**: Apply `WHERE` filters as early as possible.
+-   **Early Aggregation**: Perform `GROUP BY` before joins when possible.
+-   **Intermediate Materialization**: Choose `VIEW` vs `TABLE` for intermediate
+    nodes based on efficiency.
+
+#### Intermediate Node Strategy
+
+-   **`VIEW`**: Small datasets or simple transformations.
+-   **`TABLE`**: Large datasets, expensive computations, or nodes reused
+    multiple times.
+
+### Always Rewrite (Mandatory)
+
+-   **`WHERE <col> IN (SELECT ...)`**: Replace With
+    `WHERE EXISTS (SELECT 1 FROM ...)`
+-   **`WHERE (SELECT COUNT(*) ...) > 0`**: Replace With
+    `WHERE EXISTS (SELECT 1 FROM ...)`
+
+### Propose with Confirmation (Conditional)
+
+-   **`UNION` → `UNION ALL`**: Faster (skips deduplication), but permits
+    duplicate rows.
+-   **`COUNT(DISTINCT)` → `APPROX_COUNT_DISTINCT`**: Faster and lower memory,
+    but approximate.
 
 ## Coding Standards
 
@@ -295,7 +329,7 @@ When the user requests unit tests:
 
 -   **Batch tool calls** — maximize parallel calls to minimize round trips.
 -   **State assumptions clearly** — don't ask for unnecessary clarifications.
--   **Autocleaning is non-negotiable** — always check @skill:data-autocleaning
+-   **Autocleaning is non-negotiable** — always check data-autocleaning
     protocol.
 -   **Execution Constraints** — do not execute a real `dataform run` without
     explicit user confirmation (`dataform run --dry-run` can be used without

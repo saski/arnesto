@@ -5,7 +5,7 @@ Every data application built with this skill MUST adhere to these visual and fun
 ## Design Principles
 1. **Minimal Chrome**: Hide default framework UI (headers, footers, toolbars) to make the app feel standalone.
 2. **Card-Based Layout**: Every logical piece of content (KPIs, Charts, Tables) MUST live in a bordered card with subtle shadows.
-3. **Muted Color Palette**:
+3. **Muted Color Palette**: 
    - Use a "Zinc" inspired palette (Grays/Zinc for text and borders).
    - Primary Accent: Blue (`#2563eb`).
 4. **Semantic Coding**:

@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "repository": "GoogleCloudPlatform/data-agent-kit-plugin",
+  "release": "1.3.0",
+  "sourceCommit": "716f429da2671acbb1faaa3944948ff9e86c5cd4",
+  "sourceArchiveSha256": "0ef462e7bbe19a66e01efd55b97e3faf9b1f39b49ba415897e680a3ae2cfd8c9",
+  "treeHashAlgorithm": "SHA-256 over sorted UTF-8 relative POSIX paths, a NUL, file bytes, and a NUL per regular file",
+  "installerManifest": "Historical Google installer record, retained byte-for-byte. Its checksum algorithm has not been verified. The tree hashes here are independent.",
+  "skills": {
+    "accidental-data-loss-prevention": {
+      "status": "unchanged",
+      "sourcePath": "skills/accidental-data-loss-prevention",
+      "sourceTreeSha256": "888a56886cae21c290f9e715f9df208953d553e656ab51ed26813fb4843ec0c5",
+      "installedTreeSha256": "888a56886cae21c290f9e715f9df208953d553e656ab51ed26813fb4843ec0c5"
+    },
+    "bigquery-data-transfer-service": {
+      "status": "refreshed",
+      "sourcePath": "skills/bigquery-data-transfer-service",
+      "sourceTreeSha256": "123b84a919402ac6ec9e2d7d6804fce481e0f29076a72d7b836207d5087c12db",
+      "installedTreeSha256": "123b84a919402ac6ec9e2d7d6804fce481e0f29076a72d7b836207d5087c12db"
+    },
+    "building-data-apps": {
+      "status": "refreshed",
+      "sourcePath": "skills/building-data-apps",
+      "sourceTreeSha256": "7891fc22eafb61e9572d511a690eb81de10b034206d9c8ab23fd8b703cc93a27",
+      "installedTreeSha256": "7891fc22eafb61e9572d511a690eb81de10b034206d9c8ab23fd8b703cc93a27"
+    },
+    "data-autocleaning": {
+      "status": "refreshed",
+      "sourcePath": "skills/data-autocleaning",
+      "sourceTreeSha256": "ea4ac45dc1f97383e0e529bfdf98855e2c6b44053d0140ec9682f1fd7e3d1e4d",
+      "installedTreeSha256": "c221784834e031f843548d5a6015728527d20e789ff3075a356033dc28213796"
+    },
+    "dataform-bigquery": {
+      "status": "refreshed",
+      "sourcePath": "skills/dataform-bigquery",
+      "sourceTreeSha256": "14da9faf94936316fd0fc47111dd46e42ba9168e5ce6d94fe3bc941d16d2402b",
+      "installedTreeSha256": "fec958eb6990fcd1ce71c683c75086cd1d6c6d1ec82e1135dd8f5f187537687d"
+    },
+    "dbt-bigquery": {
+      "status": "refreshed",
+      "sourcePath": "skills/dbt-bigquery",
+      "sourceTreeSha256": "a62606a825188c2421ecb78232fdb81c7329581b47ccde5080062336e237d3b3",
+      "installedTreeSha256": "65d2a1919bf5cf082fc79d40e4140e849d2545fc00e3ea13ef4dcf7362b2d037"
+    },
+    "developing-with-bigquery": {
+      "status": "retained-legacy",
+      "installedTreeSha256": "d8d302f46ae8d81a73b67139c8e65984352ce252612e2653f4c2a45616cc678d",
+      "decision": "The official release splits this router across specialized BigQuery skills. The existing Arnesto entry point remains."
+    },
+    "discovering-gcp-data-assets": {
+      "status": "retained-legacy",
+      "installedTreeSha256": "7249f27c916fbb6a678519c5ebc5570843044695cbc10a307afd679612209460",
+      "decision": "The official discover-assets package has different runtime dependencies. Existing Arnesto callers keep using this entry point."
+    },
+    "gcloud-auth-verification": {
+      "status": "retained-legacy",
+      "installedTreeSha256": "a35e4060d18b2a6d3fab418103fea5076f0eca1e788b2078a8d65b3f232152a8",
+      "decision": "The official release has no equivalent standalone auth verification skill. Data Agent Kit setup has a different scope."
+    },
+    "gcp-composer-troubleshooting": {
+      "status": "refreshed",
+      "sourcePath": "skills/gcp-composer-troubleshooting",
+      "sourceTreeSha256": "27f266b84d29941cc8d9b52b0f60eaf1e9c6a49cb4d41067b91f523f103278a0",
+      "installedTreeSha256": "27f266b84d29941cc8d9b52b0f60eaf1e9c6a49cb4d41067b91f523f103278a0"
+    },
+    "gcp-data-pipelines": {
+      "status": "refreshed",
+      "sourcePath": "skills/gcp-data-pipelines",
+      "sourceTreeSha256": "52b3723823634144e34ba889b1d12d028dbba862064385573d35df1956f5c051",
+      "installedTreeSha256": "92fd64572f804e3bdb03a9c343f38bb266300f789fa9ae854f3879885a82a43b"
+    },
+    "gcp-dataflow": {
+      "status": "refreshed",
+      "sourcePath": "skills/gcp-dataflow",
+      "sourceTreeSha256": "b687ee0bd4272b0f0b21c2e648cdcf34f710624c707aef6b7d727829b71dc59f",
+      "installedTreeSha256": "40411e8f654dfb3e6d3b8370c10c9e8d8cb5023f949ed00b08b4cab0cb044a64"
+    },
+    "gcp-pipeline-orchestration": {
+      "status": "refreshed",
+      "sourcePath": "skills/gcp-pipeline-orchestration",
+      "sourceTreeSha256": "b372a8720b80fd38703a6d02acd96aca6765ae882c080c980d8c734806c0d35a",
+      "installedTreeSha256": "53f5b4279fad1f0c0f948725d1ae70f2a82f6acdfd5da4985af6050500cf4610"
+    },
+    "gcp-pipeline-resource-provisioning": {
+      "status": "unchanged",
+      "sourcePath": "skills/gcp-pipeline-resource-provisioning",
+      "sourceTreeSha256": "064d5ab31e8330f4bcec077a8c447d8ebd3b2e65f17e8628f58ac275f97fae46",
+      "installedTreeSha256": "064d5ab31e8330f4bcec077a8c447d8ebd3b2e65f17e8628f58ac275f97fae46"
+    },
+    "gcp-spark": {
+      "status": "refreshed",
+      "sourcePath": "skills/gcp-spark",
+      "sourceTreeSha256": "be4dc6cc83a4e93ffc17505acd255ab1a88a4269f5fcd2143489024ac6a113cd",
+      "installedTreeSha256": "d8b1467c1c17df6500198d101ef83efb978b9827b032cd3b94202c85f2fbe5cc"
+    },
+    "managing-python-dependencies": {
+      "status": "refreshed",
+      "sourcePath": "skills/managing-python-dependencies",
+      "sourceTreeSha256": "3bf4dbbe5bc4ab4f3d6b9a5d8483387578a9a16687e37a21b89b439c68eab2b8",
+      "installedTreeSha256": "3bf4dbbe5bc4ab4f3d6b9a5d8483387578a9a16687e37a21b89b439c68eab2b8"
+    },
+    "ml-best-practices": {
+      "status": "unchanged",
+      "sourcePath": "skills/ml-best-practices",
+      "sourceTreeSha256": "5d72ffd5c4bfe25806f5dde43f05aa30848382f4aa1bd92567b4339c14e2c5ed",
+      "installedTreeSha256": "5d72ffd5c4bfe25806f5dde43f05aa30848382f4aa1bd92567b4339c14e2c5ed"
+    },
+    "notebook-guidance": {
+      "status": "refreshed",
+      "sourcePath": "skills/notebook-guidance",
+      "sourceTreeSha256": "6305a99369e48b99b3f33cd1b7e68f6bac370cb78b043ff8dcef265285fc8a28",
+      "installedTreeSha256": "e23fe79eda8186e2440e12cf173c29a9acd71e5deb81a530e5c5246b0daae114"
+    },
+    "skill-repair": {
+      "status": "retained-legacy",
+      "installedTreeSha256": "a6d7111714befcb6406539f453bee5282c696629df2c79a36313e6bcaad2ba3b",
+      "decision": "The official release has no equivalent package and the original installer source is unverified."
+    }
+  }
+}

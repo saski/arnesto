@@ -6,11 +6,13 @@ description: Automated data quality and transformation capabilities for Dataform
   cleaning.
 license: Apache-2.0
 metadata:
-  version: v1
+  version: v2
   publisher: google
 ---
 
 # Data Autocleaning Skill
+
+Apply cleanup to local code or a proposed query. Run writes against a live dataset only when the user authorized the target dataset and operation.
 
 Automated data profiling, quality assessment, and transformation for data
 sourced from **BigQuery** or **Google Cloud Storage (GCS)**.
@@ -160,8 +162,8 @@ Perform these checks **before** generating the `implementation_plan.md`.
 -   **Normalization**: Only trim whitespace on string fields. Make sure to
     **PRESERVE CASE**. **DO NOT** perform case conversions (e.g., `LOWER()`,
     `UPPER()`) unless explicitly required.
--   **Filtering**: Filter out `NULL` values using `ARRAY_FILTER(array_column, e
-    -> e IS NOT NULL)`.
+-   **Filtering**: Filter out `NULL` values using
+    `ARRAY_FILTER(array_column, e -> e IS NOT NULL)`.
 -   **Deduplication**: Use `ARRAY(SELECT DISTINCT x FROM UNNEST(array_column))`
     for case-sensitive deduplication.
 -   **Transformations**: Use `ARRAY_TRANSFORM` or `UNNEST`/`ARRAY_AGG` for

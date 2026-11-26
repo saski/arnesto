@@ -3,15 +3,18 @@ name: gcp-pipeline-orchestration
 description: This skill helps the agent generate or update orchestration pipeline
   definitions for Google Cloud Composer to initialize orchestration pipeline or update
   the orchestration definition for orchestration of various data pipelines, like dbt
-  pipelines, notebooks, Spark jobs, Dataform, Python scripts or inline BigQuery SQL
-  queries. This skill also helps deploy and trigger orchestration pipelines.
+  pipelines, notebooks, Spark jobs, Dataform, Python scripts, Vertex AI custom jobs,
+  Machine Learning training, Apache Airflow operators, or inline BigQuery SQL queries.
+  This skill also helps deploy and trigger orchestration pipelines.
 license: Apache-2.0
 metadata:
-  version: v1
+  version: v7
   publisher: google
 ---
 
 ## Mandatory Reference Routing
+
+Treat local authoring, remote validation, deployment, and triggering as distinct actions. For live changes, use the environment, pipeline, and action authorized by the user. A trigger request does not authorize redeployment. Never assume the default environment for a live operation.
 
 If relevant, call the associated reference file(s) before you take actions.
 Refer to the table below to determine which reference file to retrieve in
@@ -95,6 +98,9 @@ on the IDE environment:
 
 -   For Antigravity, use `["job:datacloud:antigravity"]`.
 -   For VS Code, use `["job:datacloud:vscode"]`.
+-   For Gemini CLI, use `["job:datacloud:gemini-cli"]`.
+-   For Claude Code, use `["job:datacloud:claude"]`.
+-   For Codex, use `["job:datacloud:codex"]`.
 -   For any other environment, use `["job:datacloud:other"]`.
 
 #### Deployment yaml structure and syntax instruction.
@@ -164,9 +170,151 @@ following fields:
     > `sparkHistoryServerConfig`. It is better to omit this configuration if a
     > dedicated Spark History Server is not available.
 
--   If you want to schedule the python job, check the content of Python content
-    to determine if it's a spark job. If it is, use `pyspark` as type instead of
-    script as type.
+-   **Python Actions (`python`)**:
+
+    -   Check the content of the Python script to determine if it is a Spark
+        job. If it is, use `pyspark` action instead of `python`.
+    -   **Environment & Dependencies**: The `environment` field on a `python`
+        action is **optional**.
+        -   When `environment` or `requirements` is **omitted**, the action runs
+            as a standard `PythonOperator` directly in the Airflow worker's host
+            environment (using pre-installed Composer packages). Do **not** add
+            `environment.requirements` unnecessarily when standard libraries or
+            existing Composer packages are sufficient.
+        -   Only specify `environment.requirements` (via
+            `path: requirements.txt` or `inline: { list: [...] }`) when custom,
+            isolated third-party packages not available in Composer are needed.
+            This compiles to `PythonVirtualenvOperator` to create an isolated
+            virtual environment.
+
+-   **SQL Actions (`sql`)**:
+
+    -   **BigQuery Dataset Location**: When creating a `sql` action with the
+        `bigquery` engine, you **must inspect the location of any referenced
+        BigQuery datasets** (e.g., whether it is multi-region `US`/`EU` or a
+        specific region like `us-central1`). Run:
+
+        ```
+        # Replace <PROJECT_ID> and <DATASET_ID> with the actual project and dataset ID
+        bq show --format=prettyjson <PROJECT_ID>:<DATASET_ID>
+        ```
+
+        Extract the `location` field (e.g., `US`, `EU`, `us-central1`) and set
+        `actions[].sql.engine.bigquery.location: <LOCATION>` (or
+        `actions[].dataIngestion.bigqueryDts.location: <LOCATION>`). Do NOT omit
+        the location or assume `defaults.location` matches the BigQuery dataset
+        location.
+    -   **BigQuery vs Dataproc Query Syntax**:
+
+        -   **For BigQuery (`engine.bigquery`)**: Specify the output table via
+            `destinationTable: project.dataset.table_name`. The query
+            (`query.inline` or `query.path`) must be a standard **`SELECT`**
+            query without DDL/DML statements (do **not** use `CREATE TABLE`,
+            `CREATE OR REPLACE TABLE`, or `INSERT INTO` as BigQuery will fail).
+        -   **For Dataproc (`engine.dataprocServerless` /
+            `engine.dataprocOnGce`)**: Dataproc engines do not support
+            `destinationTable`; include DDL/DML statements
+            (`CREATE TABLE ... AS SELECT ...` or `INSERT OVERWRITE`) directly in
+            the SQL query text to materialize output tables.
+
+-   **AI / Vertex AI Actions (`ai`)**:
+
+    -   **Scope & Capabilities**: `agentPlatform` (`Vertex AI`) supports
+        `modelUpload` (register a trained model), `batchInference` (batch
+        predictions) and `createAndRunCustomJob` (run a Vertex AI `CustomJob`,
+        e.g. containerized training). Spark-based training is executed in a
+        `pyspark` action.
+    -   **Custom Job (`agentPlatform.createAndRunCustomJob`)**: follow the
+        `run_vertex_custom_job` example and reminder 7 in
+        `references/orchestration-pipelines-schema.md`.
+
+        > [!IMPORTANT]
+        >
+        > Custom Jobs (`agentPlatform.createAndRunCustomJob`) REQUIRE a Composer
+        > environment with Airflow 2.11+ or 3.x.
+
+    -   **Model Export Signature for Batch Prediction**: When creating a custom
+        training pipeline in PySpark followed by a Agent Platform batch
+        inference action (`agentPlatform.batchInference`) reading from BigQuery:
+
+        -   Agent Platform Batch Prediction passes input instances wrapped in a
+            key named `"instances"` (e.g., `{"instances": [...]}`).
+        -   Standard TensorFlow / Keras models exported with default
+            `model.save()` name their input signature after layer names (e.g.,
+            `dense_input`), which causes Agent Platform batch prediction jobs to
+            fail with input signature mismatch errors.
+        -   You **must export the model with an explicit serving signature**
+            expecting `instances` as the input name and returning a dictionary
+            with `"prediction"`:
+
+            ```python
+            class ExportModel(tf.Module):
+
+              def __init__(self, model):
+                super().__init__()
+                self.model = model
+
+              @tf.function(
+                  input_signature=[
+                      tf.TensorSpec(
+                          shape=[None, num_features],
+                          dtype=tf.float32,
+                          name="instances",
+                      )
+                  ]
+              )
+              def __call__(self, instances):
+                predictions = self.model(instances)
+                return {"prediction": predictions}
+
+            tf.saved_model.save(
+                ExportModel(model),
+                export_path,
+                signatures={"serving_default": ExportModel(model).__call__},
+            )
+            ```
+
+    -   **Consuming Batch Prediction Outputs in Downstream Actions (dbt /
+        SQL)**:
+
+        -   When Vertex AI writes batch predictions to BigQuery, regression or
+            single-value scalar predictions are serialized as scalar columns
+            (e.g., `STRING` or `FLOAT64`), **not** arrays (`REPEATED`).
+        -   Do **not** use array offset syntax (such as `prediction[OFFSET(0)]`)
+            when querying scalar prediction results in downstream dbt models or
+            BigQuery SQL actions, as this causes type mismatch errors.
+        -   Instead, access the scalar column directly using
+            `SAFE_CAST(prediction AS FLOAT64)`:
+
+            ```sql
+            SELECT
+              id,
+              SAFE_CAST(prediction AS FLOAT64) AS predicted_value,
+              actual_value
+            FROM {{ source('vertex_ai_predictions', 'batch_predictions') }}
+            ```
+
+-   **Pipeline Notifications (`notifications`)**: This block is **optional**.
+    Configure top-level email notifications under
+    `notifications.onPipelineSuccess.email` and
+    `notifications.onPipelineFailure.email` (each a list of email strings).
+
+-   **Retry Policies (`retryPolicy`)**: Optional, under `defaults.retryPolicy`
+    and/or `<action>.retryPolicy`; `maxRetries` is required, the strategy is
+    optional. You **MUST NOT** use deprecated `defaults.executionConfig`. See
+    Reminder 9 in `references/orchestration-pipelines-schema.md` for the fields
+    and duration format.
+
+-   **Airflow Task Actions (`airflowTask`)**: Prefer the built-in actions
+    (`sql`, `python`, `pyspark`, `notebook`, `pipeline`, `dataIngestion`, `ai`).
+    Use `- airflowTask:` only when no native action covers the operator: set
+    `operatorClass` to the fully qualified class name (e.g.,
+    `"airflow.providers.http.operators.http.HttpOperator"`) and pass constructor
+    keyword arguments under `params` using **`snake_case` keys** (e.g.,
+    `http_conn_id`, `log_response`). Ask the user to confirm (do NOT invent)
+    connection IDs and that the provider package is installed in the Composer
+    environment; `validate` cannot check either. Follow the `air_simple_http`
+    example and Reminder 10 in `references/orchestration-pipelines-schema.md`.
 
 -   Before creating or updating the `deployment.yaml` file, you **must** first
     run the following command to get the list of available Composer environments
@@ -193,14 +341,19 @@ following fields:
     --format="json(config.softwareConfig.imageVersion, config.softwareConfig.pypiPackages)"
     ```
 
-    From the output, select an environment where the imageVersion value is one
-    of is "composer-3-airflow-3.1.7-build.x, composer-3-airflow-2.11.1-build.x,
-    composer-3-airflow-2.10.5-build.x, composer-3-airflow-2.9.3-build.x,
-    composer-2.16.11-airflow-2.11.1, composer-2.16.11-airflow-2.10.5,
-    composer-2.16.11-airflow-2.9.3" or select an environment
-    where`orchestration-pipelines` field is presented listed in the PyPI
-    packages. This ensures the selected environment is compatible with
-    orchestration pipelines.
+    From the output, select an environment where the `imageVersion` value is one
+    of `composer-3-airflow-3.1.7-build.x`, `composer-3-airflow-2.11.1-build.x`,
+    `composer-3-airflow-2.10.5-build.x`, `composer-3-airflow-2.9.3-build.x`,
+    `composer-2.16.11-airflow-2.11.1`, `composer-2.16.11-airflow-2.10.5`, or
+    `composer-2.16.11-airflow-2.9.3`, or select an environment where
+    `orchestration-pipelines` package is listed in the PyPI packages. This
+    ensures the selected environment is compatible with orchestration pipelines.
+    Pipelines using v1.2.0 features (`agentPlatform.createAndRunCustomJob`,
+    `notifications.onPipelineSuccess`, `retryPolicy`, `airflowTask`) MUST target
+    an environment whose `orchestration-pipelines` package is `>= 1.2.0` (an
+    Airflow 2.11+/3.x image, or the package pinned in `pypiPackages`); on older
+    environments `validate` and `deploy` succeed but DAG parsing fails at
+    runtime (e.g. `no field named "retryPolicy"`).
 
 -   Third, before generating the `deployment.yaml` file, you **must ask the
     user** to provide the `artifact_storage` bucket name. Note that the
@@ -251,6 +404,15 @@ gcloud beta orchestration-pipelines validate --environment=<ENV_NAME>
     -   Read the error message carefully.
     -   Edit the orchestration and deployment files to fix the specific issue
         mentioned.
+    -   If the error is `has no field named "<field>"` for a field documented in
+        `references/orchestration-pipelines-schema.md`, you MUST verify the
+        Google Cloud CLI version (check the CLI's internal `model_version` with
+        `gcloud beta orchestration-pipelines info`; `createAndRunCustomJob`,
+        `onPipelineSuccess` (in v1.2.0+; `onPipelineFailure` is v1.0+),
+        `retryPolicy`, and `airflowTask` require CLI `model_version` `1.2.X` or
+        higher; do NOT change the pipeline YAML's `modelVersion: "1.0"`). Ask
+        the user to run `gcloud components update` and re-validate. Do NOT
+        rewrite the action into a different type.
 
 3.  Re-run the validation command to confirm the fix. Do not mark the task as
     complete until the validation passes (exit code 0), and do not fall back to
@@ -284,7 +446,7 @@ If requested to **deploy** the orchestration pipeline:
 
 1.  You MUST ask the user which environment to deploy to. If no environment name
     is provided, list the available environments from `deployment.yaml` and ask
-    the user to choose one, defaulting to `dev` if it exists.
+    the user to choose one.
 
 2.  Read the orchestration YAML to extract the `pipelineId`.
 
@@ -298,9 +460,9 @@ If requested to **deploy** the orchestration pipeline:
     ```
 
 4.  Parse the deploy output to extract the **bundle ID** (version). The output
-    includes a line like: `Pipeline deployment successful for version
-    local-b32d15e307b5` The version string (e.g., `local-b32d15e307b5`) is the
-    bundle ID.
+    includes a line like:
+    `Pipeline deployment successful for version local-b32d15e307b5` The version
+    string (e.g., `local-b32d15e307b5`) is the bundle ID.
 
 > [!IMPORTANT]
 >
@@ -310,15 +472,14 @@ If requested to **deploy** the orchestration pipeline:
 
 ### Step 7: Trigger the Orchestration Pipeline Run (Optional)
 
-If requested to **trigger/run** the orchestration pipeline, you MUST follow the
-Deploy → Poll → Trigger flow.
+If requested to **trigger/run** the orchestration pipeline, use the Resolve Bundle → Poll → Trigger flow.
 
-1.  **Ask for environment**: You MUST ask the user which environment to use.
-    Default to `dev` if it exists in `deployment.yaml`.
+1.  **Resolve environment**: Use the user-authorized environment. Ask if the
+    target is unclear.
 
-2.  **Deploy first** (Step 6): Always deploy before triggering to ensure the run
-    uses the latest code. Extract the `bundle ID` from deploy output and the
-    `pipelineId` from the orchestration YAML.
+2.  **Resolve the deployed bundle**: If deployment is authorized, follow Step 6
+    and use its returned bundle ID. Otherwise list deployed bundles and identify
+    the requested one before polling and triggering it.
 
 3.  **Poll for DAG readiness**: Wait for the DAG to be registered in Composer.
 
@@ -360,18 +521,19 @@ Deploy → Poll → Trigger flow.
 > [!TIP]
 >
 > **Trigger-only (no deploy):** If the user wants to trigger an already-deployed
-> pipeline, skip Step 6. Use `gcloud beta orchestration-pipelines list
-> --environment=<ENV_NAME>` to find the bundle ID, then trigger directly with
-> Step 7.4.
+> pipeline, skip Step 6. Use
+> `gcloud beta orchestration-pipelines list --environment=<ENV_NAME>` to find
+> the bundle ID, then trigger directly with Step 7.4.
 
 > [!IMPORTANT]
 >
-> **Fallback:** If `gcloud trigger` fails, use the bundled script: Run script
-> with -- help to discover and learn the interface.
+> **Fallback:** If `gcloud trigger` fails, check whether a run was created
+> before retrying. Use the bundled script only when the result is clear and
+> the same target and trigger are authorized.
 >
 > ```
-> python scripts/trigger/airflow_trigger.py \ --project <PROJECT_ID>
-> --location <REGION> \ --environment <COMPOSER_ENV> --dag_id <PIPELINE_ID>
+> python scripts/trigger/airflow_trigger.py --project <PROJECT_ID> \
+>   --location <REGION> --environment <COMPOSER_ENV> --dag_id <PIPELINE_ID>
 > ```
 >
 > Get `project`, `region`, and `composer_environment` from `deployment.yaml`.
@@ -381,8 +543,8 @@ Deploy → Poll → Trigger flow.
 -   `deployment.yaml` file is created successfully.
 -   The orchestration pipeline file (e.g., `orchestration_pipeline.yaml`) is
     created successfully, includes a mandatory `endTime` for every schedule, and
-    passes the validation command: `gcloud beta orchestration-pipelines validate
-    --environment=<ENV_NAME>`
+    passes the validation command:
+    `gcloud beta orchestration-pipelines validate --environment=<ENV_NAME>`
 -   If user requested to **deploy** the orchestration pipeline, the `gcloud beta
     orchestration-pipelines deploy --environment=<ENV_NAME> --local` command
     should return a success message with a version/bundle ID.

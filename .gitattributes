@@ -1,2 +1,4 @@
 # Preserve the pinned upstream detector's whitespace verbatim.
 .agents/skills/avoid-ai-writing/upstream/detector/patterns.js whitespace=-blank-at-eol
+# Retain the reviewed upstream Google reference verbatim.
+.agents/skills/building-data-apps/references/shared_design_system.md whitespace=-blank-at-eol
