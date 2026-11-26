@@ -1,6 +1,6 @@
 # Arnesto - Project Status
 
-**Last Updated**: 2026-11-12
+**Last Updated**: 2026-11-26
 **Overall Status**: 🟢 **Ready and evolving** - The core harness is operational; new clients and routing ideas remain evidence-gated experiments.
 
 This update reviews repository artifacts and documented evidence. Runtime
@@ -85,6 +85,7 @@ availability or complete unfinished acceptance tasks.
   on 2026-09-16; this is a single-case result, not broad behavioral coverage.
 - The Madrid Avisos pilot records native file reads and blinded answer scores
   for five cases with and without the skill in Codex and Agy CLI.
+- The [November skill review](docs/evaluations/skill-upstream-review-2026-11-26.md) records upstream revisions, compatible updates and retained local workflows.
 - Native `promptfoo-evals` skill routes LLM behavioral evaluations and defines
   grader controls, comparison boundaries, and honest provider-error reporting.
 - External `typesafe-ai` skill is installed in the shared library with its

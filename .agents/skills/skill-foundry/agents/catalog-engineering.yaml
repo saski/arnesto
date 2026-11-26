@@ -1765,7 +1765,7 @@ skills:
       - google-adk-setup
     notes: "Agent definitions, tools, and multi-agent composition on ADK."
 
-  # --- Obsidian LLM Wiki stack (native) ---
+  # --- Obsidian LLM Wiki stack (upstream imports with Arnesto adaptations) ---
 
   - name: llm-wiki
     category: workflow-automation

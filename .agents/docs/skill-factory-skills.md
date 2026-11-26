@@ -8,14 +8,16 @@ Cursor-only skills (Canvas, SDK, `/loop`, meta-skills) live in `.cursor/skills-c
 
 Imported and local sources land in the same tree:
 
-- **[skill-factory](https://github.com/saski/skill-factory)** — imported into this repo via `./pull-and-sync-skills.sh` / `./sync-skill-factory.sh`
-- **Local sibling skill repos** — referenced by symlink from `.agents/skills/` to `~/Code/augmented-lean-delivery` and `~/Code/augmentedcode-skills`
+- **Skill-factory** — copied packages and selected compatible changes. The [source lock](../upstreams/skill-factory/components.lock.json) records the historical `saski/skill-factory` label, the verified `lexler/skill-factory` source and their revision history.
+- **Local sibling skill repos** — seven links resolve into `~/Code/augmented-lean-delivery` and `~/Code/augmentedcode-skills`. The [sibling source lock](../upstreams/local-saski-skills/components.lock.json) records the verified `eferro` remotes.
 - **Product management pack** — `pmprompt/claude-plugin-product-management` (integrity: repo-root `skills-lock.json`; taxonomy and overlaps: [.agents/skills/skill-foundry/agents/catalog-product-management.yaml](../skills/skill-foundry/agents/catalog-product-management.yaml))
 - **Matt Pocock skills** — `mattpocock/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
-- **Google Data Cloud skills** — installed with `.agents/skills/.datacloud_skills_manifest`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml)
+- **Google Data Cloud skills** — the [reviewed source and package hashes](../upstreams/google-data-cloud/source.json) cover 19 entries. The original installer manifest is retained.
+- **Obsidian Wiki and Vercel** — the [Skills CLI lock](../.skill-lock.json) records the original upstream trees for Obsidian and the installed revision of Vercel's `find-skills`. The [Obsidian review](../upstreams/obsidian-wiki/review.json) records local adaptations.
 - **TypeSafe AI skill** — copied from `typesafe-ai/skills` (integrity: repo-root `skills-lock.json`; governance: [.agents/skills/skill-foundry/agents/catalog-engineering.yaml](../skills/skill-foundry/agents/catalog-engineering.yaml))
 - **Ponytail adaptation** — scoped reuse-first workflow adapted from `DietrichGebert/ponytail`, with MIT notice, pinned source, and local file hashes in `skills-lock.json`
 - **Writing skills** — on-demand wrappers for `conorbronsdon/avoid-ai-writing` and `blader/humanizer`, with unchanged pinned upstream resources, MIT notices, a portable ES/EN profile, and source/file hashes in `skills-lock.json`
+- **Additional shared imports** — [Anthropic Skill Creator](../upstreams/anthropic-skills/components.lock.json), [Obsidian CLI](../upstreams/obsidian-skills/source.json), [Planning with Files](../upstreams/planning-with-files/source.json) and [Upstash Context7](../upstreams/context7/provenance.md) have individual source records.
 - **Native and local skills** — authored, maintained, or locally installed into this repository
 
 ## Local sibling skill references
@@ -109,7 +111,7 @@ Imported and local sources land in the same tree:
 | gcloud-auth-verification | developer-tools | Diagnose missing Google Cloud authentication and Application Default Credentials issues. |
 | gcp-composer-troubleshooting | developer-tools | Produce evidence-based RCA for Cloud Composer and Airflow DAG or task failures. |
 | gcp-data-pipelines | developer-tools | Primary router for building, managing, and orchestrating data pipelines on Google Cloud. |
-| gcp-dataflow | developer-tools | Write, package, and execute Apache Beam pipelines on Google Cloud Dataflow. |
+| gcp-dataflow | developer-tools | Write, package, run and troubleshoot Apache Beam pipelines on Google Cloud Dataflow. |
 | gcp-pipeline-orchestration | developer-tools | Generate, update, deploy, and trigger Cloud Composer orchestration pipeline definitions. |
 | gcp-pipeline-resource-provisioning | developer-tools | Provision supported GCP data-pipeline resources declaratively through deployment.yaml. |
 | gcp-spark | data-analysis | Develop and troubleshoot Spark ETL and ML work on Dataproc clusters or serverless Spark. |
@@ -150,7 +152,7 @@ RTK is already part of shell routing; Caveman remains in the Matt Pocock pack.
 
 | Skill | Category | Purpose |
 |-------|----------|---------|
-| typesafe-ai | developer-tools | Build AI-powered software with TypeSafe's typed judgments and probabilities; use for semantic routing, ranking, extraction, verification, or replacing an LLM prompt-and-parse step with a structured decision. Read current TypeSafe docs before implementation. |
+| typesafe-ai | developer-tools | Build, review or debug TypeSafe integrations that ask typed questions about text, images or application state. Read current TypeSafe docs for API and SDK contracts. |
 
 ## Writing skills (external sources, local wrappers)
 
@@ -161,7 +163,7 @@ RTK is already part of shell routing; Caveman remains in the Matt Pocock pack.
 
 Usage, selection criteria and language limits: [writing skills](../../docs/writing-skills.md).
 
-## Native skills (local to this repo)
+## Other locally maintained or installed skills
 
 | Skill | Category | Purpose |
 |-------|----------|---------|
@@ -180,7 +182,7 @@ Usage, selection criteria and language limits: [writing skills](../../docs/writi
 | source-command-bug-fixing-agent | engineering | Investigate and fix company-environment bugs using available tickets, internal documentation, private repositories, ownership data, and production evidence while preserving corporate access and mutation boundaries. |
 | find-docs | developer-tools | Retrieves up-to-date documentation, API references, and code examples for developer technologies using the Context7 CLI. Use for library, framework, SDK, API, CLI tool, or cloud service questions. |
 | documentation-lookup | developer-tools | Use current library and framework docs through Context7, preferring MCP tools with the CLI as a fallback. Activates for setup questions, API references, code examples, or named frameworks such as React, Next.js, or Prisma. |
-| verification-loop | workflow | A comprehensive verification system for Claude Code sessions. |
+| verification-loop | workflow | Verify work using the repository’s checks and report local and target-environment results separately. |
 | strategic-compact | workflow | Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction. |
 | xp-code-review | practices | Review pending changes for tests, maintainability, and project rules. Use when the user asks for code review, review pending changes, or alignment with maintainability and project rules. |
 | xp-increase-coverage | testing | Increase test coverage with high-value, behavior-focused tests. Use when the user asks to increase coverage, write tests for untested code, or add high-value tests. |

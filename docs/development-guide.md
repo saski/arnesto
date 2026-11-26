@@ -63,7 +63,10 @@ The skill library is self-contained:
 - The TypeSafe AI skill is copied intact into `.agents/skills/` with its license and provenance in `skills-lock.json`; update it by replacing the entire upstream skill directory and refreshing its hash and source commit.
 - `avoid-ai-writing` and `humanizer` are local wrappers around unchanged upstream skills. Preserve each `upstream/` copy and the root MIT license; update source pins and content hashes in `skills-lock.json` when refreshing upstream. Keep the identical `references/communication-profile.md` copies synchronized. The English-only detector has not been validated for Spanish. See [writing skill guidance](writing-skills.md) for routing and usage.
 - Ponytail is a scoped local adaptation with its upstream MIT notice and source/file hashes in `skills-lock.json`; review and merge upstream changes manually instead of overwriting it. CodeGraph and Headroom are native optional runbooks; their external runtimes are not installed by setup. See [token-efficiency tools](token-efficiency-tools.md) for decisions, pinned versions, and bounded smoke evidence.
-- Skill-factory provenance is tracked in `.agents/upstreams/skill-factory/components.lock.json`.
+- Skill-factory and sibling-source records live in `.agents/upstreams/skill-factory/` and `.agents/upstreams/local-saski-skills/`. They distinguish the original repository label from the verified source and pin of a checkout.
+- For Google Data Cloud, use `.agents/upstreams/google-data-cloud/source.json` for the reviewed release and installed package hashes. The original installer manifest describes the historical installation.
+- For Obsidian Wiki and Vercel, `.agents/.skill-lock.json` records upstream Git trees. Obsidian's entries pin the original imported trees. The [Obsidian review](../.agents/upstreams/obsidian-wiki/review.json) records selectively ported updates, current upstream paths and installed content hashes.
+- The [November upstream review](evaluations/skill-upstream-review-2026-11-26.md) lists the decisions and the records for each source.
 - ECC upstream components are tracked in `.agents/upstreams/ecc/components.lock.json`.
 
 Shared skill governance lives in:
@@ -273,9 +276,13 @@ SKILL_FACTORY=/path/to/skill-factory ./pull-and-sync-skills.sh
 What this does:
 
 - pulls the upstream repository
-- copies upstream skill directories into `.agents/skills/`
-- preserves native repo-owned skills and other external skill packs
-- refreshes `.agents/upstreams/skill-factory/components.lock.json`
+- checks that the source tree is clean and descends from the recorded commit
+- refreshes eligible imports and records their source in `.agents/upstreams/skill-factory/components.lock.json`
+- preserves native skills, sibling links, local adaptations and historical entries missing upstream
+
+The November public `lexler/skill-factory` revision diverges from the imported
+commit. Review changes from that line per skill, as recorded in the lock. A bulk
+sync requires a checkout that descends from the recorded import.
 
 Preview only:
 

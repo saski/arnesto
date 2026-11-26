@@ -27,7 +27,7 @@ Skills:
 - `xp-code-review` - Use to review pending changes for tests, maintainability, and rule alignment.
 - `lustra` - Use for technical due diligence and code-health audits across security, dependencies, reliability, maintainability, CI, docs, and structure.
 - `pbt-pragmatic-adoption` - Use for first-wave property-based testing in suitable JS/Jest code.
-- `verification-loop` - Use for broad session verification and completion checks.
+- `verification-loop` - Use for repository checks and for reporting acceptance in the target environment.
 - `fic-validate-plan` - Use to compare completed implementation against an approved plan.
 
 ## Implementation Planning, Delivery, and Safe Change
@@ -87,7 +87,7 @@ Skills:
 - `xp-security-analysis` - Use for OWASP, threat modeling, and pragmatic security review.
 - `dockerfile-review` - Use for container build performance, image size, and security.
 - `cwv-improvement-planner` - Use for Core Web Vitals, Lighthouse, and web performance work.
-- `typesafe-ai` - Use when building with TypeSafe or exploring typed AI judgments for semantic routing, ranking, extraction, and verification; read the live TypeSafe docs before implementing.
+- `typesafe-ai` - Use to build, review or debug integrations that ask TypeSafe typed questions about text, images or application state. Consult the live docs for current API contracts.
 - `modern-cli-design` - Use for scalable command-line interface design.
 - `accidental-data-loss-prevention` - Use before irreversible SQL, Cloud Storage, or GCP resource deletion commands.
 
@@ -151,7 +151,7 @@ Skills:
 - `dbt-bigquery` - Use for dbt projects, BigQuery models, SQL optimization, and dbt troubleshooting.
 - `data-autocleaning` - Use for profiling, cleaning, moving, copying, or transforming BigQuery and GCS data sources.
 - `bigquery-data-transfer-service` - Use to discover or inspect BigQuery DTS transfer configurations and ingestion metadata.
-- `gcp-dataflow` - Use for Apache Beam pipelines and Google Cloud Dataflow Flex Templates.
+- `gcp-dataflow` - Use to build and troubleshoot Apache Beam pipelines and Google Cloud Dataflow Flex Templates.
 - `gcp-spark` - Use for Spark ETL, Spark ML, Dataproc clusters, and Dataproc Serverless work.
 - `gcp-pipeline-orchestration` - Use for Cloud Composer orchestration pipeline YAML and deployment wiring.
 - `gcp-pipeline-resource-provisioning` - Use for deployment.yaml-based provisioning of supported GCP data pipeline resources.
