@@ -35,7 +35,8 @@ Usage: $(basename "$0") [--dry-run]
 Imports skill-factory output_skills into this repo's .agents/skills/ as tracked
 directories. Native skills and sibling-repo symlinks (see local-saski-skills lock)
 are preserved. Previously imported skill-factory skills are refreshed in place
-and the provenance lock file is regenerated.
+when the checkout descends from the recorded pin. Reviewed adaptations and
+packages absent upstream retain their provenance.
 
   SKILL_FACTORY  Default: \$REPO/../skill-factory (sibling directory)
   --dry-run      List what would be refreshed or imported without writing files
@@ -79,11 +80,39 @@ if [[ ! -d "$CANONICAL_SKILLS" ]]; then
     exit 1
 fi
 
-mkdir -p "$(dirname "$LOCK_PATH")"
+source_commit="$(git -C "$SKILL_FACTORY" rev-parse HEAD)"
+source_repository="$({ git -C "$SKILL_FACTORY" config --get remote.origin.url || true; } | python3 -c '
+import re
+import sys
+
+match = re.fullmatch(
+    r"(?:https://github\.com/|(?:ssh://)?git@github\.com(?:-[\w-]+)?[:/])([\w.-]+/[\w.-]+?)(?:\.git)?/?",
+    sys.stdin.read().strip(),
+)
+if match:
+    print(match[1])
+')"
+source_type=github
+if [[ -z "$source_repository" ]]; then
+    source_repository=local-checkout
+    source_type=local-git
+fi
+if [[ -f "$LOCK_PATH" ]]; then
+    pinned_commit="$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1]))["source"]["sourceCommit"])' "$LOCK_PATH")"
+    if ! git -C "$SKILL_FACTORY" merge-base --is-ancestor "$pinned_commit" "$source_commit"; then
+        printf 'error: skill-factory checkout %s does not descend from reviewed pin %s. Review the upstream changes before refreshing.\n' "$source_commit" "$pinned_commit" >&2
+        exit 1
+    fi
+fi
+if [[ -n "$(git -C "$SKILL_FACTORY" status --porcelain -- output_skills)" ]]; then
+    echo "error: skill-factory output_skills has uncommitted changes; the recorded commit would not describe the copied bytes." >&2
+    exit 1
+fi
 
 previous_imports_file="$(mktemp)"
 current_imports_file="$(mktemp)"
-trap 'rm -f "$previous_imports_file" "$current_imports_file"' EXIT
+reviewed_imports_file="$(mktemp)"
+trap 'rm -f "$previous_imports_file" "$current_imports_file" "$reviewed_imports_file"' EXIT
 
 python3 - <<'PY' "$LOCK_PATH" > "$previous_imports_file"
 import json
@@ -97,6 +126,18 @@ if not lock_path.exists():
 payload = json.loads(lock_path.read_text())
 for name in sorted(payload.get("skills", {})):
     print(name)
+PY
+
+python3 - "$LOCK_PATH" > "$reviewed_imports_file" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+if path.exists():
+    for name, entry in json.loads(path.read_text()).get("skills", {}).items():
+        if entry.get("adapted") or entry.get("upstreamReview"):
+            print(name)
 PY
 
 added=0
@@ -123,6 +164,34 @@ while IFS= read -r -d '' skill_md; do
         if [[ "$DRY_RUN" == true ]]; then
             echo "  skip (native/custom) $name"
         fi
+        continue
+    fi
+
+    if grep -Fxq -- "$name" "$reviewed_imports_file"; then
+        ((skipped++)) || true
+        echo "  skip (reviewed package) $name"
+        continue
+    fi
+
+    if [[ -e "$target" ]] && ! python3 - "$LOCK_PATH" "$target" <<'PY'
+import hashlib
+import json
+import sys
+from pathlib import Path
+
+lock = json.loads(Path(sys.argv[1]).read_text())
+package = Path(sys.argv[2])
+expected = lock["skills"][package.name].get("computedHash")
+digest = hashlib.sha256()
+for file in sorted(package.rglob("*")):
+    if file.is_file():
+        digest.update(file.relative_to(package).as_posix().encode())
+        digest.update(file.read_bytes())
+raise SystemExit(0 if package.is_dir() and expected == digest.hexdigest() else 1)
+PY
+    then
+        ((skipped++)) || true
+        echo "  skip (local edits or unverified package) $name"
         continue
     fi
 
@@ -156,9 +225,9 @@ if [[ "$DRY_RUN" == true ]]; then
     exit 0
 fi
 
-source_commit="$(git -C "$SKILL_FACTORY" rev-parse HEAD)"
+mkdir -p "$(dirname "$LOCK_PATH")"
 
-python3 - <<'PY' "$OUTPUT_SKILLS" "$LOCK_PATH" "$current_imports_file" "$source_commit"
+python3 - <<'PY' "$OUTPUT_SKILLS" "$LOCK_PATH" "$current_imports_file" "$source_commit" "$source_repository" "$source_type"
 import hashlib
 import json
 import sys
@@ -169,9 +238,16 @@ output_skills = Path(sys.argv[1])
 lock_path = Path(sys.argv[2])
 imports_file = Path(sys.argv[3])
 source_commit = sys.argv[4]
+source_repository = sys.argv[5]
+source_type = sys.argv[6]
 skill_names = [line.strip() for line in imports_file.read_text().splitlines() if line.strip()]
 
-skills = {}
+payload = json.loads(lock_path.read_text()) if lock_path.exists() else {"version": 1, "source": {}, "skills": {}}
+source = payload["source"]
+source.setdefault("repository", source_repository)
+source.setdefault("sourceType", source_type)
+skills = payload["skills"]
+
 for name in sorted(set(skill_names)):
     matches = list(output_skills.glob(f"**/{name}/SKILL.md"))
     if not matches:
@@ -183,27 +259,26 @@ for name in sorted(set(skill_names)):
             digest.update(str(path.relative_to(source_dir)).encode())
             digest.update(path.read_bytes())
     skills[name] = {
-        "source": "saski/skill-factory",
-        "sourceType": "github",
+        "source": source_repository,
+        "sourceType": source_type,
         "sourceCommit": source_commit,
         "sourcePath": str(source_dir.relative_to(output_skills.parent)).replace("\\", "/"),
         "computedHash": digest.hexdigest(),
         "syncedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
     }
 
-    payload = {
-        "version": 1,
-        "source": {
-            "repository": "saski/skill-factory",
-            "sourceType": "github",
-            "sourceCommit": source_commit,
-        },
-        "skills": skills,
-    }
-    content = json.dumps(payload, indent=2) + "\n"
-    tmp_path = lock_path.with_name(lock_path.name + ".tmp")
-    tmp_path.write_text(content)
-    tmp_path.replace(lock_path)
+source["sourceCommit"] = source_commit
+if (source["repository"], source["sourceType"]) != (source_repository, source_type):
+    source["lastSyncRepository"] = source_repository
+    source["lastSyncSourceType"] = source_type
+else:
+    source.pop("lastSyncRepository", None)
+    source.pop("lastSyncSourceType", None)
+payload["skills"] = dict(sorted(skills.items()))
+content = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+tmp_path = lock_path.with_name(lock_path.name + ".tmp")
+tmp_path.write_text(content)
+tmp_path.replace(lock_path)
 PY
 
 echo ""

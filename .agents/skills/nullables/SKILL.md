@@ -56,6 +56,8 @@ Logic (pure, tested)    Infrastructure (Nullables)
 
 This separation lets you swap real infrastructure for nulled versions without touching Logic. For full details, see [a-frame.md](references/architecture/a-frame.md). For event-driven code, see [event-driven.md](references/architecture/event-driven.md).
 
+Keep parsing, mapping, and normalization that your code owns above the stub boundary so those behaviors still run during nulled tests. If the third-party API returns a chain of objects, keep the stub at that boundary and implement only the parts of the chain your code uses.
+
 ## Core Pattern: Two Factory Methods
 
 Every infrastructure wrapper has two creation paths:

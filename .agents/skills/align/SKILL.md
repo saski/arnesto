@@ -18,11 +18,11 @@ Read input → Think internally → Present chunk → Confirm → Next chunk
                                                    └── Redirect ┘
 ```
 
-- Read the input context
+- Read the input context and confirm your understanding of the goal and why it matters before proposing the approach.
 - Think through the full approach internally
 - Present a rough outline of chunks coming — gives the user the full scope before drilling in
 - Present each chunk progressively, starting from the highest level of abstraction
-- Confirm each chunk with AskUserQuestion before moving to the next
+- Confirm each chunk using the client’s supported user input mechanism before moving to the next
 - Drill down only after the big picture is confirmed
 
 ## Presenting Chunks
@@ -46,7 +46,7 @@ Scannable in one read. If it needs scrolling, split it.
 
 ## Handling Redirects
 
-When the user rejects a chunk, downstream design may change. Don't present pre-computed chunks that depend on the rejected one. Rethink from the redirect point forward.
+When the user rejects a chunk, downstream design may change. Don't present pre-computed chunks that depend on the rejected one. Re-present the corrected portion in full so the user can confirm it in context. Then identify which later decisions the correction affects and rethink them before continuing.
 
 ## Anti-patterns
 

@@ -3,7 +3,14 @@
   "source": {
     "repository": "saski/skill-factory",
     "sourceType": "github",
-    "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5"
+    "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
+    "verifiedUpstream": {
+      "repository": "lexler/skill-factory",
+      "pinnedCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
+      "reviewedCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+      "relationship": "diverged",
+      "mergeBaseCommit": "e5b68f19ead3a456d34b50e89ea3bba533b60eff"
+    }
   },
   "skills": {
     "ai-patterns": {
@@ -19,8 +26,15 @@
       "sourceType": "github",
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/design/align",
-      "computedHash": "b7da3a707bd7be58047144d79bacc23417da262f7c330bf2a471142804404132",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "computedHash": "945001bbd8a52f1697ed9b5fc33c89b556a1fe1eb5a13120266de49e157265ec",
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamPackageHash": "b7da3a707bd7be58047144d79bacc23417da262f7c330bf2a471142804404132",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "selective-port",
+        "note": "Ports goal confirmation and re-presentation after corrections while preserving progressive confirmation and routing."
+      }
     },
     "approval-tests": {
       "source": "saski/skill-factory",
@@ -44,7 +58,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/practices/code-simplifier",
       "computedHash": "bc35611540c29c5b84bbab9b08f52854821ea8406c54d2846f0ff16ee8cb91ed",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "collaborative-design": {
       "source": "saski/skill-factory",
@@ -76,7 +95,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/developer-tools/dockerfile-review",
       "computedHash": "143c3616a61df5cef7d77f8cee26773e6c896f65cd802a91082a9a368368fb15",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "event-modeling": {
       "source": "saski/skill-factory",
@@ -116,7 +140,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/strategy/llm-council",
       "computedHash": "43a7d2ec93ef0cf34b01340a35b69332ace547f0ece37ecc280af3fd22bce682",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "modern-cli-design": {
       "source": "saski/skill-factory",
@@ -124,7 +153,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/design/modern-cli-design",
       "computedHash": "55307bd45c162e55639019f4658bfc991c25be0426b27a30584176c31e770f38",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "mutation-testing": {
       "source": "saski/skill-factory",
@@ -132,15 +166,27 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/testing/mutation-testing",
       "computedHash": "6caa0fefdb70de3860c272a1c8b22e9172680b12f54f359c9863f5327001ca0d",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "nullables": {
       "source": "saski/skill-factory",
       "sourceType": "github",
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/testing/nullables",
-      "computedHash": "f03eb9d101f60e7a85649a9392d3fdb2e515c5c7d32237ee061b93c70ebc432b",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "computedHash": "d987079f685f82f64b3d77c4f11d294b95617174ffb5fccf5da6304f758f0b34",
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamPackageHash": "f03eb9d101f60e7a85649a9392d3fdb2e515c5c7d32237ee061b93c70ebc432b",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "selective-port",
+        "note": "Ports the third-party stub boundary guidance while preserving the existing test workflow and compatible bundled references."
+      }
     },
     "refactoring": {
       "source": "saski/skill-factory",
@@ -172,7 +218,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/practices/small-safe-steps",
       "computedHash": "2e99479f522d51dfa2681ef528edf2e1f46cdcc4538a5df002f5767daf8b65f8",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "strategy-kernel": {
       "source": "saski/skill-factory",
@@ -180,7 +231,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/strategy/strategy-kernel",
       "computedHash": "aa722c1b8024aab27e8c4d1d42a19bf1e92ae9010ed1d4a57c3ee3efd3da5745",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "thin-wrappers": {
       "source": "saski/skill-factory",
@@ -188,7 +244,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/practices/thin-wrappers",
       "computedHash": "e8287f6f4b2c9130c35f2e51e04086244461d499a7d482d1a98e6917ee764a1e",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "thinkies": {
       "source": "saski/skill-factory",
@@ -196,7 +257,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/practices/thinkies",
       "computedHash": "e708a5d96ef1722bb45226f6c57e2c3ab6b66cfb37e7d49651a15248ff1cb7c2",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "traductor-bilingue": {
       "source": "saski/skill-factory",
@@ -204,7 +270,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/tools/traductor-bilingue",
       "computedHash": "dc5a10368830b0537c26c7289f865d5c4402974fe6ca6c1e1b9630f80d6dd188",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The reviewed upstream snapshot no longer contains this skill package."
+      }
     },
     "using-uv": {
       "source": "saski/skill-factory",
@@ -220,7 +291,12 @@
       "sourceCommit": "1e7795cc6f457f44f3a452a5ed20158244f8fec5",
       "sourcePath": "output_skills/developer-tools/writing-bash-scripts",
       "computedHash": "52f0a61d8698a0727e960ac9ed21ca86d0ec06c1f2a3044bf459c4022941d839",
-      "syncedAt": "2026-05-27T10:40:49Z"
+      "syncedAt": "2026-05-27T10:40:49Z",
+      "upstreamReview": {
+        "sourceCommit": "dafc979e9d25adba45d8e4c3da3c99219b49dbf1",
+        "disposition": "retain-historical",
+        "note": "The instructions are identical. The only upstream change is an evaluation bundle with destructive-operation scenarios that has no integration with Arnesto’s evaluator."
+      }
     },
     "writing-statuslines": {
       "source": "saski/skill-factory",

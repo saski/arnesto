@@ -5,13 +5,21 @@
       "repository": "saski/augmented-lean-delivery",
       "sourceType": "local-git",
       "localPath": "~/Code/augmented-lean-delivery",
-      "sourceCommit": "e60dba69ecaf799e786a96fd27dccf2e5e216ee3"
+      "sourceCommit": "e60dba69ecaf799e786a96fd27dccf2e5e216ee3",
+      "verifiedUpstream": {
+        "repository": "eferro/augmented-lean-delivery",
+        "sourceCommit": "e60dba69ecaf799e786a96fd27dccf2e5e216ee3"
+      }
     },
     "augmentedcode-skills": {
       "repository": "saski/augmentedcode-skills",
       "sourceType": "local-git",
       "localPath": "~/Code/augmentedcode-skills",
-      "sourceCommit": "3e0c39814ae041c92a5c52e01c79994f42a309ea"
+      "sourceCommit": "3e0c39814ae041c92a5c52e01c79994f42a309ea",
+      "verifiedUpstream": {
+        "repository": "eferro/augmentedcode-skills",
+        "sourceCommit": "3e0c39814ae041c92a5c52e01c79994f42a309ea"
+      }
     }
   },
   "skills": {
