@@ -58,22 +58,22 @@ manual municipal login followed by an authenticated portal-state check.
 
 ## Installed packages
 
-Local installation verified on 2026-10-02:
+The corrected evaluation guide was distributed locally on 2026-11-26. It is
+the only skill file that changed relative to the package used in the pilot.
 
 | Client or artifact | Evidence |
 | --- | --- |
-| Hermes | Native `skills_list` finds `madrid-avisos`; `skill_view` loads its content and all four references from `~/.hermes/skills/madrid-avisos/` |
-| OpenCode | `opencode debug skill` discovers the updated canonical skill through `~/.config/opencode/skills/madrid-avisos/SKILL.md` |
-| Codex | Shared skill link resolves; `codex plugin list --json` also reports `madrid-avisos@arnesto-local` installed and enabled, version `0.1.1` |
-| Claude, Cursor, Gemini | Existing shared-library symlinks resolve to the canonical skill; no model execution tested |
-| ChatGPT | Compatible local plugin package installed through Codex; visibility in a separate ChatGPT client and web/mobile use remain unverified |
+| Hermes | The installed copy at `~/.hermes/skills/madrid-avisos/` matches all six corrected canonical files. Native discovery and reference loading were verified on 2026-10-02. |
+| Codex | A fresh native plugin listing reports `madrid-avisos@arnesto-local` version `0.1.2` installed and enabled. The native skill catalog lists `madrid-avisos:madrid-avisos` from the `0.1.2` cache alongside the shared `madrid-avisos` entry. All six cached skill files match the corrected canonical files. |
+| Local marketplace | The source at `~/.local/share/arnesto-plugin-marketplace/plugins/madrid-avisos/` declares version `0.1.2` and matches all six corrected canonical skill files. |
+| OpenCode | Native discovery through the shared library was verified on 2026-10-02. |
+| Claude, Cursor, Gemini | These clients use the shared library. Discovery in a fresh session depends on the client's configured skill paths. |
+| ChatGPT | Availability in a separate ChatGPT client, including web and mobile, remains unverified. |
 
-The local marketplace source is `~/.local/share/arnesto-plugin-marketplace/`.
-The installed plugin contains a byte-verified copy of the six canonical skill
-files. Portable archives are `~/Downloads/madrid-avisos-skill-0.1.1.zip` and
-`~/Downloads/madrid-avisos-plugin-0.1.1.zip`. The latter contains `plugin.json`
-and `skills/` directly at its archive root. Neither archive contains account
-data, browser sessions, or report evidence.
+Codex retains the original `0.1.1` cache alongside the active `0.1.2` package.
+The original portable exports were named `madrid-avisos-skill-0.1.1.zip` and
+`madrid-avisos-plugin-0.1.1.zip`. Neither was present in `~/Downloads` at the
+November verification.
 
 ## Verification boundary
 
@@ -105,5 +105,5 @@ synthetic requests with and without the skill. The [results and supporting
 responses](evaluations/madrid-avisos-2026-11-26.md) cover observed manifest
 reads and answer quality. The simulated municipal portal stayed offline.
 
-The skill-creator structural validator, `git diff --check`, and the complete
-canonical `make check` suite passed.
+The original package passed the skill-creator structural validator,
+`git diff --check`, and the canonical `make check` suite.

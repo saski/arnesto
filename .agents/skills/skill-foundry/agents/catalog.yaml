@@ -29,8 +29,8 @@ skills:
     owner: personal-operations
     status: monitor
     review_cycle_days: 60
-    last_reviewed: "2026-10-02"
-    next_benchmark: "2026-12-01"
+    last_reviewed: "2026-11-26"
+    next_benchmark: "2027-01-25"
     benchmark_after_model_update: true
     platforms:
       - claude
@@ -41,7 +41,12 @@ skills:
       - opencode
       - chatgpt
     overlap_with: []
-    notes: "Portable municipal-report workflow. Browser capability and authentication are runtime-specific; ChatGPT needs a supported skill/plugin installation. Public form inspected without submission; authenticated end-to-end operation and comparative benchmarking remain pending."
+    notes: >-
+      The 2026-11-26 offline pilot observed correct activation in Codex and Agy CLI.
+      Answers meeting all three criteria went from 8/10 to 8/10 in Codex and from
+      3/10 to 8/10 in Agy. See docs/evaluations/madrid-avisos-2026-11-26.md.
+      Browser access depends on the client. Authenticated municipal submission
+      and receipt verification still require a real, authorized incident.
 
   - name: skill-foundry
     category: skill-governance
