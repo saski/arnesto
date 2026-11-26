@@ -250,18 +250,58 @@ const AIDetectorValidate = (() => {
    * list are counted.
    */
   function extractIndentedBlocks(text) {
+    // Fenced lines are skipped so their indented content doesn't count. A tab
+    // before the marker makes the line indented code, so that span is kept.
+    const spans = fenceSpans(text).filter(([start]) => !/^ {0,3}\t/.test(text.slice(start, start + 4)));
     const lines = text.split('\n');
     const blocks = [];
     let current = null;
     let inList = false;
+    let listContentIndent = 0;
+    let listMarkerIndent = 0;
+    let prevBlank = true;
+    let lineStart = 0;
+    let s = 0;
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
+      const start = lineStart;
+      lineStart += line.length + 1;
+      while (s < spans.length && spans[s][1] < start) s++;
+      // A fence ends any open block and, like a blank line, may precede a new one.
+      if (s < spans.length && spans[s][0] <= start) {
+        // A fence outside the list's content indentation ends that list.
+        // Inspect only the opener: code inside a nested fence is not prose.
+        if (start === spans[s][0] && line.match(/^ */)[0].length < listContentIndent) {
+          inList = false;
+          listContentIndent = 0;
+        }
+        if (current !== null) blocks.push(current.join('\n'));
+        current = null;
+        prevBlank = true;
+        continue;
+      }
       const isIndented = /^(?: {4}|\t)\S/.test(line);
       const isBlank = /^\s*$/.test(line);
-      if (/^\s*(?:[-*+]|\d+[.)])\s/.test(line)) inList = true;
-      else if (!isBlank && !isIndented) inList = false;
+      const listMarker = line.match(/^([ \t]*(?:[-*+]|\d+[.)]))([ \t]+)/);
+      if (listMarker) {
+        const columns = (value) => [...value].reduce((col, char) => char === '\t' ? col + 4 - col % 4 : col + 1, 0);
+        const markerEnd = columns(listMarker[1]);
+        const padding = columns(listMarker[0]) - markerEnd;
+        const contentIndent = markerEnd + (padding > 4 ? 1 : padding);
+        const markerIndent = columns(line.match(/^[ \t]*/)[0]);
+        if (!inList || markerIndent <= listMarkerIndent) {
+          listContentIndent = contentIndent;
+          listMarkerIndent = markerIndent;
+        }
+        inList = true;
+      } else if (!isBlank && !isIndented) {
+        inList = false;
+        listContentIndent = 0;
+      }
+      const wasBlank = prevBlank;
+      prevBlank = isBlank;
 
-      if (isIndented && !inList) {
+      if (isIndented && !inList && (current !== null || wasBlank)) {
         if (current === null) current = [];
         current.push(line);
       } else if (!isBlank && current !== null) {
@@ -335,8 +375,10 @@ const AIDetectorValidate = (() => {
     // extraction sees one line-ending shape. A rewrite that only re-terminates
     // CRLF lines is not a preservation failure, but a lone carriage return can
     // be meaningful code content and must remain visible to exact comparisons.
-    original = original.replace(/\r\n/g, '\n');
-    rewritten = rewritten.replace(/\r\n/g, '\n');
+    // A leading UTF-8 BOM (kept by readFileSync(path, 'utf8')) is dropped for
+    // the same reason: it hid frontmatter from the `^---` anchor.
+    original = original.replace(/\r\n/g, '\n').replace(/^\uFEFF/, '');
+    rewritten = rewritten.replace(/\r\n/g, '\n').replace(/^\uFEFF/, '');
 
     // ── Fenced code: exact, in order. Code is never the skill's business. ──
     const origFenced = fenceBlockTexts(original);

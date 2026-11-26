@@ -85,7 +85,9 @@ is renamed to keep recursive skill discovery on the local wrapper. References to
 `SKILL.md` inside the upstream material refer to `upstream/instructions.md`.
 Source commits, upstream versions and per-file hashes are
 recorded in [skills-lock.json](../skills-lock.json). Review upstream updates
-manually and preserve the local wrappers. Update both communication-profile
+manually and preserve the local wrappers. Humanizer 4.0 allows an editor to
+supply details from general knowledge. Arnesto limits additions to material
+supplied by the author. If a missing fact matters, ask for it. Update both communication-profile
 copies together and verify they remain identical.
 
 Before promoting a revised profile, compare these synthetic cases with the

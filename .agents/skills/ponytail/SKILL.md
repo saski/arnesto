@@ -18,7 +18,9 @@ This is Arnesto's scoped adaptation of DietrichGebert/ponytail; see
 ## Establish the behavior
 
 Read the relevant code, callers, tests, and project conventions first. Identify
-the acceptance criteria, boundaries, and failure cases. For a bug, trace its
+the acceptance criteria, boundaries, and failure cases. Trace affected callers,
+exports, configuration and fixtures so the change reaches each supported entry
+point. Keep validation and error handling when moving existing code. For a bug, trace its
 root cause before choosing where to change it. Scope this skill to the current
 task; extend it across turns only when the user asks for a persistent mode.
 

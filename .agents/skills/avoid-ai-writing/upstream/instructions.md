@@ -1,7 +1,7 @@
 ---
 name: avoid-ai-writing
 description: Audit and rewrite content to remove AI writing patterns ("AI-isms"). Use this skill when asked to "remove AI-isms," "clean up AI writing," "edit writing for AI patterns," "audit writing for AI tells," or "make this sound less like AI." Supports a detect-only mode, an edit-in-place mode for files, an optional voice profile (casual / professional / technical / warm / blunt), and an iterate-to-convergence pass.
-version: 3.38.0
+version: 3.39.1
 license: MIT
 compatibility: Any AI coding assistant that supports agentskills.io SKILL.md format (Claude Code, Cursor, VS Code Copilot, Hermes Agent, OpenHands, etc.) or OpenClaw. No external tools or APIs required.
 ---
@@ -202,7 +202,7 @@ When writing *about* AI writing patterns (blog posts, tutorials, skill documenta
 
 `--style` copyedits to a house style on top of the de-AI pass (which always runs). No bundled guides. This layer is not a guide registry: it applies **register/voice** directives and removes AI tells, on top of whatever **mechanics** you enforce.
 
-**Preferred: a config file.** `--style ./house.json` (or a bare name matching `examples/<name>.json`) applies a user-supplied JSON config and verifies the checkable subset of its mechanics with `node scripts/check-style.js <file> --config <path>` (exit 0 clean / 1 hard violation / 2 tool error). A config is JSON: **`register`** (voice directives you apply as written) plus **`mechanics`** (`quotes` and `latinAbbrev` hard-checkable; `headings`, `emDash`, `spellNumbersUpTo` advisory; `serialComma` model-applied). Schema and rationale: `examples/README.md`. Open the output by naming the resolved config (`Applying config examples/technical.json; checkable mechanics verified.`), the way the fallback below names its guide, so which mode ran is never ambiguous.
+**Preferred: a config file.** `--style ./house.json` (or a bare name matching `examples/<name>.json`) applies a user-supplied JSON config and verifies the checkable subset of its mechanics with `node scripts/check-style.js <file> --config <path>` (exit 0 clean / 1 hard violation / 2 tool error). A config is JSON: **`register`** (voice directives you apply as written) plus **`mechanics`** (`quotes`, `latinAbbrev`, `colons`, `semicolons`, and `emDash: never` hard-checkable; `headings`, `emDash: sparing`, `spellNumbersUpTo` advisory; `serialComma` model-applied). Schema and rationale: `examples/README.md`. Open the output by naming the resolved config (`Applying config examples/technical.json; checkable mechanics verified.`), the way the fallback below names its guide, so which mode ran is never ambiguous.
 
 **How `--style` composes.** Follow the editing contract's applicability and protection gates. A config's `mechanics` governs its typographic features in editable prose. An explicit `--voice` governs register when it conflicts with a config's `register`; otherwise use the config register. `--context` decides whether an AI-writing pattern applies, and source fidelity governs every axis. For example, `--voice blunt` with a config asking for warmth stays blunt, while that config's `emDash: deliberate` governs dashes and a necessary technical hedge keeps its uncertainty.
 

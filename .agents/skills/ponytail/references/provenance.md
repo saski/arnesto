@@ -1,10 +1,10 @@
 # Ponytail provenance
 
 - Upstream: https://github.com/DietrichGebert/ponytail
-- Reviewed: 2026-09-27
-- Commit: `e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156`
+- Reviewed: 2026-11-26
+- Commit: `ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10`
 - Source: `skills/ponytail/SKILL.md`
-- Source SHA-256: `1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2`
+- Source SHA-256: `9badd22a32e19cb884e46dfa8d3aae82bb81dfa5484105b8b4f0262df823a509`
 - License: MIT; upstream notice is retained in `../LICENSE`.
 - Ownership: Arnesto-maintained adaptation, not an intact upstream import.
 
@@ -17,6 +17,10 @@ persistence, intensity modes, mandatory one-liners, branded comments, and
 instructions that could underdeliver a complex request. Repository test
 conventions and requested explanations remain authoritative. No upstream plugin,
 lifecycle hook, install script, or MCP server is installed with this skill.
+
+The November review adopts the checks for affected callers, exports, configuration
+and fixtures and for error handling when moving code. Task-scoped activation and
+the repository's test policy still apply.
 
 Upstream benchmark percentages describe its own tasks and models. The README
 also reports that a reasoning model can spend more tokens with the ladder.

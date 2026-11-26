@@ -4,251 +4,390 @@
     "ab-test-designer": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "c72561e2e277c95ed52a8d683afb4040c0e396d6ded4c77b22deed3ba6dd2f71"
+      "computedHash": "7defa2bc0d79853bacf7dec85e8073c0672f05ab3d34088995b19f579a549bda",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/ab-test-designer/SKILL.md"
     },
     "caveman": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/caveman/SKILL.md",
-      "computedHash": "934433479903febc585bf6deb5f0cebc63137e3f86b7babe0aab1ecb94d6d7a4"
+      "computedHash": "934433479903febc585bf6deb5f0cebc63137e3f86b7babe0aab1ecb94d6d7a4",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream removed this skill."
+      }
     },
     "design-sprint": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "56930150ff6eea94330309811bed114425d32ac5c36c5573ab41d8db12716159"
+      "computedHash": "56930150ff6eea94330309811bed114425d32ac5c36c5573ab41d8db12716159",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/design-sprint/SKILL.md"
     },
     "diagnose": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/diagnose/SKILL.md",
-      "computedHash": "15939a26f86edec2d4862042b8564e5a062cb81d04e047a0cea6305c8830b5f5"
+      "computedHash": "8c73b572ee8d8be80bee5db2b4f3d958d10b536371e3d8a6cb88960465873bfc",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "selective-port",
+        "note": "Ports verification of a deliberately induced failure.",
+        "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md"
+      }
     },
     "feature-prioritization-assistant": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "406856ecd9006855c0e390c8f9d2a7a92d5ad3e9297e36e92fa7a79c80149885"
+      "computedHash": "10729094f23fc3a92d7941b062173e74433ea49d246422a76f7e4e688ca52e55",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/feature-prioritization-assistant/SKILL.md"
     },
     "grill-me": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/grill-me/SKILL.md",
-      "computedHash": "784f0dbb7403b0f00324bce9a112f715342777a0daee7bbb7385f9c6f0a170ea"
+      "computedHash": "784f0dbb7403b0f00324bce9a112f715342777a0daee7bbb7385f9c6f0a170ea",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream delegates to a separate skill with batched questions. Arnesto retains one question at a time.",
+        "skillPath": "skills/productivity/grill-me/SKILL.md"
+      }
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "computedHash": "ea225e10406dbb6a18ba97af34e4e9313424438195cd16e657635f841b6e7a2f"
+      "computedHash": "ea225e10406dbb6a18ba97af34e4e9313424438195cd16e657635f841b6e7a2f",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream delegates to separate skills and changes domain document conventions. Arnesto retains its standalone workflow.",
+        "skillPath": "skills/engineering/grill-with-docs/SKILL.md"
+      }
     },
     "growth-loops": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "737720f7e4d3aff0280639c62e12f969f82274d3adb62348d1688c17df44aaed"
+      "computedHash": "737720f7e4d3aff0280639c62e12f969f82274d3adb62348d1688c17df44aaed",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/growth-loops/SKILL.md"
     },
     "hierarchy-of-engagement": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "c9f7adde159d3260241492875af9fe8e6dd8edf6fe10febf9e3cce293ac7964f"
+      "computedHash": "c9f7adde159d3260241492875af9fe8e6dd8edf6fe10febf9e3cce293ac7964f",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/hierarchy-of-engagement/SKILL.md"
     },
     "hierarchy-of-marketplaces": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "25355b4cd09a0b7d327c42840990fbd49e97c646f596da4e9162f9b5e982b36a"
+      "computedHash": "25355b4cd09a0b7d327c42840990fbd49e97c646f596da4e9162f9b5e982b36a",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/hierarchy-of-marketplaces/SKILL.md"
     },
     "hooked-model": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "238e24d2d0d23aff347f80ffef0ff9d640351ecc06ad298e9579b26d94629253"
+      "computedHash": "238e24d2d0d23aff347f80ffef0ff9d640351ecc06ad298e9579b26d94629253",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/hooked-model/SKILL.md"
     },
     "improve-codebase-architecture": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
-      "computedHash": "c77b86b4332919499608f9af1880074e1fec65a59b95c70c27a9f39cd137865e"
+      "computedHash": "c77b86b4332919499608f9af1880074e1fec65a59b95c70c27a9f39cd137865e",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream requires a separate design vocabulary and HTML-first presentation. Arnesto retains its portable workflow and bundled references.",
+        "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md"
+      }
     },
     "jobs-to-be-done": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "3f9b72ef53477e35d7904ddac1c642d77b4ec6b7ac8992792689f51258aafeb0"
+      "computedHash": "919d9bb67e87bf1964934e74be668671951e38eac52ee3b7ce3259939791bdd2",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/jobs-to-be-done/SKILL.md",
+      "adapted": true,
+      "upstreamSkillHash": "7a983dbbf40f8b19a747d15b6699e8edb88d4380937724fdd65d3aa3e71f1e37"
     },
     "monetizing-innovation": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "d50c35fd25d9313f47389d41c08e8fa45488eb0c8e5d20d06ef81a912b858f37"
+      "computedHash": "d50c35fd25d9313f47389d41c08e8fa45488eb0c8e5d20d06ef81a912b858f37",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/monetizing-innovation/SKILL.md"
     },
     "okrs": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "bdbae4e8f9b935a45688729ae2f03d3d95b630abb26fd16b6ca72f222d3c526a"
+      "computedHash": "bdbae4e8f9b935a45688729ae2f03d3d95b630abb26fd16b6ca72f222d3c526a",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/okrs/SKILL.md"
     },
     "opportunity-solution-trees": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "639a556f2019114e984d4608a26b3ac370b86e8e5601d1669d2a6e834aba74ef"
+      "computedHash": "639a556f2019114e984d4608a26b3ac370b86e8e5601d1669d2a6e834aba74ef",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/opportunity-solution-trees/SKILL.md"
     },
     "pmf-survey": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "fce0643f1ea7d9e807bf6c65f9d76d25c728a15aa573d3bcb05871e82d68c9c4"
+      "computedHash": "fce0643f1ea7d9e807bf6c65f9d76d25c728a15aa573d3bcb05871e82d68c9c4",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/pmf-survey/SKILL.md"
     },
     "ponytail": {
       "source": "DietrichGebert/ponytail",
       "sourceType": "github",
-      "sourceCommit": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "sourceCommit": "ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10",
       "skillPath": "skills/ponytail/SKILL.md",
       "adapted": true,
-      "upstreamSkillHash": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
-      "computedHash": "c0b68c2137aedaf21462c4c878deeb8dc0eba1190c0b40d7d55abf370d04ef16",
+      "upstreamSkillHash": "9badd22a32e19cb884e46dfa8d3aae82bb81dfa5484105b8b4f0262df823a509",
+      "computedHash": "534b185999b1dcbbedd667f9b326f41195d3e1fdcb7ca0677c4e61c3f5e0c0d3",
       "localFileHashes": {
         "LICENSE": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
-        "SKILL.md": "8c8d7018316af481a02e1dea0b0b77466bbb44246ccb595220b5cbbae23d7e4d",
+        "SKILL.md": "5bf33821a352a4ace7e35bdfbc9cbb00c534c44e226eaa1799a4694e4893f091",
         "references/eval-plan.md": "602507bb42e823a099b0bd79107e19c128fea13afff5c2b720c699234fac1e63",
-        "references/provenance.md": "700adbef6cca81da64c8ecf060fc688daed9d5643c4009bb466560298eafce7d"
+        "references/provenance.md": "26f879cfad77bcd759b2ae1ece5ceee692fc9025419f66bfbc0adf241c392468"
       }
     },
     "positioning-canvas": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "75b2d28174195c86da5d47578548349aac68aa5631b72b90a3872d6e8561cbe6"
+      "computedHash": "75b2d28174195c86da5d47578548349aac68aa5631b72b90a3872d6e8561cbe6",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/positioning-canvas/SKILL.md"
     },
     "prd-writer": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "d225ececb30fd50c74e938b387b9794c2017fa3988e76c9457a743a6ca6ceba0"
+      "computedHash": "f41a1ded686ad70970e4b38c0742f3d3c6b971fc5e0e4a3bcaacf5ad4715bc3a",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/prd-writer/SKILL.md"
     },
     "product-led-growth": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "bc5669521050a2be6ad1478bc2e2a1068d2ab79e382b22798c30a9d49e06b916"
+      "computedHash": "bc5669521050a2be6ad1478bc2e2a1068d2ab79e382b22798c30a9d49e06b916",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/product-led-growth/SKILL.md"
     },
     "product-led-seo": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "4f6f93c4f92a719064e24f5382401a7400b24e3274ff180165c8d1b3dda9d163"
+      "computedHash": "4f6f93c4f92a719064e24f5382401a7400b24e3274ff180165c8d1b3dda9d163",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/product-led-seo/SKILL.md"
     },
     "radical-candor": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "f408f04d1d0a8697cbc86d7cd7ffa6626504109b60bc07d91a92cbb59410a550"
+      "computedHash": "f408f04d1d0a8697cbc86d7cd7ffa6626504109b60bc07d91a92cbb59410a550",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/radical-candor/SKILL.md"
     },
     "setup-matt-pocock-skills": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "computedHash": "3a32f8f1ed8160c9d286a2aabe88ee9b884c6f3f88a7a6c47b7d5d552c959587"
+      "computedHash": "61b9df673716aa4c5fc8da4ba6d6f25af8581c987791719dd31d6fce0b412496",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream redesigns the shared domain document conventions and tracker setup. Arnesto retains the existing caller contract.",
+        "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md"
+      }
     },
     "seven-powers": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "9c05d54b2f440672d0b3ca84e5604d84e8fd93612edc74a1be1983946d6673a2"
+      "computedHash": "9c05d54b2f440672d0b3ca84e5604d84e8fd93612edc74a1be1983946d6673a2",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/seven-powers/SKILL.md"
     },
     "shape-up": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "e508c1ad0e675dc525fe5798047eace6e60a94154c30c827c43755a8e57fc05b"
+      "computedHash": "e508c1ad0e675dc525fe5798047eace6e60a94154c30c827c43755a8e57fc05b",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/shape-up/SKILL.md"
     },
     "stakeholder-update-generator": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "cc2935c557f18245688cba9ea53ff1aeed09898fc0c2308cd1b7a1c9ab0945f1"
+      "computedHash": "964a8d8096cd7aed6ca49661dd3f2d4670cce579ffe03f1425b0fbde31fdb3c0",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/stakeholder-update-generator/SKILL.md"
     },
     "strategic-narrative": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "d921258ee77d200008e742505fff051089ce5a10396b5f12f185fa2393e3476f"
+      "computedHash": "d921258ee77d200008e742505fff051089ce5a10396b5f12f185fa2393e3476f",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/strategic-narrative/SKILL.md"
     },
     "tdd": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/tdd/SKILL.md",
-      "computedHash": "15a7b5e36383ebadb2dec5e586679e55e9663d292da418926b8da6fc0ef27d84"
+      "computedHash": "5f70e71cd9239dcb2ee829bbae05ac4b21edd8466429277a3fa16b470b38e6e8",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "selective-port",
+        "note": "Ports independent expected values and preserves outside-in red–green–refactor and local references.",
+        "skillPath": "skills/engineering/tdd/SKILL.md"
+      }
     },
     "thinking-in-bets": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "e53a742d774cbcbff53cb68a8032741d7f76a04e706490aaa4f9b77ebbdbba29"
+      "computedHash": "e53a742d774cbcbff53cb68a8032741d7f76a04e706490aaa4f9b77ebbdbba29",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/thinking-in-bets/SKILL.md"
     },
     "to-issues": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/to-issues/SKILL.md",
-      "computedHash": "73a91f30784523aa59ec9b02769576ebfc738e2cd5ad8f6441076031f0a5d5ac"
+      "computedHash": "55a665ba1aec3e1b927bf330b1a7003164d0e5039183de4f51ee84223aa57025",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "selective-port",
+        "note": "Ports expand–contract planning and preserves the issue workflow, labels, and existing invocation.",
+        "skillPath": "skills/engineering/to-tickets/SKILL.md"
+      }
     },
     "to-prd": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/to-prd/SKILL.md",
-      "computedHash": "fd8c259f9c44eff08e29a1a2fc71a806a3568d279a55387a361f78620b10f2aa"
+      "computedHash": "8a9e28ca52842cf2588dc9c07fd95a398c66309fd5c12e827a32c160701e450a",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "selective-port",
+        "note": "Ports public test boundary planning and preserves the PRD workflow and triage label.",
+        "skillPath": "skills/engineering/to-spec/SKILL.md"
+      }
     },
     "triage": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/triage/SKILL.md",
-      "computedHash": "2b6efb6da12d92551772fcc04acf331f4e0e6f7bd9d4cb23ce0b301e0b128feb"
+      "computedHash": "626db11ebd0ade1b852f67822254e367555242dce3f63cea4ed7242bf45f4b28",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "adapted": true,
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "selective-port",
+        "note": "Ports evidence gathering for already implemented requests and preserves issue-only triage.",
+        "skillPath": "skills/engineering/triage/SKILL.md"
+      }
     },
     "trustworthy-experiments": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "f153410fc9c9c778b8575584b5c7c32260c3c8ae3ad54ca114335eaaab33de14"
+      "computedHash": "f153410fc9c9c778b8575584b5c7c32260c3c8ae3ad54ca114335eaaab33de14",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/trustworthy-experiments/SKILL.md"
     },
     "typesafe-ai": {
       "source": "typesafe-ai/skills",
       "sourceType": "github",
-      "sourceCommit": "65a39f393687675ce170e6094757de20370365b9",
+      "sourceCommit": "302eea662c54bca6730873fe245bec1d69ebc23d",
       "skillPath": "skills/typesafe-ai/SKILL.md",
-      "computedHash": "9cd84c5e535dec8dec59917c110f9c00b4a61faadb86b432ec7e41051170af12"
+      "computedHash": "15e077333436b1e63e526c7c7559202816f4848dabefd3aa3d4c91988fd181b5"
     },
     "user-feedback-synthesizer": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "3cf570a8f18b39ceb1a28814430ac26fd3cb91ce82f42ca3d9e6f1ec4826e61f"
+      "computedHash": "ed906edd2405527a23a34689ced096c4a884fc349af450ea032243228256aac9",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/user-feedback-synthesizer/SKILL.md"
     },
     "working-backwards": {
       "source": "pmprompt/claude-plugin-product-management",
       "sourceType": "github",
-      "computedHash": "99ce4114c30598c6d16dfe6f1a7b56c5ebbf22099080d229c1263d20ad7734e3"
+      "computedHash": "99ce4114c30598c6d16dfe6f1a7b56c5ebbf22099080d229c1263d20ad7734e3",
+      "sourceCommit": "9b9a4929de8ce23617719402b43fe3e75be23c02",
+      "skillPath": "skills/working-backwards/SKILL.md"
     },
     "write-a-skill": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/write-a-skill/SKILL.md",
-      "computedHash": "b44d8aab2ead83c716e01af4c9a24ccc4575ce70ad58ec4f1749fb88c9cc82ba"
+      "computedHash": "b44d8aab2ead83c716e01af4c9a24ccc4575ce70ad58ec4f1749fb88c9cc82ba",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream no longer ships this package."
+      }
     },
     "zoom-out": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/zoom-out/SKILL.md",
-      "computedHash": "8357aeaece3b709c442eab67e64b86844e05e2f1ea95b109565eba50b6def36e"
+      "computedHash": "8357aeaece3b709c442eab67e64b86844e05e2f1ea95b109565eba50b6def36e",
+      "sourceCommit": "f71bb975bfae2dc0d31c529c7dd4a8479ecc3748",
+      "upstreamReview": {
+        "sourceCommit": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+        "disposition": "retain-historical",
+        "note": "Upstream removed this skill."
+      }
     },
     "avoid-ai-writing": {
       "source": "conorbronsdon/avoid-ai-writing",
       "sourceType": "github",
-      "sourceCommit": "209815cdeb4af942616daec89a5e0a706c804e3a",
+      "sourceCommit": "8678c864383ade43f9866ffebb235b2e1e409fb0",
       "skillPath": "skills/avoid-ai-writing/SKILL.md",
-      "upstreamVersion": "3.38.0",
+      "upstreamVersion": "3.39.1",
       "adapted": true,
-      "upstreamSkillHash": "af4be7fb7898d00a9fca25b54ffe6d0f123117989aa60732d1be7dc69fac0491",
+      "upstreamSkillHash": "e54ab3ed7c643b3f0073bc85ba22a1fa75623d365b931c11db9f6fb90c965f73",
       "upstreamFileHashes": {
         "agents/openai.yaml": "cc9c3a3cf200e64753cd182c9ed85fa1fa378ce6f02d9d4318ab9e918847d2fe",
         "detector/CATEGORIES.md": "fb303990be9e9da197ab83ac5b9ff3539de63b827641f3760493a13bc1763256",
-        "detector/patterns.js": "37d6b022821f592b062e421c639789861b692e22388f65e8db0692154f7a59fd",
-        "detector/validate.js": "00c36a802373e263120325c4180e34d7bf2f64196f850b76226e90a09c7f22c9",
-        "examples/README.md": "d1e0ca4d2c100b2f276253a9964506b3a92a161068ca327f9c4f06e77e04bc39",
+        "detector/patterns.js": "81553136b8fa9f8feb0151dbac4de6ef54c8e6a5f59a1d0eb6b493e52e11d6f4",
+        "detector/validate.js": "2efe6b7892bf3d4fe94555a1f90fc18fb93816e7ab7b68eceb2da96da184f251",
+        "examples/README.md": "6e028f9e51a9a85139818632c2f4c782ad9837f4bb80cbd082b8f2a36979529c",
         "examples/prose.json": "720a208037e469e3e4234aa41a05d13f9600dc6d562e40e033c41f0fa7fead3f",
         "examples/technical.json": "f44c732fa3d222b997fa1310f2b74e1c2d6d619c3e47249833a66816b08cc969",
-        "references/patterns.md": "d5452a813006840b47273b0c1ddd4ca655733cbab4db9fbe19e803c03e77c499",
-        "scripts/check-style.js": "a7265f5b5dd3312c4cafa5d395300cdf6156876ef60b499cde06f63eea8a374f",
-        "scripts/markdown-prose.js": "bd3cc9a98081728f9b663c4943b38e3bf2ceea389721b45bb5abccba0b916903",
-        "scripts/normalize-quotes.js": "9d3ee6f66d8e70041a66d60a41d60fc53ea6308c20728e48cbb71dc2493bfb65",
-        "instructions.md": "af4be7fb7898d00a9fca25b54ffe6d0f123117989aa60732d1be7dc69fac0491"
+        "instructions.md": "e54ab3ed7c643b3f0073bc85ba22a1fa75623d365b931c11db9f6fb90c965f73",
+        "references/patterns.md": "840beca03abb387cba0d04bfee6701ba8b199e17c86a6bee2af601abd2da3351",
+        "scripts/check-style.js": "c1505d9546a1522934053974322b08b1e01495f9c67db816fe9a435eb70bef9f",
+        "scripts/html-entity-names.js": "f18b7802a0f1fdaa1cccae68a53d81d80cf821f8ba53d9c70bb490e750466cf6",
+        "scripts/markdown-prose.js": "ca5ff5edfc59231d8b0a65b4ebcc7b74262c524a5d1e655b1d89ac49879a83eb",
+        "scripts/normalize-quotes.js": "9d3ee6f66d8e70041a66d60a41d60fc53ea6308c20728e48cbb71dc2493bfb65"
       },
-      "computedHash": "520078d958579bdee5b5f7a87f54bc59144c0c0fe398066821c10d0d56305630",
+      "computedHash": "96769826dec7752f47282f16ff5e1de3bf1786ffd93b2718334a665e09b30343",
       "localFileHashes": {
         "LICENSE": "4da9b9f0bb899269b6e79fb383b4c3f24ebcadf7352f970871bae3e215401589",
         "SKILL.md": "8c2d1645c813b12bcd43eaff42b906dabed93c0c0f850eab358873c9545a0a58",
         "agents/openai.yaml": "6d12a209ea73b9d80807c757ad5e69c5b7ee097970812e5c3f0fd7e62249d608",
         "references/communication-profile.md": "5c94217bae8d37906fbefd2ad9fd0f08f08f34fe6e551efc5c4eda8328a032e2",
-        "references/provenance.md": "df0bebbfed9935916c5420de14ff23524c1b81e28a7df8e065e76dacff4fb52e"
+        "references/provenance.md": "1b314e27bd92076304c80e114b9003ed47ea352a6a017b4152168ac90414bedb"
       },
       "upstreamPathMap": {
         "instructions.md": "SKILL.md"
@@ -257,21 +396,21 @@
     "humanizer": {
       "source": "blader/humanizer",
       "sourceType": "github",
-      "sourceCommit": "8c307f367c91bd974002f10f2be2965d642c13df",
+      "sourceCommit": "a32f24407364c74c812b43c15926d638bee1e072",
       "skillPath": "SKILL.md",
-      "upstreamVersion": "3.1.0",
+      "upstreamVersion": "4.0.0",
       "adapted": true,
-      "upstreamSkillHash": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad",
+      "upstreamSkillHash": "3013910ef5433dab12f0d2b86d9cf9e3421a253ef986518a68ef07aa29629bdc",
       "upstreamFileHashes": {
-        "instructions.md": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad"
+        "instructions.md": "3013910ef5433dab12f0d2b86d9cf9e3421a253ef986518a68ef07aa29629bdc"
       },
-      "computedHash": "623412aa9a90ae5cac68b92a660ff16dd559711ff79be867ceb45f4f1621e93a",
+      "computedHash": "03efe476eadcfc54ec3146f22240e65d35ebb0643f2d21ede5c367b8d4458ddb",
       "localFileHashes": {
         "LICENSE": "4ac4810254ab36d45419141aeb8e69bf50652cfafe5b2dab947d06d44e5cbf96",
-        "SKILL.md": "21923e58a5cbda80b9481d7dfca4c243f661ff5b35114197f69d92068825076c",
+        "SKILL.md": "076ebd01cda3ad809a096f19922c33c1c847415ea8ac16a1eda608c18babe735",
         "agents/openai.yaml": "ed5f4507802d9e11fb67c457cf56ccb51f86a7344b9cfecd531f751ebed23ff1",
         "references/communication-profile.md": "5c94217bae8d37906fbefd2ad9fd0f08f08f34fe6e551efc5c4eda8328a032e2",
-        "references/provenance.md": "30e8573a4e8f217190a65f015bf31bd2f551a5a8ee060a20af566a4709f994c9"
+        "references/provenance.md": "cc5fc4dbfc556292781f3d83122c41eda6edee74862f3da577da59bccb4f55f2"
       },
       "upstreamPathMap": {
         "instructions.md": "SKILL.md"

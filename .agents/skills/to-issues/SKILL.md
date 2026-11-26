@@ -31,6 +31,8 @@ Slices may be 'HITL' or 'AFK'. HITL slices require human interaction, such as an
 - Prefer many thin slices over few thick ones
 </vertical-slice-rules>
 
+If a cross-cutting change would break many callers at once, propose an expand–contract sequence. Introduce the replacement alongside the existing interface, migrate callers in independently verifiable batches, and remove the old interface after confirming no callers remain. Make the dependencies explicit in the issue breakdown.
+
 ### 4. Quiz the user
 
 Present the proposed breakdown as a numbered list. For each slice, show:

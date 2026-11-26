@@ -61,9 +61,10 @@ until the author accepts it; do not reuse it as an approved voice sample.
 - Match supplied writing samples and the author's existing register. Infer only
   what the text and conversation support. Ask for a sample only when matching a
   particular voice matters and the available text does not provide it.
-- Preserve the author's claims, qualifications, commitments, reasons and evidence.
-  Do not add an opinion, emotional reaction or lived experience, even where the
-  upstream creative-writing guidance permits one. Rephrase an existing stance only.
+- Use only facts in the draft or supporting material supplied by the author.
+  Upstream 4.0 permits adding a detail the editor believes to be true. In Arnesto,
+  request the missing detail when essential or keep the wording general. Preserve
+  qualifications, commitments and the author's stance without inventing reactions.
 - Before drafting, make a private checklist of the source's individual claims.
   After drafting, account for each in the final text, including negative statements
   about missing evidence and conditions on future commitments. Restore any missing

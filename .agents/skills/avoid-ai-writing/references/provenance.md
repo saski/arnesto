@@ -1,11 +1,11 @@
 # Avoid AI Writing provenance
 
 - Upstream: https://github.com/conorbronsdon/avoid-ai-writing
-- Reviewed: 2026-10-20
-- Commit: `209815cdeb4af942616daec89a5e0a706c804e3a`
-- Upstream version: `3.38.0`
+- Reviewed: 2026-11-26
+- Commit: `8678c864383ade43f9866ffebb235b2e1e409fb0`
+- Upstream version: `3.39.1`
 - Source entry: `skills/avoid-ai-writing/SKILL.md`
-- Source entry SHA-256: `af4be7fb7898d00a9fca25b54ffe6d0f123117989aa60732d1be7dc69fac0491`
+- Source entry SHA-256: `e54ab3ed7c643b3f0073bc85ba22a1fa75623d365b931c11db9f6fb90c965f73`
 - License: MIT; the upstream notice is retained in `../LICENSE`.
 - Ownership: Arnesto-maintained wrapper and communication profile; upstream
   instructions and bundled resources under `../upstream/` retain their original bytes.
