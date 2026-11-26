@@ -106,7 +106,8 @@ Compare current sources against the manifest. Classify each source file:
 | **Modified** | File in manifest, hash differs from `content_hash` | Needs re-ingesting |
 | **Touched** | File in manifest, mtime newer but hash unchanged | Skip — content identical, no re-ingest needed |
 | **Unchanged** | File in manifest, mtime and hash both match | Nothing to do |
-| **Deleted** | In manifest, but file no longer exists on disk | Note it — wiki pages may be stale |
+| **Deleted** | A vault-local source is no longer present in the resolved vault | Report it as a possible cause of stale pages |
+| **Unavailable** | A machine-local source is absent from this checkout or device | Preserve the manifest entry and report unavailable evidence |
 
 When a manifest entry has no `content_hash` (older entry), fall back to mtime comparison only.
 

@@ -19,6 +19,8 @@ You are performing a health check on an Obsidian wiki. Your goal is to find and 
 2. Read `index.md` for the full page inventory
 3. Read `log.md` for recent activity context
 
+Read the selected vault’s schema before checking required fields, lifecycle values, or relationship types. Use the framework defaults below for rules the owner has not customized.
+
 ## Lint Checks
 
 Run these checks in order. Report findings as you go.
@@ -52,7 +54,7 @@ Find `[[wikilinks]]` that point to pages that don't exist.
 
 ### 3. Missing Frontmatter
 
-Every page should have: title, category, tags, sources, created, updated.
+By default, pages should have title, category, tags, sources, created, and updated. Use the selected vault’s declared required fields when it defines them.
 
 **How to check:**
 - Grep frontmatter blocks (scope to `^---` at file heads) instead of reading every page in full

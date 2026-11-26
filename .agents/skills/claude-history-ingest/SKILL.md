@@ -104,6 +104,8 @@ find ~/Library/Application\ Support/Claude/local-agent-mode-sessions -name "*.js
 3. **Audit logs** (`audit.jsonl` in desktop sessions) — Tool-call level record of what was done. Useful for extracting concrete actions, file patterns, and command patterns even when the conversation is sparse.
 4. **Session metadata** (`sessions/*.json` and `local_*.json`) — Tells you which project, when, and what CWD.
 
+Apply the same project and source scope to discovery, sampling, and manifest updates. Report which sessions were inspected or skipped, and leave skipped sessions eligible for a later ingest.
+
 ## Step 1: Survey and Compute Delta
 
 Scan both data locations and compare against `.manifest.json`:

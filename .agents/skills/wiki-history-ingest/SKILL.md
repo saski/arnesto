@@ -30,6 +30,8 @@ If the user invokes `/wiki-history-ingest <target>` (or equivalent text command)
    - "Should I ingest `claude` or `codex` history?"
 4. If the user asks for another history source, say that only `claude` and `codex` history ingesters are installed in this repository.
 
+For other agent formats, report that a dedicated ingester is unavailable. If the user supplied an export and wants it ingested, route that file to `data-ingest` instead of assuming another agent’s history layout or opening unrelated sessions.
+
 ## Execution Contract
 
 - After routing, execute the destination skill's workflow exactly.

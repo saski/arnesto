@@ -114,6 +114,8 @@ provenance:
 
 **The title format is `A × B`** — this signals to readers that it's a synthesis page, not a page about either concept alone.
 
+Before finalizing a synthesis, state the strongest concrete objection supported by the sources and explain whether it changes the conclusion. Track uncertainty when the available evidence cannot resolve it.
+
 ## Step 5: Back-link from Source Pages
 
 For each synthesis page you created, add a link to it from the two (or more) concept pages it synthesizes. In the concept page, add to its `## Related` section:

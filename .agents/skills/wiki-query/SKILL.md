@@ -34,6 +34,8 @@ Pages with no `visibility/` tag, or tagged `visibility/public`, are always inclu
 
 In filtered mode, note the filter in the Step 6 log entry: `mode=filtered`.
 
+Use this workflow to retrieve and cite existing knowledge. If a question also calls for a wiki edit, surface the proposed change and route it to the applicable capture or update workflow under the vault’s normal approval rules.
+
 ## Retrieval Protocol
 
 **Follow the Retrieval Primitives table in `llm-wiki/SKILL.md`.** Reading is the dominant cost of this skill — use the cheapest primitive that answers the question and escalate only when it can't. Never jump straight to full-page reads.

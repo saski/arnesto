@@ -20,6 +20,8 @@ This skill can be invoked directly or via the `wiki-history-ingest` router (`/wi
 2. Read `.manifest.json` at the vault root to check what has already been ingested
 3. Read `index.md` at the vault root to understand what the wiki already contains
 
+For a topic-only question, look up the relevant existing wiki notes or search the user-authorized session scope. Use this ingest workflow when the request is to distill and preserve history.
+
 ## Ingest Modes
 
 ### Append Mode (default)

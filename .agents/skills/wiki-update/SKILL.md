@@ -37,7 +37,7 @@ Derive a clean project name from the directory name.
 Check `.manifest.json` for this project:
 
 - **First time?** Full scan. Everything is new.
-- **Synced before?** Look at `last_commit_synced`. Only consider what changed since then. Use `git log <last_commit>..HEAD --oneline` to see what's new.
+- **Synced before?** Check that `last_commit_synced` is an ancestor of the worktree’s `HEAD` with `git merge-base --is-ancestor <last_commit> HEAD`. If it is, review `git log <last_commit>..HEAD --oneline`. If the commit is unknown or unreachable, report the reason the delta is unavailable and use a full scan for the selected project. Update the watermark only after a successful vault update.
 
 If nothing meaningful changed since last sync, tell the user and stop.
 

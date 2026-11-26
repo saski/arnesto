@@ -1,0 +1,135 @@
+{
+  "repository": "Ar9av/obsidian-wiki",
+  "baseLock": ".agents/.skill-lock.json",
+  "reviewedCommit": "9fe94b2cdeb19cc09017326092afebd65d2a6803",
+  "reviewedAt": "2026-11-26",
+  "installedHashAlgorithm": "SHA-256 over sorted UTF-8 relative POSIX paths, a NUL, file bytes, and a NUL per regular file",
+  "skills": {
+    "claude-history-ingest": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/claude-history-ingest",
+      "reviewedGitTree": "b122681a9284986894bc0153978d1c28735df22f",
+      "installedTreeSha256": "dbb610d1bb4a2319d4157eb160255b679531063dcd67f7da147601d050bf7ad7"
+    },
+    "codex-history-ingest": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/codex-history-ingest",
+      "reviewedGitTree": "3bc7a559754b042dbd1b53104b048f112255350d",
+      "installedTreeSha256": "19357c5754f1201c5cd4cb6546120230b70e2742e9771eb26779e634130777d1"
+    },
+    "cross-linker": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/cross-linker",
+      "reviewedGitTree": "081a9f73e2cb477d8bc36c0d59ea701d7f5b91ca",
+      "installedTreeSha256": "a4b27457a291c1b2ff2a39e94e69b212142340dbfc37b6b51e83f3a85c386376"
+    },
+    "data-ingest": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-ingest",
+      "reviewedGitTree": "e8fabd40b8550c9400eb2237d4e3b91dc67d3528",
+      "installedTreeSha256": "d22508feedaff3cc70b17ddc03aa41c9450ae39b89f14efb574c73ff3b2bd523"
+    },
+    "graph-colorize": {
+      "disposition": "retain-local",
+      "reviewedPath": "skills/graph-colorize",
+      "reviewedGitTree": "31d4ed61d8780e24ed09f11da442504333718d97",
+      "installedTreeSha256": "76e2de616b860eb0864f21379ab5a1aa03edeb13c9518516c79cdf02382f35a0"
+    },
+    "ingest-url": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-ingest",
+      "reviewedGitTree": "e8fabd40b8550c9400eb2237d4e3b91dc67d3528",
+      "installedTreeSha256": "d5520a22b1ebd8e6ff87fa7898a0d0da4730b689cbed9e188c6afdad2091d88c"
+    },
+    "llm-wiki": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/llm-wiki",
+      "reviewedGitTree": "6a2c18e2e67218eae3726550b350a5c39a878138",
+      "installedTreeSha256": "60c60b1be4ac137cbe51985e2da89ab87b578655e1c30a69e5cb512afaebc3fc"
+    },
+    "tag-taxonomy": {
+      "disposition": "retain-local",
+      "reviewedPath": "skills/tag-taxonomy",
+      "reviewedGitTree": "1b01771382fc6b1800f7cdb6558314845ed366bb",
+      "installedTreeSha256": "8151b8e04a4cde26d21d08062e429b736eb19be77ea0f35c19818dd9d1256652"
+    },
+    "wiki-capture": {
+      "disposition": "retain-local",
+      "reviewedPath": "skills/wiki-capture",
+      "reviewedGitTree": "071ab27bfa1ee0b0d9174724897f79d0a85f14ba",
+      "installedTreeSha256": "9554c73d41b4e605374d97f75063fe74fde30d9e78387302e35ccfa1db77cc51"
+    },
+    "wiki-dashboard": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-dashboard",
+      "reviewedGitTree": "4731ed3cf152ad99dae548f5b6ca9fba3ad16e53",
+      "installedTreeSha256": "576406e5cfbcf28b3dd6b8d0f30e8eb797bf311273bbafc415606c7403e45e69"
+    },
+    "wiki-export": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-export",
+      "reviewedGitTree": "d93bf170aa7f0e6a84d0c7ba2ce5644e6f89dad5",
+      "installedTreeSha256": "7f4a76c8f8414182b7f26ae5de38dc97d836e7ffe0de61bc06ed35526c82dd03"
+    },
+    "wiki-history-ingest": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-history-ingest",
+      "reviewedGitTree": "2cc3c40391cde5a36f99c0de40af2863f1120b88",
+      "installedTreeSha256": "9f5b77a2ac19b0588cacb16151990903d2c5ca047de2077991bea5135920805a"
+    },
+    "wiki-ingest": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-ingest",
+      "reviewedGitTree": "e8fabd40b8550c9400eb2237d4e3b91dc67d3528",
+      "installedTreeSha256": "43611f18ac50179c339f226df8644c2434af8fdd1c0fed76be080ec667e8056c"
+    },
+    "wiki-lint": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-lint",
+      "reviewedGitTree": "5a97c6f3c78dd1b3cb01387157d5a2caee928c5c",
+      "installedTreeSha256": "a5d17e162dcb3b9630a6d6c61c462b546e3127cb170346de8ff07b01b2600e95"
+    },
+    "wiki-query": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-query",
+      "reviewedGitTree": "1bc6d5b7c3db8c732c47838161f36752ba4a7721",
+      "installedTreeSha256": "76ac20b95d1cfa00284bedb51d33c57a262a9e26dd4c6d0a9ca83a581c27baaf"
+    },
+    "wiki-rebuild": {
+      "disposition": "retain-local",
+      "reviewedPath": "skills/wiki-rebuild",
+      "reviewedGitTree": "679225e430c13ff7ed493d6aab2cd0b01a497a6b",
+      "installedTreeSha256": "9798a1d2078e2c192b97c44843c7c98c37df80a8c9da5414486811e74046b179"
+    },
+    "wiki-research": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-research",
+      "reviewedGitTree": "8a8d59cea37482441227dae08280b37478ab03fc",
+      "installedTreeSha256": "aeb215f8eacd0b5add8ca277e4d74fb992f8aa82cb38c9551062467a73ff9fa2"
+    },
+    "wiki-setup": {
+      "disposition": "retain-local",
+      "reviewedPath": "skills/wiki-setup",
+      "reviewedGitTree": "5fd184c786adf783a3902fb7f82172a3131ce4e7",
+      "installedTreeSha256": "4aee03a0bc63b89c418f948bde7b712a4544996ff36a0382498cd5474fa325e2"
+    },
+    "wiki-status": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-status",
+      "reviewedGitTree": "88f76f9a4e3c297361fb4addf828ee97dc7cebc6",
+      "installedTreeSha256": "76f57610a48f468ee0ed7758eb7e263948dd15016df2ffb4f271f0dec08ffc8c"
+    },
+    "wiki-synthesize": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-synthesize",
+      "reviewedGitTree": "a1e52c5eac62703c7ad36f2c50f4e156ce4c81eb",
+      "installedTreeSha256": "a848ae3da36eeb349e55aaa3cb7a4388687a4bbc228d84ba1490989c83de6386"
+    },
+    "wiki-update": {
+      "disposition": "selective-port",
+      "reviewedPath": "skills/wiki-update",
+      "reviewedGitTree": "f1355d78d594fb10dda5f48f67f3adf21a65013b",
+      "installedTreeSha256": "4a613692da9339f137e3159d9fb6482e93ef9328c892c4e06e50191fe887dcc5"
+    }
+  }
+}

@@ -48,6 +48,8 @@ Only ingest sources that are **new or modified** since last ingest. Check the ma
 
 This is the right choice most of the time. It's fast and avoids redundant work even when timestamps are unreliable.
 
+A manifest entry for sources stored outside this vault may refer to another machine. Classify it as unavailable here and preserve the existing tracking record. For a previously staged source, cite the retained local snapshot as evidence separately from the external origin.
+
 ### Full Mode
 Ingest everything regardless of manifest state. Use when:
 - The user explicitly asks for a full ingest

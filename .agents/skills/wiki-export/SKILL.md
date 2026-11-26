@@ -30,6 +30,8 @@ If the user requests a filtered export — phrases like **"public export"**, **"
 
 Pages with no `visibility/` tag, or tagged `visibility/public`, are always included.
 
+Treat an export as a local artifact. Before any authorized transfer or publication, review page content and the exported titles, paths, tags, and edges for confidential material. Visibility tags help narrow an export but cannot establish that untagged content is safe to share.
+
 ## Step 1: Build the Node and Edge Lists
 
 Glob all `.md` files in the vault (excluding `_archives/`, `_raw/`, `.obsidian/`, `index.md`, `log.md`, `_insights.md`). In filtered mode, also skip pages whose tags contain `visibility/internal` or `visibility/pii`.

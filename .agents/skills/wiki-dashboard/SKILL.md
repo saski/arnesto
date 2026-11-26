@@ -6,12 +6,12 @@ description: >
   Use this skill when the user says "create a dashboard", "vault dashboard", "show all X as a table",
   "dynamic view", "create a vault table", "build a content index", "show me all concepts/entities/projects",
   or wants a structured, auto-updating view of their wiki content.
-  Requires Obsidian 1.8+ (Bases is a core plugin, no external install needed).
+  Requires an Obsidian release with the Bases core plugin enabled.
 ---
 
 # Wiki Dashboard — Dynamic Vault Views
 
-You are creating a `.base` file — an Obsidian Bases definition that turns vault frontmatter into a live, queryable view. The `.base` format is native to Obsidian 1.8+ and requires no plugins.
+You are creating a `.base` file — an Obsidian Bases definition that turns vault frontmatter into a live, queryable view. Enable the Bases core plugin in Obsidian. [The first public desktop release with Bases was 1.9.10](https://obsidian.md/changelog/2025-08-18-desktop-v1.9.10/). Individual views can require a newer release.
 
 ## Before You Start
 
@@ -43,89 +43,57 @@ Determine:
 
 The `.base` format is YAML. Here are the patterns you'll use:
 
-### Basic table — all pages in a category folder
+### Basic table
+
 ```yaml
 filters:
-  - type: folder
-    folder: concepts
-columns:
-  - property: file.name
-    title: Page
-  - property: tags
-    title: Tags
-  - property: summary
-    title: Summary
-  - property: updated
-    title: Updated
-sort:
-  - property: updated
-    direction: desc
-view: table
+  and:
+    - file.inFolder("concepts")
+views:
+  - type: table
+    name: Concepts
+    order:
+      - file.name
+      - note.tags
+      - note.summary
+      - note.updated
 ```
 
-### Filtered by tag
+### Cards filtered by folder and tag
+
 ```yaml
 filters:
-  - type: tag
-    tag: "#machine-learning"
-columns:
-  - property: file.name
-    title: Page
-  - property: category
-    title: Category
-  - property: summary
-    title: Summary
-  - property: created
-    title: Created
-sort:
-  - property: created
-    direction: desc
-view: table
+  and:
+    - file.inFolder("projects")
+    - file.hasTag("active")
+views:
+  - type: cards
+    name: Active projects
+    order:
+      - file.name
+      - note.summary
+      - note.updated
 ```
 
-### Multi-filter (folder AND tag)
+### Computed column
+
 ```yaml
-filters:
-  operator: and
-  conditions:
-    - type: folder
-      folder: projects
-    - type: tag
-      tag: "#active"
-columns:
-  - property: file.name
-    title: Project
-  - property: summary
-    title: Summary
-  - property: updated
-    title: Last Updated
-view: cards
+formulas:
+  updated_relative: 'date(note.updated).relative()'
+views:
+  - type: table
+    name: Concepts
+    filters:
+      and:
+        - file.inFolder("concepts")
+        - '!note.updated.isEmpty()'
+    order:
+      - file.name
+      - note.updated
+      - formula.updated_relative
 ```
 
-### Computed column (days since last update)
-```yaml
-columns:
-  - property: file.name
-    title: Page
-  - property: updated
-    title: Updated
-  - formula: "floor((now() - updated) / 86400000)"
-    title: Days Stale
-    type: number
-sort:
-  - formula: "floor((now() - updated) / 86400000)"
-    direction: desc
-view: table
-```
-
-### Filter operators and functions available
-- `file.hasTag("tag")` — boolean, true if page has tag
-- `file.inFolder("path")` — boolean, true if page is in folder
-- `file.name` — the note's filename (without extension)
-- `file.path` — full vault-relative path
-- `now()` — current timestamp in ms
-- Arithmetic: `+`, `-`, `*`, `/`, `floor()`, `ceil()`
-- Comparison: `==`, `!=`, `>`, `<`, `>=`, `<=`
+Bases filters use expression strings inside an `and`, `or`, or `not` group. Configure each view under `views` and put displayed property identifiers in its `order`. Check [Obsidian Bases syntax](https://obsidian.md/help/bases/syntax) for the view options supported by the installed Obsidian version.
 
 ## Step 3: Write the File
 
@@ -180,4 +148,4 @@ Tell the user about these if they're not sure what to ask for:
 - [ ] Filter matches the user's intent
 - [ ] File written to `_meta/` with a descriptive slug
 - [ ] `log.md` updated
-- [ ] User told how to embed it (`![[_meta/<name>.base]]`) and what Obsidian version is required (1.8+)
+- [ ] User told how to embed it (`![[_meta/<name>.base]]`) and the Bases requirements for the chosen view

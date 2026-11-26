@@ -149,6 +149,8 @@ The manifest enables:
 - **Audit** — which source produced which wiki page
 - **Staleness detection** — source changed but wiki page hasn't been updated
 
+For new source keys, prefer a path relative to the vault for its own files or a home-relative key for a source beneath the user’s home. URLs and repositories can use their stable source identifiers. Resolve recognized legacy absolute and relative forms before comparing entries. Keep the existing key form in vaults whose ingest or audit tooling only supports that form. An off-machine source is unavailable, and its absence on this machine does not establish deletion. Keep any bulk migration separate from ordinary ingest.
+
 ## Page Template
 
 When creating a new wiki page, use this structure:

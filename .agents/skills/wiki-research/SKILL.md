@@ -34,6 +34,8 @@ If `references/research-config.md` exists in the vault, read it and apply any ru
 
 If the file doesn't exist, proceed with defaults.
 
+Before sending search queries to an external provider, abstract away private names, internal URLs, and confidential facts where possible. Use public terms for public research and keep any local-source review inside the authorized vault scope.
+
 ## Round 1 — Broad Survey
 
 **Goal:** Get a wide map of the topic.

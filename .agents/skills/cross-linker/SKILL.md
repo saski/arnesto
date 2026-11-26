@@ -22,6 +22,8 @@ You are weaving the wiki's knowledge graph tighter by finding and inserting miss
 2. Read `index.md` to get the full inventory of pages and their one-line descriptions
 3. Skim `log.md` to see what was recently ingested (focus linking effort on new pages)
 
+Exclude frozen archives and generated readouts from both the page registry and link edits. Work on live knowledge pages in the resolved vault.
+
 ## Step 1: Build the Page Registry
 
 Glob all `.md` files in the vault (excluding `_archives/`, `.obsidian/`). For each page, extract:
