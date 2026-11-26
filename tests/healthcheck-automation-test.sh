@@ -115,7 +115,8 @@ test_arnesto_identity_contract() {
     assert_contains "$cursor_rules" "github.com/saski/arnesto"
     assert_not_contains "$cursor_rules" "github.com/saski/augmentedcode-configuration"
     assert_contains "$review_command" "repo: arnesto"
-    assert_contains "$repo_inventory" $'augmentedcode-configuration\torigin\tmain\tmain\t-'
+    assert_contains "$repo_inventory" $'arnesto\torigin\tmain\tmain\t-'
+    assert_not_contains "$repo_inventory" $'augmentedcode-configuration\t'
 }
 
 test_portable_public_defaults_contract() {
